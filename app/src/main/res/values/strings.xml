@@ -17,7 +17,7 @@
         <string name="ScoringTitle">SCORING</string>
         <string name="RobotTitle">ROBOT</string>
         <string name="ControlPanelTitle">CONTROL PANEL</string>
-        <string name="ClimbTitle">CLIMB</string>
+        <string name="TeleopTitle">TELEOP</string>
         <string name="EndGameTitle">POST-MATCH</string>
         <string name="QRCodeTitle">DID YOU SCAN YOUR QR CODE?</string>
 
