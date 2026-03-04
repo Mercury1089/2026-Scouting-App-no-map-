@@ -1,0 +1,670 @@
+[
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_left.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/left.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_minus.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/minus.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_generate_qrcode_confirm_popup.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/generate_qrcode_confirm_popup.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_start_directions_symbol_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/start_directions_symbol_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-mdpi_field_2026_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-mdpi/field_2026_round.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_infinite_recharge_logo.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/infinite_recharge_logo.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xhdpi_field_2026_horizontal.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xhdpi/field_2026_horizontal.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-anydpi-v26_field_2026_round.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-anydpi-v26/field_2026_round.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_clear.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/clear.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_thumb_active_disabled.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/thumb_active_disabled.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_badge_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/badge_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_minus_disabled.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/minus_disabled.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_field_2026_foreground.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/field_2026_foreground.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_toggle_blue_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/toggle_blue_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxhdpi_field_2026.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxhdpi/field_2026.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_popup_qr_cached.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/popup_qr_cached.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_setup_next_match_confirm_popup.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/setup_next_match_confirm_popup.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_starting_pos_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/starting_pos_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxxhdpi_field_2026.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxxhdpi/field_2026.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_timer.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/timer.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_mercury_logo.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/mercury_logo.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_qr_list_item.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/qr_list_item.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_popup_qr.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/popup_qr.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_button_large_disabled.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/button_large_disabled.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_start_button_symbol_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/start_button_symbol_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_starting_pos.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/starting_pos.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-mdpi_team_logo_icon_foreground.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-mdpi/team_logo_icon_foreground.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_start_directions_bg_color_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/start_directions_bg_color_states.xml"
+    },
+    {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-16:/layout_activity_pregame.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-18:/layout/activity_pregame.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_playing_field.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/playing_field.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-anydpi-v26_team_logo_icon_round.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-anydpi-v26/team_logo_icon_round.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_toggle_red_active.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/toggle_red_active.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_thumb_default.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/thumb_default.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxxhdpi_team_logo_icon_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxxhdpi/team_logo_icon_round.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_popup_scored_down.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/popup_scored_down.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-hdpi_field_2026_horizontal.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-hdpi/field_2026_horizontal.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_loading_screen.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/loading_screen.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxhdpi_field_2026_horizontal.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxhdpi/field_2026_horizontal.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_splash_activity.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/splash_activity.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_exit_confirm_popup.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/exit_confirm_popup.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xhdpi_team_logo_icon_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xhdpi/team_logo_icon_round.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxxhdpi_field_2026_horizontal.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxxhdpi/field_2026_horizontal.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_carat.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/carat.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_text_header_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/text_header_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_trash_disabled.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/trash_disabled.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_badge_counter_active.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/badge_counter_active.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_popup_qr_confirm.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/popup_qr_confirm.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_button_large_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/button_large_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_toggle_left_disabled.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/toggle_left_disabled.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/font_open_sans_bold.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/font/open_sans_bold.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_scoring_layout_bg.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/scoring_layout_bg.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_start_directions_symbol_disabled.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/start_directions_symbol_disabled.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_toggle_blue_active.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/toggle_blue_active.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_edittext_rounded_corners.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/edittext_rounded_corners.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_carat_down.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/carat_down.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_toggle_right_active.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/toggle_right_active.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_activity_pregame.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/activity_pregame.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_toggle_left_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/toggle_left_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_plus.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/plus.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_button_disabled.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/button_disabled.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_qr.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/qr.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_button_default.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/button_default.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_teleop_warning.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/teleop_warning.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_button_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/button_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_track_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/track_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-hdpi_team_logo_icon.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-hdpi/team_logo_icon.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_toggle_right_default.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/toggle_right_default.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_playing_field_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/playing_field_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_right.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/right.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_start.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/start.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_clear_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/clear_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_auton_screen.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/auton_screen.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_clear_confirm_popup.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/clear_confirm_popup.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_text_subead_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/text_subead_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_target.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/target.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_ic_launcher_background.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-mdpi_team_logo_icon.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-mdpi/team_logo_icon.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxxhdpi_team_logo_icon.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxxhdpi/team_logo_icon.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_plus_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/plus_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-hdpi_team_logo_icon_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-hdpi/team_logo_icon_round.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-mdpi_team_logo_icon_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-mdpi/team_logo_icon_round.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-anydpi-v26_team_logo_icon.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-anydpi-v26/team_logo_icon.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_track_default.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/track_default.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_thumb_disabled.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/thumb_disabled.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_popup_scored_up.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/popup_scored_up.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_start_disabled.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/start_disabled.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-mdpi_field_2026.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-mdpi/field_2026.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_clear_qr_cache_confirm.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/clear_qr_cache_confirm.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxhdpi_team_logo_icon.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxhdpi/team_logo_icon.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_toggle_left_active.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/toggle_left_active.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_endgame_screen.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/endgame_screen.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/font_open_sans_italic.ttf.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/font/open_sans_italic.ttf"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_toggle_right_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/toggle_right_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_track_active.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/track_active.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xhdpi_team_logo_icon.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xhdpi/team_logo_icon.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_button_large_active.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/button_large_active.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_right_disabled.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/right_disabled.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxhdpi_team_logo_icon_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxhdpi/team_logo_icon_round.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xhdpi_field_2026.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xhdpi/field_2026.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-hdpi_field_2026.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-hdpi/field_2026.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_thumb_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/thumb_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_badge_counter_default.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/badge_counter_default.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xhdpi_team_logo_icon_foreground.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xhdpi/team_logo_icon_foreground.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_trash_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/trash_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_timer_yellow.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/timer_yellow.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_playing_field_disabled.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/playing_field_disabled.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/font_barlow_condensed_medium.ttf.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/font/barlow_condensed_medium.ttf"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_activity_settings.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/raw_loading_gif.gif.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/raw/loading_gif.gif"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_divider.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/divider.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_text_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/text_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_button_start_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/button_start_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-mdpi_field_2026_horizontal.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-mdpi/field_2026_horizontal.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_toggle_left_default.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/toggle_left_default.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_minus_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/minus_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/font_open_sans.ttf.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/font/open_sans.ttf"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_timer_red.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/timer_red.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_toggle_right_disabled.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/toggle_right_disabled.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_track_disabled.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/track_disabled.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_right_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/right_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-hdpi_team_logo_icon_foreground.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-hdpi/team_logo_icon_foreground.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-hdpi_field_2026_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-hdpi/field_2026_round.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_badge_counter_disabled.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/badge_counter_disabled.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_button_large_default.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/button_large_default.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_enter_password_popup.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/enter_password_popup.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_clear_disabled.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/clear_disabled.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/raw_sound.wav.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/raw/sound.wav"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/font_futura_medium_condensed_bt.ttf.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/font/futura_medium_condensed_bt.ttf"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_lightning_bolt.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/lightning_bolt.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxxhdpi_team_logo_icon_foreground.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxxhdpi/team_logo_icon_foreground.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xhdpi_field_2026_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xhdpi/field_2026_round.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_thumb_active.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/thumb_active.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_toggle_red_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/toggle_red_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_mute.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/mute.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_button_active.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/button_active.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/color_text_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/color/text_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-anydpi-v26_field_2026.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-anydpi-v26/field_2026.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_settings_password.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/settings_password.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_start_directions.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/start_directions.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_slack.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/slack.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_teleop_screen.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/teleop_screen.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_start_directions_symbol.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/start_directions_symbol.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_teleop_error.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/teleop_error.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/raw_thunder2.wav.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/raw/thunder2.wav"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_settings.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/settings.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_button_large_error.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/button_large_error.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_track_active_disabled.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/track_active_disabled.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxhdpi_team_logo_icon_foreground.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxhdpi/team_logo_icon_foreground.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_button_next_states.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/button_next_states.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/layout_activity_match.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/activity_match.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_plus_disabled.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/plus_disabled.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable_trash.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/drawable/trash.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-pngs-12:/drawable-anydpi-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxhdpi_field_2026_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxhdpi/field_2026_round.png"
+    },
+    {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-debug-16:/mipmap-xxxhdpi_field_2026_round.png.flat",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/mipmap-xxxhdpi/field_2026_round.png"
+    }
+]

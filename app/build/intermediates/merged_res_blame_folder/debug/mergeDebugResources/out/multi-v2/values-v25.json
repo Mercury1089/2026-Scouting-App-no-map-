@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.mercury1089.Scouting_App_2026.app-mergeDebugResources-14:/values-v25/values-v25.xml",
+            "map": [
+                {
+                    "source": "/Users/srikar_muthyala/.gradle/caches/8.13/transforms/eb11f427f7db57aa664209b2b7fbabde/transformed/appcompat-1.0.2/res/values-v25/values-v25.xml",
+                    "from": {
+                        "startLines": "2,3,4,6",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,126,209,308",
+                        "endLines": "2,3,5,7",
+                        "endColumns": "70,82,12,12",
+                        "endOffsets": "121,204,303,414"
+                    }
+                }
+            ]
+        }
+    ]
+}

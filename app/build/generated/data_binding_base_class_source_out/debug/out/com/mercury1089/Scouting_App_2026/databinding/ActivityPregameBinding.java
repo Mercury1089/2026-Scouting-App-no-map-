@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -22,7 +23,7 @@ import java.lang.String;
 
 public final class ActivityPregameBinding implements ViewBinding {
   @NonNull
-  private final ConstraintLayout rootView;
+  private final ScrollView rootView;
 
   @NonNull
   public final Button BlueButton;
@@ -105,7 +106,7 @@ public final class ActivityPregameBinding implements ViewBinding {
   @NonNull
   public final ConstraintLayout mainActivity;
 
-  private ActivityPregameBinding(@NonNull ConstraintLayout rootView, @NonNull Button BlueButton,
+  private ActivityPregameBinding(@NonNull ScrollView rootView, @NonNull Button BlueButton,
       @NonNull Button ClearButton, @NonNull EditText FirstAlliancePartnerInput,
       @NonNull TextView IDAllianceColor, @NonNull TextView IDAlliancePartners,
       @NonNull TextView IDMatchNumber, @NonNull TextView IDNoShow, @NonNull TextView IDPreloadNote,
@@ -151,7 +152,7 @@ public final class ActivityPregameBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public ConstraintLayout getRoot() {
+  public ScrollView getRoot() {
     return rootView;
   }
 
@@ -332,9 +333,13 @@ public final class ActivityPregameBinding implements ViewBinding {
         break missingId;
       }
 
-      ConstraintLayout mainActivity = (ConstraintLayout) rootView;
+      id = R.id.mainActivity;
+      ConstraintLayout mainActivity = ViewBindings.findChildViewById(rootView, id);
+      if (mainActivity == null) {
+        break missingId;
+      }
 
-      return new ActivityPregameBinding((ConstraintLayout) rootView, BlueButton, ClearButton,
+      return new ActivityPregameBinding((ScrollView) rootView, BlueButton, ClearButton,
           FirstAlliancePartnerInput, IDAllianceColor, IDAlliancePartners, IDMatchNumber, IDNoShow,
           IDPreloadNote, IDScouterName, IDSetup, IDSetupDirections, IDStartDirections, IDTeamNumber,
           IDToggleInstructions, MatchNumberInput, MissedToggle, NoShowSwitch, PreloadedCargoDisplay,

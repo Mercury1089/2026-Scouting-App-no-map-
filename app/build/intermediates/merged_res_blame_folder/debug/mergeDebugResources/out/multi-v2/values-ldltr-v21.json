@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.mercury1089.Scouting_App_2026.app-mergeDebugResources-14:/values-ldltr-v21/values-ldltr-v21.xml",
+            "map": [
+                {
+                    "source": "/Users/srikar_muthyala/.gradle/caches/8.13/transforms/eb11f427f7db57aa664209b2b7fbabde/transformed/appcompat-1.0.2/res/values-ldltr-v21/values-ldltr-v21.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "112",
+                        "endOffsets": "163"
+                    }
+                }
+            ]
+        }
+    ]
+}

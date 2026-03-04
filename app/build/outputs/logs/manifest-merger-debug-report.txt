@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:2:1-36:12
-INJECTED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:2:1-36:12
-INJECTED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:2:1-36:12
-INJECTED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:2:1-36:12
+ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:2:1-32:12
 MERGED from [androidx.databinding:viewbinding:8.13.2] /Users/srikar_muthyala/.gradle/caches/8.13/transforms/0d414d82b19149e2ef194eab40d20499/transformed/jetified-viewbinding-8.13.2/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.gridlayout:gridlayout:1.1.0] /Users/srikar_muthyala/.gradle/caches/8.13/transforms/5a8fce269450adf3d453bc50717ebdb5/transformed/gridlayout-1.1.0/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.0.0] /Users/srikar_muthyala/.gradle/caches/8.13/transforms/40706ff0ccc2b5b4c34be43182fd994c/transformed/material-1.0.0/AndroidManifest.xml:17:1-24:12
@@ -56,8 +56,8 @@ ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/s
 	android:name
 		ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:5:22-63
 application
-ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:7:5-34:19
-INJECTED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:7:5-34:19
+ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:7:5-30:19
+INJECTED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:7:5-30:19
 MERGED from [com.google.android.material:material:1.0.0] /Users/srikar_muthyala/.gradle/caches/8.13/transforms/40706ff0ccc2b5b4c34be43182fd994c/transformed/material-1.0.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.0.0] /Users/srikar_muthyala/.gradle/caches/8.13/transforms/40706ff0ccc2b5b4c34be43182fd994c/transformed/material-1.0.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/srikar_muthyala/.gradle/caches/8.13/transforms/9f0dd21d18dded7b0601e0a06ce64c41/transformed/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
@@ -87,27 +87,27 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/srik
 	android:theme
 		ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:14:9-40
 activity#com.mercury1089.Scouting_App_2026.SettingsActivity
-ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:15:9-16:51
+ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:15:9-16:52
 	android:screenOrientation
-		ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:16:13-49
+		ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:16:13-50
 	android:name
 		ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:15:19-84
 activity#com.mercury1089.Scouting_App_2026.PregameActivity
-ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:17:9-18:51
+ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:17:9-18:52
 	android:screenOrientation
-		ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:18:13-49
+		ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:18:13-50
 	android:name
 		ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:17:19-83
 activity#com.mercury1089.Scouting_App_2026.MatchActivity
-ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:19:9-20:51
+ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:19:9-20:52
 	android:screenOrientation
-		ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:20:13-49
+		ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:20:13-50
 	android:name
 		ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:19:19-81
 activity#com.mercury1089.Scouting_App_2026.SplashActivity
 ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:21:9-29:20
 	android:screenOrientation
-		ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:23:13-49
+		ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:23:13-50
 	android:exported
 		ADDED from /Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:22:13-36
 	android:name

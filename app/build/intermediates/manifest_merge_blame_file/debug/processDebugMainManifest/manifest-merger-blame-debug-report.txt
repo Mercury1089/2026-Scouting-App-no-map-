@@ -13,7 +13,7 @@
 11-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:5:22-63
 12
 13    <application
-13-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:7:5-34:19
+13-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:7:5-30:19
 14        android:allowBackup="true"
 14-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:9:9-35
 15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -34,31 +34,31 @@
 24        android:theme="@style/AppTheme" >
 24-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:14:9-40
 25        <activity
-25-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:15:9-16:51
+25-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:15:9-16:52
 26            android:name="com.mercury1089.Scouting_App_2026.SettingsActivity"
 26-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:15:19-84
-27            android:screenOrientation="portrait" />
-27-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:16:13-49
+27            android:screenOrientation="landscape" />
+27-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:16:13-50
 28        <activity
-28-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:17:9-18:51
+28-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:17:9-18:52
 29            android:name="com.mercury1089.Scouting_App_2026.PregameActivity"
 29-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:17:19-83
-30            android:screenOrientation="portrait" />
-30-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:18:13-49
+30            android:screenOrientation="landscape" />
+30-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:18:13-50
 31        <activity
-31-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:19:9-20:51
+31-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:19:9-20:52
 32            android:name="com.mercury1089.Scouting_App_2026.MatchActivity"
 32-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:19:19-81
-33            android:screenOrientation="portrait" />
-33-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:20:13-49
+33            android:screenOrientation="landscape" />
+33-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:20:13-50
 34        <activity
 34-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:21:9-29:20
 35            android:name="com.mercury1089.Scouting_App_2026.SplashActivity"
 35-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:21:19-82
 36            android:exported="true"
 36-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:22:13-36
-37            android:screenOrientation="portrait" >
-37-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:23:13-49
+37            android:screenOrientation="landscape" >
+37-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:23:13-50
 38            <intent-filter>
 38-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:24:13-28:29
 39                <action android:name="android.intent.action.MAIN" />
@@ -73,12 +73,6 @@
 42-->/Users/srikar_muthyala/StudioProjects/2026-Scouting-App-no-map-/app/src/main/AndroidManifest.xml:27:27-74
 43            </intent-filter>
 44        </activity>
-45
-46        <!--
-47             <meta-data
-48            android:name="preloaded_fonts"
-49            android:resource="@array/preloaded_fonts" />
-50        -->
-51    </application>
-52
-53</manifest>
+45    </application>
+46
+47</manifest>
