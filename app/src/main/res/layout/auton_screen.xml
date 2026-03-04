@@ -786,7 +786,7 @@
             app:layout_constraintTop_toBottomOf="@+id/MissedCounterToggle" />
 
         <Button
-            android:id="@+id/NextButtonTeleop"
+            android:id="@+id/NextButtonAuton"
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_marginStart="20dp"
@@ -852,7 +852,7 @@
 
         <!-- TIMER LABEL -->
         <TextView
-            android:id="@+id/IDTeleopSeconds1"
+            android:id="@+id/IDAutonSeconds1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -862,13 +862,13 @@
             android:text="@string/TeleopSeconds"
             android:textColor="@color/sky"
             android:textSize="@dimen/instruction_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/NextButtonTeleop"
+            app:layout_constraintBottom_toTopOf="@+id/NextButtonAuton"
             app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
             app:layout_constraintStart_toEndOf="@+id/leftEdgeBar" />
 
         <!-- TIMER COUNTDOWN DISPLAY -->
         <TextView
-            android:id="@+id/TeleopSeconds"
+            android:id="@+id/AutonSeconds"
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -876,13 +876,13 @@
             android:text="@string/DefaultValue"
             android:textColor="@drawable/text_states"
             android:textSize="@dimen/instruction_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/IDTeleopSeconds1"
-            app:layout_constraintStart_toEndOf="@+id/IDTeleopSeconds1"
-            app:layout_constraintTop_toTopOf="@+id/IDTeleopSeconds1" />
+            app:layout_constraintBottom_toBottomOf="@+id/IDAutonSeconds1"
+            app:layout_constraintStart_toEndOf="@+id/IDAutonSeconds1"
+            app:layout_constraintTop_toTopOf="@+id/IDAutonSeconds1" />
 
         <!-- TELEOP WARNING MESSAGE -->
         <TextView
-            android:id="@+id/EndgameWarning"
+            android:id="@+id/TeleopWarning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/teleop_warning"
@@ -895,3 +895,6 @@
             app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
             app:layout_constraintStart_toEndOf="@+id/leftEdgeBar"
             app:layout_constraintTop_toTopOf="@+id/ScoringTitle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

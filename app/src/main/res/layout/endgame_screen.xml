@@ -895,3 +895,6 @@
             app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
             app:layout_constraintStart_toEndOf="@+id/leftEdgeBar"
             app:layout_constraintTop_toTopOf="@+id/ScoringTitle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
