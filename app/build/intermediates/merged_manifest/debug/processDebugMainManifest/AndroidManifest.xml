@@ -24,17 +24,17 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.mercury1089.Scouting_App_2026.SettingsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
         <activity
             android:name="com.mercury1089.Scouting_App_2026.PregameActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
         <activity
             android:name="com.mercury1089.Scouting_App_2026.MatchActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
         <activity
             android:name="com.mercury1089.Scouting_App_2026.SplashActivity"
             android:exported="true"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -42,12 +42,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!--
-             <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-        -->
     </application>
 
 </manifest>
