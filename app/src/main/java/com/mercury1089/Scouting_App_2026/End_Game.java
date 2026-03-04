@@ -34,7 +34,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.mercury1089.Scouting_App_2026.listeners.UpdateListener;
 import com.mercury1089.Scouting_App_2026.utils.GenUtils;
 
-public class Teleop extends Fragment implements UpdateListener {
+public class Endgame extends Fragment implements UpdateListener {
     // HashMaps for data persistence
     private LinkedHashMap<String, String> setupHashMap;
     private LinkedHashMap<String, String> endgameHashMap;

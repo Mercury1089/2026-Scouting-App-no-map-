@@ -1,1485 +1,897 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/teleop"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg_general"
-    android:padding="@dimen/padding"
-    tools:context=".MatchActivity">
+    android:id="@+id/ScoredPopupWindow"
+    android:layout_width="@dimen/field_tower_popup_width"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
 
-
-    <!--
-        android:backgroundTint="@color/button_active"
-        android:foregroundTint="@color/button_active"
-
-        android:thumbTint="@color/switch_default"
-        -->
-
-    <!--
-        android:backgroundTint="@color/button_active"
-        android:foregroundTint="@color/button_active"
-
-        android:thumbTint="@color/switch_default"
-        -->
-
-    <TextView
-        android:id="@+id/IDPossessionDirectionsTeleop"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Contents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans_italic"
-        android:text="@string/PossessionDirections"
-        android:textColor="@drawable/text_states"
-        android:textSize="@dimen/instruction_text_size"
+        android:background="@color/bg_scoring_popup"
+        android:padding="@dimen/padding"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/algaeLayoutTeleop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        app:layout_constraintStart_toEndOf="@+id/coralLayoutTeleop"
-        app:layout_constraintTop_toTopOf="@+id/coralLayoutTeleop">
+        <!-- ═════════════════════════════════════════
+             COLLECTING SECTION
+             ═════════════════════════════════════════ -->
 
         <TextView
-            android:id="@+id/IDAlgaeTeleop"
+            android:id="@+id/CollectingTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/Algae"
-            android:textColor="@drawable/text_subead_states"
-            android:textSize="@dimen/alt_header_text_size"
+            android:gravity="top"
+            android:text="@string/Header"
+            android:textColor="@drawable/text_header_states"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ScoringTitle" />
+
+        <TextView
+            android:id="@+id/CollectingDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/CollectingDesc"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/CollectingTitle" />
 
+        <!-- Collecting counter toggle: 0-25, 26-50, 51-75, >75-->
+        <RadioGroup
+            android:id="@+id/CollectingCounterToggle"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="CollectingDesc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CollectingDesc">
+
+            <RadioButton
+                android:id="@+id/Collecting0To25Fuel"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="0 - 25"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Collecting26To50Fuel"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="26 - 50"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Collecting51to755Fuel"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="51 - 75"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/CollectingMoreThan75Fuel"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:checked="true"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text=">75"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+        </RadioGroup>
+
+        <!-- ═════════════════════════════════════════
+             FERRYING SECTION
+             ═════════════════════════════════════════ -->
         <TextView
-            android:id="@+id/IDDealgaefyingTeleop"
+            android:id="@+id/FerryingTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/Dealgaefying"
-            android:textColor="@color/melon"
-            android:textSize="@dimen/alt_subheader_text_size"
+            android:text="@string/Ferrying"
+            android:textColor="@drawable/text_header_states"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/StopDesc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CollectingCounterToggle"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/FerryingDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/FerryingDesc"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/IDAlgaeTeleop" />
+            app:layout_constraintTop_toBottomOf="@+id/FerryingTitle" />
 
-        <TextView
-            android:id="@+id/IDL3AlgaeTeleop"
-            android:layout_width="wrap_content"
+        <!-- Ferrying counter toggle: 0-25, 26-50, 51-75, >75-->
+        <RadioGroup
+            android:id="@+id/FerryingCounterToggle"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/L3"
-            android:textColor="@drawable/text_subead_states"
-            android:textSize="@dimen/alt_header_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/IDL3AttemptedTeleop"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="CollectingDesc"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/IDL3RemovedTeleop" />
+            app:layout_constraintTop_toBottomOf="@+id/FerryingDesc">
+
+            <RadioButton
+                android:id="@+id/Ferrying0To25Fuel"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="0 - 25"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Ferrying26To50Fuel"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="26 - 50"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Ferrying51to755Fuel"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="51 - 75"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/FerryingMoreThan75Fuel"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:checked="true"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text=">75"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+        </RadioGroup>
+
+        <!-- ═════════════════════════════════════════
+             START SECTION
+             ═════════════════════════════════════════ -->
 
         <TextView
-            android:id="@+id/IDL2AlgaeTeleop"
+            android:id="@+id/ScoringTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="600dp"
+            android:layout_marginTop="0dp"
             android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/L2"
-            android:textColor="@drawable/text_subead_states"
-            android:textSize="@dimen/alt_header_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/IDL2AttemptedTeleop"
+            android:text="@string/ScoringTitle"
+            android:textColor="@drawable/text_header_states"
+            android:textSize="@dimen/header_text_size"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/IDL2RemovedTeleop" />
-
-        <RadioGroup
-            android:id="@+id/L3RemovedButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintStart_toEndOf="@+id/IDL3RemovedTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/IDDealgaefyingTeleop">
-
-            <ImageButton
-                android:id="@+id/notRemovedL3ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_left_states"
-                android:enabled="true"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
-
-            <ImageButton
-                android:id="@+id/removedL3ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/L3AttemptedButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintStart_toStartOf="@+id/L3RemovedButtonGroupTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/L3RemovedButtonGroupTeleop">
-
-            <ImageButton
-                android:id="@+id/notAttemptedL3ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_left_states"
-                android:enabled="true"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
-
-            <ImageButton
-                android:id="@+id/attemptedL3ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-        </RadioGroup>
+            app:layout_constraintBottom_toTopOf="@+id/StartTitle" />
 
         <TextView
-            android:id="@+id/IDL3RemovedTeleop"
+            android:id="@+id/StartTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Removed"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/L3RemovedButtonGroupTeleop"
-            app:layout_constraintStart_toEndOf="@+id/IDL3AlgaeTeleop"
-            app:layout_constraintTop_toTopOf="@id/L3RemovedButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/L3RemovedCounterTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/L3RemovedButtonGroupTeleop"
-            app:layout_constraintStart_toEndOf="@+id/L3RemovedButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L3RemovedButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/IDL3AttemptedTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Attempted"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/L3AttemptedButtonGroupTeleop"
-            app:layout_constraintEnd_toEndOf="@+id/IDL3RemovedTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L3AttemptedButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/L3AttemptedCounterTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/L3AttemptedButtonGroupTeleop"
-            app:layout_constraintStart_toEndOf="@+id/L3AttemptedButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L3AttemptedButtonGroupTeleop" />
-
-        <RadioGroup
-            android:id="@+id/L2RemovedButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintStart_toStartOf="@+id/L3AttemptedButtonGroupTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/L3AttemptedButtonGroupTeleop">
-
-            <ImageButton
-                android:id="@+id/notRemovedL2ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_left_states"
-                android:enabled="true"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
-
-            <ImageButton
-                android:id="@+id/removedL2ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/L2AttemptedButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintStart_toStartOf="@+id/L2RemovedButtonGroupTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/L2RemovedButtonGroupTeleop">
-
-            <ImageButton
-                android:id="@+id/notAttemptedL2ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_left_states"
-                android:enabled="true"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
-
-            <ImageButton
-                android:id="@+id/attemptedL2ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/IDL2RemovedTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Removed"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/L2RemovedButtonGroupTeleop"
-            app:layout_constraintStart_toStartOf="@+id/IDL3RemovedTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L2RemovedButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/L2RemovedCounterTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/L2RemovedButtonGroupTeleop"
-            app:layout_constraintStart_toEndOf="@+id/L2RemovedButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L2RemovedButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/IDL2AttemptedTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Attempted"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/L2AttemptedButtonGroupTeleop"
-            app:layout_constraintStart_toStartOf="@+id/IDL3AttemptedTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L2AttemptedButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/L2AttemptedCounterTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/L2AttemptedButtonGroupTeleop"
-            app:layout_constraintStart_toEndOf="@+id/L2AttemptedButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L2AttemptedButtonGroupTeleop" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/coralLayoutTeleop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/IDPossessionDirectionsTeleop"
-        app:layout_constraintTop_toBottomOf="@+id/IDPossessionDirectionsTeleop">
-
-        <TextView
-            android:id="@+id/IDCoralTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="600dp"
+            android:layout_marginTop="0dp"
             android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/Coral"
-            android:textColor="@drawable/text_subead_states"
-            android:textSize="@dimen/alt_header_text_size"
+            android:text="@string/StartTitle"
+            android:textColor="@color/sky"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CollectingTitle" />
+
+        <TextView
+            android:id="@+id/StartDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/StartDesc"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/StartTitle"
+            app:layout_constraintTop_toBottomOf="@+id/StartTitle" />
 
+        <!-- Start level toggle: EMPTY | 25% | 50% | 75% | FULL -->
+        <RadioGroup
+            android:id="@+id/StartLevelToggle"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/StartDesc"
+            app:layout_constraintTop_toBottomOf="@+id/StartDesc">
+
+            <RadioButton
+                android:id="@+id/StartEmpty"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:checked="true"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/empty_label"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Start25"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/percent_25"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Start50"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/percent_50"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Start75"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/percent_75"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/StartFull"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/full_label"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+        </RadioGroup>
+
+        <!-- ═════════════════════════════════════════
+             STOP SECTION
+             ═════════════════════════════════════════ -->
         <TextView
-            android:id="@+id/IDL4CoralTeleop"
+            android:id="@+id/StopTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/L4"
-            android:textColor="@drawable/text_subead_states"
-            android:textSize="@dimen/alt_header_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/IDL4MissedTeleop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/IDL4ScoredTeleop" />
+            android:text="@string/StopTitle"
+            android:textColor="@color/sky"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintStart_toStartOf="@+id/StartLevelToggle"
+            app:layout_constraintTop_toBottomOf="@+id/StartLevelToggle" />
 
         <TextView
-            android:id="@+id/IDL3CoralTeleop"
-            android:layout_width="wrap_content"
+            android:id="@+id/StopDesc"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/L3"
-            android:textColor="@drawable/text_subead_states"
-            android:textSize="@dimen/alt_header_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/IDL3MissedTeleop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/IDL3ScoredTeleop" />
-
-        <TextView
-            android:id="@+id/IDL2CoralTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/L2"
-            android:textColor="@drawable/text_subead_states"
-            android:textSize="@dimen/alt_header_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/IDL2MissedTeleop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/IDL2ScoredTeleop" />
-
-        <TextView
-            android:id="@+id/IDL1CoralTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/L1"
-            android:textColor="@drawable/text_subead_states"
-            android:textSize="@dimen/alt_header_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/IDL1MissedTeleop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/IDL1ScoredTeleop" />
-
-        <TextView
-            android:id="@+id/IDReefTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/Reef"
-            android:textColor="@color/melon"
-            android:textSize="@dimen/alt_subheader_text_size"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/StopDesc"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/IDCoralTeleop" />
+            app:layout_constraintStart_toStartOf="@id/StopTitle"
+            app:layout_constraintTop_toBottomOf="@+id/StopTitle" />
 
+        <!-- Stop level toggle: EMPTY | 25% | 50% | 75% | FULL -->
         <RadioGroup
-            android:id="@+id/L4ScoredButtonGroupTeleop"
-            android:layout_width="wrap_content"
+            android:id="@+id/StopLevelToggle"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:divider="?android:attr/dividerHorizontal"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintStart_toEndOf="@+id/IDL4ScoredTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/IDReefTeleop">
+            app:layout_constraintStart_toStartOf="@+id/StopDesc"
+            app:layout_constraintTop_toBottomOf="@+id/StopDesc">
 
-            <ImageButton
-                android:id="@+id/notScoredL4ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
+            <RadioButton
+                android:id="@+id/StopEmpty"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
                 android:background="@drawable/toggle_left_states"
-                android:enabled="true"
+                android:button="@null"
+                android:checked="true"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
+                android:text="@string/empty_label"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-            <ImageButton
-                android:id="@+id/scoredL4ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
+            <RadioButton
+                android:id="@+id/Stop25"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/L4MissedButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintStart_toStartOf="@+id/L4ScoredButtonGroupTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/L4ScoredButtonGroupTeleop">
-
-            <ImageButton
-                android:id="@+id/notMissedL4ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
                 android:background="@drawable/toggle_left_states"
-                android:enabled="true"
+                android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
+                android:text="@string/percent_25"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-            <ImageButton
-                android:id="@+id/missedL4ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
+            <RadioButton
+                android:id="@+id/Stop50"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/IDL4ScoredTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Scored"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/L4ScoredButtonGroupTeleop"
-            app:layout_constraintStart_toEndOf="@+id/IDL4CoralTeleop"
-            app:layout_constraintTop_toTopOf="@id/L4ScoredButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/L4ScoredCounterTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/L4ScoredButtonGroupTeleop"
-            app:layout_constraintStart_toEndOf="@+id/L4ScoredButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L4ScoredButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/IDL4MissedTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Missed"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/L4MissedButtonGroupTeleop"
-            app:layout_constraintEnd_toEndOf="@+id/IDL4ScoredTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L4MissedButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/L4MissedCounterTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/L4MissedButtonGroupTeleop"
-            app:layout_constraintStart_toEndOf="@+id/L4MissedButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L4MissedButtonGroupTeleop" />
-
-        <RadioGroup
-            android:id="@+id/L3ScoredButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintStart_toEndOf="@+id/IDL3ScoredTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/L4MissedButtonGroupTeleop">
-
-            <ImageButton
-                android:id="@+id/notScoredL3ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
                 android:background="@drawable/toggle_left_states"
-                android:enabled="true"
+                android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
+                android:text="@string/percent_50"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-            <ImageButton
-                android:id="@+id/scoredL3ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
+            <RadioButton
+                android:id="@+id/Stop75"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/L3MissedButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintStart_toStartOf="@+id/L3ScoredButtonGroupTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/L3ScoredButtonGroupTeleop">
-
-            <ImageButton
-                android:id="@+id/notMissedL3ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
                 android:background="@drawable/toggle_left_states"
-                android:enabled="true"
+                android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
+                android:text="@string/percent_75"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-            <ImageButton
-                android:id="@+id/missedL3ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
+            <RadioButton
+                android:id="@+id/StopFull"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/IDL3ScoredTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Scored"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/L3ScoredButtonGroupTeleop"
-            app:layout_constraintStart_toStartOf="@+id/IDL4ScoredTeleop"
-            app:layout_constraintTop_toTopOf="@id/L3ScoredButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/L3ScoredCounterTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/L3ScoredButtonGroupTeleop"
-            app:layout_constraintStart_toEndOf="@+id/L3ScoredButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L3ScoredButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/IDL3MissedTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Missed"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/L3MissedButtonGroupTeleop"
-            app:layout_constraintEnd_toEndOf="@+id/IDL3ScoredTeleop"
-            app:layout_constraintStart_toStartOf="@+id/IDL3ScoredTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L3MissedButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/L3MissedCounterTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/L3MissedButtonGroupTeleop"
-            app:layout_constraintStart_toEndOf="@+id/L3MissedButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L3MissedButtonGroupTeleop" />
-
-        <RadioGroup
-            android:id="@+id/L2ScoredButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintStart_toEndOf="@+id/IDL2ScoredTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/L3MissedButtonGroupTeleop">
-
-            <ImageButton
-                android:id="@+id/notScoredL2ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_left_states"
-                android:enabled="true"
+                android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
-
-            <ImageButton
-                android:id="@+id/scoredL2ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
+                android:text="@string/full_label"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
         </RadioGroup>
 
-        <RadioGroup
-            android:id="@+id/L2MissedButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintStart_toStartOf="@+id/L2ScoredButtonGroupTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/L2ScoredButtonGroupTeleop">
-
-            <ImageButton
-                android:id="@+id/notMissedL2ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_left_states"
-                android:enabled="true"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
-
-            <ImageButton
-                android:id="@+id/missedL2ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-        </RadioGroup>
-
+        <!-- ═════════════════════════════════════════
+             MISSED SECTION
+             ═════════════════════════════════════════ -->
         <TextView
-            android:id="@+id/IDL2ScoredTeleop"
+            android:id="@+id/MissedTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Scored"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/L2ScoredButtonGroupTeleop"
-            app:layout_constraintStart_toStartOf="@+id/IDL3ScoredTeleop"
-            app:layout_constraintTop_toTopOf="@id/L2ScoredButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/L2ScoredCounterTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/L2ScoredButtonGroupTeleop"
-            app:layout_constraintStart_toEndOf="@+id/L2ScoredButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L2ScoredButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/IDL2MissedTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Missed"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/L2MissedButtonGroupTeleop"
-            app:layout_constraintEnd_toEndOf="@+id/IDL2ScoredTeleop"
-            app:layout_constraintStart_toStartOf="@+id/IDL2ScoredTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L2MissedButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/L2MissedCounterTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/L2MissedButtonGroupTeleop"
-            app:layout_constraintStart_toEndOf="@+id/L2MissedButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L2MissedButtonGroupTeleop" />
-
-        <RadioGroup
-            android:id="@+id/L1ScoredButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintStart_toEndOf="@+id/IDL1ScoredTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/L2MissedButtonGroupTeleop">
-
-            <ImageButton
-                android:id="@+id/notScoredL1ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_left_states"
-                android:enabled="true"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
-
-            <ImageButton
-                android:id="@+id/scoredL1ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/L1MissedButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintStart_toStartOf="@+id/L1ScoredButtonGroupTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/L1ScoredButtonGroupTeleop">
-
-            <ImageButton
-                android:id="@+id/notMissedL1ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_left_states"
-                android:enabled="true"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
-
-            <ImageButton
-                android:id="@+id/missedL1ButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/IDL1ScoredTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Scored"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/L1ScoredButtonGroupTeleop"
-            app:layout_constraintStart_toStartOf="@+id/IDL2ScoredTeleop"
-            app:layout_constraintTop_toTopOf="@id/L1ScoredButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/L1ScoredCounterTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/L1ScoredButtonGroupTeleop"
-            app:layout_constraintStart_toEndOf="@+id/L1ScoredButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L1ScoredButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/IDL1MissedTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Missed"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/L1MissedButtonGroupTeleop"
-            app:layout_constraintEnd_toEndOf="@+id/IDL1ScoredTeleop"
-            app:layout_constraintStart_toStartOf="@+id/IDL1ScoredTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L1MissedButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/L1MissedCounterTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/L1MissedButtonGroupTeleop"
-            app:layout_constraintStart_toEndOf="@+id/L1MissedButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/L1MissedButtonGroupTeleop" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/processorNetLayoutTeleop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="@+id/algaeLayoutTeleop"
-        app:layout_constraintTop_toBottomOf="@+id/algaeLayoutTeleop">
-
-        <TextView
-            android:id="@+id/IDProcessorTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/Processor"
-            android:textColor="@color/melon"
-            android:textSize="@dimen/alt_subheader_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/MissedTitle"
+            android:textColor="@color/sky"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintStart_toStartOf="@+id/StopLevelToggle"
+            app:layout_constraintTop_toBottomOf="@+id/StopLevelToggle" />
 
-        <RadioGroup
-            android:id="@+id/ProcessorScoredButtonGroupTeleop"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/MissedDesc"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintEnd_toStartOf="@+id/ProcessorScoredCounterTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/IDProcessorTeleop">
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/MissedDesc"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/MissedTitle"
+            app:layout_constraintTop_toBottomOf="@+id/MissedTitle" />
 
-            <ImageButton
-                android:id="@+id/notScoredProcessorButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
+        <!-- Missed counter toggle: 0-25, 26-50, 51-75, >75-->
+        <RadioGroup
+            android:id="@+id/MissedCounterToggle"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/MissedDesc"
+            app:layout_constraintTop_toBottomOf="@+id/MissedDesc">
+
+            <RadioButton
+                android:id="@+id/Missed0To25Fuel"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
                 android:background="@drawable/toggle_left_states"
-                android:enabled="true"
+                android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
+                android:text="0 - 25"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-            <ImageButton
-                android:id="@+id/scoredProcessorButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
+            <RadioButton
+                android:id="@+id/Missed26To50Fuel"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/ProcessorMissedButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintEnd_toEndOf="@+id/ProcessorScoredButtonGroupTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/ProcessorScoredButtonGroupTeleop">
-
-            <ImageButton
-                android:id="@+id/notMissedProcessorButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
                 android:background="@drawable/toggle_left_states"
-                android:enabled="true"
+                android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
+                android:text="26 - 50"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-            <ImageButton
-                android:id="@+id/missedProcessorButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
+            <RadioButton
+                android:id="@+id/Missed51to755Fuel"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
+                android:text="51 - 75"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/MissedMoreThan75Fuel"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:checked="true"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text=">75"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
         </RadioGroup>
 
-        <TextView
-            android:id="@+id/IDProcessorScoredTeleop"
+        <!--No Show Switch-->
+        <Switch
+            android:id="@+id/NoShowSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="16dp"
+            android:thumb="@drawable/thumb_states"
+            android:track="@drawable/track_states"
+            app:layout_constraintBottom_toBottomOf="@+id/MissedDesc"
+            app:layout_constraintStart_toStartOf="@+id/FerryingCounterToggle"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/FellOverLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:fontFamily="@font/open_sans"
-            android:text="@string/Scored"
+            android:text="@string/RobotFellOver"
             android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/ProcessorScoredButtonGroupTeleop"
-            app:layout_constraintEnd_toStartOf="@+id/ProcessorScoredButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@id/ProcessorScoredButtonGroupTeleop"
-            app:layout_constraintVertical_bias="0.666" />
+            android:textSize="@dimen/input_label_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/MissedDesc"
+            app:layout_constraintStart_toEndOf="@+id/NoShowSwitch"
+            app:layout_constraintTop_toTopOf="@+id/NoShowSwitch"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <!-- ═════════════════════════════════════════
+             CLIMBING SECTION
+             ═════════════════════════════════════════ -->
 
         <TextView
-            android:id="@+id/ProcessorScoredCounterTeleop"
+            android:id="@+id/ClimbingTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/ProcessorScoredButtonGroupTeleop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/ProcessorScoredButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/IDProcessorMissedTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Missed"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/ProcessorMissedButtonGroupTeleop"
-            app:layout_constraintEnd_toEndOf="@+id/IDProcessorScoredTeleop"
-            app:layout_constraintTop_toTopOf="@+id/ProcessorMissedButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/ProcessorMissedCounterTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/ProcessorMissedButtonGroupTeleop"
-            app:layout_constraintEnd_toEndOf="@+id/ProcessorScoredCounterTeleop"
-            app:layout_constraintTop_toTopOf="@+id/ProcessorMissedButtonGroupTeleop" />
-
-        <TextView
-            android:id="@+id/IDNetTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="600dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/Net"
-            android:textColor="@color/melon"
-            android:textSize="@dimen/alt_subheader_text_size"
+            android:gravity="top"
+            android:text="@string/ClimbingTitle"
+            android:textColor="@drawable/text_header_states"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/StartLevelToggle"
+            app:layout_constraintStart_toStartOf="@+id/ScoringTitle"
+            app:layout_constraintTop_toBottomOf="@+id/StartTitle" />
+
+        <TextView
+            android:id="@+id/ClimbingDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/AttemptedCLimbLevelDesc"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ProcessorMissedButtonGroupTeleop" />
+            app:layout_constraintStart_toStartOf="@+id/ClimbingTitle"
+            app:layout_constraintTop_toBottomOf="@+id/ClimbingTitle" />
 
-        <TextView
-            android:id="@+id/IDNetScoredTeleop"
-            android:layout_width="wrap_content"
+        <!-- Did Not Attempt or Level 1 -->
+        <RadioGroup
+            android:id="@+id/AttemptedClimbToggle"
+            android:layout_width="348dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Scored"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/NetScoredButtonGroupTeleop"
-            app:layout_constraintEnd_toStartOf="@+id/NetScoredButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/NetScoredButtonGroupTeleop" />
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/ClimbingDesc"
+            app:layout_constraintTop_toBottomOf="@+id/ClimbingDesc">
 
+            <RadioButton
+                android:id="@+id/DidNotAttempt"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/DNA"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/AchievedLevel1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+        </RadioGroup>
+
+
+        <!--Successful Climbed-->
+
+        <!-- None or Level 1 -->
         <TextView
-            android:id="@+id/netScoredCounterTeleop"
-            android:layout_width="wrap_content"
+            android:id="@+id/SuccessfullyClimbed"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="11dp"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/NetScoredButtonGroupTeleop"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/SuccessfullyClimbed"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/NetScoredButtonGroupTeleop" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/AttemptedClimbToggle"
+            app:layout_constraintTop_toBottomOf="@+id/AttemptedClimbToggle" />
 
-        <TextView
-            android:id="@+id/netMissedCounterTeleop"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/SuccessfulClimbed"
+            android:layout_width="348dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/SuccessfullyClimbed"
+            app:layout_constraintTop_toBottomOf="@+id/SuccessfullyClimbed">
+
+            <RadioButton
+                android:id="@+id/DNA"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/SuccessfulClimbedLevel"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Level1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+        </RadioGroup>
+
+
+        <!--Tower Climb Level-->
+        <TextView
+            android:id="@+id/TowerClimbPlacement"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/TowerClimbPlacement"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/SuccessfulClimbed"
+            app:layout_constraintTop_toBottomOf="@+id/SuccessfulClimbed" />
+
+        <!-- Left, Right, Center Climb Location -->
+        <RadioGroup
+            android:id="@+id/SuccessfullyClimbedLocation"
+            android:layout_width="348dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/TowerClimbPlacement"
+            app:layout_constraintTop_toBottomOf="@+id/TowerClimbPlacement">
+
+            <RadioButton
+                android:id="@+id/Left"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/Left"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Center"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/Center"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Right"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/Right"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+        </RadioGroup>
+
+        <!-- ═════════════════════════════════════════
+             BUTTONS
+             ═════════════════════════════════════════ -->
+        <Button
+            android:id="@+id/CancelButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="20dp"
+            android:background="@android:color/transparent"
+            android:text="@string/Cancel"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/button_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/netScoredCounterTeleop"
-            app:layout_constraintTop_toTopOf="@+id/NetMissedButtonGroupTeleop" />
+            app:layout_constraintEnd_toStartOf="@+id/SaveButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MissedCounterToggle" />
 
-        <TextView
-            android:id="@+id/IDNetMissedTeleop"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/SaveButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/Missed"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_large_active"
+            android:text="@string/Save"
             android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
+            android:textSize="@dimen/button_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/IDNetScoredTeleop"
-            app:layout_constraintTop_toTopOf="@+id/NetMissedButtonGroupTeleop" />
-
-        <RadioGroup
-            android:id="@+id/NetScoredButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintEnd_toStartOf="@+id/netScoredCounterTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/IDNetTeleop">
-
-            <ImageButton
-                android:id="@+id/notScoredNetButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_left_states"
-                android:enabled="true"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
-
-            <ImageButton
-                android:id="@+id/scoredNetButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-        </RadioGroup>
-
-        <RadioGroup
-            android:id="@+id/NetMissedButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintEnd_toEndOf="@+id/NetScoredButtonGroupTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/NetScoredButtonGroupTeleop">
-
-            <ImageButton
-                android:id="@+id/notMissedNetButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_left_states"
-                android:enabled="true"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
-
-            <ImageButton
-                android:id="@+id/missedNetButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-        </RadioGroup>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/coralPossessionLayoutTeleop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/coralLayoutTeleop"
-        app:layout_constraintTop_toTopOf="@+id/algaePossesssionLayoutTeleop">
-
-        <TextView
-            android:id="@+id/IDCoralPossessionTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/PossessionTitle"
-            android:textColor="@color/melon"
-            android:textSize="@dimen/alt_subheader_text_size"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/CancelButton"
+            app:layout_constraintTop_toBottomOf="@+id/MissedCounterToggle" />
+
+        <Button
+            android:id="@+id/NextButtonTeleop"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/button_next_states"
+            android:drawableEnd="@drawable/right_states"
+            android:paddingStart="150dp"
+            android:paddingEnd="150dp"
+            android:text="@string/Teleop"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/button_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- ═════════════════════════════════════════
+             Timer
+             ═════════════════════════════════════════ -->
+
+        <!-- LEFT EDGE BAR -->
+        <ImageView
+            android:id="@+id/leftEdgeBar"
+            android:layout_width="5dp"
+            android:layout_height="0dp"
+            android:alpha="0"
+            android:background="@drawable/teleop_warning"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/IDCoralPossessedTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/PickedUp"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/CoralPossessedButtonGroupTeleop"
-            app:layout_constraintEnd_toStartOf="@+id/CoralPossessedButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/CoralPossessedButtonGroupTeleop" />
-
-        <RadioGroup
-            android:id="@+id/CoralPossessedButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintEnd_toStartOf="@+id/coralPossessedCounterTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/IDCoralPossessionTeleop">
-
-            <ImageButton
-                android:id="@+id/notPossessedCoralButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_left_states"
-                android:enabled="true"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
-
-            <ImageButton
-                android:id="@+id/possessedCoralButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/coralPossessedCounterTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
-            android:text="@string/DefaultValue"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/CoralPossessedButtonGroupTeleop"
+        <!-- RIGHT EDGE BAR -->
+        <ImageView
+            android:id="@+id/rightEdgeBar"
+            android:layout_width="5dp"
+            android:layout_height="0dp"
+            android:alpha="0"
+            android:background="@drawable/teleop_warning"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/CoralPossessedButtonGroupTeleop" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/algaePossesssionLayoutTeleop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/processorNetLayoutTeleop"
-        app:layout_constraintTop_toBottomOf="@+id/processorNetLayoutTeleop">
-
-        <TextView
-            android:id="@+id/IDAlgaePossessionTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/futura_medium_condensed_bt"
-            android:text="@string/PossessionTitle"
-            android:textColor="@color/melon"
-            android:textSize="@dimen/alt_subheader_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- TOP EDGE BAR -->
+        <ImageView
+            android:id="@+id/topEdgeBar"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:alpha="0"
+            android:background="@drawable/teleop_warning"
+            app:layout_constraintEnd_toStartOf="@id/rightEdgeBar"
+            app:layout_constraintStart_toEndOf="@id/leftEdgeBar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- BOTTOM EDGE BAR -->
+        <ImageView
+            android:id="@+id/bottomEdgeBar"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:alpha="0"
+            android:background="@drawable/teleop_warning"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/rightEdgeBar"
+            app:layout_constraintStart_toStartOf="@+id/leftEdgeBar" />
+
+        <!-- TIMER LABEL -->
         <TextView
-            android:id="@+id/IDAlgaePossessedTeleop"
+            android:id="@+id/IDTeleopSeconds1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/PickedUp"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/AlgaePossessedButtonGroupTeleop"
-            app:layout_constraintEnd_toStartOf="@+id/AlgaePossessedButtonGroupTeleop"
-            app:layout_constraintTop_toTopOf="@+id/AlgaePossessedButtonGroupTeleop" />
+            android:layout_marginBottom="5dp"
+            android:drawableStart="@drawable/timer"
+            android:drawablePadding="@dimen/drawable_padding"
+            android:fontFamily="@font/futura_medium_condensed_bt"
+            android:text="@string/TeleopSeconds"
+            android:textColor="@color/sky"
+            android:textSize="@dimen/instruction_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/NextButtonTeleop"
+            app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
+            app:layout_constraintStart_toEndOf="@+id/leftEdgeBar" />
 
-        <RadioGroup
-            android:id="@+id/AlgaePossessedButtonGroupTeleop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:divider="?android:attr/dividerHorizontal"
-            android:orientation="horizontal"
-            android:showDividers="middle"
-            app:layout_constraintEnd_toStartOf="@+id/algaePossessedCounterTeleop"
-            app:layout_constraintTop_toBottomOf="@+id/IDAlgaePossessionTeleop">
-
-            <ImageButton
-                android:id="@+id/notPossessedAlgaeButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_left_states"
-                android:enabled="true"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:src="@drawable/minus_states"
-                tools:ignore="ContentDescription" />
-
-            <ImageButton
-                android:id="@+id/possessedAlgaeButtonTeleop"
-                android:layout_width="@dimen/square_toggle_length"
-                android:layout_height="@dimen/square_toggle_length"
-                android:layout_weight="1"
-                android:background="@drawable/toggle_right_states"
-                android:enabled="false"
-                android:gravity="center"
-                android:src="@drawable/plus_states"
-                tools:ignore="ContentDescription" />
-
-        </RadioGroup>
-
+        <!-- TIMER COUNTDOWN DISPLAY -->
         <TextView
-            android:id="@+id/algaePossessedCounterTeleop"
-            android:layout_width="wrap_content"
+            android:id="@+id/TeleopSeconds"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:gravity="center"
-            android:paddingStart="5dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="4dp"
             android:text="@string/DefaultValue"
             android:textColor="@drawable/text_states"
-            android:textSize="@dimen/counter_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/AlgaePossessedButtonGroupTeleop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/AlgaePossessedButtonGroupTeleop" />
+            android:textSize="@dimen/instruction_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/IDTeleopSeconds1"
+            app:layout_constraintStart_toEndOf="@+id/IDTeleopSeconds1"
+            app:layout_constraintTop_toTopOf="@+id/IDTeleopSeconds1" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/IDMiscDirectionsTeleop"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/open_sans_italic"
-        android:text="@string/MiscDirections"
-        android:textColor="@drawable/text_states"
-        android:textSize="@dimen/instruction_text_size"
-        app:layout_constraintStart_toStartOf="@+id/coralLayoutTeleop"
-        app:layout_constraintTop_toBottomOf="@+id/coralPossessionLayoutTeleop" />
-
-    <TextView
-        android:id="@+id/IDPlayedDefenseTeleop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/open_sans"
-        android:text="@string/PlayedDefense"
-        android:textColor="@drawable/text_states"
-        android:textSize="@dimen/input_label_text_size"
-        app:layout_constraintBottom_toBottomOf="@+id/playedDefenseSwitchTeleop"
-        app:layout_constraintStart_toEndOf="@+id/playedDefenseSwitchTeleop"
-        app:layout_constraintTop_toTopOf="@+id/playedDefenseSwitchTeleop" />
-
-    <Switch
-        android:id="@+id/playedDefenseSwitchTeleop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:thumb="@drawable/thumb_states"
-        android:track="@drawable/track_states"
-        app:layout_constraintStart_toStartOf="@+id/IDMiscDirectionsTeleop"
-        app:layout_constraintTop_toBottomOf="@+id/IDMiscDirectionsTeleop" />
-
-    <TextView
-        android:id="@+id/IDFellOverTeleop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/open_sans"
-        android:text="@string/FellOverOrDied"
-        android:textColor="@drawable/text_states"
-        android:textSize="@dimen/input_label_text_size"
-        app:layout_constraintBottom_toBottomOf="@+id/fellOverSwitchTeleop"
-        app:layout_constraintStart_toEndOf="@+id/fellOverSwitchTeleop"
-        app:layout_constraintTop_toTopOf="@+id/fellOverSwitchTeleop" />
-
-    <Switch
-        android:id="@+id/fellOverSwitchTeleop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:thumb="@drawable/thumb_states"
-        android:track="@drawable/track_states"
-        app:layout_constraintStart_toStartOf="@+id/playedDefenseSwitchTeleop"
-        app:layout_constraintTop_toBottomOf="@id/playedDefenseSwitchTeleop" />
-
-    <Button
-        android:id="@+id/NextClimbButtonTeleop"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/button_next_states"
-        android:drawableEnd="@drawable/right_states"
-        android:paddingStart="150dp"
-        android:paddingEnd="150dp"
-        android:text="@string/ClimbNext"
-        android:textColor="@drawable/text_states"
-        android:textSize="@dimen/button_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- TELEOP WARNING MESSAGE -->
+        <TextView
+            android:id="@+id/EndgameWarning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/teleop_warning"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="@string/TeleopWarning"
+            android:textColor="@color/bg_general"
+            android:textSize="@dimen/input_label_text_size"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
+            app:layout_constraintStart_toEndOf="@+id/leftEdgeBar"
+            app:layout_constraintTop_toTopOf="@+id/ScoringTitle" />

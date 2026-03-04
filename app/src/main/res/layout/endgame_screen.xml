@@ -656,7 +656,7 @@
             app:layout_constraintTop_toBottomOf="@+id/SuccessfullyClimbed">
 
             <RadioButton
-                android:id="@+id/DidNotAttempt"
+                android:id="@+id/DNA"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -669,7 +669,7 @@
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/AchievedLevel1"
+                android:id="@+id/Level1"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -785,17 +785,113 @@
             app:layout_constraintStart_toEndOf="@+id/CancelButton"
             app:layout_constraintTop_toBottomOf="@+id/MissedCounterToggle" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/NextButtonEndGame"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/button_next_states"
+            android:drawableEnd="@drawable/right_states"
+            android:paddingStart="150dp"
+            android:paddingEnd="150dp"
+            android:text="@string/EndGame"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/button_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- CARET POINTER -->
-    <View
-        android:id="@+id/carat"
-        android:layout_width="@dimen/carat_width"
-        android:layout_height="@dimen/carat_height"
-        android:layout_marginStart="32dp"
-        android:background="@drawable/carat"
-        android:rotation="180"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <!-- ═════════════════════════════════════════
+             Timer
+             ═════════════════════════════════════════ -->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- LEFT EDGE BAR -->
+        <ImageView
+            android:id="@+id/leftEdgeBar"
+            android:layout_width="5dp"
+            android:layout_height="0dp"
+            android:alpha="0"
+            android:background="@drawable/teleop_warning"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- RIGHT EDGE BAR -->
+        <ImageView
+            android:id="@+id/rightEdgeBar"
+            android:layout_width="5dp"
+            android:layout_height="0dp"
+            android:alpha="0"
+            android:background="@drawable/teleop_warning"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- TOP EDGE BAR -->
+        <ImageView
+            android:id="@+id/topEdgeBar"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:alpha="0"
+            android:background="@drawable/teleop_warning"
+            app:layout_constraintEnd_toStartOf="@id/rightEdgeBar"
+            app:layout_constraintStart_toEndOf="@id/leftEdgeBar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- BOTTOM EDGE BAR -->
+        <ImageView
+            android:id="@+id/bottomEdgeBar"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:alpha="0"
+            android:background="@drawable/teleop_warning"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/rightEdgeBar"
+            app:layout_constraintStart_toStartOf="@+id/leftEdgeBar" />
+
+        <!-- TIMER LABEL -->
+        <TextView
+            android:id="@+id/IDEndGameSeconds1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:drawableStart="@drawable/timer"
+            android:drawablePadding="@dimen/drawable_padding"
+            android:fontFamily="@font/futura_medium_condensed_bt"
+            android:text="@string/EndGameSeconds"
+            android:textColor="@color/sky"
+            android:textSize="@dimen/instruction_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/NextButtonEndGame"
+            app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
+            app:layout_constraintStart_toEndOf="@+id/leftEdgeBar" />
+
+        <!-- TIMER COUNTDOWN DISPLAY -->
+        <TextView
+            android:id="@+id/EndGameSeconds"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:text="@string/DefaultValue"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/instruction_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/IDEndGameSeconds1"
+            app:layout_constraintStart_toEndOf="@+id/IDEndGameSeconds1"
+            app:layout_constraintTop_toTopOf="@+id/IDEndGameSeconds1" />
+
+        <!-- POST MATCH WARNING MESSAGE -->
+        <TextView
+            android:id="@+id/PostMatchWarning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/teleop_warning"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="@string/EndGameWarning"
+            android:textColor="@color/bg_general"
+            android:textSize="@dimen/input_label_text_size"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
+            app:layout_constraintStart_toEndOf="@+id/leftEdgeBar"
+            app:layout_constraintTop_toTopOf="@+id/ScoringTitle" />

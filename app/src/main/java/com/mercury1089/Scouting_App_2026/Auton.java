@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import java.util.LinkedHashMap;
@@ -68,6 +69,13 @@ public class Auton extends Fragment implements UpdateListener {
     private TextView timerID;
     private TextView secondsRemaining;
     private TextView teleopWarning;
+
+    // Edge bars for animation
+    private ImageView topEdgeBar;
+    private ImageView bottomEdgeBar;
+    private ImageView leftEdgeBar;
+    private ImageView rightEdgeBar;
+
     private static CountDownTimer timer;
     private boolean firstTime = true;
     private boolean running = true;
@@ -133,6 +141,12 @@ public class Auton extends Fragment implements UpdateListener {
         timerID = getView().findViewById(R.id.IDAutonSeconds1);
         secondsRemaining = getView().findViewById(R.id.AutonSeconds);
         teleopWarning = getView().findViewById(R.id.TeleopWarning);
+
+        // Link edge bars for animations
+        topEdgeBar = getView().findViewById(R.id.topEdgeBar);
+        bottomEdgeBar = getView().findViewById(R.id.bottomEdgeBar);
+        leftEdgeBar = getView().findViewById(R.id.leftEdgeBar);
+        rightEdgeBar = getView().findViewById(R.id.rightEdgeBar);
 
         // Get HashMap data (fill with defaults if empty or null)
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.SETUP);
@@ -210,6 +224,30 @@ public class Auton extends Fragment implements UpdateListener {
                     if (vibrator != null) {
                         vibrator.vibrate(500);
                     }
+
+                    // Animate edge bars
+                    ObjectAnimator topEdgeLighter = ObjectAnimator.ofFloat(topEdgeBar, View.ALPHA, 0.0f, 1.0f);
+                    ObjectAnimator bottomEdgeLighter = ObjectAnimator.ofFloat(bottomEdgeBar, View.ALPHA, 0.0f, 1.0f);
+                    ObjectAnimator rightEdgeLighter = ObjectAnimator.ofFloat(rightEdgeBar, View.ALPHA, 0.0f, 1.0f);
+                    ObjectAnimator leftEdgeLighter = ObjectAnimator.ofFloat(leftEdgeBar, View.ALPHA, 0.0f, 1.0f);
+
+                    topEdgeLighter.setDuration(500);
+                    bottomEdgeLighter.setDuration(500);
+                    leftEdgeLighter.setDuration(500);
+                    rightEdgeLighter.setDuration(500);
+
+                    topEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);
+                    topEdgeLighter.setRepeatCount(1);
+                    bottomEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);
+                    bottomEdgeLighter.setRepeatCount(1);
+                    leftEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);
+                    leftEdgeLighter.setRepeatCount(1);
+                    rightEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);
+                    rightEdgeLighter.setRepeatCount(1);
+
+                    AnimatorSet edgeAnimatorSet = new AnimatorSet();
+                    edgeAnimatorSet.playTogether(topEdgeLighter, bottomEdgeLighter, leftEdgeLighter, rightEdgeLighter);
+                    edgeAnimatorSet.start();
                 }
             }
 
@@ -217,11 +255,14 @@ public class Auton extends Fragment implements UpdateListener {
             public void onFinish() {
                 if (running) {
                     secondsRemaining.setText("00");
+                    topEdgeBar.setBackground(getResources().getDrawable(R.drawable.teleop_warning));
+                    bottomEdgeBar.setBackground(getResources().getDrawable(R.drawable.teleop_warning));
+                    leftEdgeBar.setBackground(getResources().getDrawable(R.drawable.teleop_warning));
+                    rightEdgeBar.setBackground(getResources().getDrawable(R.drawable.teleop_warning));
                     timerID.setTextColor(context.getResources().getColor(R.color.border_warning));
                     timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_red, 0, 0, 0);
                     teleopWarning.setVisibility(View.VISIBLE);
                     teleopWarning.setTextColor(getResources().getColor(R.color.white));
-                    teleopWarning.setBackground(getResources().getDrawable(R.drawable.teleop_error));
                     teleopWarning.setText(getResources().getString(R.string.TeleopError));
                 }
             }
