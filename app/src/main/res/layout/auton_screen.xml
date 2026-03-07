@@ -82,12 +82,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:orientation="horizontal"
-            android:gravity="bottom"
+            android:gravity="end|bottom"
             app:layout_constraintStart_toEndOf="parent" >
 
             <Button
                 android:id="@+id/ResetButton"
-                android:layout_width="482dp"
+                android:layout_width="200dp"
                 android:layout_height="54dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/button_large_disabled"
@@ -97,7 +97,7 @@
 
             <Button
                 android:id="@+id/SaveButton"
-                android:layout_width="482dp"
+                android:layout_width="550dp"
                 android:layout_height="54dp"
                 android:background="@drawable/button_large_active"
                 android:text="@string/Save"
@@ -105,14 +105,19 @@
                 android:textSize="@dimen/button_text_size"/>
 
             <Button
-                android:id="@+id/NextButtonAuton"
-                android:layout_width="wrap_content"
+                android:id="@+id/NextTeleopButton"
+                android:layout_width="200dp"
                 android:layout_height="54dp"
-                android:background="@drawable/button_large_disabled"
-                android:text="@string/TeleopTitle"
-                android:textColor="@drawable/text_states"
+                android:layout_marginStart="20dp"
+                android:drawableEnd="@drawable/right_states"
+                android:paddingHorizontal="12dp"
+                android:drawablePadding="12dp"
+                android:text="TELEOP"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/button_text_size"
-                />
+                android:background="@drawable/button_default"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/autonTimerBar" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -422,9 +427,11 @@
         android:id="@+id/ColumnTwo"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
+        android:layout_marginTop="5dp"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@id/ColumnOne" >
+        android:paddingLeft="15dp"
+        app:layout_constraintStart_toEndOf="@id/ColumnOne"
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- ═════════════════════════════════════════
          SCORING TITLE
@@ -483,12 +490,12 @@
                 android:id="@+id/StartEmpty"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="12dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:checked="false"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="12dp"
                 android:text="@string/empty_label"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -497,11 +504,11 @@
                 android:id="@+id/Start25"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="@string/percent_25"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -510,11 +517,11 @@
                 android:id="@+id/Start50"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="@string/percent_50"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -523,11 +530,11 @@
                 android:id="@+id/Start75"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="@string/percent_75"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -536,11 +543,11 @@
                 android:id="@+id/StartFull"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="12dp"
                 android:background="@drawable/toggle_right_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="12dp"
                 android:text="@string/full_label"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -587,12 +594,12 @@
                 android:id="@+id/StopEmpty"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="12dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:checked="false"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="12dp"
                 android:text="@string/empty_label"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -601,11 +608,11 @@
                 android:id="@+id/Stop25"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="@string/percent_25"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -614,11 +621,11 @@
                 android:id="@+id/Stop50"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="@string/percent_50"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -627,11 +634,11 @@
                 android:id="@+id/Stop75"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="@string/percent_75"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -640,11 +647,11 @@
                 android:id="@+id/StopFull"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="12dp"
                 android:background="@drawable/toggle_right_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="12dp"
                 android:text="@string/full_label"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -788,6 +795,7 @@
         android:paddingLeft="10dp"
         android:orientation="vertical"
         app:layout_constraintStart_toEndOf="@id/ColumnTwo" >
+        app:layout_constraintStart_toTopof="@id/ColumnTwo" >
 
         <!-- ═════════════════════════════════════════
          CLIMBING SECTION  (right column, below Missed)
