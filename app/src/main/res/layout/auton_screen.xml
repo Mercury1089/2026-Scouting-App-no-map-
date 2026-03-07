@@ -796,7 +796,6 @@
         android:paddingLeft="10dp"
         android:orientation="vertical"
         app:layout_constraintStart_toEndOf="@id/ColumnTwo"
-        app:layout_constraintTop_toBottomof="parent"
         tools:ignore="MissingConstraints">
 
 

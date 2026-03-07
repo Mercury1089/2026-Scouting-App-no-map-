@@ -1398,12 +1398,14 @@ id IDExit
 id IDGenerateQR
 id IDGenerateQRDirections
 id IDMatchNumber
+id IDMatchNumberQR
 id IDNoShow
 id IDPassword
 id IDPasswordConfirm
 id IDPreloadNote
 id IDQRWarningDirections
 id IDScouterName
+id IDScouterNameQR
 id IDSettings
 id IDSettingsDirections
 id IDSetup
@@ -1412,6 +1414,7 @@ id IDSetupNextMatch
 id IDSetupNextMatchDirections
 id IDStartDirections
 id IDTeamNumber
+id IDTeamNumberQR
 id IDTeleopSeconds1
 id IDToggleInstructions
 id InnerDecrement
