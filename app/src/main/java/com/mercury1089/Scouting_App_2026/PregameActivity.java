@@ -60,6 +60,7 @@ public class PregameActivity extends AppCompatActivity {
     private ImageButton preloadCargoPlus;
     private TextView preloadCargoDisplay;
 
+
     //HashMaps
     private LinkedHashMap<String, String> settingsHashMap;
     private LinkedHashMap<String, String> setupHashMap;

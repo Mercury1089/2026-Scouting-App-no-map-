@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.mercury1089.Scouting_App_2026.R;
@@ -35,15 +36,19 @@ public final class ActivityMatchBinding implements ViewBinding {
   @NonNull
   public final TabItem teleopTab;
 
+  @NonNull
+  public final ViewPager viewPager;
+
   private ActivityMatchBinding(@NonNull ConstraintLayout rootView, @NonNull TabItem autonTab,
       @NonNull TabItem endgametab, @NonNull TabItem matchSetupTab, @NonNull TabLayout tabs,
-      @NonNull TabItem teleopTab) {
+      @NonNull TabItem teleopTab, @NonNull ViewPager viewPager) {
     this.rootView = rootView;
     this.autonTab = autonTab;
     this.endgametab = endgametab;
     this.matchSetupTab = matchSetupTab;
     this.tabs = tabs;
     this.teleopTab = teleopTab;
+    this.viewPager = viewPager;
   }
 
   @Override
@@ -103,8 +108,14 @@ public final class ActivityMatchBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.view_pager;
+      ViewPager viewPager = ViewBindings.findChildViewById(rootView, id);
+      if (viewPager == null) {
+        break missingId;
+      }
+
       return new ActivityMatchBinding((ConstraintLayout) rootView, autonTab, endgametab,
-          matchSetupTab, tabs, teleopTab);
+          matchSetupTab, tabs, teleopTab, viewPager);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

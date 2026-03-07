@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.Auton, R.string.Teleop, R.string.PostMatch};
+    private static final int[] TAB_TITLES = new int[]{R.string.Auton, R.string.Teleop, R.string.EndGame};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -29,6 +29,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         switch(position){
+
             case 1:
                 return Teleop.newInstance();
             case 2:

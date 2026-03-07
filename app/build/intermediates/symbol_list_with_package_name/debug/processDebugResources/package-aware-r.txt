@@ -1333,7 +1333,6 @@ id AchievedLevel1
 id AttemptedClimbToggle
 id AttemptedNo
 id AttemptedOne
-id Auton
 id AutonSeconds
 id BackButton
 id BlueButton
@@ -1371,6 +1370,7 @@ id Contents
 id CreditWhereCreditsDue
 id DidNotAttempt
 id DoneButton
+id EndGameSeconds
 id EndgameWarning
 id ExitConfirm
 id FUNCTION
@@ -1397,6 +1397,7 @@ id IDAllianceColor
 id IDAlliancePartners
 id IDAutonSeconds1
 id IDClear
+id IDEndGameSeconds1
 id IDExit
 id IDGenerateQR
 id IDGenerateQRDirections
@@ -1449,6 +1450,8 @@ id MissedPlus5
 id MissedTitle
 id MissedToggle
 id MuteButton
+id NextButtonAuton
+id NextButtonEndGame
 id NoShowSwitch
 id OuterDecrement
 id OuterID
@@ -3744,6 +3747,7 @@ id view
 id view2
 id view3
 id view_offset_helper
+id view_pager
 id visible
 id warning
 id withText

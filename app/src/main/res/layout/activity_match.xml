@@ -49,35 +49,16 @@
             app:tabBackground="@drawable/toggle_right_states" />
     </com.google.android.material.tabs.TabLayout>
 
-    <fragment
-        android:id="@+id/Auton"
-        android:name="com.mercury1089.Scouting_App_2026.Auton"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="55dp"
-        app:layout_constraintStart_toStartOf="@id/tabs"
-        app:layout_constraintTop_toTopOf="@id/tabs"
-        tools:layout="@layout/auton_screen"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabs" />
 
-    <fragment
-        android:id="@+id/Auton"
-        android:name="com.mercury1089.Scouting_App_2026.Teleop"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="55dp"
-        app:layout_constraintStart_toStartOf="@id/tabs"
-        app:layout_constraintTop_toTopOf="@id/tabs"
-        tools:layout="@layout/teleop_screen"/>
-
-    <fragment
-        android:id="@+id/Auton"
-        android:name="com.mercury1089.Scouting_App_2026.Endgame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="55dp"
-        app:layout_constraintStart_toStartOf="@id/tabs"
-        app:layout_constraintTop_toTopOf="@id/tabs"
-        tools:layout="@layout/endgame_screen"/>
 
     <!--
         <androidx.constraintlayout.widget.ConstraintLayout

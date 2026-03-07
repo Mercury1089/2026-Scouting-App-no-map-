@@ -1332,7 +1332,6 @@ int id AchievedLevel1 0x7f0a0001
 int id AttemptedClimbToggle 0x7f0a0002
 int id AttemptedNo 0x7f0a0003
 int id AttemptedOne 0x7f0a0004
-int id Auton 0x7f0a0005
 int id AutonSeconds 0x7f0a0006
 int id BackButton 0x7f0a0007
 int id BlueButton 0x7f0a0008
@@ -1370,6 +1369,7 @@ int id Contents 0x7f0a0027
 int id CreditWhereCreditsDue 0x7f0a0028
 int id DidNotAttempt 0x7f0a0029
 int id DoneButton 0x7f0a002a
+int id EndGameSeconds 0x7f0a0977
 int id EndgameWarning 0x7f0a002b
 int id ExitConfirm 0x7f0a002c
 int id FUNCTION 0x7f0a002d
@@ -1396,6 +1396,7 @@ int id IDAllianceColor 0x7f0a0041
 int id IDAlliancePartners 0x7f0a0042
 int id IDAutonSeconds1 0x7f0a0043
 int id IDClear 0x7f0a0044
+int id IDEndGameSeconds1 0x7f0a0978
 int id IDExit 0x7f0a0045
 int id IDGenerateQR 0x7f0a0046
 int id IDGenerateQRDirections 0x7f0a0047
@@ -1448,6 +1449,8 @@ int id MissedPlus5 0x7f0a0075
 int id MissedTitle 0x7f0a0076
 int id MissedToggle 0x7f0a0077
 int id MuteButton 0x7f0a0078
+int id NextButtonAuton 0x7f0a0979
+int id NextButtonEndGame 0x7f0a097a
 int id NoShowSwitch 0x7f0a0079
 int id OuterDecrement 0x7f0a007a
 int id OuterID 0x7f0a007b
@@ -3743,6 +3746,7 @@ int id view 0x7f0a096c
 int id view2 0x7f0a096d
 int id view3 0x7f0a096e
 int id view_offset_helper 0x7f0a096f
+int id view_pager 0x7f0a097b
 int id visible 0x7f0a0970
 int id warning 0x7f0a0971
 int id withText 0x7f0a0972

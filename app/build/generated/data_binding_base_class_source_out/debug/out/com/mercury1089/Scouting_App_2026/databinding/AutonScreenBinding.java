@@ -167,6 +167,9 @@ public final class AutonScreenBinding implements ViewBinding {
   public final TextView MissedTitle;
 
   @NonNull
+  public final Button NextButtonAuton;
+
+  @NonNull
   public final Switch NoShowSwitch;
 
   @NonNull
@@ -285,20 +288,21 @@ public final class AutonScreenBinding implements ViewBinding {
       @NonNull TextView MissedDesc, @NonNull RadioButton MissedMinus,
       @NonNull RadioButton MissedMinus10, @NonNull RadioButton MissedMinus5,
       @NonNull RadioButton MissedPlus, @NonNull RadioButton MissedPlus10,
-      @NonNull RadioButton MissedPlus5, @NonNull TextView MissedTitle, @NonNull Switch NoShowSwitch,
-      @NonNull Button ResetButton, @NonNull RadioButton Right, @NonNull Button SaveButton,
-      @NonNull TextView ScoringTitle, @NonNull RadioButton Start25, @NonNull RadioButton Start50,
-      @NonNull RadioButton Start75, @NonNull TextView StartDesc, @NonNull RadioButton StartEmpty,
-      @NonNull RadioButton StartFull, @NonNull RadioGroup StartLevelToggle,
-      @NonNull TextView StartTitle, @NonNull RadioButton Stop25, @NonNull RadioButton Stop50,
-      @NonNull RadioButton Stop75, @NonNull TextView StopDesc, @NonNull RadioButton StopEmpty,
-      @NonNull RadioButton StopFull, @NonNull RadioGroup StopLevelToggle,
-      @NonNull TextView StopTitle, @NonNull RadioGroup SuccessfulClimbed,
-      @NonNull TextView SuccessfullyClimbed, @NonNull RadioGroup SuccessfullyClimbedLocation,
-      @NonNull TextView TeleopWarning, @NonNull LinearLayoutCompat TimerBox,
-      @NonNull TextView TowerClimbPlacement, @NonNull ConstraintLayout autonFieldContainer,
-      @NonNull ImageView bottomEdgeBar, @NonNull ImageView leftEdgeBar,
-      @NonNull ImageView rightEdgeBar, @NonNull ImageView topEdgeBar) {
+      @NonNull RadioButton MissedPlus5, @NonNull TextView MissedTitle,
+      @NonNull Button NextButtonAuton, @NonNull Switch NoShowSwitch, @NonNull Button ResetButton,
+      @NonNull RadioButton Right, @NonNull Button SaveButton, @NonNull TextView ScoringTitle,
+      @NonNull RadioButton Start25, @NonNull RadioButton Start50, @NonNull RadioButton Start75,
+      @NonNull TextView StartDesc, @NonNull RadioButton StartEmpty, @NonNull RadioButton StartFull,
+      @NonNull RadioGroup StartLevelToggle, @NonNull TextView StartTitle,
+      @NonNull RadioButton Stop25, @NonNull RadioButton Stop50, @NonNull RadioButton Stop75,
+      @NonNull TextView StopDesc, @NonNull RadioButton StopEmpty, @NonNull RadioButton StopFull,
+      @NonNull RadioGroup StopLevelToggle, @NonNull TextView StopTitle,
+      @NonNull RadioGroup SuccessfulClimbed, @NonNull TextView SuccessfullyClimbed,
+      @NonNull RadioGroup SuccessfullyClimbedLocation, @NonNull TextView TeleopWarning,
+      @NonNull LinearLayoutCompat TimerBox, @NonNull TextView TowerClimbPlacement,
+      @NonNull ConstraintLayout autonFieldContainer, @NonNull ImageView bottomEdgeBar,
+      @NonNull ImageView leftEdgeBar, @NonNull ImageView rightEdgeBar,
+      @NonNull ImageView topEdgeBar) {
     this.rootView = rootView;
     this.AchievedLevel1 = AchievedLevel1;
     this.AttemptedClimbToggle = AttemptedClimbToggle;
@@ -347,6 +351,7 @@ public final class AutonScreenBinding implements ViewBinding {
     this.MissedPlus10 = MissedPlus10;
     this.MissedPlus5 = MissedPlus5;
     this.MissedTitle = MissedTitle;
+    this.NextButtonAuton = NextButtonAuton;
     this.NoShowSwitch = NoShowSwitch;
     this.ResetButton = ResetButton;
     this.Right = Right;
@@ -690,6 +695,12 @@ public final class AutonScreenBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.NextButtonAuton;
+      Button NextButtonAuton = ViewBindings.findChildViewById(rootView, id);
+      if (NextButtonAuton == null) {
+        break missingId;
+      }
+
       id = R.id.NoShowSwitch;
       Switch NoShowSwitch = ViewBindings.findChildViewById(rootView, id);
       if (NoShowSwitch == null) {
@@ -887,12 +898,12 @@ public final class AutonScreenBinding implements ViewBinding {
           FerryingMinus10, FerryingMinus5, FerryingPlus, FerryingPlus10, FerryingPlus5,
           FerryingTitle, FixedBottom, IDAutonSeconds1, Left, MissedCounter, MissedCounterToggle,
           MissedDesc, MissedMinus, MissedMinus10, MissedMinus5, MissedPlus, MissedPlus10,
-          MissedPlus5, MissedTitle, NoShowSwitch, ResetButton, Right, SaveButton, ScoringTitle,
-          Start25, Start50, Start75, StartDesc, StartEmpty, StartFull, StartLevelToggle, StartTitle,
-          Stop25, Stop50, Stop75, StopDesc, StopEmpty, StopFull, StopLevelToggle, StopTitle,
-          SuccessfulClimbed, SuccessfullyClimbed, SuccessfullyClimbedLocation, TeleopWarning,
-          TimerBox, TowerClimbPlacement, autonFieldContainer, bottomEdgeBar, leftEdgeBar,
-          rightEdgeBar, topEdgeBar);
+          MissedPlus5, MissedTitle, NextButtonAuton, NoShowSwitch, ResetButton, Right, SaveButton,
+          ScoringTitle, Start25, Start50, Start75, StartDesc, StartEmpty, StartFull,
+          StartLevelToggle, StartTitle, Stop25, Stop50, Stop75, StopDesc, StopEmpty, StopFull,
+          StopLevelToggle, StopTitle, SuccessfulClimbed, SuccessfullyClimbed,
+          SuccessfullyClimbedLocation, TeleopWarning, TimerBox, TowerClimbPlacement,
+          autonFieldContainer, bottomEdgeBar, leftEdgeBar, rightEdgeBar, topEdgeBar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

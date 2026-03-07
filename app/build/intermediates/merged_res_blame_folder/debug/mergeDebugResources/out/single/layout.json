@@ -4,12 +4,16 @@
         "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/generate_qrcode_confirm_popup.xml"
     },
     {
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/popup_qr.xml",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/popup_qr.xml"
+    },
+    {
         "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/endgame_screen.xml",
         "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/endgame_screen.xml"
     },
     {
-        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/popup_qr.xml",
-        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/popup_qr.xml"
+        "merged": "com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/activity_match.xml",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-18:/layout/activity_match.xml"
     },
     {
         "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/clear_confirm_popup.xml",
@@ -48,32 +52,28 @@
         "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/activity_settings.xml"
     },
     {
-        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/popup_scored_down.xml",
-        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/popup_scored_down.xml"
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/popup_scored_up.xml",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/popup_scored_up.xml"
     },
     {
         "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/enter_password_popup.xml",
         "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/enter_password_popup.xml"
     },
     {
-        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/popup_scored_up.xml",
-        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/popup_scored_up.xml"
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/popup_scored_down.xml",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/popup_scored_down.xml"
     },
     {
         "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/activity_pregame.xml",
         "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/activity_pregame.xml"
     },
     {
-        "merged": "com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/teleop_screen.xml",
-        "source": "com.mercury1089.Scouting_App_2026.app-main-18:/layout/teleop_screen.xml"
+        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/qr_list_item.xml",
+        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/qr_list_item.xml"
     },
     {
         "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/clear_qr_cache_confirm.xml",
         "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/clear_qr_cache_confirm.xml"
-    },
-    {
-        "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/qr_list_item.xml",
-        "source": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-main-18:/layout/qr_list_item.xml"
     },
     {
         "merged": "/Users/srikar_muthyala/.gradle/daemon/8.13/com.mercury1089.Scouting_App_2026.app-mergeDebugResources-15:/layout/popup_qr_confirm.xml",

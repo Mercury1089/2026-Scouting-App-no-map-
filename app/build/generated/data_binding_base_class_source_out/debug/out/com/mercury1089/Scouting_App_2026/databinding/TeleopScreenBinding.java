@@ -140,6 +140,9 @@ public final class TeleopScreenBinding implements ViewBinding {
   public final TextView MissedTitle;
 
   @NonNull
+  public final Button NextButtonEndGame;
+
+  @NonNull
   public final Switch NoShowSwitch;
 
   @NonNull
@@ -255,10 +258,10 @@ public final class TeleopScreenBinding implements ViewBinding {
       @NonNull RadioButton Missed26To50Fuel, @NonNull RadioButton Missed51to755Fuel,
       @NonNull RadioGroup MissedCounterToggle, @NonNull TextView MissedDesc,
       @NonNull RadioButton MissedMoreThan75Fuel, @NonNull TextView MissedTitle,
-      @NonNull Switch NoShowSwitch, @NonNull Button ResetButton, @NonNull RadioButton Right,
-      @NonNull Button SaveButton, @NonNull TextView ScoringTitle, @NonNull RadioButton Start25,
-      @NonNull RadioButton Start50, @NonNull RadioButton Start75, @NonNull TextView StartDesc,
-      @NonNull RadioButton StartEmpty, @NonNull RadioButton StartFull,
+      @NonNull Button NextButtonEndGame, @NonNull Switch NoShowSwitch, @NonNull Button ResetButton,
+      @NonNull RadioButton Right, @NonNull Button SaveButton, @NonNull TextView ScoringTitle,
+      @NonNull RadioButton Start25, @NonNull RadioButton Start50, @NonNull RadioButton Start75,
+      @NonNull TextView StartDesc, @NonNull RadioButton StartEmpty, @NonNull RadioButton StartFull,
       @NonNull RadioGroup StartLevelToggle, @NonNull TextView StartTitle,
       @NonNull RadioButton Stop25, @NonNull RadioButton Stop50, @NonNull RadioButton Stop75,
       @NonNull TextView StopDesc, @NonNull RadioButton StopEmpty, @NonNull RadioButton StopFull,
@@ -308,6 +311,7 @@ public final class TeleopScreenBinding implements ViewBinding {
     this.MissedDesc = MissedDesc;
     this.MissedMoreThan75Fuel = MissedMoreThan75Fuel;
     this.MissedTitle = MissedTitle;
+    this.NextButtonEndGame = NextButtonEndGame;
     this.NoShowSwitch = NoShowSwitch;
     this.ResetButton = ResetButton;
     this.Right = Right;
@@ -597,6 +601,12 @@ public final class TeleopScreenBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.NextButtonEndGame;
+      Button NextButtonEndGame = ViewBindings.findChildViewById(rootView, id);
+      if (NextButtonEndGame == null) {
+        break missingId;
+      }
+
       id = R.id.NoShowSwitch;
       Switch NoShowSwitch = ViewBindings.findChildViewById(rootView, id);
       if (NoShowSwitch == null) {
@@ -793,8 +803,8 @@ public final class TeleopScreenBinding implements ViewBinding {
           Ferrying0To25Fuel, Ferrying26To50Fuel, Ferrying51to755Fuel, FerryingCounterToggle,
           FerryingDesc, FerryingMoreThan75Fuel, FerryingTitle, FixedBottom, IDTeleopSeconds1, Left,
           Missed0To25Fuel, Missed26To50Fuel, Missed51to755Fuel, MissedCounterToggle, MissedDesc,
-          MissedMoreThan75Fuel, MissedTitle, NoShowSwitch, ResetButton, Right, SaveButton,
-          ScoringTitle, Start25, Start50, Start75, StartDesc, StartEmpty, StartFull,
+          MissedMoreThan75Fuel, MissedTitle, NextButtonEndGame, NoShowSwitch, ResetButton, Right,
+          SaveButton, ScoringTitle, Start25, Start50, Start75, StartDesc, StartEmpty, StartFull,
           StartLevelToggle, StartTitle, Stop25, Stop50, Stop75, StopDesc, StopEmpty, StopFull,
           StopLevelToggle, StopTitle, SuccessfulClimbed, SuccessfullyClimbed,
           SuccessfullyClimbedLocation, TeleopSeconds, TimerBox, TowerClimbPlacement, bottomEdgeBar,
