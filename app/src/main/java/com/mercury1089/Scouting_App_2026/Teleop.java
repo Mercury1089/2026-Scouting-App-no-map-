@@ -366,7 +366,7 @@ public class Teleop extends Fragment implements UpdateListener {
                 saveTeleopData();
                 appendTeleopSnapshot();
                 resetTeleopUI();
-                context.tabs.getTabAt(1).select();
+                context.tabs.getTabAt(2).select();
             });
         }
     }

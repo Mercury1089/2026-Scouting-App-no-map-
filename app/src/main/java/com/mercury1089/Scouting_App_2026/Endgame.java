@@ -19,6 +19,9 @@ import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.Dialog;
+import android.view.Window;
+import com.mercury1089.Scouting_App_2026.qr.QRRunnable;
 
 import androidx.fragment.app.Fragment;
 
@@ -68,6 +71,8 @@ public class Endgame extends Fragment implements UpdateListener {
     private boolean running = true;
     private MatchActivity context;
 
+    private Button generateQRButton;
+
     // Running counts
     private int collectingCount = 0;
     private int ferryingCount   = 0;
@@ -111,10 +116,11 @@ public class Endgame extends Fragment implements UpdateListener {
         noShowSwitch                     = getView().findViewById(R.id.NoShowSwitch);
         saveButton                       = getView().findViewById(R.id.SaveButton);
         resetButton                      = getView().findViewById(R.id.ResetButton);
-        nextButtonEndGame                  = getView().findViewById(R.id.NextTeleopButton);
+        nextButtonEndGame                = getView().findViewById(R.id.NextTeleopButton);
+        generateQRButton                 = getView().findViewById(R.id.GenerateQRButton);
         timerID                          = getView().findViewById(R.id.IDEndGameSeconds1);
         secondsRemaining                 = getView().findViewById(R.id.EndGameSeconds);
-        endgamewarning                    = getView().findViewById(R.id.postMatchWarning);
+        endgamewarning                   = getView().findViewById(R.id.postMatchWarning);
         topEdgeBar                       = getView().findViewById(R.id.topEdgeBar);
         bottomEdgeBar                    = getView().findViewById(R.id.bottomEdgeBar);
         leftEdgeBar                      = getView().findViewById(R.id.leftEdgeBar);
@@ -391,7 +397,19 @@ public class Endgame extends Fragment implements UpdateListener {
                 saveEndGameData();
                 appendEndGameSnapshot();
                 resetEndGameUI();
-                context.tabs.getTabAt(1).select();
+                context.tabs.getTabAt(3).select();
+            });
+        }
+
+        if (generateQRButton != null) {
+            generateQRButton.setOnClickListener(v -> {
+                saveEndGameData();
+                Dialog loading_alert = new Dialog(context);
+                loading_alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                loading_alert.setContentView(R.layout.loading_screen);
+                loading_alert.setCancelable(false);
+                loading_alert.show();
+                new Thread(new QRRunnable(context, loading_alert)).start();
             });
         }
     }
