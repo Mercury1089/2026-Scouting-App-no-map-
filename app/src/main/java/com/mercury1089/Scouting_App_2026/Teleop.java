@@ -30,6 +30,8 @@ import java.util.LinkedHashMap;
 public class Teleop extends Fragment implements UpdateListener {
 
     private LinkedHashMap<String, String> setupHashMap;
+
+    private int teleopSnapshotCount = 0;
     private LinkedHashMap<String, String> teleopHashMap;
 
     // Fuel section
@@ -440,9 +442,11 @@ public class Teleop extends Fragment implements UpdateListener {
 
         // Append to builder
         snapshotBuilder.append(snapshotLine);
+        teleopSnapshotCount++;
 
         // Save to HashMap for persistence
         teleopHashMap.put("snapshots", snapshotBuilder.toString());
+        teleopHashMap.put("TeleopSaveIndex", String.valueOf(teleopSnapshotCount));
         HashMapManager.putTeleopHashMap(teleopHashMap);
 
         int snapshotCount = countSnapshots();

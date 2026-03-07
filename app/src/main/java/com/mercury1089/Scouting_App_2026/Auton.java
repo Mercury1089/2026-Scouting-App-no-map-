@@ -31,6 +31,7 @@ public class Auton extends Fragment implements UpdateListener {
 
     private static final String TAG = "Auton Fragment";
 
+    private int autonSnapshotCount = 0;
     private LinkedHashMap<String, String> setupHashMap;
     private LinkedHashMap<String, String> autonHashMap;
 
@@ -110,7 +111,7 @@ public class Auton extends Fragment implements UpdateListener {
         noShowSwitch                     = getView().findViewById(R.id.NoShowSwitch);
         saveButton                       = getView().findViewById(R.id.SaveButton);
         resetButton                      = getView().findViewById(R.id.ResetButton);
-        nextButtonAuton                  = getView().findViewById(R.id.NextButtonAuton);
+        nextButtonAuton                  = getView().findViewById(R.id.NextTeleopButton);
         timerID                          = getView().findViewById(R.id.IDAutonSeconds1);
         secondsRemaining                 = getView().findViewById(R.id.AutonSeconds);
         teleopWarning                    = getView().findViewById(R.id.TeleopWarning);
@@ -161,7 +162,10 @@ public class Auton extends Fragment implements UpdateListener {
                 (noShowSwitch != null && noShowSwitch.isChecked()) ? "1" : "0");
 
         snapshotBuilder.append(snapshotLine);
+        autonSnapshotCount++;
+
         autonHashMap.put("snapshots", snapshotBuilder.toString());
+        autonHashMap.put("AutonSaveIndex", String.valueOf(autonSnapshotCount));
         HashMapManager.putAutonHashMap(autonHashMap);
     }
 

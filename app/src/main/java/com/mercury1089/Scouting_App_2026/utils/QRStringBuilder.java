@@ -66,6 +66,12 @@ public class QRStringBuilder {
     // E-AttemptedClimb (0/1), E-SuccessfulClimbed (0/1), E-ClimbLocation
     // ─────────────────────────────────────────
     public static void buildQRString() {
+        // Initialize default values if hashmaps are empty
+        HashMapManager.checkNullOrEmpty(HashMapManager.HASH.SETUP);
+        HashMapManager.checkNullOrEmpty(HashMapManager.HASH.AUTON);
+        HashMapManager.checkNullOrEmpty(HashMapManager.HASH.TELEOP);
+        HashMapManager.checkNullOrEmpty(HashMapManager.HASH.ENDGAME);
+
         LinkedHashMap<String, String> setup  = HashMapManager.getSetupHashMap();
         LinkedHashMap<String, String> auton  = HashMapManager.getAutonHashMap();
         LinkedHashMap<String, String> teleop = HashMapManager.getTeleopHashMap();

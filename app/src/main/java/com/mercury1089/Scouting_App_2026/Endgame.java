@@ -32,6 +32,8 @@ public class Endgame extends Fragment implements UpdateListener {
     private LinkedHashMap<String, String> setupHashMap;
     private LinkedHashMap<String, String> endgameHashMap;
 
+    private int endgameSnapshotCount = 0;
+
     // Range toggles (select one range bucket)
     private RadioGroup collectingCounterToggle;
     private RadioGroup ferryingCounterToggle;
@@ -105,7 +107,7 @@ public class Endgame extends Fragment implements UpdateListener {
         successfullyClimbedLocationToggle = getView().findViewById(R.id.SuccessfullyClimbedLocation);
         noShowSwitch                      = getView().findViewById(R.id.NoShowSwitch);
         saveButton                        = getView().findViewById(R.id.SaveButton);
-        generateQRButton                  = getView().findViewById(R.id.NextButtonEndGame);
+        generateQRButton                  = getView().findViewById(R.id.GenerateQRButton);
         timerID                           = getView().findViewById(R.id.IDEndGameSeconds1);
         secondsRemaining                  = getView().findViewById(R.id.EndGameSeconds);
         postMatchWarning                  = getView().findViewById(R.id.PostMatchWarning);
@@ -374,9 +376,11 @@ public class Endgame extends Fragment implements UpdateListener {
 
         // Append to builder
         snapshotBuilder.append(snapshotLine);
+        endgameSnapshotCount++;
 
         // Save to HashMap for persistence
         endgameHashMap.put("snapshots", snapshotBuilder.toString());
+        endgameHashMap.put("EndgameSaveIndex", String.valueOf(endgameSnapshotCount));
         HashMapManager.putEndgameHashMap(endgameHashMap);
 
         int snapshotCount = countSnapshots();
