@@ -167,7 +167,7 @@ public final class AutonScreenBinding implements ViewBinding {
   public final TextView MissedTitle;
 
   @NonNull
-  public final Button NextButtonAuton;
+  public final Button NextTeleopButton;
 
   @NonNull
   public final Switch NoShowSwitch;
@@ -289,7 +289,7 @@ public final class AutonScreenBinding implements ViewBinding {
       @NonNull RadioButton MissedMinus10, @NonNull RadioButton MissedMinus5,
       @NonNull RadioButton MissedPlus, @NonNull RadioButton MissedPlus10,
       @NonNull RadioButton MissedPlus5, @NonNull TextView MissedTitle,
-      @NonNull Button NextButtonAuton, @NonNull Switch NoShowSwitch, @NonNull Button ResetButton,
+      @NonNull Button NextTeleopButton, @NonNull Switch NoShowSwitch, @NonNull Button ResetButton,
       @NonNull RadioButton Right, @NonNull Button SaveButton, @NonNull TextView ScoringTitle,
       @NonNull RadioButton Start25, @NonNull RadioButton Start50, @NonNull RadioButton Start75,
       @NonNull TextView StartDesc, @NonNull RadioButton StartEmpty, @NonNull RadioButton StartFull,
@@ -351,7 +351,7 @@ public final class AutonScreenBinding implements ViewBinding {
     this.MissedPlus10 = MissedPlus10;
     this.MissedPlus5 = MissedPlus5;
     this.MissedTitle = MissedTitle;
-    this.NextButtonAuton = NextButtonAuton;
+    this.NextTeleopButton = NextTeleopButton;
     this.NoShowSwitch = NoShowSwitch;
     this.ResetButton = ResetButton;
     this.Right = Right;
@@ -695,9 +695,9 @@ public final class AutonScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.NextButtonAuton;
-      Button NextButtonAuton = ViewBindings.findChildViewById(rootView, id);
-      if (NextButtonAuton == null) {
+      id = R.id.NextTeleopButton;
+      Button NextTeleopButton = ViewBindings.findChildViewById(rootView, id);
+      if (NextTeleopButton == null) {
         break missingId;
       }
 
@@ -898,7 +898,7 @@ public final class AutonScreenBinding implements ViewBinding {
           FerryingMinus10, FerryingMinus5, FerryingPlus, FerryingPlus10, FerryingPlus5,
           FerryingTitle, FixedBottom, IDAutonSeconds1, Left, MissedCounter, MissedCounterToggle,
           MissedDesc, MissedMinus, MissedMinus10, MissedMinus5, MissedPlus, MissedPlus10,
-          MissedPlus5, MissedTitle, NextButtonAuton, NoShowSwitch, ResetButton, Right, SaveButton,
+          MissedPlus5, MissedTitle, NextTeleopButton, NoShowSwitch, ResetButton, Right, SaveButton,
           ScoringTitle, Start25, Start50, Start75, StartDesc, StartEmpty, StartFull,
           StartLevelToggle, StartTitle, Stop25, Stop50, Stop75, StopDesc, StopEmpty, StopFull,
           StopLevelToggle, StopTitle, SuccessfulClimbed, SuccessfullyClimbed,

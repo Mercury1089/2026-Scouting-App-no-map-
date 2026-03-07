@@ -339,7 +339,7 @@ public class HashMapManager{
                 autonHashMap.put("StopLevel", "EMPTY");
                 autonHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
                 autonHashMap.put("SuccessfulClimbed", "None");
-                autonHashMap.put("ClimbLocation", "LEFT");
+                autonHashMap.put("ClimbLocation", "Null");
                 autonHashMap.put("RobotFellOver", "0");
 
                 // CSV Snapshot buffer - initialize with header
@@ -358,7 +358,7 @@ public class HashMapManager{
                 teleopHashMap.put("StopLevel", "EMPTY");
                 teleopHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
                 teleopHashMap.put("SuccessfulClimbed", "None");
-                teleopHashMap.put("ClimbLocation", "LEFT");
+                teleopHashMap.put("ClimbLocation", "Null");
                 teleopHashMap.put("RobotFellOver", "0");
 
                 // CSV Snapshot buffer - initialize with header
@@ -377,7 +377,7 @@ public class HashMapManager{
                 endgameHashMap.put("StopLevel", "EMPTY");
                 endgameHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
                 endgameHashMap.put("SuccessfulClimbed", "None");
-                endgameHashMap.put("ClimbLocation", "LEFT");
+                endgameHashMap.put("ClimbLocation", "Null");
                 endgameHashMap.put("RobotFellOver", "0");
 
                 // CSV Snapshot buffer - initialize with header

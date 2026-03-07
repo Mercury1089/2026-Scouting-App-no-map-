@@ -29,8 +29,15 @@ import java.util.LinkedHashMap;
 
 public class Teleop extends Fragment implements UpdateListener {
 
+    private static final String TAG = "Teleop Fragment";
+
+    private int teleopSnapshotCount = 0;
     private LinkedHashMap<String, String> setupHashMap;
     private LinkedHashMap<String, String> teleopHashMap;
+
+    // Snapshot System (CSV format)
+    private StringBuilder snapshotBuilder;
+    private static final String SNAPSHOT_HEADER = "collecting,ferrying,missed,startLevel,stopLevel,attemptedClimb,successfulClimbed,climbLocation,robotFellOver";
 
     // Fuel section
     private RadioGroup collectingCounterToggle;
@@ -47,12 +54,13 @@ public class Teleop extends Fragment implements UpdateListener {
     // Other controls
     private Switch noShowSwitch;
     private Button saveButton;
-    private Button nextButtonEndGame;
+    private Button resetButton;
+    private Button nextButtonTeleop;
 
     // Timer & animation
     private TextView timerID;
     private TextView secondsRemaining;
-    private TextView endgameWarning;
+    private TextView teleopWarning;
     private ImageView topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar;
 
     private static CountDownTimer timer;
@@ -64,12 +72,6 @@ public class Teleop extends Fragment implements UpdateListener {
     private int collectingCount = 0;
     private int ferryingCount   = 0;
     private int missedCount     = 0;
-
-    // SNAPSHOT SYSTEM - CSV FORMAT
-    private StringBuilder snapshotBuilder;
-    private static final String SNAPSHOT_HEADER =
-            "collecting,ferrying,missed,startLevel,stopLevel," +
-                    "attemptedClimb,successfulClimbed,climbLocation,robotFellOver";
 
     public static Teleop newInstance() {
         Teleop fragment = new Teleop();
@@ -94,32 +96,31 @@ public class Teleop extends Fragment implements UpdateListener {
 
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.SETUP);
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.TELEOP);
-        setupHashMap  = HashMapManager.getSetupHashMap();
+        setupHashMap = HashMapManager.getSetupHashMap();
         teleopHashMap = HashMapManager.getTeleopHashMap();
 
         // Link views
-        collectingCounterToggle          = getView().findViewById(R.id.CollectingCounterToggle);
-        ferryingCounterToggle            = getView().findViewById(R.id.FerryingCounterToggle);
-        startLevelToggle                 = getView().findViewById(R.id.StartLevelToggle);
-        stopLevelToggle                  = getView().findViewById(R.id.StopLevelToggle);
-        missedCounterToggle              = getView().findViewById(R.id.MissedCounterToggle);
-        attemptedClimbToggle             = getView().findViewById(R.id.AttemptedClimbToggle);
-        successfulClimbedToggle          = getView().findViewById(R.id.SuccessfulClimbed);
+        collectingCounterToggle           = getView().findViewById(R.id.CollectingCounterToggle);
+        ferryingCounterToggle             = getView().findViewById(R.id.FerryingCounterToggle);
+        startLevelToggle                  = getView().findViewById(R.id.StartLevelToggle);
+        stopLevelToggle                   = getView().findViewById(R.id.StopLevelToggle);
+        missedCounterToggle               = getView().findViewById(R.id.MissedCounterToggle);
+        attemptedClimbToggle              = getView().findViewById(R.id.AttemptedClimbToggle);
+        successfulClimbedToggle           = getView().findViewById(R.id.SuccessfulClimbed);
         successfullyClimbedLocationToggle = getView().findViewById(R.id.SuccessfullyClimbedLocation);
-        noShowSwitch                     = getView().findViewById(R.id.NoShowSwitch);
-        saveButton                       = getView().findViewById(R.id.SaveButton);
-        nextButtonEndGame                = getView().findViewById(R.id.NextButtonEndGame);
-        timerID                          = getView().findViewById(R.id.IDTeleopSeconds1);
-        secondsRemaining                 = getView().findViewById(R.id.TeleopSeconds);
-        endgameWarning                   = getView().findViewById(R.id.EndgameWarning);
-        topEdgeBar                       = getView().findViewById(R.id.topEdgeBar);
-        bottomEdgeBar                    = getView().findViewById(R.id.bottomEdgeBar);
-        leftEdgeBar                      = getView().findViewById(R.id.leftEdgeBar);
-        rightEdgeBar                     = getView().findViewById(R.id.rightEdgeBar);
+        noShowSwitch                      = getView().findViewById(R.id.NoShowSwitch);
+        saveButton                        = getView().findViewById(R.id.SaveButton);
+        resetButton                       = getView().findViewById(R.id.ResetButton);
+        nextButtonTeleop                   = getView().findViewById(R.id.NextButtonEndGame);
+        timerID                           = getView().findViewById(R.id.IDTeleopSeconds1);
+        secondsRemaining                  = getView().findViewById(R.id.TeleopSeconds);
+        teleopWarning                     = getView().findViewById(R.id.endgameWarning);
+        topEdgeBar                        = getView().findViewById(R.id.topEdgeBar);
+        bottomEdgeBar                     = getView().findViewById(R.id.bottomEdgeBar);
+        leftEdgeBar                       = getView().findViewById(R.id.leftEdgeBar);
+        rightEdgeBar                      = getView().findViewById(R.id.rightEdgeBar);
 
-        // Initialize snapshot system
         initializeSnapshots();
-
         loadTeleopData();
         setupCounterListeners();
         setupCascadingListeners();
@@ -127,20 +128,106 @@ public class Teleop extends Fragment implements UpdateListener {
         setupTimer();
     }
 
-    // SNAPSHOT INITIALIZATION
+    // ─────────────────────────────────────────
+    // SNAPSHOT SYSTEM
+    // ─────────────────────────────────────────
+
     private void initializeSnapshots() {
-        String existingSnapshots = teleopHashMap.get("snapshots");
-        if (existingSnapshots != null && !existingSnapshots.isEmpty()) {
-            snapshotBuilder = new StringBuilder(existingSnapshots);
-            Log.d("Teleop", "Restored " + countSnapshots() + " existing snapshots");
-        } else {
+        String snapshotsString = teleopHashMap.get("snapshots");
+        if (snapshotsString == null || snapshotsString.isEmpty()) {
             snapshotBuilder = new StringBuilder();
             snapshotBuilder.append(SNAPSHOT_HEADER).append("\n");
-            Log.d("Teleop", "Initialized new snapshot buffer");
+        } else {
+            snapshotBuilder = new StringBuilder(snapshotsString);
+            if (!snapshotsString.endsWith("\n")) {
+                snapshotBuilder.append("\n");
+            }
         }
     }
 
+    private void appendTeleopSnapshot() {
+        if (snapshotBuilder == null) {
+            initializeSnapshots();
+        }
+
+        String snapshotLine = String.format("%d,%d,%d,%s,%s,%s,%s,%s,%s\n",
+                collectingCount,
+                ferryingCount,
+                missedCount,
+                getLevelValue(startLevelToggle),
+                getLevelValue(stopLevelToggle),
+                getSelectedText(attemptedClimbToggle, "DID NOT ATTEMPT"),
+                getSelectedText(successfulClimbedToggle, "None"),
+                getSelectedText(successfullyClimbedLocationToggle, "LEFT"),
+                (noShowSwitch != null && noShowSwitch.isChecked()) ? "1" : "0");
+
+        snapshotBuilder.append(snapshotLine);
+        teleopSnapshotCount++;
+
+        teleopHashMap.put("snapshots", snapshotBuilder.toString());
+        teleopHashMap.put("TeleopSaveIndex", String.valueOf(teleopSnapshotCount));
+        HashMapManager.putTeleopHashMap(teleopHashMap);
+    }
+
+    private int countSnapshots() {
+        if (snapshotBuilder == null) return 0;
+        String content = snapshotBuilder.toString();
+        int count = 0;
+        for (int i = 0; i < content.length(); i++) {
+            if (content.charAt(i) == '\n') count++;
+        }
+        return count - 1; // Subtract header line
+    }
+
+    public String getSnapshotsAsString() {
+        return snapshotBuilder != null ? snapshotBuilder.toString() : "";
+    }
+
+    public String exportSnapshotsCSV() {
+        return getSnapshotsAsString();
+    }
+
+    // ─────────────────────────────────────────
+    // UI RESET
+    // ─────────────────────────────────────────
+
+    private void resetTeleopUI() {
+        collectingCount = 0;
+        ferryingCount = 0;
+        missedCount = 0;
+
+        refreshDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
+        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
+        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
+
+
+        if (startLevelToggle != null && startLevelToggle.getChildCount() > 0) {
+            startLevelToggle.check(((RadioButton) startLevelToggle.getChildAt(0)).getId());
+        }
+        if (stopLevelToggle != null && stopLevelToggle.getChildCount() > 0) {
+            stopLevelToggle.check(((RadioButton) stopLevelToggle.getChildAt(0)).getId());
+        }
+        if (attemptedClimbToggle != null && attemptedClimbToggle.getChildCount() > 0) {
+            attemptedClimbToggle.check(((RadioButton) attemptedClimbToggle.getChildAt(0)).getId());
+        }
+        if (successfulClimbedToggle != null && successfulClimbedToggle.getChildCount() > 0) {
+            successfulClimbedToggle.check(((RadioButton) successfulClimbedToggle.getChildAt(0)).getId());
+        }
+        if (successfullyClimbedLocationToggle != null && successfullyClimbedLocationToggle.getChildCount() > 0) {
+            successfullyClimbedLocationToggle.check(((RadioButton) successfullyClimbedLocationToggle.getChildAt(0)).getId());
+        }
+        if (noShowSwitch != null) {
+            noShowSwitch.setChecked(false);
+        }
+
+        updateFuelStates();
+        updateClimbStates();
+    }
+
+    // ─────────────────────────────────────────
     // COUNTER LISTENERS
+    // ─────────────────────────────────────────
+
     private void setupCounterListeners() {
         collectingCounterToggle.setOnCheckedChangeListener((g, id) -> {
             if (id == R.id.CollectingCounter) return;
@@ -167,7 +254,9 @@ public class Teleop extends Fragment implements UpdateListener {
         });
     }
 
-    private int deltaFor(int id, int m10, int m5, int m1, int p1, int p5, int p10) {
+    private int deltaFor(int id,
+                         int m10, int m5, int m1,
+                         int p1,  int p5, int p10) {
         if (id == m10) return -10;
         if (id == m5)  return -5;
         if (id == m1)  return -1;
@@ -177,11 +266,15 @@ public class Teleop extends Fragment implements UpdateListener {
         return 0;
     }
 
-    private int clamp(int value) { return Math.max(0, value); }
+    private int clamp(int value) {
+        return Math.max(0, value);
+    }
 
     private void refreshDisplay(RadioGroup group, int displayId, int count) {
         RadioButton display = group.findViewById(displayId);
-        if (display != null) display.setText(String.valueOf(count));
+        if (display != null) {
+            display.setText(String.valueOf(count));
+        }
         group.setOnCheckedChangeListener(null);
         group.check(displayId);
         if      (group == collectingCounterToggle) setupCollectingListener();
@@ -219,7 +312,10 @@ public class Teleop extends Fragment implements UpdateListener {
         });
     }
 
+    // ─────────────────────────────────────────
     // CASCADING LOGIC
+    // ─────────────────────────────────────────
+
     private void setupCascadingListeners() {
         startLevelToggle.setOnCheckedChangeListener((g, id) -> updateFuelStates());
         stopLevelToggle.setOnCheckedChangeListener((g, id)  -> updateFuelStates());
@@ -239,41 +335,64 @@ public class Teleop extends Fragment implements UpdateListener {
     private void updateClimbStates() {
         String attempted  = getSelectedText(attemptedClimbToggle, "");
         String successful = getSelectedText(successfulClimbedToggle, "");
-        setGroupEnabled(successfullyClimbedLocationToggle, "1".equals(attempted) && "1".equals(successful));
+        boolean climbed = !"".equals(attempted) && !getString(R.string.DNA).equals(attempted)
+                && !"".equals(successful) && !getString(R.string.SuccessfulClimbedLevel).equals(successful);
+        setGroupEnabled(successfullyClimbedLocationToggle, climbed);
     }
 
+    // ─────────────────────────────────────────
     // BUTTON LISTENERS
-    private void setupButtonListeners() {
-        saveButton.setOnClickListener(v -> {
-            appendTeleopSnapshot();
-        });
+    // ─────────────────────────────────────────
 
-        nextButtonEndGame.setOnClickListener(v -> {
-            saveTeleopData();
-            context.tabs.getTabAt(2).select();
-        });
+    private void setupButtonListeners() {
+        if (saveButton != null) {
+            saveButton.setOnClickListener(v -> {
+                saveTeleopData();
+                appendTeleopSnapshot();
+                resetTeleopUI();
+                Toast.makeText(context, "Teleop snapshot saved", Toast.LENGTH_SHORT).show();
+            });
+        }
+
+        if (resetButton != null) {
+            resetButton.setOnClickListener(v -> {
+                resetTeleopUI();
+                Toast.makeText(context, "Changes cancelled", Toast.LENGTH_SHORT).show();
+            });
+        }
+
+        if (nextButtonTeleop != null) {
+            nextButtonTeleop.setOnClickListener(v -> {
+                saveTeleopData();
+                appendTeleopSnapshot();
+                resetTeleopUI();
+                context.tabs.getTabAt(1).select();
+            });
+        }
     }
 
-    // TIMER — 1:50 (110 seconds), warning at 30s
+    // ─────────────────────────────────────────
+    // TIMER
+    // ─────────────────────────────────────────
+
     private void setupTimer() {
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 
         timer = new CountDownTimer(130000, 1000) {
             @Override
             public void onTick(long ms) {
+                if (secondsRemaining == null) return;
                 long secs = ms / 1000;
                 long mins = secs / 60;
                 long rem  = secs % 60;
 
-                if (secondsRemaining != null) {
-                    secondsRemaining.setText(mins + ":" + String.format("%02d", rem));
-                }
+                secondsRemaining.setText(mins + ":" + String.format("%02d", rem));
 
                 if (!running) return;
 
                 if (secs <= 30 && secs > 0) {
-                    if (endgameWarning != null) {
-                        endgameWarning.setVisibility(View.VISIBLE);
+                    if (teleopWarning != null) {
+                        teleopWarning.setVisibility(View.VISIBLE);
                     }
 
                     if (timerID != null) {
@@ -281,7 +400,7 @@ public class Teleop extends Fragment implements UpdateListener {
                             timerID.setTextColor(getResources().getColor(R.color.banana));
                             timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_yellow, 0, 0, 0);
                         } catch (Exception e) {
-                            Log.e("Teleop", "Timer warning color error: " + e.getMessage());
+                            Log.e(TAG, "Timer warning color error: " + e.getMessage());
                         }
                     }
 
@@ -290,7 +409,7 @@ public class Teleop extends Fragment implements UpdateListener {
                     try {
                         pulseEdgeBars();
                     } catch (Exception e) {
-                        Log.e("Teleop", "Pulse edge bars error: " + e.getMessage());
+                        Log.e(TAG, "Pulse edge bars error: " + e.getMessage());
                     }
                 }
             }
@@ -299,29 +418,22 @@ public class Teleop extends Fragment implements UpdateListener {
             public void onFinish() {
                 if (!running) return;
 
-                if (secondsRemaining != null) {
-                    secondsRemaining.setText("0:00");
-                }
-
-                setAllEdgeBars(R.drawable.teleop_warning);
-
-                if (timerID != null) {
-                    try {
-                        timerID.setTextColor(getResources().getColor(R.color.border_warning));
+                try {
+                    if (secondsRemaining != null) {
+                        secondsRemaining.setText("0");
+                    }
+                    setAllEdgeBars(R.drawable.teleop_warning);
+                    if (timerID != null) {
+                        timerID.setTextColor(context.getResources().getColor(R.color.border_warning));
                         timerID.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.timer_red, 0, 0, 0);
-                    } catch (Exception e) {
-                        Log.e("Teleop", "Timer finish color error: " + e.getMessage());
                     }
-                }
-
-                if (endgameWarning != null) {
-                    endgameWarning.setVisibility(View.VISIBLE);
-                    try {
-                        endgameWarning.setTextColor(getResources().getColor(R.color.white));
-                    } catch (Exception e) {
-                        Log.e("Teleop", "Warning text color error: " + e.getMessage());
+                    if (teleopWarning != null) {
+                        teleopWarning.setVisibility(View.VISIBLE);
+                        teleopWarning.setTextColor(getResources().getColor(R.color.white));
+                        teleopWarning.setText(getString(R.string.EndGameWarning));
                     }
-                    endgameWarning.setText(getString(R.string.EndGameError));
+                } catch (Exception e) {
+                    Log.e(TAG, "Error in timer finish: " + e.getMessage());
                 }
             }
         };
@@ -333,28 +445,37 @@ public class Teleop extends Fragment implements UpdateListener {
     }
 
     private void pulseEdgeBars() {
-        for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
-            if (bar == null) continue;
-            ObjectAnimator anim = ObjectAnimator.ofFloat(bar, View.ALPHA, 0f, 1f);
-            anim.setDuration(500);
-            anim.setRepeatMode(ObjectAnimator.REVERSE);
-            anim.setRepeatCount(1);
-            anim.start();
+        try {
+            for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
+                if (bar != null) {
+                    ObjectAnimator anim = ObjectAnimator.ofFloat(bar, View.ALPHA, 0f, 1f);
+                    anim.setDuration(500);
+                    anim.setRepeatMode(ObjectAnimator.REVERSE);
+                    anim.setRepeatCount(1);
+                    anim.start();
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error pulsing edge bars: " + e.getMessage());
         }
     }
 
     private void setAllEdgeBars(int drawableRes) {
-        for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
-            if (bar == null) continue;
-            try {
-                bar.setBackground(getResources().getDrawable(drawableRes));
-            } catch (Exception e) {
-                Log.e("Teleop", "Edge bar drawable error: " + e.getMessage());
+        try {
+            for (ImageView bar : new ImageView[]{topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar}) {
+                if (bar != null) {
+                    bar.setBackground(getResources().getDrawable(drawableRes));
+                }
             }
+        } catch (Exception e) {
+            Log.e(TAG, "Error setting edge bars: " + e.getMessage());
         }
     }
 
+    // ─────────────────────────────────────────
     // GET / SET HELPERS
+    // ─────────────────────────────────────────
+
     private String getSelectedText(RadioGroup group, String defaultVal) {
         int id = group.getCheckedRadioButtonId();
         if (id == -1) return defaultVal;
@@ -383,22 +504,25 @@ public class Teleop extends Fragment implements UpdateListener {
             group.getChildAt(i).setEnabled(enabled);
     }
 
+    // ─────────────────────────────────────────
     // DATA PERSISTENCE
+    // ─────────────────────────────────────────
+
     private void loadTeleopData() {
         collectingCount = parseCount(hm("Collecting", "0"));
         ferryingCount   = parseCount(hm("Ferrying",   "0"));
         missedCount     = parseCount(hm("Missed",     "0"));
 
         refreshDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
-        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,  ferryingCount);
-        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,    missedCount);
+        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
+        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
 
         selectByText(startLevelToggle, hm("StartLevel", "EMPTY"));
         selectByText(stopLevelToggle,  hm("StopLevel",  "EMPTY"));
 
-        selectByText(attemptedClimbToggle,              hm("AttemptedClimb",    "DID NOT ATTEMPT"));
-        selectByText(successfulClimbedToggle,           hm("SuccessfulClimbed", "None"));
-        selectByText(successfullyClimbedLocationToggle, hm("ClimbLocation",     "LEFT"));
+        selectByText(attemptedClimbToggle,              hm("AttemptedClimb",    getString(R.string.DNA)));
+        selectByText(successfulClimbedToggle,           hm("SuccessfulClimbed", getString(R.string.SuccessfulClimbedLevel)));
+        selectByText(successfullyClimbedLocationToggle, hm("ClimbLocation",     getString(R.string.Left)));
 
         noShowSwitch.setChecked("Y".equals(hm("RobotFellOver", "N")));
 
@@ -412,102 +536,11 @@ public class Teleop extends Fragment implements UpdateListener {
         teleopHashMap.put("Missed",            String.valueOf(missedCount));
         teleopHashMap.put("StartLevel",        getLevelValue(startLevelToggle));
         teleopHashMap.put("StopLevel",         getLevelValue(stopLevelToggle));
-        teleopHashMap.put("AttemptedClimb",    getSelectedText(attemptedClimbToggle,              "DID NOT ATTEMPT"));
-        teleopHashMap.put("SuccessfulClimbed", getSelectedText(successfulClimbedToggle,           "None"));
-        teleopHashMap.put("ClimbLocation",     getSelectedText(successfullyClimbedLocationToggle, "LEFT"));
+        teleopHashMap.put("AttemptedClimb",    getSelectedText(attemptedClimbToggle,              getString(R.string.DNA)));
+        teleopHashMap.put("SuccessfulClimbed", getSelectedText(successfulClimbedToggle,           getString(R.string.SuccessfulClimbedLevel)));
+        teleopHashMap.put("ClimbLocation",     getSelectedText(successfullyClimbedLocationToggle, getString(R.string.Left)));
         teleopHashMap.put("RobotFellOver",     noShowSwitch.isChecked() ? "Y" : "N");
         HashMapManager.putTeleopHashMap(teleopHashMap);
-    }
-
-    // SNAPSHOT SYSTEM - CSV SERIALIZATION
-    private void appendTeleopSnapshot() {
-        saveTeleopData();
-
-        String collecting = String.valueOf(collectingCount);
-        String ferrying = String.valueOf(ferryingCount);
-        String missed = String.valueOf(missedCount);
-        String startLevel = getLevelValue(startLevelToggle);
-        String stopLevel = getLevelValue(stopLevelToggle);
-        String attemptedClimb = getSelectedText(attemptedClimbToggle, "DID NOT ATTEMPT");
-        String successfulClimbed = getSelectedText(successfulClimbedToggle, "None");
-        String climbLocation = getSelectedText(successfullyClimbedLocationToggle, "LEFT");
-        String robotFellOver = noShowSwitch.isChecked() ? "Y" : "N";
-
-        // Create CSV line
-        String snapshotLine = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
-                collecting, ferrying, missed, startLevel, stopLevel,
-                attemptedClimb, successfulClimbed, climbLocation, robotFellOver);
-
-        // Append to builder
-        snapshotBuilder.append(snapshotLine);
-
-        // Save to HashMap for persistence
-        teleopHashMap.put("snapshots", snapshotBuilder.toString());
-        HashMapManager.putTeleopHashMap(teleopHashMap);
-
-        int snapshotCount = countSnapshots();
-        Toast.makeText(context, "Snapshot #" + snapshotCount + " saved", Toast.LENGTH_SHORT).show();
-        Log.d("Teleop", "Snapshot appended: " + snapshotLine.trim());
-
-        // RESET UI
-        resetTeleopUI();
-    }
-
-    private void resetTeleopUI() {
-        // Reset counters
-        collectingCount = 0;
-        ferryingCount = 0;
-        missedCount = 0;
-
-        // Reset counter displays
-        refreshDisplay(collectingCounterToggle, R.id.CollectingCounter, 0);
-        refreshDisplay(ferryingCounterToggle, R.id.FerryingCounter, 0);
-        refreshDisplay(missedCounterToggle, R.id.MissedCounter, 0);
-
-        // Reset level toggles
-        selectByText(startLevelToggle, "EMPTY");
-        selectByText(stopLevelToggle, "EMPTY");
-
-        // Reset climb toggles
-        selectByText(attemptedClimbToggle, "DID NOT ATTEMPT");
-        selectByText(successfulClimbedToggle, "None");
-        selectByText(successfullyClimbedLocationToggle, "LEFT");
-
-        // Reset switch
-        noShowSwitch.setChecked(false);
-
-        // Update cascading logic
-        updateFuelStates();
-        updateClimbStates();
-
-        // Save reset state to HashMap
-        teleopHashMap.put("Collecting", "0");
-        teleopHashMap.put("Ferrying", "0");
-        teleopHashMap.put("Missed", "0");
-        teleopHashMap.put("StartLevel", "EMPTY");
-        teleopHashMap.put("StopLevel", "EMPTY");
-        teleopHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
-        teleopHashMap.put("SuccessfulClimbed", "None");
-        teleopHashMap.put("ClimbLocation", "LEFT");
-        teleopHashMap.put("RobotFellOver", "N");
-        HashMapManager.putTeleopHashMap(teleopHashMap);
-
-        Log.d("Teleop", "UI reset after snapshot save");
-    }
-
-    private int countSnapshots() {
-        String content = snapshotBuilder.toString();
-        if (content.isEmpty()) return 0;
-        String[] lines = content.split("\n");
-        return Math.max(0, lines.length - 2);
-    }
-
-    public String getSnapshotsAsString() {
-        return snapshotBuilder.toString();
-    }
-
-    public String exportSnapshotsCSV() {
-        return snapshotBuilder.toString();
     }
 
     private String hm(String key, String def) {
@@ -520,16 +553,19 @@ public class Teleop extends Fragment implements UpdateListener {
         catch (NumberFormatException e) { return 0; }
     }
 
+    // ─────────────────────────────────────────
     // LIFECYCLE
+    // ─────────────────────────────────────────
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (this.isVisible()) {
             if (isVisibleToUser) {
-                setupHashMap  = HashMapManager.getSetupHashMap();
+                setupHashMap = HashMapManager.getSetupHashMap();
                 teleopHashMap = HashMapManager.getTeleopHashMap();
-                loadTeleopData();
                 initializeSnapshots();
+                loadTeleopData();
             } else {
                 saveTeleopData();
             }

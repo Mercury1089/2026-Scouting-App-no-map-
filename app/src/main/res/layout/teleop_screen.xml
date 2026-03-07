@@ -23,7 +23,7 @@
 
         <!-- Timer Warning -->
         <TextView
-            android:id="@+id/EndGameWarning"
+            android:id="@+id/endgameWarning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/teleop_warning"
@@ -105,7 +105,7 @@
                 android:textSize="@dimen/button_text_size"/>
 
             <Button
-                android:id="@+id/NextEndGameButton"
+                android:id="@+id/NextButtonEndGame"
                 android:layout_width="200dp"
                 android:layout_height="54dp"
                 android:layout_marginStart="20dp"
