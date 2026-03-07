@@ -12,6 +12,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -29,6 +30,15 @@ public final class TeleopScreenBinding implements ViewBinding {
 
   @NonNull
   public final RadioGroup AttemptedClimbToggle;
+
+  @NonNull
+  public final RadioButton AttemptedNo;
+
+  @NonNull
+  public final RadioButton AttemptedOne;
+
+  @NonNull
+  public final LinearLayoutCompat ButtonBox;
 
   @NonNull
   public final RadioButton Center;
@@ -61,6 +71,15 @@ public final class TeleopScreenBinding implements ViewBinding {
   public final TextView CollectingTitle;
 
   @NonNull
+  public final LinearLayoutCompat ColumnOne;
+
+  @NonNull
+  public final LinearLayoutCompat ColumnThree;
+
+  @NonNull
+  public final LinearLayoutCompat ColumnTwo;
+
+  @NonNull
   public final RadioButton DidNotAttempt;
 
   @NonNull
@@ -91,6 +110,9 @@ public final class TeleopScreenBinding implements ViewBinding {
   public final TextView FerryingTitle;
 
   @NonNull
+  public final LinearLayoutCompat FixedBottom;
+
+  @NonNull
   public final TextView IDTeleopSeconds1;
 
   @NonNull
@@ -118,10 +140,10 @@ public final class TeleopScreenBinding implements ViewBinding {
   public final TextView MissedTitle;
 
   @NonNull
-  public final Button NextButtonEndGame;
+  public final Switch NoShowSwitch;
 
   @NonNull
-  public final Switch NoShowSwitch;
+  public final Button ResetButton;
 
   @NonNull
   public final RadioButton Right;
@@ -184,12 +206,6 @@ public final class TeleopScreenBinding implements ViewBinding {
   public final RadioGroup SuccessfulClimbed;
 
   @NonNull
-  public final RadioButton SuccessfulNo;
-
-  @NonNull
-  public final RadioButton SuccessfulYes;
-
-  @NonNull
   public final TextView SuccessfullyClimbed;
 
   @NonNull
@@ -197,6 +213,9 @@ public final class TeleopScreenBinding implements ViewBinding {
 
   @NonNull
   public final TextView TeleopSeconds;
+
+  @NonNull
+  public final LinearLayoutCompat TimerBox;
 
   @NonNull
   public final TextView TowerClimbPlacement;
@@ -218,21 +237,25 @@ public final class TeleopScreenBinding implements ViewBinding {
 
   private TeleopScreenBinding(@NonNull ConstraintLayout rootView,
       @NonNull RadioButton AchievedLevel1, @NonNull RadioGroup AttemptedClimbToggle,
-      @NonNull RadioButton Center, @NonNull TextView ClimbingDesc, @NonNull TextView ClimbingTitle,
+      @NonNull RadioButton AttemptedNo, @NonNull RadioButton AttemptedOne,
+      @NonNull LinearLayoutCompat ButtonBox, @NonNull RadioButton Center,
+      @NonNull TextView ClimbingDesc, @NonNull TextView ClimbingTitle,
       @NonNull RadioButton Collecting0To25Fuel, @NonNull RadioButton Collecting26To50Fuel,
       @NonNull RadioButton Collecting51to755Fuel, @NonNull RadioGroup CollectingCounterToggle,
       @NonNull TextView CollectingDesc, @NonNull RadioButton CollectingMoreThan75Fuel,
-      @NonNull TextView CollectingTitle, @NonNull RadioButton DidNotAttempt,
-      @NonNull TextView EndgameWarning, @NonNull TextView FellOverLabel,
-      @NonNull RadioButton Ferrying0To25Fuel, @NonNull RadioButton Ferrying26To50Fuel,
-      @NonNull RadioButton Ferrying51to755Fuel, @NonNull RadioGroup FerryingCounterToggle,
-      @NonNull TextView FerryingDesc, @NonNull RadioButton FerryingMoreThan75Fuel,
-      @NonNull TextView FerryingTitle, @NonNull TextView IDTeleopSeconds1,
+      @NonNull TextView CollectingTitle, @NonNull LinearLayoutCompat ColumnOne,
+      @NonNull LinearLayoutCompat ColumnThree, @NonNull LinearLayoutCompat ColumnTwo,
+      @NonNull RadioButton DidNotAttempt, @NonNull TextView EndgameWarning,
+      @NonNull TextView FellOverLabel, @NonNull RadioButton Ferrying0To25Fuel,
+      @NonNull RadioButton Ferrying26To50Fuel, @NonNull RadioButton Ferrying51to755Fuel,
+      @NonNull RadioGroup FerryingCounterToggle, @NonNull TextView FerryingDesc,
+      @NonNull RadioButton FerryingMoreThan75Fuel, @NonNull TextView FerryingTitle,
+      @NonNull LinearLayoutCompat FixedBottom, @NonNull TextView IDTeleopSeconds1,
       @NonNull RadioButton Left, @NonNull RadioButton Missed0To25Fuel,
       @NonNull RadioButton Missed26To50Fuel, @NonNull RadioButton Missed51to755Fuel,
       @NonNull RadioGroup MissedCounterToggle, @NonNull TextView MissedDesc,
       @NonNull RadioButton MissedMoreThan75Fuel, @NonNull TextView MissedTitle,
-      @NonNull Button NextButtonEndGame, @NonNull Switch NoShowSwitch, @NonNull RadioButton Right,
+      @NonNull Switch NoShowSwitch, @NonNull Button ResetButton, @NonNull RadioButton Right,
       @NonNull Button SaveButton, @NonNull TextView ScoringTitle, @NonNull RadioButton Start25,
       @NonNull RadioButton Start50, @NonNull RadioButton Start75, @NonNull TextView StartDesc,
       @NonNull RadioButton StartEmpty, @NonNull RadioButton StartFull,
@@ -240,15 +263,18 @@ public final class TeleopScreenBinding implements ViewBinding {
       @NonNull RadioButton Stop25, @NonNull RadioButton Stop50, @NonNull RadioButton Stop75,
       @NonNull TextView StopDesc, @NonNull RadioButton StopEmpty, @NonNull RadioButton StopFull,
       @NonNull RadioGroup StopLevelToggle, @NonNull TextView StopTitle,
-      @NonNull RadioGroup SuccessfulClimbed, @NonNull RadioButton SuccessfulNo,
-      @NonNull RadioButton SuccessfulYes, @NonNull TextView SuccessfullyClimbed,
+      @NonNull RadioGroup SuccessfulClimbed, @NonNull TextView SuccessfullyClimbed,
       @NonNull RadioGroup SuccessfullyClimbedLocation, @NonNull TextView TeleopSeconds,
-      @NonNull TextView TowerClimbPlacement, @NonNull ImageView bottomEdgeBar,
-      @NonNull ImageView leftEdgeBar, @NonNull ImageView rightEdgeBar,
-      @NonNull ConstraintLayout teleopFieldContainer, @NonNull ImageView topEdgeBar) {
+      @NonNull LinearLayoutCompat TimerBox, @NonNull TextView TowerClimbPlacement,
+      @NonNull ImageView bottomEdgeBar, @NonNull ImageView leftEdgeBar,
+      @NonNull ImageView rightEdgeBar, @NonNull ConstraintLayout teleopFieldContainer,
+      @NonNull ImageView topEdgeBar) {
     this.rootView = rootView;
     this.AchievedLevel1 = AchievedLevel1;
     this.AttemptedClimbToggle = AttemptedClimbToggle;
+    this.AttemptedNo = AttemptedNo;
+    this.AttemptedOne = AttemptedOne;
+    this.ButtonBox = ButtonBox;
     this.Center = Center;
     this.ClimbingDesc = ClimbingDesc;
     this.ClimbingTitle = ClimbingTitle;
@@ -259,6 +285,9 @@ public final class TeleopScreenBinding implements ViewBinding {
     this.CollectingDesc = CollectingDesc;
     this.CollectingMoreThan75Fuel = CollectingMoreThan75Fuel;
     this.CollectingTitle = CollectingTitle;
+    this.ColumnOne = ColumnOne;
+    this.ColumnThree = ColumnThree;
+    this.ColumnTwo = ColumnTwo;
     this.DidNotAttempt = DidNotAttempt;
     this.EndgameWarning = EndgameWarning;
     this.FellOverLabel = FellOverLabel;
@@ -269,6 +298,7 @@ public final class TeleopScreenBinding implements ViewBinding {
     this.FerryingDesc = FerryingDesc;
     this.FerryingMoreThan75Fuel = FerryingMoreThan75Fuel;
     this.FerryingTitle = FerryingTitle;
+    this.FixedBottom = FixedBottom;
     this.IDTeleopSeconds1 = IDTeleopSeconds1;
     this.Left = Left;
     this.Missed0To25Fuel = Missed0To25Fuel;
@@ -278,8 +308,8 @@ public final class TeleopScreenBinding implements ViewBinding {
     this.MissedDesc = MissedDesc;
     this.MissedMoreThan75Fuel = MissedMoreThan75Fuel;
     this.MissedTitle = MissedTitle;
-    this.NextButtonEndGame = NextButtonEndGame;
     this.NoShowSwitch = NoShowSwitch;
+    this.ResetButton = ResetButton;
     this.Right = Right;
     this.SaveButton = SaveButton;
     this.ScoringTitle = ScoringTitle;
@@ -300,11 +330,10 @@ public final class TeleopScreenBinding implements ViewBinding {
     this.StopLevelToggle = StopLevelToggle;
     this.StopTitle = StopTitle;
     this.SuccessfulClimbed = SuccessfulClimbed;
-    this.SuccessfulNo = SuccessfulNo;
-    this.SuccessfulYes = SuccessfulYes;
     this.SuccessfullyClimbed = SuccessfullyClimbed;
     this.SuccessfullyClimbedLocation = SuccessfullyClimbedLocation;
     this.TeleopSeconds = TeleopSeconds;
+    this.TimerBox = TimerBox;
     this.TowerClimbPlacement = TowerClimbPlacement;
     this.bottomEdgeBar = bottomEdgeBar;
     this.leftEdgeBar = leftEdgeBar;
@@ -349,6 +378,24 @@ public final class TeleopScreenBinding implements ViewBinding {
       id = R.id.AttemptedClimbToggle;
       RadioGroup AttemptedClimbToggle = ViewBindings.findChildViewById(rootView, id);
       if (AttemptedClimbToggle == null) {
+        break missingId;
+      }
+
+      id = R.id.AttemptedNo;
+      RadioButton AttemptedNo = ViewBindings.findChildViewById(rootView, id);
+      if (AttemptedNo == null) {
+        break missingId;
+      }
+
+      id = R.id.AttemptedOne;
+      RadioButton AttemptedOne = ViewBindings.findChildViewById(rootView, id);
+      if (AttemptedOne == null) {
+        break missingId;
+      }
+
+      id = R.id.ButtonBox;
+      LinearLayoutCompat ButtonBox = ViewBindings.findChildViewById(rootView, id);
+      if (ButtonBox == null) {
         break missingId;
       }
 
@@ -412,6 +459,24 @@ public final class TeleopScreenBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.ColumnOne;
+      LinearLayoutCompat ColumnOne = ViewBindings.findChildViewById(rootView, id);
+      if (ColumnOne == null) {
+        break missingId;
+      }
+
+      id = R.id.ColumnThree;
+      LinearLayoutCompat ColumnThree = ViewBindings.findChildViewById(rootView, id);
+      if (ColumnThree == null) {
+        break missingId;
+      }
+
+      id = R.id.ColumnTwo;
+      LinearLayoutCompat ColumnTwo = ViewBindings.findChildViewById(rootView, id);
+      if (ColumnTwo == null) {
+        break missingId;
+      }
+
       id = R.id.DidNotAttempt;
       RadioButton DidNotAttempt = ViewBindings.findChildViewById(rootView, id);
       if (DidNotAttempt == null) {
@@ -472,6 +537,12 @@ public final class TeleopScreenBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.FixedBottom;
+      LinearLayoutCompat FixedBottom = ViewBindings.findChildViewById(rootView, id);
+      if (FixedBottom == null) {
+        break missingId;
+      }
+
       id = R.id.IDTeleopSeconds1;
       TextView IDTeleopSeconds1 = ViewBindings.findChildViewById(rootView, id);
       if (IDTeleopSeconds1 == null) {
@@ -526,15 +597,15 @@ public final class TeleopScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.NextButtonEndGame;
-      Button NextButtonEndGame = ViewBindings.findChildViewById(rootView, id);
-      if (NextButtonEndGame == null) {
-        break missingId;
-      }
-
       id = R.id.NoShowSwitch;
       Switch NoShowSwitch = ViewBindings.findChildViewById(rootView, id);
       if (NoShowSwitch == null) {
+        break missingId;
+      }
+
+      id = R.id.ResetButton;
+      Button ResetButton = ViewBindings.findChildViewById(rootView, id);
+      if (ResetButton == null) {
         break missingId;
       }
 
@@ -658,18 +729,6 @@ public final class TeleopScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.SuccessfulNo;
-      RadioButton SuccessfulNo = ViewBindings.findChildViewById(rootView, id);
-      if (SuccessfulNo == null) {
-        break missingId;
-      }
-
-      id = R.id.SuccessfulYes;
-      RadioButton SuccessfulYes = ViewBindings.findChildViewById(rootView, id);
-      if (SuccessfulYes == null) {
-        break missingId;
-      }
-
       id = R.id.SuccessfullyClimbed;
       TextView SuccessfullyClimbed = ViewBindings.findChildViewById(rootView, id);
       if (SuccessfullyClimbed == null) {
@@ -685,6 +744,12 @@ public final class TeleopScreenBinding implements ViewBinding {
       id = R.id.TeleopSeconds;
       TextView TeleopSeconds = ViewBindings.findChildViewById(rootView, id);
       if (TeleopSeconds == null) {
+        break missingId;
+      }
+
+      id = R.id.TimerBox;
+      LinearLayoutCompat TimerBox = ViewBindings.findChildViewById(rootView, id);
+      if (TimerBox == null) {
         break missingId;
       }
 
@@ -721,18 +786,19 @@ public final class TeleopScreenBinding implements ViewBinding {
       }
 
       return new TeleopScreenBinding((ConstraintLayout) rootView, AchievedLevel1,
-          AttemptedClimbToggle, Center, ClimbingDesc, ClimbingTitle, Collecting0To25Fuel,
-          Collecting26To50Fuel, Collecting51to755Fuel, CollectingCounterToggle, CollectingDesc,
-          CollectingMoreThan75Fuel, CollectingTitle, DidNotAttempt, EndgameWarning, FellOverLabel,
+          AttemptedClimbToggle, AttemptedNo, AttemptedOne, ButtonBox, Center, ClimbingDesc,
+          ClimbingTitle, Collecting0To25Fuel, Collecting26To50Fuel, Collecting51to755Fuel,
+          CollectingCounterToggle, CollectingDesc, CollectingMoreThan75Fuel, CollectingTitle,
+          ColumnOne, ColumnThree, ColumnTwo, DidNotAttempt, EndgameWarning, FellOverLabel,
           Ferrying0To25Fuel, Ferrying26To50Fuel, Ferrying51to755Fuel, FerryingCounterToggle,
-          FerryingDesc, FerryingMoreThan75Fuel, FerryingTitle, IDTeleopSeconds1, Left,
+          FerryingDesc, FerryingMoreThan75Fuel, FerryingTitle, FixedBottom, IDTeleopSeconds1, Left,
           Missed0To25Fuel, Missed26To50Fuel, Missed51to755Fuel, MissedCounterToggle, MissedDesc,
-          MissedMoreThan75Fuel, MissedTitle, NextButtonEndGame, NoShowSwitch, Right, SaveButton,
+          MissedMoreThan75Fuel, MissedTitle, NoShowSwitch, ResetButton, Right, SaveButton,
           ScoringTitle, Start25, Start50, Start75, StartDesc, StartEmpty, StartFull,
           StartLevelToggle, StartTitle, Stop25, Stop50, Stop75, StopDesc, StopEmpty, StopFull,
-          StopLevelToggle, StopTitle, SuccessfulClimbed, SuccessfulNo, SuccessfulYes,
-          SuccessfullyClimbed, SuccessfullyClimbedLocation, TeleopSeconds, TowerClimbPlacement,
-          bottomEdgeBar, leftEdgeBar, rightEdgeBar, teleopFieldContainer, topEdgeBar);
+          StopLevelToggle, StopTitle, SuccessfulClimbed, SuccessfullyClimbed,
+          SuccessfullyClimbedLocation, TeleopSeconds, TimerBox, TowerClimbPlacement, bottomEdgeBar,
+          leftEdgeBar, rightEdgeBar, teleopFieldContainer, topEdgeBar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

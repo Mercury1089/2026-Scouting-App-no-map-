@@ -102,7 +102,6 @@ public class Endgame extends Fragment implements UpdateListener {
         generateQRButton                  = getView().findViewById(R.id.GenerateQRButton);
         timerID                           = getView().findViewById(R.id.IDEndGameSeconds1);
         secondsRemaining                  = getView().findViewById(R.id.EndGameSeconds);
-        postMatchWarning                  = getView().findViewById(R.id.PostMatchWarning);
         topEdgeBar                        = getView().findViewById(R.id.topEdgeBar);
         bottomEdgeBar                     = getView().findViewById(R.id.bottomEdgeBar);
         leftEdgeBar                       = getView().findViewById(R.id.leftEdgeBar);

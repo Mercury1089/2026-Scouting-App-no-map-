@@ -132,19 +132,19 @@ public class Teleop extends Fragment implements UpdateListener {
         });
 
         ferryingCounterToggle.setOnCheckedChangeListener((g, id) -> {
-            if (id == R.id.FerryingZero) return;
+            if (id == R.id.FerryingCounter) return;
             ferryingCount = clamp(ferryingCount + deltaFor(id,
                     R.id.FerryingMinus10, R.id.FerryingMinus5, R.id.FerryingMinus,
                     R.id.FerryingPlus,    R.id.FerryingPlus5,  R.id.FerryingPlus10));
-            refreshDisplay(ferryingCounterToggle, R.id.FerryingZero, ferryingCount);
+            refreshDisplay(ferryingCounterToggle, R.id.FerryingCounter, ferryingCount);
         });
 
         missedCounterToggle.setOnCheckedChangeListener((g, id) -> {
-            if (id == R.id.MissedZero) return;
+            if (id == R.id.MissedCounter) return;
             missedCount = clamp(missedCount + deltaFor(id,
                     R.id.MissedMinus10, R.id.MissedMinus5, R.id.MissedMinus,
                     R.id.MissedPlus,    R.id.MissedPlus5,  R.id.MissedPlus10));
-            refreshDisplay(missedCounterToggle, R.id.MissedZero, missedCount);
+            refreshDisplay(missedCounterToggle, R.id.MissedCounter, missedCount);
         });
     }
 
@@ -182,21 +182,21 @@ public class Teleop extends Fragment implements UpdateListener {
 
     private void setupFerryingListener() {
         ferryingCounterToggle.setOnCheckedChangeListener((g, id) -> {
-            if (id == R.id.FerryingZero) return;
+            if (id == R.id.FerryingCounter) return;
             ferryingCount = clamp(ferryingCount + deltaFor(id,
                     R.id.FerryingMinus10, R.id.FerryingMinus5, R.id.FerryingMinus,
                     R.id.FerryingPlus,    R.id.FerryingPlus5,  R.id.FerryingPlus10));
-            refreshDisplay(ferryingCounterToggle, R.id.FerryingZero, ferryingCount);
+            refreshDisplay(ferryingCounterToggle, R.id.FerryingCounter, ferryingCount);
         });
     }
 
     private void setupMissedListener() {
         missedCounterToggle.setOnCheckedChangeListener((g, id) -> {
-            if (id == R.id.MissedZero) return;
+            if (id == R.id.MissedCounter) return;
             missedCount = clamp(missedCount + deltaFor(id,
                     R.id.MissedMinus10, R.id.MissedMinus5, R.id.MissedMinus,
                     R.id.MissedPlus,    R.id.MissedPlus5,  R.id.MissedPlus10));
-            refreshDisplay(missedCounterToggle, R.id.MissedZero, missedCount);
+            refreshDisplay(missedCounterToggle, R.id.MissedCounter, missedCount);
         });
     }
 
@@ -361,8 +361,8 @@ public class Teleop extends Fragment implements UpdateListener {
         missedCount     = parseCount(hm("Missed",     "0"));
 
         refreshDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
-        refreshDisplay(ferryingCounterToggle,   R.id.FerryingZero,     ferryingCount);
-        refreshDisplay(missedCounterToggle,     R.id.MissedZero,       missedCount);
+        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,  ferryingCount);
+        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,    missedCount);
 
         selectByText(startLevelToggle, hm("StartLevel", "EMPTY"));
         selectByText(stopLevelToggle,  hm("StopLevel",  "EMPTY"));

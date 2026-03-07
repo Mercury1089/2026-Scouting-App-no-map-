@@ -101,7 +101,7 @@
         android:text="@string/Reset"
         android:textColor="@drawable/text_states"
         android:textSize="@dimen/button_text_size"
-        app:layout_constraintStart_toBottomOf="parent" />
+       />
 
         <Button
             android:id="@+id/SaveButton"
@@ -111,9 +111,19 @@
             android:text="@string/Save"
             android:textColor="@drawable/text_states"
             android:textSize="@dimen/button_text_size"
-            app:layout_constraintStart_toBottomOf="parent" />
+            />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        <Button
+            android:id="@+id/NextButtonEndGame"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:background="@drawable/button_large_disabled"
+            android:text="@string/EndGameTitle"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/button_text_size"
+             />
+
+     </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -132,6 +142,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+    </androidx.appcompat.widget.LinearLayoutCompat>
         <!-- ═════════════════════════════════════════
              COLLECTING SECTION
              ═════════════════════════════════════════ -->
@@ -319,8 +330,8 @@
             android:layout_height="wrap_content"
             android:thumb="@drawable/thumb_states"
             android:track="@drawable/track_states"
-            app:layout_constraintStart_toStartOf="@id/FerryingCounterToggle"
-            app:layout_constraintTop_toBottomOf="@+id/FerryingCounterToggle" />
+            app:layout_constraintStart_toStartOf="@id/Ferrying0To25Fuel"
+            app:layout_constraintTop_toBottomOf="@+id/Ferrying0To25Fuel" />
 
         <TextView
             android:id="@+id/FellOverLabel"
@@ -916,7 +927,6 @@
                 android:textSize="@dimen/button_text_size" />
         </RadioGroup>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <!-- ═════════════════════════════════════════

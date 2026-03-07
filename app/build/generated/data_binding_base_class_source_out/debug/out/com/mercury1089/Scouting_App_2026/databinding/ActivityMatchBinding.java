@@ -4,13 +4,11 @@ package com.mercury1089.Scouting_App_2026.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.mercury1089.Scouting_App_2026.R;
@@ -21,9 +19,6 @@ import java.lang.String;
 public final class ActivityMatchBinding implements ViewBinding {
   @NonNull
   private final ConstraintLayout rootView;
-
-  @NonNull
-  public final ConstraintLayout TitleBar;
 
   @NonNull
   public final TabItem autonTab;
@@ -40,25 +35,15 @@ public final class ActivityMatchBinding implements ViewBinding {
   @NonNull
   public final TabItem teleopTab;
 
-  @NonNull
-  public final TextView title;
-
-  @NonNull
-  public final ViewPager viewPager;
-
-  private ActivityMatchBinding(@NonNull ConstraintLayout rootView,
-      @NonNull ConstraintLayout TitleBar, @NonNull TabItem autonTab, @NonNull TabItem endgametab,
-      @NonNull TabItem matchSetupTab, @NonNull TabLayout tabs, @NonNull TabItem teleopTab,
-      @NonNull TextView title, @NonNull ViewPager viewPager) {
+  private ActivityMatchBinding(@NonNull ConstraintLayout rootView, @NonNull TabItem autonTab,
+      @NonNull TabItem endgametab, @NonNull TabItem matchSetupTab, @NonNull TabLayout tabs,
+      @NonNull TabItem teleopTab) {
     this.rootView = rootView;
-    this.TitleBar = TitleBar;
     this.autonTab = autonTab;
     this.endgametab = endgametab;
     this.matchSetupTab = matchSetupTab;
     this.tabs = tabs;
     this.teleopTab = teleopTab;
-    this.title = title;
-    this.viewPager = viewPager;
   }
 
   @Override
@@ -88,12 +73,6 @@ public final class ActivityMatchBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.TitleBar;
-      ConstraintLayout TitleBar = ViewBindings.findChildViewById(rootView, id);
-      if (TitleBar == null) {
-        break missingId;
-      }
-
       id = R.id.autonTab;
       TabItem autonTab = ViewBindings.findChildViewById(rootView, id);
       if (autonTab == null) {
@@ -124,20 +103,8 @@ public final class ActivityMatchBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.title;
-      TextView title = ViewBindings.findChildViewById(rootView, id);
-      if (title == null) {
-        break missingId;
-      }
-
-      id = R.id.view_pager;
-      ViewPager viewPager = ViewBindings.findChildViewById(rootView, id);
-      if (viewPager == null) {
-        break missingId;
-      }
-
-      return new ActivityMatchBinding((ConstraintLayout) rootView, TitleBar, autonTab, endgametab,
-          matchSetupTab, tabs, teleopTab, title, viewPager);
+      return new ActivityMatchBinding((ConstraintLayout) rootView, autonTab, endgametab,
+          matchSetupTab, tabs, teleopTab);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

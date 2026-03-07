@@ -12,6 +12,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -31,6 +32,18 @@ public final class EndgameScreenBinding implements ViewBinding {
   public final RadioGroup AttemptedClimbToggle;
 
   @NonNull
+  public final RadioButton AttemptedNo;
+
+  @NonNull
+  public final RadioButton AttemptedOne;
+
+  @NonNull
+  public final TextView AutonSeconds;
+
+  @NonNull
+  public final LinearLayoutCompat ButtonBox;
+
+  @NonNull
   public final RadioButton Center;
 
   @NonNull
@@ -40,13 +53,7 @@ public final class EndgameScreenBinding implements ViewBinding {
   public final TextView ClimbingTitle;
 
   @NonNull
-  public final RadioButton Collecting0To25Fuel;
-
-  @NonNull
-  public final RadioButton Collecting26To50Fuel;
-
-  @NonNull
-  public final RadioButton Collecting51to755Fuel;
+  public final RadioButton CollectingCounter;
 
   @NonNull
   public final RadioGroup CollectingCounterToggle;
@@ -55,28 +62,46 @@ public final class EndgameScreenBinding implements ViewBinding {
   public final TextView CollectingDesc;
 
   @NonNull
-  public final RadioButton CollectingMoreThan75Fuel;
+  public final RadioButton CollectingMinus;
+
+  @NonNull
+  public final RadioButton CollectingMinus10;
+
+  @NonNull
+  public final RadioButton CollectingMinus5;
+
+  @NonNull
+  public final RadioButton CollectingPlus;
+
+  @NonNull
+  public final RadioButton CollectingPlus10;
+
+  @NonNull
+  public final RadioButton CollectingPlus5;
 
   @NonNull
   public final TextView CollectingTitle;
 
   @NonNull
+  public final LinearLayoutCompat ColumnOne;
+
+  @NonNull
+  public final LinearLayoutCompat ColumnThree;
+
+  @NonNull
+  public final LinearLayoutCompat ColumnTwo;
+
+  @NonNull
   public final RadioButton DidNotAttempt;
 
   @NonNull
-  public final TextView EndGameSeconds;
+  public final TextView EndgameWarning;
 
   @NonNull
   public final TextView FellOverLabel;
 
   @NonNull
-  public final RadioButton Ferrying0To25Fuel;
-
-  @NonNull
-  public final RadioButton Ferrying26To50Fuel;
-
-  @NonNull
-  public final RadioButton Ferrying51to755Fuel;
+  public final RadioButton FerryingCounter;
 
   @NonNull
   public final RadioGroup FerryingCounterToggle;
@@ -85,28 +110,37 @@ public final class EndgameScreenBinding implements ViewBinding {
   public final TextView FerryingDesc;
 
   @NonNull
-  public final RadioButton FerryingMoreThan75Fuel;
+  public final RadioButton FerryingMinus;
+
+  @NonNull
+  public final RadioButton FerryingMinus10;
+
+  @NonNull
+  public final RadioButton FerryingMinus5;
+
+  @NonNull
+  public final RadioButton FerryingPlus;
+
+  @NonNull
+  public final RadioButton FerryingPlus10;
+
+  @NonNull
+  public final RadioButton FerryingPlus5;
 
   @NonNull
   public final TextView FerryingTitle;
 
   @NonNull
-  public final Button GenerateQRButton;
+  public final LinearLayoutCompat FixedBottom;
 
   @NonNull
-  public final TextView IDEndGameSeconds1;
+  public final TextView IDAutonSeconds1;
 
   @NonNull
   public final RadioButton Left;
 
   @NonNull
-  public final RadioButton Missed0To25Fuel;
-
-  @NonNull
-  public final RadioButton Missed26To50Fuel;
-
-  @NonNull
-  public final RadioButton Missed51to755Fuel;
+  public final RadioButton MissedCounter;
 
   @NonNull
   public final RadioGroup MissedCounterToggle;
@@ -115,7 +149,22 @@ public final class EndgameScreenBinding implements ViewBinding {
   public final TextView MissedDesc;
 
   @NonNull
-  public final RadioButton MissedMoreThan75Fuel;
+  public final RadioButton MissedMinus;
+
+  @NonNull
+  public final RadioButton MissedMinus10;
+
+  @NonNull
+  public final RadioButton MissedMinus5;
+
+  @NonNull
+  public final RadioButton MissedPlus;
+
+  @NonNull
+  public final RadioButton MissedPlus10;
+
+  @NonNull
+  public final RadioButton MissedPlus5;
 
   @NonNull
   public final TextView MissedTitle;
@@ -124,7 +173,7 @@ public final class EndgameScreenBinding implements ViewBinding {
   public final Switch NoShowSwitch;
 
   @NonNull
-  public final TextView PostMatchWarning;
+  public final Button ResetButton;
 
   @NonNull
   public final RadioButton Right;
@@ -187,19 +236,19 @@ public final class EndgameScreenBinding implements ViewBinding {
   public final RadioGroup SuccessfulClimbed;
 
   @NonNull
-  public final RadioButton SuccessfulNo;
-
-  @NonNull
-  public final RadioButton SuccessfulYes;
-
-  @NonNull
   public final TextView SuccessfullyClimbed;
 
   @NonNull
   public final RadioGroup SuccessfullyClimbedLocation;
 
   @NonNull
+  public final LinearLayoutCompat TimerBox;
+
+  @NonNull
   public final TextView TowerClimbPlacement;
+
+  @NonNull
+  public final ConstraintLayout autonFieldContainer;
 
   @NonNull
   public final ImageView bottomEdgeBar;
@@ -211,76 +260,96 @@ public final class EndgameScreenBinding implements ViewBinding {
   public final ImageView rightEdgeBar;
 
   @NonNull
-  public final ConstraintLayout teleopFieldContainer;
-
-  @NonNull
   public final ImageView topEdgeBar;
 
   private EndgameScreenBinding(@NonNull ConstraintLayout rootView,
       @NonNull RadioButton AchievedLevel1, @NonNull RadioGroup AttemptedClimbToggle,
+      @NonNull RadioButton AttemptedNo, @NonNull RadioButton AttemptedOne,
+      @NonNull TextView AutonSeconds, @NonNull LinearLayoutCompat ButtonBox,
       @NonNull RadioButton Center, @NonNull TextView ClimbingDesc, @NonNull TextView ClimbingTitle,
-      @NonNull RadioButton Collecting0To25Fuel, @NonNull RadioButton Collecting26To50Fuel,
-      @NonNull RadioButton Collecting51to755Fuel, @NonNull RadioGroup CollectingCounterToggle,
-      @NonNull TextView CollectingDesc, @NonNull RadioButton CollectingMoreThan75Fuel,
-      @NonNull TextView CollectingTitle, @NonNull RadioButton DidNotAttempt,
-      @NonNull TextView EndGameSeconds, @NonNull TextView FellOverLabel,
-      @NonNull RadioButton Ferrying0To25Fuel, @NonNull RadioButton Ferrying26To50Fuel,
-      @NonNull RadioButton Ferrying51to755Fuel, @NonNull RadioGroup FerryingCounterToggle,
-      @NonNull TextView FerryingDesc, @NonNull RadioButton FerryingMoreThan75Fuel,
-      @NonNull TextView FerryingTitle, @NonNull Button GenerateQRButton,
-      @NonNull TextView IDEndGameSeconds1, @NonNull RadioButton Left,
-      @NonNull RadioButton Missed0To25Fuel, @NonNull RadioButton Missed26To50Fuel,
-      @NonNull RadioButton Missed51to755Fuel, @NonNull RadioGroup MissedCounterToggle,
-      @NonNull TextView MissedDesc, @NonNull RadioButton MissedMoreThan75Fuel,
-      @NonNull TextView MissedTitle, @NonNull Switch NoShowSwitch,
-      @NonNull TextView PostMatchWarning, @NonNull RadioButton Right, @NonNull Button SaveButton,
-      @NonNull TextView ScoringTitle, @NonNull RadioButton Start25, @NonNull RadioButton Start50,
-      @NonNull RadioButton Start75, @NonNull TextView StartDesc, @NonNull RadioButton StartEmpty,
-      @NonNull RadioButton StartFull, @NonNull RadioGroup StartLevelToggle,
-      @NonNull TextView StartTitle, @NonNull RadioButton Stop25, @NonNull RadioButton Stop50,
-      @NonNull RadioButton Stop75, @NonNull TextView StopDesc, @NonNull RadioButton StopEmpty,
-      @NonNull RadioButton StopFull, @NonNull RadioGroup StopLevelToggle,
-      @NonNull TextView StopTitle, @NonNull RadioGroup SuccessfulClimbed,
-      @NonNull RadioButton SuccessfulNo, @NonNull RadioButton SuccessfulYes,
-      @NonNull TextView SuccessfullyClimbed, @NonNull RadioGroup SuccessfullyClimbedLocation,
-      @NonNull TextView TowerClimbPlacement, @NonNull ImageView bottomEdgeBar,
-      @NonNull ImageView leftEdgeBar, @NonNull ImageView rightEdgeBar,
-      @NonNull ConstraintLayout teleopFieldContainer, @NonNull ImageView topEdgeBar) {
+      @NonNull RadioButton CollectingCounter, @NonNull RadioGroup CollectingCounterToggle,
+      @NonNull TextView CollectingDesc, @NonNull RadioButton CollectingMinus,
+      @NonNull RadioButton CollectingMinus10, @NonNull RadioButton CollectingMinus5,
+      @NonNull RadioButton CollectingPlus, @NonNull RadioButton CollectingPlus10,
+      @NonNull RadioButton CollectingPlus5, @NonNull TextView CollectingTitle,
+      @NonNull LinearLayoutCompat ColumnOne, @NonNull LinearLayoutCompat ColumnThree,
+      @NonNull LinearLayoutCompat ColumnTwo, @NonNull RadioButton DidNotAttempt,
+      @NonNull TextView EndgameWarning, @NonNull TextView FellOverLabel,
+      @NonNull RadioButton FerryingCounter, @NonNull RadioGroup FerryingCounterToggle,
+      @NonNull TextView FerryingDesc, @NonNull RadioButton FerryingMinus,
+      @NonNull RadioButton FerryingMinus10, @NonNull RadioButton FerryingMinus5,
+      @NonNull RadioButton FerryingPlus, @NonNull RadioButton FerryingPlus10,
+      @NonNull RadioButton FerryingPlus5, @NonNull TextView FerryingTitle,
+      @NonNull LinearLayoutCompat FixedBottom, @NonNull TextView IDAutonSeconds1,
+      @NonNull RadioButton Left, @NonNull RadioButton MissedCounter,
+      @NonNull RadioGroup MissedCounterToggle, @NonNull TextView MissedDesc,
+      @NonNull RadioButton MissedMinus, @NonNull RadioButton MissedMinus10,
+      @NonNull RadioButton MissedMinus5, @NonNull RadioButton MissedPlus,
+      @NonNull RadioButton MissedPlus10, @NonNull RadioButton MissedPlus5,
+      @NonNull TextView MissedTitle, @NonNull Switch NoShowSwitch, @NonNull Button ResetButton,
+      @NonNull RadioButton Right, @NonNull Button SaveButton, @NonNull TextView ScoringTitle,
+      @NonNull RadioButton Start25, @NonNull RadioButton Start50, @NonNull RadioButton Start75,
+      @NonNull TextView StartDesc, @NonNull RadioButton StartEmpty, @NonNull RadioButton StartFull,
+      @NonNull RadioGroup StartLevelToggle, @NonNull TextView StartTitle,
+      @NonNull RadioButton Stop25, @NonNull RadioButton Stop50, @NonNull RadioButton Stop75,
+      @NonNull TextView StopDesc, @NonNull RadioButton StopEmpty, @NonNull RadioButton StopFull,
+      @NonNull RadioGroup StopLevelToggle, @NonNull TextView StopTitle,
+      @NonNull RadioGroup SuccessfulClimbed, @NonNull TextView SuccessfullyClimbed,
+      @NonNull RadioGroup SuccessfullyClimbedLocation, @NonNull LinearLayoutCompat TimerBox,
+      @NonNull TextView TowerClimbPlacement, @NonNull ConstraintLayout autonFieldContainer,
+      @NonNull ImageView bottomEdgeBar, @NonNull ImageView leftEdgeBar,
+      @NonNull ImageView rightEdgeBar, @NonNull ImageView topEdgeBar) {
     this.rootView = rootView;
     this.AchievedLevel1 = AchievedLevel1;
     this.AttemptedClimbToggle = AttemptedClimbToggle;
+    this.AttemptedNo = AttemptedNo;
+    this.AttemptedOne = AttemptedOne;
+    this.AutonSeconds = AutonSeconds;
+    this.ButtonBox = ButtonBox;
     this.Center = Center;
     this.ClimbingDesc = ClimbingDesc;
     this.ClimbingTitle = ClimbingTitle;
-    this.Collecting0To25Fuel = Collecting0To25Fuel;
-    this.Collecting26To50Fuel = Collecting26To50Fuel;
-    this.Collecting51to755Fuel = Collecting51to755Fuel;
+    this.CollectingCounter = CollectingCounter;
     this.CollectingCounterToggle = CollectingCounterToggle;
     this.CollectingDesc = CollectingDesc;
-    this.CollectingMoreThan75Fuel = CollectingMoreThan75Fuel;
+    this.CollectingMinus = CollectingMinus;
+    this.CollectingMinus10 = CollectingMinus10;
+    this.CollectingMinus5 = CollectingMinus5;
+    this.CollectingPlus = CollectingPlus;
+    this.CollectingPlus10 = CollectingPlus10;
+    this.CollectingPlus5 = CollectingPlus5;
     this.CollectingTitle = CollectingTitle;
+    this.ColumnOne = ColumnOne;
+    this.ColumnThree = ColumnThree;
+    this.ColumnTwo = ColumnTwo;
     this.DidNotAttempt = DidNotAttempt;
-    this.EndGameSeconds = EndGameSeconds;
+    this.EndgameWarning = EndgameWarning;
     this.FellOverLabel = FellOverLabel;
-    this.Ferrying0To25Fuel = Ferrying0To25Fuel;
-    this.Ferrying26To50Fuel = Ferrying26To50Fuel;
-    this.Ferrying51to755Fuel = Ferrying51to755Fuel;
+    this.FerryingCounter = FerryingCounter;
     this.FerryingCounterToggle = FerryingCounterToggle;
     this.FerryingDesc = FerryingDesc;
-    this.FerryingMoreThan75Fuel = FerryingMoreThan75Fuel;
+    this.FerryingMinus = FerryingMinus;
+    this.FerryingMinus10 = FerryingMinus10;
+    this.FerryingMinus5 = FerryingMinus5;
+    this.FerryingPlus = FerryingPlus;
+    this.FerryingPlus10 = FerryingPlus10;
+    this.FerryingPlus5 = FerryingPlus5;
     this.FerryingTitle = FerryingTitle;
-    this.GenerateQRButton = GenerateQRButton;
-    this.IDEndGameSeconds1 = IDEndGameSeconds1;
+    this.FixedBottom = FixedBottom;
+    this.IDAutonSeconds1 = IDAutonSeconds1;
     this.Left = Left;
-    this.Missed0To25Fuel = Missed0To25Fuel;
-    this.Missed26To50Fuel = Missed26To50Fuel;
-    this.Missed51to755Fuel = Missed51to755Fuel;
+    this.MissedCounter = MissedCounter;
     this.MissedCounterToggle = MissedCounterToggle;
     this.MissedDesc = MissedDesc;
-    this.MissedMoreThan75Fuel = MissedMoreThan75Fuel;
+    this.MissedMinus = MissedMinus;
+    this.MissedMinus10 = MissedMinus10;
+    this.MissedMinus5 = MissedMinus5;
+    this.MissedPlus = MissedPlus;
+    this.MissedPlus10 = MissedPlus10;
+    this.MissedPlus5 = MissedPlus5;
     this.MissedTitle = MissedTitle;
     this.NoShowSwitch = NoShowSwitch;
-    this.PostMatchWarning = PostMatchWarning;
+    this.ResetButton = ResetButton;
     this.Right = Right;
     this.SaveButton = SaveButton;
     this.ScoringTitle = ScoringTitle;
@@ -301,15 +370,14 @@ public final class EndgameScreenBinding implements ViewBinding {
     this.StopLevelToggle = StopLevelToggle;
     this.StopTitle = StopTitle;
     this.SuccessfulClimbed = SuccessfulClimbed;
-    this.SuccessfulNo = SuccessfulNo;
-    this.SuccessfulYes = SuccessfulYes;
     this.SuccessfullyClimbed = SuccessfullyClimbed;
     this.SuccessfullyClimbedLocation = SuccessfullyClimbedLocation;
+    this.TimerBox = TimerBox;
     this.TowerClimbPlacement = TowerClimbPlacement;
+    this.autonFieldContainer = autonFieldContainer;
     this.bottomEdgeBar = bottomEdgeBar;
     this.leftEdgeBar = leftEdgeBar;
     this.rightEdgeBar = rightEdgeBar;
-    this.teleopFieldContainer = teleopFieldContainer;
     this.topEdgeBar = topEdgeBar;
   }
 
@@ -352,6 +420,30 @@ public final class EndgameScreenBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.AttemptedNo;
+      RadioButton AttemptedNo = ViewBindings.findChildViewById(rootView, id);
+      if (AttemptedNo == null) {
+        break missingId;
+      }
+
+      id = R.id.AttemptedOne;
+      RadioButton AttemptedOne = ViewBindings.findChildViewById(rootView, id);
+      if (AttemptedOne == null) {
+        break missingId;
+      }
+
+      id = R.id.AutonSeconds;
+      TextView AutonSeconds = ViewBindings.findChildViewById(rootView, id);
+      if (AutonSeconds == null) {
+        break missingId;
+      }
+
+      id = R.id.ButtonBox;
+      LinearLayoutCompat ButtonBox = ViewBindings.findChildViewById(rootView, id);
+      if (ButtonBox == null) {
+        break missingId;
+      }
+
       id = R.id.Center;
       RadioButton Center = ViewBindings.findChildViewById(rootView, id);
       if (Center == null) {
@@ -370,21 +462,9 @@ public final class EndgameScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.Collecting0To25Fuel;
-      RadioButton Collecting0To25Fuel = ViewBindings.findChildViewById(rootView, id);
-      if (Collecting0To25Fuel == null) {
-        break missingId;
-      }
-
-      id = R.id.Collecting26To50Fuel;
-      RadioButton Collecting26To50Fuel = ViewBindings.findChildViewById(rootView, id);
-      if (Collecting26To50Fuel == null) {
-        break missingId;
-      }
-
-      id = R.id.Collecting51to755Fuel;
-      RadioButton Collecting51to755Fuel = ViewBindings.findChildViewById(rootView, id);
-      if (Collecting51to755Fuel == null) {
+      id = R.id.CollectingCounter;
+      RadioButton CollectingCounter = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingCounter == null) {
         break missingId;
       }
 
@@ -400,9 +480,39 @@ public final class EndgameScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.CollectingMoreThan75Fuel;
-      RadioButton CollectingMoreThan75Fuel = ViewBindings.findChildViewById(rootView, id);
-      if (CollectingMoreThan75Fuel == null) {
+      id = R.id.CollectingMinus;
+      RadioButton CollectingMinus = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingMinus == null) {
+        break missingId;
+      }
+
+      id = R.id.CollectingMinus10;
+      RadioButton CollectingMinus10 = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingMinus10 == null) {
+        break missingId;
+      }
+
+      id = R.id.CollectingMinus5;
+      RadioButton CollectingMinus5 = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingMinus5 == null) {
+        break missingId;
+      }
+
+      id = R.id.CollectingPlus;
+      RadioButton CollectingPlus = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingPlus == null) {
+        break missingId;
+      }
+
+      id = R.id.CollectingPlus10;
+      RadioButton CollectingPlus10 = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingPlus10 == null) {
+        break missingId;
+      }
+
+      id = R.id.CollectingPlus5;
+      RadioButton CollectingPlus5 = ViewBindings.findChildViewById(rootView, id);
+      if (CollectingPlus5 == null) {
         break missingId;
       }
 
@@ -412,15 +522,33 @@ public final class EndgameScreenBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.ColumnOne;
+      LinearLayoutCompat ColumnOne = ViewBindings.findChildViewById(rootView, id);
+      if (ColumnOne == null) {
+        break missingId;
+      }
+
+      id = R.id.ColumnThree;
+      LinearLayoutCompat ColumnThree = ViewBindings.findChildViewById(rootView, id);
+      if (ColumnThree == null) {
+        break missingId;
+      }
+
+      id = R.id.ColumnTwo;
+      LinearLayoutCompat ColumnTwo = ViewBindings.findChildViewById(rootView, id);
+      if (ColumnTwo == null) {
+        break missingId;
+      }
+
       id = R.id.DidNotAttempt;
       RadioButton DidNotAttempt = ViewBindings.findChildViewById(rootView, id);
       if (DidNotAttempt == null) {
         break missingId;
       }
 
-      id = R.id.EndGameSeconds;
-      TextView EndGameSeconds = ViewBindings.findChildViewById(rootView, id);
-      if (EndGameSeconds == null) {
+      id = R.id.EndgameWarning;
+      TextView EndgameWarning = ViewBindings.findChildViewById(rootView, id);
+      if (EndgameWarning == null) {
         break missingId;
       }
 
@@ -430,21 +558,9 @@ public final class EndgameScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.Ferrying0To25Fuel;
-      RadioButton Ferrying0To25Fuel = ViewBindings.findChildViewById(rootView, id);
-      if (Ferrying0To25Fuel == null) {
-        break missingId;
-      }
-
-      id = R.id.Ferrying26To50Fuel;
-      RadioButton Ferrying26To50Fuel = ViewBindings.findChildViewById(rootView, id);
-      if (Ferrying26To50Fuel == null) {
-        break missingId;
-      }
-
-      id = R.id.Ferrying51to755Fuel;
-      RadioButton Ferrying51to755Fuel = ViewBindings.findChildViewById(rootView, id);
-      if (Ferrying51to755Fuel == null) {
+      id = R.id.FerryingCounter;
+      RadioButton FerryingCounter = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingCounter == null) {
         break missingId;
       }
 
@@ -460,9 +576,39 @@ public final class EndgameScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.FerryingMoreThan75Fuel;
-      RadioButton FerryingMoreThan75Fuel = ViewBindings.findChildViewById(rootView, id);
-      if (FerryingMoreThan75Fuel == null) {
+      id = R.id.FerryingMinus;
+      RadioButton FerryingMinus = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingMinus == null) {
+        break missingId;
+      }
+
+      id = R.id.FerryingMinus10;
+      RadioButton FerryingMinus10 = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingMinus10 == null) {
+        break missingId;
+      }
+
+      id = R.id.FerryingMinus5;
+      RadioButton FerryingMinus5 = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingMinus5 == null) {
+        break missingId;
+      }
+
+      id = R.id.FerryingPlus;
+      RadioButton FerryingPlus = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingPlus == null) {
+        break missingId;
+      }
+
+      id = R.id.FerryingPlus10;
+      RadioButton FerryingPlus10 = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingPlus10 == null) {
+        break missingId;
+      }
+
+      id = R.id.FerryingPlus5;
+      RadioButton FerryingPlus5 = ViewBindings.findChildViewById(rootView, id);
+      if (FerryingPlus5 == null) {
         break missingId;
       }
 
@@ -472,15 +618,15 @@ public final class EndgameScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.GenerateQRButton;
-      Button GenerateQRButton = ViewBindings.findChildViewById(rootView, id);
-      if (GenerateQRButton == null) {
+      id = R.id.FixedBottom;
+      LinearLayoutCompat FixedBottom = ViewBindings.findChildViewById(rootView, id);
+      if (FixedBottom == null) {
         break missingId;
       }
 
-      id = R.id.IDEndGameSeconds1;
-      TextView IDEndGameSeconds1 = ViewBindings.findChildViewById(rootView, id);
-      if (IDEndGameSeconds1 == null) {
+      id = R.id.IDAutonSeconds1;
+      TextView IDAutonSeconds1 = ViewBindings.findChildViewById(rootView, id);
+      if (IDAutonSeconds1 == null) {
         break missingId;
       }
 
@@ -490,21 +636,9 @@ public final class EndgameScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.Missed0To25Fuel;
-      RadioButton Missed0To25Fuel = ViewBindings.findChildViewById(rootView, id);
-      if (Missed0To25Fuel == null) {
-        break missingId;
-      }
-
-      id = R.id.Missed26To50Fuel;
-      RadioButton Missed26To50Fuel = ViewBindings.findChildViewById(rootView, id);
-      if (Missed26To50Fuel == null) {
-        break missingId;
-      }
-
-      id = R.id.Missed51to755Fuel;
-      RadioButton Missed51to755Fuel = ViewBindings.findChildViewById(rootView, id);
-      if (Missed51to755Fuel == null) {
+      id = R.id.MissedCounter;
+      RadioButton MissedCounter = ViewBindings.findChildViewById(rootView, id);
+      if (MissedCounter == null) {
         break missingId;
       }
 
@@ -520,9 +654,39 @@ public final class EndgameScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.MissedMoreThan75Fuel;
-      RadioButton MissedMoreThan75Fuel = ViewBindings.findChildViewById(rootView, id);
-      if (MissedMoreThan75Fuel == null) {
+      id = R.id.MissedMinus;
+      RadioButton MissedMinus = ViewBindings.findChildViewById(rootView, id);
+      if (MissedMinus == null) {
+        break missingId;
+      }
+
+      id = R.id.MissedMinus10;
+      RadioButton MissedMinus10 = ViewBindings.findChildViewById(rootView, id);
+      if (MissedMinus10 == null) {
+        break missingId;
+      }
+
+      id = R.id.MissedMinus5;
+      RadioButton MissedMinus5 = ViewBindings.findChildViewById(rootView, id);
+      if (MissedMinus5 == null) {
+        break missingId;
+      }
+
+      id = R.id.MissedPlus;
+      RadioButton MissedPlus = ViewBindings.findChildViewById(rootView, id);
+      if (MissedPlus == null) {
+        break missingId;
+      }
+
+      id = R.id.MissedPlus10;
+      RadioButton MissedPlus10 = ViewBindings.findChildViewById(rootView, id);
+      if (MissedPlus10 == null) {
+        break missingId;
+      }
+
+      id = R.id.MissedPlus5;
+      RadioButton MissedPlus5 = ViewBindings.findChildViewById(rootView, id);
+      if (MissedPlus5 == null) {
         break missingId;
       }
 
@@ -538,9 +702,9 @@ public final class EndgameScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.PostMatchWarning;
-      TextView PostMatchWarning = ViewBindings.findChildViewById(rootView, id);
-      if (PostMatchWarning == null) {
+      id = R.id.ResetButton;
+      Button ResetButton = ViewBindings.findChildViewById(rootView, id);
+      if (ResetButton == null) {
         break missingId;
       }
 
@@ -664,18 +828,6 @@ public final class EndgameScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.SuccessfulNo;
-      RadioButton SuccessfulNo = ViewBindings.findChildViewById(rootView, id);
-      if (SuccessfulNo == null) {
-        break missingId;
-      }
-
-      id = R.id.SuccessfulYes;
-      RadioButton SuccessfulYes = ViewBindings.findChildViewById(rootView, id);
-      if (SuccessfulYes == null) {
-        break missingId;
-      }
-
       id = R.id.SuccessfullyClimbed;
       TextView SuccessfullyClimbed = ViewBindings.findChildViewById(rootView, id);
       if (SuccessfullyClimbed == null) {
@@ -688,11 +840,19 @@ public final class EndgameScreenBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.TimerBox;
+      LinearLayoutCompat TimerBox = ViewBindings.findChildViewById(rootView, id);
+      if (TimerBox == null) {
+        break missingId;
+      }
+
       id = R.id.TowerClimbPlacement;
       TextView TowerClimbPlacement = ViewBindings.findChildViewById(rootView, id);
       if (TowerClimbPlacement == null) {
         break missingId;
       }
+
+      ConstraintLayout autonFieldContainer = (ConstraintLayout) rootView;
 
       id = R.id.bottomEdgeBar;
       ImageView bottomEdgeBar = ViewBindings.findChildViewById(rootView, id);
@@ -712,8 +872,6 @@ public final class EndgameScreenBinding implements ViewBinding {
         break missingId;
       }
 
-      ConstraintLayout teleopFieldContainer = (ConstraintLayout) rootView;
-
       id = R.id.topEdgeBar;
       ImageView topEdgeBar = ViewBindings.findChildViewById(rootView, id);
       if (topEdgeBar == null) {
@@ -721,18 +879,20 @@ public final class EndgameScreenBinding implements ViewBinding {
       }
 
       return new EndgameScreenBinding((ConstraintLayout) rootView, AchievedLevel1,
-          AttemptedClimbToggle, Center, ClimbingDesc, ClimbingTitle, Collecting0To25Fuel,
-          Collecting26To50Fuel, Collecting51to755Fuel, CollectingCounterToggle, CollectingDesc,
-          CollectingMoreThan75Fuel, CollectingTitle, DidNotAttempt, EndGameSeconds, FellOverLabel,
-          Ferrying0To25Fuel, Ferrying26To50Fuel, Ferrying51to755Fuel, FerryingCounterToggle,
-          FerryingDesc, FerryingMoreThan75Fuel, FerryingTitle, GenerateQRButton, IDEndGameSeconds1,
-          Left, Missed0To25Fuel, Missed26To50Fuel, Missed51to755Fuel, MissedCounterToggle,
-          MissedDesc, MissedMoreThan75Fuel, MissedTitle, NoShowSwitch, PostMatchWarning, Right,
-          SaveButton, ScoringTitle, Start25, Start50, Start75, StartDesc, StartEmpty, StartFull,
+          AttemptedClimbToggle, AttemptedNo, AttemptedOne, AutonSeconds, ButtonBox, Center,
+          ClimbingDesc, ClimbingTitle, CollectingCounter, CollectingCounterToggle, CollectingDesc,
+          CollectingMinus, CollectingMinus10, CollectingMinus5, CollectingPlus, CollectingPlus10,
+          CollectingPlus5, CollectingTitle, ColumnOne, ColumnThree, ColumnTwo, DidNotAttempt,
+          EndgameWarning, FellOverLabel, FerryingCounter, FerryingCounterToggle, FerryingDesc,
+          FerryingMinus, FerryingMinus10, FerryingMinus5, FerryingPlus, FerryingPlus10,
+          FerryingPlus5, FerryingTitle, FixedBottom, IDAutonSeconds1, Left, MissedCounter,
+          MissedCounterToggle, MissedDesc, MissedMinus, MissedMinus10, MissedMinus5, MissedPlus,
+          MissedPlus10, MissedPlus5, MissedTitle, NoShowSwitch, ResetButton, Right, SaveButton,
+          ScoringTitle, Start25, Start50, Start75, StartDesc, StartEmpty, StartFull,
           StartLevelToggle, StartTitle, Stop25, Stop50, Stop75, StopDesc, StopEmpty, StopFull,
-          StopLevelToggle, StopTitle, SuccessfulClimbed, SuccessfulNo, SuccessfulYes,
-          SuccessfullyClimbed, SuccessfullyClimbedLocation, TowerClimbPlacement, bottomEdgeBar,
-          leftEdgeBar, rightEdgeBar, teleopFieldContainer, topEdgeBar);
+          StopLevelToggle, StopTitle, SuccessfulClimbed, SuccessfullyClimbed,
+          SuccessfullyClimbedLocation, TimerBox, TowerClimbPlacement, autonFieldContainer,
+          bottomEdgeBar, leftEdgeBar, rightEdgeBar, topEdgeBar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
