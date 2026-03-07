@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/teleopFieldContainer"
-    android:layout_width="@dimen/field_tower_popup_width"
+    android:id="@+id/autonFieldContainer"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/night">
-
+    android:background="@color/night"
+    android:paddingTop="5dp">
 
     <!-- ═════════════════════════════════════════
- TIMER & BUTTON BOX (bottom)
- ═════════════════════════════════════════ -->
+     TIMER & BUTTON BOX (bottom)
+     ═════════════════════════════════════════ -->
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/FixedBottom"
         android:layout_width="match_parent"
@@ -21,117 +21,112 @@
         android:gravity="center_horizontal|bottom"
         app:layout_constraintStart_toEndOf="parent" >
 
-    <!-- Timer Warning -->
-    <TextView
-        android:id="@+id/EndgameWarning"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/teleop_warning"
-        android:fontFamily="@font/open_sans"
-        android:text="@string/TeleopWarning"
-        android:textColor="@color/bg_general"
-        android:textSize="@dimen/input_label_text_size"
-        android:layout_marginBottom="2dp"
-        android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="parent" />
+        <!-- Timer Warning -->
+        <TextView
+            android:id="@+id/EndGameWarning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/teleop_warning"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/EndGameWarning"
+            android:textColor="@color/bg_general"
+            android:textSize="@dimen/input_label_text_size"
+            android:layout_marginBottom="2dp"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- ═════════════════════════════════════════
-            TIMER
-            ═════════════════════════════════════════ -->
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/TimerBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal">
+        <!-- ═════════════════════════════════════════
+             TIMER
+             ═════════════════════════════════════════ -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/TimerBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
 
-    <TextView
-        android:id="@+id/IDTeleopSeconds1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/timer"
-        android:drawablePadding="@dimen/drawable_padding"
-        android:fontFamily="@font/futura_medium_condensed_bt"
-        android:text="@string/TeleopSeconds"
-        android:textColor="@color/sky"
-        android:textSize="@dimen/instruction_text_size"
-        app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toEndOf="@+id/leftEdgeBar"
-        tools:layout_editor_absoluteY="685dp" />
+            <TextView
+                android:id="@+id/IDTeleopSeconds1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/timer"
+                android:drawablePadding="@dimen/drawable_padding"
+                android:fontFamily="@font/futura_medium_condensed_bt"
+                android:text="@string/TeleopSeconds"
+                android:textColor="@color/sky"
+                android:textSize="@dimen/instruction_text_size"
+                app:layout_constraintBottom_toTopOf="parent" />
+            <TextView
+                android:id="@+id/TeleopSeconds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/DefaultValue"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/instruction_text_size"
+                app:layout_constraintStart_toEndOf="@+id/IDTeleopSeconds1" />
 
-    <TextView
-        android:id="@+id/TeleopSeconds"
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:gravity="center"
-        android:text="@string/DefaultValue"
-        android:textColor="@drawable/text_states"
-        android:textSize="@dimen/instruction_text_size"
-        app:layout_constraintBottom_toBottomOf="@+id/IDTeleopSeconds1"
-        app:layout_constraintStart_toEndOf="@+id/IDTeleopSeconds1"
-        app:layout_constraintTop_toTopOf="@+id/IDTeleopSeconds1"
-        app:layout_constraintVertical_bias="0.0" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/sky" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/sky" />
-
-    <!-- ═════════════════════════════════════════
+        <!-- ═════════════════════════════════════════
              BUTTONS
              ═════════════════════════════════════════ -->
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ButtonBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        android:gravity="bottom"
-        app:layout_constraintStart_toEndOf="parent" >
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ButtonBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:gravity="end|bottom"
+            app:layout_constraintStart_toEndOf="parent" >
 
-    <Button
-        android:id="@+id/ResetButton"
-        android:layout_width="482dp"
-        android:layout_height="54dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/button_large_disabled"
-        android:text="@string/Reset"
-        android:textColor="@drawable/text_states"
-        android:textSize="@dimen/button_text_size"
-       />
+            <Button
+                android:id="@+id/ResetButton"
+                android:layout_width="200dp"
+                android:layout_height="54dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/button_large_disabled"
+                android:text="@string/Reset"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <Button
-            android:id="@+id/SaveButton"
-            android:layout_width="482dp"
-            android:layout_height="54dp"
-            android:background="@drawable/button_large_active"
-            android:text="@string/Save"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size"
-            />
+            <Button
+                android:id="@+id/SaveButton"
+                android:layout_width="550dp"
+                android:layout_height="54dp"
+                android:background="@drawable/button_large_active"
+                android:text="@string/Save"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size"/>
 
-        <Button
-            android:id="@+id/NextButtonEndGame"
-            android:layout_width="wrap_content"
-            android:layout_height="54dp"
-            android:background="@drawable/button_large_disabled"
-            android:text="@string/EndGameTitle"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size"
-             />
+            <Button
+                android:id="@+id/NextEndGameButton"
+                android:layout_width="200dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="20dp"
+                android:drawableEnd="@drawable/right_states"
+                android:paddingHorizontal="12dp"
+                android:drawablePadding="12dp"
+                android:text="ENDGAME"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/button_text_size"
+                android:background="@drawable/button_default"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/autonTimerBar" />
 
-     </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-
     <!-- ═════════════════════════════════════════
-        COLUMN ONE
-        ═════════════════════════════════════════ -->
+         COLUMN ONE
+         ═════════════════════════════════════════ -->
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/ColumnOne"
         android:layout_width="330dp"
@@ -143,11 +138,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-        <!-- ═════════════════════════════════════════
-             COLLECTING SECTION
-             ═════════════════════════════════════════ -->
 
+        <!-- ═════════════════════════════════════════
+             COLLECTING
+             ═════════════════════════════════════════ -->
         <TextView
             android:id="@+id/CollectingTitle"
             android:layout_width="match_parent"
@@ -171,7 +165,7 @@
             android:textStyle="italic"
             app:layout_constraintTop_toBottomOf="@+id/CollectingTitle" />
 
-        <!-- Collecting counter toggle: 0-25, 26-50, 51-75, >75-->
+        <!-- Collecting counter toggle: -10 | -5 | - | 000 | + | +5 | +10 -->
         <RadioGroup
             android:id="@+id/CollectingCounterToggle"
             android:layout_width="match_parent"
@@ -182,51 +176,88 @@
             app:layout_constraintTop_toBottomOf="@+id/CollectingDesc">
 
             <RadioButton
-                android:id="@+id/Collecting0To25Fuel"
+                android:id="@+id/CollectingMinus10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:text="0 - 25"
+                android:text="-10"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/Collecting26To50Fuel"
+                android:id="@+id/CollectingMinus5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:text="26 - 50"
+                android:text="-5"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/Collecting51to755Fuel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/CollectingMinus"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:text="51 - 75"
+                android:text="-"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/CollectingMoreThan75Fuel"
+                android:id="@+id/CollectingCounter"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/toggle_left_states"
+                android:layout_height="match_parent"
                 android:button="@null"
-                android:checked="true"
+                android:checked="false"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:text=">75"
+                android:padding="8dp"
+                android:text="000"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/CollectingPlus"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="+"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/CollectingPlus5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="+5"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/CollectingPlus10"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="+10"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
         </RadioGroup>
@@ -244,7 +275,7 @@
             android:textColor="@drawable/text_header_states"
             android:textSize="@dimen/header_text_size"
             app:layout_constraintStart_toStartOf="@id/CollectingDesc"
-            app:layout_constraintTop_toBottomOf="@+id/CollectingCounterToggle"  />
+            app:layout_constraintTop_toBottomOf="@+id/CollectingCounterToggle" />
 
         <TextView
             android:id="@+id/FerryingDesc"
@@ -254,12 +285,12 @@
             android:textColor="@color/bootstrap_brand_secondary_border"
             android:textSize="@dimen/instruction_text_size"
             android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="@id/FerryingCounterToggle"
+            app:layout_constraintEnd_toEndOf="@+id/FerryingCounterToggle"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/FerryingTitle"
             app:layout_constraintTop_toBottomOf="@+id/FerryingTitle" />
 
-        <!-- Ferrying counter toggle: 0-25, 26-50, 51-75, >75-->
+        <!-- Ferrying counter toggle: -10 | -5 | - | 000 | + | +5 | +10 -->
         <RadioGroup
             android:id="@+id/FerryingCounterToggle"
             android:layout_width="match_parent"
@@ -270,84 +301,123 @@
             app:layout_constraintTop_toBottomOf="@+id/FerryingDesc">
 
             <RadioButton
-                android:id="@+id/Ferrying0To25Fuel"
+                android:id="@+id/FerryingMinus10"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:text="0 - 25"
+                android:text="-10"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/Ferrying26To50Fuel"
+                android:id="@+id/FerryingMinus5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:text="26 - 50"
+                android:text="-5"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/Ferrying51to755Fuel"
-                android:layout_width="wrap_content"
+                android:id="@+id/FerryingMinus"
+                android:layout_width="44dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:text="51 - 75"
+                android:text="-"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/FerryingMoreThan75Fuel"
+                android:id="@+id/FerryingCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:checked="false"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="000"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/FerryingPlus"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="+"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/FerryingPlus5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:text=">75"
+                android:text="+5"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/FerryingPlus10"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="+10"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
         </RadioGroup>
 
-    <!-- No Show Switch -->
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:orientation="horizontal">
-
-        <Switch
-            android:id="@+id/NoShowSwitch"
-            android:layout_width="wrap_content"
+        <!-- No Show Switch -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:thumb="@drawable/thumb_states"
-            android:track="@drawable/track_states"
-            app:layout_constraintStart_toStartOf="@id/Ferrying0To25Fuel"
-            app:layout_constraintTop_toBottomOf="@+id/Ferrying0To25Fuel" />
+            android:layout_marginTop="35dp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/FellOverLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/RobotFellOver"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/input_label_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/NoShowSwitch"
-            app:layout_constraintStart_toEndOf="@+id/NoShowSwitch"
-            app:layout_constraintTop_toTopOf="@+id/NoShowSwitch" />
+            <Switch
+                android:id="@+id/NoShowSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:thumb="@drawable/thumb_states"
+                android:track="@drawable/track_states"
+                app:layout_constraintStart_toStartOf="@id/FerryingCounterToggle"
+                app:layout_constraintTop_toBottomOf="@+id/FerryingCounterToggle" />
+
+            <TextView
+                android:id="@+id/FellOverLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/RobotFellOver"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/input_label_text_size"
+                app:layout_constraintBottom_toBottomOf="@+id/NoShowSwitch"
+                app:layout_constraintStart_toEndOf="@+id/NoShowSwitch"
+                app:layout_constraintTop_toTopOf="@+id/NoShowSwitch" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 
     <!-- ═════════════════════════════════════════
      COLUMN TWO  (middle column)
@@ -357,15 +427,15 @@
         android:id="@+id/ColumnTwo"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
+        android:layout_marginTop="5dp"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@id/ColumnOne" >
-
-
+        android:paddingLeft="15dp"
+        app:layout_constraintStart_toEndOf="@id/ColumnOne"
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- ═════════════════════════════════════════
-             SCORING TITLE
-             ═════════════════════════════════════════ -->
+         SCORING TITLE
+         ═════════════════════════════════════════ -->
 
         <TextView
             android:id="@+id/ScoringTitle"
@@ -376,7 +446,7 @@
             android:textColor="@drawable/text_header_states"
             android:textSize="@dimen/header_text_size"
             app:layout_constraintBottom_toTopOf="@+id/StartTitle"
-            app:layout_constraintStart_toStartOf="parent"  />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <!-- ═════════════════════════════════════════
              START SECTION  (right column)
@@ -392,7 +462,7 @@
             android:textColor="@color/sky"
             android:textSize="@dimen/header_text_size"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/CollectingTitle"/>
+            app:layout_constraintTop_toBottomOf="@+id/CollectingTitle" />
 
         <TextView
             android:id="@+id/StartDesc"
@@ -420,12 +490,12 @@
                 android:id="@+id/StartEmpty"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="12dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:checked="false"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="12dp"
                 android:text="@string/empty_label"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -434,11 +504,11 @@
                 android:id="@+id/Start25"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="@string/percent_25"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -447,11 +517,11 @@
                 android:id="@+id/Start50"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="@string/percent_50"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -460,11 +530,11 @@
                 android:id="@+id/Start75"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="@string/percent_75"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -473,11 +543,11 @@
                 android:id="@+id/StartFull"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="12dp"
                 android:background="@drawable/toggle_right_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="12dp"
                 android:text="@string/full_label"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -524,12 +594,12 @@
                 android:id="@+id/StopEmpty"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="12dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:checked="false"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="12dp"
                 android:text="@string/empty_label"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -538,11 +608,11 @@
                 android:id="@+id/Stop25"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="@string/percent_25"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -551,11 +621,11 @@
                 android:id="@+id/Stop50"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="@string/percent_50"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -564,11 +634,11 @@
                 android:id="@+id/Stop75"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="@string/percent_75"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -577,22 +647,22 @@
                 android:id="@+id/StopFull"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="12dp"
                 android:background="@drawable/toggle_right_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="12dp"
                 android:text="@string/full_label"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
         </RadioGroup>
 
         <!-- ═════════════════════════════════════════
-             MISSED SECTION
-             ═════════════════════════════════════════ -->
+         MISSED SECTION
+         ═════════════════════════════════════════ -->
         <TextView
             android:id="@+id/MissedTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/futura_medium_condensed_bt"
@@ -614,7 +684,7 @@
             app:layout_constraintStart_toStartOf="@+id/MissedTitle"
             app:layout_constraintTop_toBottomOf="@+id/MissedTitle" />
 
-        <!-- Missed counter toggle: 0-25, 26-50, 51-75, >75-->
+        <!-- Missed counter toggle: -10 | -5 | - | 000 | + | +5 | +10 -->
         <RadioGroup
             android:id="@+id/MissedCounterToggle"
             android:layout_width="match_parent"
@@ -625,55 +695,94 @@
             app:layout_constraintTop_toBottomOf="@+id/MissedDesc">
 
             <RadioButton
-                android:id="@+id/Missed0To25Fuel"
+                android:id="@+id/MissedMinus10"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:text="0 - 25"
+                android:text="-10"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/Missed26To50Fuel"
+                android:id="@+id/MissedMinus5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:text="26 - 50"
+                android:text="-5"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/Missed51to755Fuel"
-                android:layout_width="wrap_content"
+                android:id="@+id/MissedMinus"
+                android:layout_width="44dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:text="51 - 75"
+                android:text="-"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/MissedMoreThan75Fuel"
+                android:id="@+id/MissedCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:checked="false"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="000"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/MissedPlus"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="+"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/MissedPlus5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
-                android:text=">75"
+                android:text="+5"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/MissedPlus10"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="+10"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
         </RadioGroup>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     <!-- ═════════════════════════════════════════
      COLUMN THREE  (right column)
@@ -683,13 +792,14 @@
         android:id="@+id/ColumnThree"
         android:layout_width="295dp"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@id/ColumnTwo" >
+        android:paddingLeft="10dp"
+        app:layout_constraintStart_toEndOf="@id/ColumnTwo"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!-- ═════════════════════════════════════════
-     CLIMBING SECTION  (right column, below Missed)
-     ═════════════════════════════════════════ -->
+        <!-- ═════════════════════════════════════════
+         CLIMBING SECTION  (right column, below Missed)
+         ═════════════════════════════════════════ -->
 
         <TextView
             android:id="@+id/ClimbingTitle"
@@ -731,11 +841,11 @@
                 android:id="@+id/AttemptedNo"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="12dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="12dp"
                 android:text="@string/DNA"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -744,25 +854,24 @@
                 android:id="@+id/AttemptedOne"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_right_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="1"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
-            <!-- Teleop/Endgame only
             <RadioButton
                 android:id="@+id/AttemptedTwo"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_right_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="2"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -771,15 +880,15 @@
                 android:id="@+id/AttemptedThree"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_right_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="3"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
-               -->
+
         </RadioGroup>
 
         <!-- Successful Climbed: None | 1 -->
@@ -789,11 +898,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
+            android:letterSpacing="-0.02"
             android:text="@string/SuccessfullyClimbed"
             android:textColor="@color/bootstrap_brand_secondary_border"
             android:textSize="@dimen/instruction_text_size"
             android:textStyle="italic"
-            android:letterSpacing="-0.02"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/AttemptedClimbToggle"
@@ -812,11 +921,11 @@
                 android:id="@+id/DidNotAttempt"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="12dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="12dp"
                 android:text="@string/SuccessfulClimbedLevel"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -825,42 +934,41 @@
                 android:id="@+id/AchievedLevel1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="1"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
-            <!-- Teleop/Endgame only
             <RadioButton
-                android:id="@+id/AchievedLevel1"
+                android:id="@+id/AchievedLevel2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="2"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
 
             <RadioButton
-                android:id="@+id/AchievedLevel1"
+                android:id="@+id/AchievedLevel3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="10dp"
                 android:text="3"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
-            -->
+
         </RadioGroup>
 
         <!-- Tower Climb Location: LEFT | CENTER | RIGHT -->
@@ -870,11 +978,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
+            android:letterSpacing="-0.02"
             android:text="@string/TowerClimbPlacement"
             android:textColor="@color/bootstrap_brand_secondary_border"
             android:textSize="@dimen/instruction_text_size"
             android:textStyle="italic"
-            android:letterSpacing="-0.02"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/SuccessfulClimbed"
             app:layout_constraintTop_toBottomOf="@+id/SuccessfulClimbed" />
@@ -892,11 +1000,11 @@
                 android:id="@+id/Left"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="12dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="12dp"
                 android:text="@string/Left"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -905,11 +1013,11 @@
                 android:id="@+id/Center"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="12dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="12dp"
                 android:text="@string/Center"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
@@ -918,11 +1026,11 @@
                 android:id="@+id/Right"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingHorizontal="12dp"
                 android:background="@drawable/toggle_left_states"
                 android:button="@null"
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
+                android:paddingHorizontal="12dp"
                 android:text="@string/Right"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
