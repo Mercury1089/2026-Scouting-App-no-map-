@@ -2,40 +2,69 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
     android:background="@color/bg_general"
+    android:orientation="vertical"
     android:padding="40dp">
+
+    <TextView
+        android:id="@+id/IDScouterNameQR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ScouterNameID"
+        android:textColor="@color/bootstrap_dropdown_divider"
+        android:textSize="@dimen/instruction_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/IDMatchNumberQR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/MatchNumberID"
+        android:textColor="@color/bootstrap_dropdown_divider"
+        android:textSize="@dimen/instruction_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IDScouterNameQR" />
+
+    <TextView
+        android:id="@+id/IDTeamNumberQR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/TeamNumberID"
+        android:textColor="@color/bootstrap_dropdown_divider"
+        android:textSize="@dimen/instruction_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IDMatchNumberQR" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="447dp"
-        android:layout_height="447dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:contentDescription="@string/QRCode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@color/bootstrap_brand_secondary_text"
-        tools:layout_editor_absoluteY="-22dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/IDTeamNumberQR"
+        app:srcCompat="@color/bootstrap_brand_secondary_text" />
 
     <Button
         android:id="@+id/GoBackButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
         android:background="@drawable/button_active"
         android:drawableEnd="@drawable/right_states"
+        android:drawablePadding="12dp"
         android:fontFamily="@font/open_sans"
-        android:paddingLeft="100dp"
-        android:paddingRight="100dp"
+        android:paddingHorizontal="100dp"
         android:text="@string/SetupNext"
         android:textColor="@drawable/text_states"
         android:textSize="@dimen/button_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

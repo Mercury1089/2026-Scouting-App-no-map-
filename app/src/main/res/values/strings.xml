@@ -85,9 +85,9 @@
     <string name="Missed">MISSED</string>
     <string name="Leave">Leave (Robot left the starting zone)</string>
     <string name="FellOver">Fell Over</string>
-    <string name="TeleopWarning">Teleop is starting soon...</string>
+    <string name="TeleopWarning">Teleop is starting soon&#8230;</string>
     <string name="TeleopError">Switch to teleop as soon as possible!</string>
-    <string name="EndGameWarning">End Game is starting soon...</string>
+    <string name="EndGameWarning">End Game is starting soon&#8230;</string>
     <string name="EndGameError">Switch to End Game as soon as possible!</string>
     <string name="TeleopNext">NEXT: TELEOP</string>
 
@@ -170,7 +170,7 @@
     <string name="IDPasswordRequiredConfirm">Password protect app settings?</string>
 
     <!-- Button Text -->
-    <string name="SetupNext">DIVE Into the Next Match</string>
+    <string name="SetupNext">(RE)BUILD THE NEXT MATCH</string>
     <string name="Scanned">Scanned?</string>
     <string name="NextMatch">SET UP NEXT MATCH</string>
     <string name="ToggleInstructions">Tap on the toggle to record if the options are true (on) or false (off).</string>
