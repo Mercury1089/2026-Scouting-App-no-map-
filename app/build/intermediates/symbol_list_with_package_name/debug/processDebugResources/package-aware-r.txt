@@ -1397,14 +1397,12 @@ id IDExit
 id IDGenerateQR
 id IDGenerateQRDirections
 id IDMatchNumber
-id IDMatchNumberQR
 id IDNoShow
 id IDPassword
 id IDPasswordConfirm
 id IDPreloadNote
 id IDQRWarningDirections
 id IDScouterName
-id IDScouterNameQR
 id IDSettings
 id IDSettingsDirections
 id IDSetup
@@ -1413,7 +1411,6 @@ id IDSetupNextMatch
 id IDSetupNextMatchDirections
 id IDStartDirections
 id IDTeamNumber
-id IDTeamNumberQR
 id IDTeleopSeconds1
 id IDToggleInstructions
 id InnerDecrement
@@ -1432,7 +1429,6 @@ id LowerIncrementDecrementContainer
 id LowerScore
 id META
 id MatchNumberInput
-id MatchNumberQR
 id Missed0To25Fuel
 id Missed26To50Fuel
 id Missed51to755Fuel
@@ -1474,7 +1470,6 @@ id SaveButton
 id ScoredPopupWindow
 id ScoringTitle
 id ScouterNameInput
-id ScouterNameQR
 id SecondAlliancePartnerInput
 id SettingsButton
 id SettingsHeader
@@ -1505,7 +1500,6 @@ id SuccessfullyClimbed
 id SuccessfullyClimbedLocation
 id Target
 id TeamNumberInput
-id TeamNumberQR
 id Teleop
 id TeleopSeconds
 id TeleopWarning

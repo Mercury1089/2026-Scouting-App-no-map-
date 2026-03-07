@@ -1396,14 +1396,12 @@ int id IDExit 0x7f0a0041
 int id IDGenerateQR 0x7f0a0042
 int id IDGenerateQRDirections 0x7f0a0043
 int id IDMatchNumber 0x7f0a0044
-int id IDMatchNumberQR 0x7f0a0045
 int id IDNoShow 0x7f0a0046
 int id IDPassword 0x7f0a0047
 int id IDPasswordConfirm 0x7f0a0048
 int id IDPreloadNote 0x7f0a0049
 int id IDQRWarningDirections 0x7f0a004a
 int id IDScouterName 0x7f0a004b
-int id IDScouterNameQR 0x7f0a004c
 int id IDSettings 0x7f0a004d
 int id IDSettingsDirections 0x7f0a004e
 int id IDSetup 0x7f0a004f
@@ -1412,7 +1410,6 @@ int id IDSetupNextMatch 0x7f0a0051
 int id IDSetupNextMatchDirections 0x7f0a0052
 int id IDStartDirections 0x7f0a0053
 int id IDTeamNumber 0x7f0a0054
-int id IDTeamNumberQR 0x7f0a0055
 int id IDTeleopSeconds1 0x7f0a0056
 int id IDToggleInstructions 0x7f0a0057
 int id InnerDecrement 0x7f0a0058
@@ -1431,7 +1428,6 @@ int id LowerIncrementDecrementContainer 0x7f0a0064
 int id LowerScore 0x7f0a0065
 int id META 0x7f0a0066
 int id MatchNumberInput 0x7f0a0067
-int id MatchNumberQR 0x7f0a0068
 int id Missed0To25Fuel 0x7f0a0069
 int id Missed26To50Fuel 0x7f0a006a
 int id Missed51to755Fuel 0x7f0a006b
@@ -1473,7 +1469,6 @@ int id SaveButton 0x7f0a008f
 int id ScoredPopupWindow 0x7f0a0090
 int id ScoringTitle 0x7f0a0091
 int id ScouterNameInput 0x7f0a0092
-int id ScouterNameQR 0x7f0a0093
 int id SecondAlliancePartnerInput 0x7f0a0094
 int id SettingsButton 0x7f0a0095
 int id SettingsHeader 0x7f0a0096
@@ -1504,7 +1499,6 @@ int id SuccessfullyClimbed 0x7f0a00ae
 int id SuccessfullyClimbedLocation 0x7f0a00af
 int id Target 0x7f0a00b0
 int id TeamNumberInput 0x7f0a00b1
-int id TeamNumberQR 0x7f0a00b2
 int id Teleop 0x7f0a00b3
 int id TeleopSeconds 0x7f0a00b4
 int id TeleopWarning 0x7f0a00b5

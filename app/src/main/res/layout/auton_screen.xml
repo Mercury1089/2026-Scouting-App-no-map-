@@ -1,851 +1,1033 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/autonFieldContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/night">
+    android:background="@color/night"
+    android:paddingTop="5dp">
+
+
 
     <!-- ═════════════════════════════════════════
-         COLLECTING SECTION  (left column)
-         ═════════════════════════════════════════ -->
+     TIMER & BUTTON BOX (bottom)
+     ═════════════════════════════════════════ -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/FixedBottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="15dp"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal|bottom"
+        app:layout_constraintStart_toEndOf="parent" >
 
-    <TextView
-        android:id="@+id/CollectingTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginStart="10dp"
-        android:fontFamily="@font/futura_medium_condensed_bt"
-        android:gravity="top"
-        android:text="@string/Header"
-        android:textColor="@drawable/text_header_states"
-        android:textSize="@dimen/header_text_size"
+        <!-- Timer Warning -->
+        <TextView
+            android:id="@+id/TeleopWarning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/teleop_warning"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/TeleopWarning"
+            android:textColor="@color/bg_general"
+            android:textSize="@dimen/input_label_text_size"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- ═════════════════════════════════════════
+             TIMER
+             ═════════════════════════════════════════ -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/TimerBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/IDAutonSeconds1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/timer"
+                android:drawablePadding="@dimen/drawable_padding"
+                android:fontFamily="@font/futura_medium_condensed_bt"
+                android:text="@string/AutonSeconds"
+                android:textColor="@color/sky"
+                android:textSize="@dimen/instruction_text_size"
+                app:layout_constraintBottom_toTopOf="parent" />
+            <TextView
+                android:id="@+id/AutonSeconds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/DefaultValue"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/instruction_text_size"
+                app:layout_constraintStart_toEndOf="@+id/IDAutonSeconds1" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/sky" />
+
+        <!-- ═════════════════════════════════════════
+             BUTTONS
+             ═════════════════════════════════════════ -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ButtonBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:gravity="bottom"
+            app:layout_constraintStart_toEndOf="parent" >
+
+            <Button
+                android:id="@+id/ResetButton"
+                android:layout_width="482dp"
+                android:layout_height="54dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/button_large_disabled"
+                android:text="@string/Reset"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size"
+                app:layout_constraintStart_toBottomOf="parent" />
+
+            <Button
+                android:id="@+id/SaveButton"
+                android:layout_width="482dp"
+                android:layout_height="54dp"
+                android:background="@drawable/button_large_active"
+                android:text="@string/Save"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size"
+                app:layout_constraintStart_toBottomOf="parent" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!-- ═════════════════════════════════════════
+         COLUMN ONE
+         ═════════════════════════════════════════ -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ColumnOne"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ScoringTitle" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/CollectingDesc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/CollectingDesc"
-        android:textColor="@color/bootstrap_brand_secondary_border"
-        android:textSize="@dimen/instruction_text_size"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="@+id/CollectingCounterToggle"
-        app:layout_constraintStart_toStartOf="@id/CollectingTitle"
-        app:layout_constraintTop_toBottomOf="@+id/CollectingTitle" />
 
-    <!-- Collecting counter toggle: -10 | -5 | - | 000 | + | +5 | +10 -->
-    <RadioGroup
-        android:id="@+id/CollectingCounterToggle"
-        android:layout_width="450dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@id/CollectingDesc"
-        app:layout_constraintTop_toBottomOf="@+id/CollectingDesc">
+        <!-- ═════════════════════════════════════════
+             COLLECTING
+             ═════════════════════════════════════════ -->
+        <TextView
+            android:id="@+id/CollectingTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            android:fontFamily="@font/futura_medium_condensed_bt"
+            android:gravity="top"
+            android:text="@string/Header"
+            android:textColor="@drawable/text_header_states"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <RadioButton
-            android:id="@+id/CollectingMinus10"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="-10"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+        <TextView
+            android:id="@+id/CollectingDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/CollectingDesc"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
+            app:layout_constraintTop_toBottomOf="@+id/CollectingTitle" />
 
-        <RadioButton
-            android:id="@+id/CollectingMinus5"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="-5"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+        <!-- Collecting counter toggle: -10 | -5 | - | 000 | + | +5 | +10 -->
+        <RadioGroup
+            android:id="@+id/CollectingCounterToggle"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/CollectingDesc"
+            app:layout_constraintTop_toBottomOf="@+id/CollectingDesc">
 
-        <RadioButton
-            android:id="@+id/CollectingMinus"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="-"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+            <RadioButton
+                android:id="@+id/CollectingMinus10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="-10"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <RadioButton
-            android:id="@+id/CollectingCounter"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:button="@null"
-            android:checked="true"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="0"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+            <RadioButton
+                android:id="@+id/CollectingMinus5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="-5"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <RadioButton
-            android:id="@+id/CollectingPlus"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="+"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+            <RadioButton
+                android:id="@+id/CollectingMinus"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <RadioButton
-            android:id="@+id/CollectingPlus5"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="+5"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+            <RadioButton
+                android:id="@+id/CollectingCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:checked="false"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="000"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <RadioButton
-            android:id="@+id/CollectingPlus10"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_right_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="+10"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/CollectingPlus"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="+"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/CollectingPlus5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="+5"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/CollectingPlus10"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="+10"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+        </RadioGroup>
+
+        <!-- ═════════════════════════════════════════
+             FERRYING SECTION
+             ═════════════════════════════════════════ -->
+        <TextView
+            android:id="@+id/FerryingTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:fontFamily="@font/futura_medium_condensed_bt"
+            android:text="@string/Ferrying"
+            android:textColor="@drawable/text_header_states"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintStart_toStartOf="@id/CollectingDesc"
+            app:layout_constraintTop_toBottomOf="@+id/CollectingCounterToggle" />
+
+        <TextView
+            android:id="@+id/FerryingDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/FerryingDesc"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="@+id/FerryingCounterToggle"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/FerryingTitle"
+            app:layout_constraintTop_toBottomOf="@+id/FerryingTitle" />
+
+        <!-- Ferrying counter toggle: -10 | -5 | - | 000 | + | +5 | +10 -->
+        <RadioGroup
+            android:id="@+id/FerryingCounterToggle"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/FerryingDesc"
+            app:layout_constraintTop_toBottomOf="@+id/FerryingDesc">
+
+            <RadioButton
+                android:id="@+id/FerryingMinus10"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="-10"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/FerryingMinus5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="-5"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/FerryingMinus"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/FerryingCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:checked="false"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="000"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/FerryingPlus"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="+"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/FerryingPlus5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="+5"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/FerryingPlus10"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="+10"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+        </RadioGroup>
+
+        <!-- No Show Switch -->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:orientation="horizontal">
+
+            <Switch
+                android:id="@+id/NoShowSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:thumb="@drawable/thumb_states"
+                android:track="@drawable/track_states"
+                app:layout_constraintStart_toStartOf="@id/FerryingCounterToggle"
+                app:layout_constraintTop_toBottomOf="@+id/FerryingCounterToggle" />
+
+            <TextView
+                android:id="@+id/FellOverLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/RobotFellOver"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/input_label_text_size"
+                app:layout_constraintBottom_toBottomOf="@+id/NoShowSwitch"
+                app:layout_constraintStart_toEndOf="@+id/NoShowSwitch"
+                app:layout_constraintTop_toTopOf="@+id/NoShowSwitch" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <!-- ═════════════════════════════════════════
-         FERRYING SECTION  (left column)
+     COLUMN TWO  (middle column)
+     ═════════════════════════════════════════ -->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ColumnTwo"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/ColumnOne" >
+
+        <!-- ═════════════════════════════════════════
+         SCORING TITLE
          ═════════════════════════════════════════ -->
-    <TextView
-        android:id="@+id/FerryingTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/futura_medium_condensed_bt"
-        android:text="@string/Ferrying"
-        android:textColor="@drawable/text_header_states"
-        android:textSize="@dimen/header_text_size"
-        app:layout_constraintStart_toStartOf="@id/CollectingDesc"
-        app:layout_constraintTop_toBottomOf="@+id/CollectingCounterToggle" />
 
-    <TextView
-        android:id="@+id/FerryingDesc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/FerryingDesc"
-        android:textColor="@color/bootstrap_brand_secondary_border"
-        android:textSize="@dimen/instruction_text_size"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="@+id/FerryingCounterToggle"
-        app:layout_constraintStart_toStartOf="@id/FerryingTitle"
-        app:layout_constraintTop_toBottomOf="@+id/FerryingTitle" />
+        <TextView
+            android:id="@+id/ScoringTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/futura_medium_condensed_bt"
+            android:text="@string/ScoringTitle"
+            android:textColor="@drawable/text_header_states"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/StartTitle"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Ferrying counter toggle: -10 | -5 | - | 000 | + | +5 | +10 -->
-    <RadioGroup
-        android:id="@+id/FerryingCounterToggle"
-        android:layout_width="450dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@id/FerryingTitle"
-        app:layout_constraintTop_toBottomOf="@+id/FerryingDesc">
+        <!-- ═════════════════════════════════════════
+             START SECTION  (right column)
+             ═════════════════════════════════════════ -->
 
-        <RadioButton
-            android:id="@+id/FerryingMinus10"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="-10"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+        <TextView
+            android:id="@+id/StartTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/futura_medium_condensed_bt"
+            android:text="@string/StartTitle"
+            android:textColor="@color/sky"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CollectingTitle" />
 
-        <RadioButton
-            android:id="@+id/FerryingMinus5"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="-5"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+        <TextView
+            android:id="@+id/StartDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/StartDesc"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/StartTitle"
+            app:layout_constraintTop_toBottomOf="@+id/StartTitle" />
 
-        <RadioButton
-            android:id="@+id/FerryingMinus"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="-"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+        <!-- Start level toggle: EMPTY | 25% | 50% | 75% | FULL -->
+        <RadioGroup
+            android:id="@+id/StartLevelToggle"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/StartDesc"
+            app:layout_constraintTop_toBottomOf="@+id/StartDesc">
 
-        <RadioButton
-            android:id="@+id/FerryingZero"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:button="@null"
-            android:checked="true"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="0"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+            <RadioButton
+                android:id="@+id/StartEmpty"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:checked="false"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/empty_label"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <RadioButton
-            android:id="@+id/FerryingPlus"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="+"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+            <RadioButton
+                android:id="@+id/Start25"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/percent_25"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <RadioButton
-            android:id="@+id/FerryingPlus5"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="+5"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+            <RadioButton
+                android:id="@+id/Start50"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/percent_50"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <RadioButton
-            android:id="@+id/FerryingPlus10"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_right_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="+10"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/Start75"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/percent_75"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-    <!-- ═════════════════════════════════════════
-         SCORING TITLE  (right column anchor)
+            <RadioButton
+                android:id="@+id/StartFull"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/full_label"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+        </RadioGroup>
+
+        <!-- ═════════════════════════════════════════
+             STOP SECTION  (right column)
+             ═════════════════════════════════════════ -->
+        <TextView
+            android:id="@+id/StopTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/futura_medium_condensed_bt"
+            android:text="@string/StopTitle"
+            android:textColor="@color/sky"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintStart_toStartOf="@+id/StartLevelToggle"
+            app:layout_constraintTop_toBottomOf="@+id/StartLevelToggle" />
+
+        <TextView
+            android:id="@+id/StopDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/StopDesc"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/StopTitle"
+            app:layout_constraintTop_toBottomOf="@+id/StopTitle" />
+
+        <!-- Stop level toggle: EMPTY | 25% | 50% | 75% | FULL -->
+        <RadioGroup
+            android:id="@+id/StopLevelToggle"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/StopDesc"
+            app:layout_constraintTop_toBottomOf="@+id/StopDesc">
+
+            <RadioButton
+                android:id="@+id/StopEmpty"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:checked="false"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/empty_label"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Stop25"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/percent_25"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Stop50"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/percent_50"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Stop75"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/percent_75"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/StopFull"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/full_label"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+        </RadioGroup>
+
+        <!-- ═════════════════════════════════════════
+         MISSED SECTION
          ═════════════════════════════════════════ -->
+        <TextView
+            android:id="@+id/MissedTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/futura_medium_condensed_bt"
+            android:text="@string/MissedTitle"
+            android:textColor="@color/sky"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintStart_toStartOf="@+id/StopLevelToggle"
+            app:layout_constraintTop_toBottomOf="@+id/StopLevelToggle" />
 
-    <TextView
-        android:id="@+id/ScoringTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="580dp"
-        android:layout_marginTop="0dp"
-        android:fontFamily="@font/futura_medium_condensed_bt"
-        android:text="@string/ScoringTitle"
-        android:textColor="@drawable/text_header_states"
-        android:textSize="@dimen/header_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/StartTitle"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/MissedDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/MissedDesc"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/MissedTitle"
+            app:layout_constraintTop_toBottomOf="@+id/MissedTitle" />
 
-    <!-- ═════════════════════════════════════════
-         START SECTION  (right column)
-         ═════════════════════════════════════════ -->
+        <!-- Missed counter toggle: -10 | -5 | - | 000 | + | +5 | +10 -->
+        <RadioGroup
+            android:id="@+id/MissedCounterToggle"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/MissedDesc"
+            app:layout_constraintTop_toBottomOf="@+id/MissedDesc">
 
-    <TextView
-        android:id="@+id/StartTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="580dp"
-        android:layout_marginTop="0dp"
-        android:fontFamily="@font/futura_medium_condensed_bt"
-        android:text="@string/StartTitle"
-        android:textColor="@color/sky"
-        android:textSize="@dimen/header_text_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CollectingTitle" />
+            <RadioButton
+                android:id="@+id/MissedMinus10"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="-10"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-    <TextView
-        android:id="@+id/StartDesc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/StartDesc"
-        android:textColor="@color/bootstrap_brand_secondary_border"
-        android:textSize="@dimen/instruction_text_size"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/StartTitle"
-        app:layout_constraintTop_toBottomOf="@+id/StartTitle" />
+            <RadioButton
+                android:id="@+id/MissedMinus5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="-5"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-    <!-- Start level toggle: EMPTY | 25% | 50% | 75% | FULL -->
-    <RadioGroup
-        android:id="@+id/StartLevelToggle"
-        android:layout_width="450dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@+id/StartDesc"
-        app:layout_constraintTop_toBottomOf="@+id/StartDesc">
+            <RadioButton
+                android:id="@+id/MissedMinus"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <RadioButton
-            android:id="@+id/StartEmpty"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:checked="true"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/empty_label"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+            <RadioButton
+                android:id="@+id/MissedCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:checked="false"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="000"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <RadioButton
-            android:id="@+id/Start25"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/percent_25"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+            <RadioButton
+                android:id="@+id/MissedPlus"
+                android:layout_width="44dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="+"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <RadioButton
-            android:id="@+id/Start50"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/percent_50"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+            <RadioButton
+                android:id="@+id/MissedPlus5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="+5"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <RadioButton
-            android:id="@+id/Start75"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/percent_75"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+            <RadioButton
+                android:id="@+id/MissedPlus10"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="+10"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+        </RadioGroup>
 
-        <RadioButton
-            android:id="@+id/StartFull"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_right_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/full_label"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-    </RadioGroup>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <!-- ═════════════════════════════════════════
-         STOP SECTION  (right column)
-         ═════════════════════════════════════════ -->
-    <TextView
-        android:id="@+id/StopTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/futura_medium_condensed_bt"
-        android:text="@string/StopTitle"
-        android:textColor="@color/sky"
-        android:textSize="@dimen/header_text_size"
-        app:layout_constraintStart_toStartOf="@+id/StartLevelToggle"
-        app:layout_constraintTop_toBottomOf="@+id/StartLevelToggle" />
-
-    <TextView
-        android:id="@+id/StopDesc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/StopDesc"
-        android:textColor="@color/bootstrap_brand_secondary_border"
-        android:textSize="@dimen/instruction_text_size"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/StopTitle"
-        app:layout_constraintTop_toBottomOf="@+id/StopTitle" />
-
-    <!-- Stop level toggle: EMPTY | 25% | 50% | 75% | FULL -->
-    <RadioGroup
-        android:id="@+id/StopLevelToggle"
-        android:layout_width="450dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@+id/StopDesc"
-        app:layout_constraintTop_toBottomOf="@+id/StopDesc">
-
-        <RadioButton
-            android:id="@+id/StopEmpty"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:checked="true"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/empty_label"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-
-        <RadioButton
-            android:id="@+id/Stop25"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/percent_25"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-
-        <RadioButton
-            android:id="@+id/Stop50"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/percent_50"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-
-        <RadioButton
-            android:id="@+id/Stop75"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/percent_75"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-
-        <RadioButton
-            android:id="@+id/StopFull"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_right_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/full_label"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-    </RadioGroup>
 
     <!-- ═════════════════════════════════════════
-         MISSED SECTION  (right column)
-         ═════════════════════════════════════════ -->
-    <TextView
-        android:id="@+id/MissedTitle"
-        android:layout_width="wrap_content"
+     COLUMN THREE  (right column)
+     ═════════════════════════════════════════ -->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ColumnThree"
+        android:layout_width="295dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/futura_medium_condensed_bt"
-        android:text="@string/MissedTitle"
-        android:textColor="@color/sky"
-        android:textSize="@dimen/header_text_size"
-        app:layout_constraintStart_toStartOf="@+id/StopLevelToggle"
-        app:layout_constraintTop_toBottomOf="@+id/StopLevelToggle" />
+        android:paddingLeft="10dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/ColumnTwo" >
 
-    <TextView
-        android:id="@+id/MissedDesc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/MissedDesc"
-        android:textColor="@color/bootstrap_brand_secondary_border"
-        android:textSize="@dimen/instruction_text_size"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/MissedTitle"
-        app:layout_constraintTop_toBottomOf="@+id/MissedTitle" />
-
-    <!-- Missed counter toggle: -10 | -5 | - | 000 | + | +5 | +10 -->
-    <RadioGroup
-        android:id="@+id/MissedCounterToggle"
-        android:layout_width="450dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@+id/MissedDesc"
-        app:layout_constraintTop_toBottomOf="@+id/MissedDesc">
-
-        <RadioButton
-            android:id="@+id/MissedMinus10"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="-10"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-
-        <RadioButton
-            android:id="@+id/MissedMinus5"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="-5"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-
-        <RadioButton
-            android:id="@+id/MissedMinus"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="-"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-
-        <RadioButton
-            android:id="@+id/MissedZero"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:button="@null"
-            android:checked="true"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="0"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-
-        <RadioButton
-            android:id="@+id/MissedPlus"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="+"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-
-        <RadioButton
-            android:id="@+id/MissedPlus5"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="+5"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-
-        <RadioButton
-            android:id="@+id/MissedPlus10"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_right_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="+10"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-    </RadioGroup>
-
-    <!-- No Show Switch -->
-    <Switch
-        android:id="@+id/NoShowSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:thumb="@drawable/thumb_states"
-        android:track="@drawable/track_states"
-        app:layout_constraintStart_toStartOf="@id/FerryingCounterToggle"
-        app:layout_constraintTop_toBottomOf="@+id/FerryingCounterToggle" />
-
-    <TextView
-        android:id="@+id/FellOverLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:fontFamily="@font/open_sans"
-        android:text="@string/RobotFellOver"
-        android:textColor="@drawable/text_states"
-        android:textSize="@dimen/input_label_text_size"
-        app:layout_constraintBottom_toBottomOf="@+id/NoShowSwitch"
-        app:layout_constraintStart_toEndOf="@+id/NoShowSwitch"
-        app:layout_constraintTop_toTopOf="@+id/NoShowSwitch" />
-
-    <!-- ═════════════════════════════════════════
+        <!-- ═════════════════════════════════════════
          CLIMBING SECTION  (right column, below Missed)
          ═════════════════════════════════════════ -->
 
-    <TextView
-        android:id="@+id/ClimbingTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/futura_medium_condensed_bt"
-        android:text="@string/ClimbingTitle"
-        android:layout_marginStart="580dp"
-        android:textColor="@drawable/text_header_states"
-        android:textSize="@dimen/header_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/StartLevelToggle"
-        app:layout_constraintStart_toStartOf="@+id/ScoringTitle"
-        app:layout_constraintTop_toBottomOf="@+id/StartTitle" />
+        <TextView
+            android:id="@+id/ClimbingTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            android:fontFamily="@font/futura_medium_condensed_bt"
+            android:text="@string/ClimbingTitle"
+            android:textColor="@drawable/text_header_states"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/StartLevelToggle"
+            app:layout_constraintStart_toStartOf="@+id/ScoringTitle"
+            app:layout_constraintTop_toBottomOf="@+id/StartTitle" />
 
-    <TextView
-        android:id="@+id/ClimbingDesc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/AttemptedCLimbLevelDesc"
-        android:textColor="@color/bootstrap_brand_secondary_border"
-        android:textSize="@dimen/instruction_text_size"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/ClimbingTitle"
-        app:layout_constraintTop_toBottomOf="@+id/ClimbingTitle" />
+        <TextView
+            android:id="@+id/ClimbingDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/AttemptedCLimbLevelDesc"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/ClimbingTitle"
+            app:layout_constraintTop_toBottomOf="@+id/ClimbingTitle" />
 
-    <!-- Did Not Attempt | 1 -->
-    <RadioGroup
-        android:id="@+id/AttemptedClimbToggle"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@+id/ClimbingDesc"
-        app:layout_constraintTop_toBottomOf="@+id/ClimbingDesc">
+        <!-- Did Not Attempt | 1 -->
+        <RadioGroup
+            android:id="@+id/AttemptedClimbToggle"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/ClimbingDesc"
+            app:layout_constraintTop_toBottomOf="@+id/ClimbingDesc">
 
-        <RadioButton
-            android:id="@+id/SuccessfulNo"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/DNA"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+            <RadioButton
+                android:id="@+id/AttemptedNo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/DNA"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <RadioButton
-            android:id="@+id/SuccessfulYes"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_right_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="1"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/AttemptedOne"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-    <!-- Successful Climbed: None | 1 -->
-    <TextView
-        android:id="@+id/SuccessfullyClimbed"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/SuccessfullyClimbed"
-        android:textColor="@color/bootstrap_brand_secondary_border"
-        android:textSize="@dimen/instruction_text_size"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/AttemptedClimbToggle"
-        app:layout_constraintTop_toBottomOf="@+id/AttemptedClimbToggle" />
+            <!-- Teleop/Endgame only
+            <RadioButton
+                android:id="@+id/AttemptedTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-    <RadioGroup
-        android:id="@+id/SuccessfulClimbed"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@+id/SuccessfullyClimbed"
-        app:layout_constraintTop_toBottomOf="@+id/SuccessfullyClimbed">
+            <RadioButton
+                android:id="@+id/AttemptedThree"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/toggle_right_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+               -->
+        </RadioGroup>
 
-        <RadioButton
-            android:id="@+id/DidNotAttempt"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/SuccessfulClimbedLevel"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+        <!-- Successful Climbed: None | 1 -->
+        <TextView
+            android:id="@+id/SuccessfullyClimbed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/SuccessfullyClimbed"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
+            android:letterSpacing="-0.02"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/AttemptedClimbToggle"
+            app:layout_constraintTop_toBottomOf="@+id/AttemptedClimbToggle" />
 
-        <RadioButton
-            android:id="@+id/AchievedLevel1"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="1"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-    </RadioGroup>
+        <RadioGroup
+            android:id="@+id/SuccessfulClimbed"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/SuccessfullyClimbed"
+            app:layout_constraintTop_toBottomOf="@+id/SuccessfullyClimbed">
 
-    <!-- Tower Climb Location: LEFT | CENTER | RIGHT -->
-    <TextView
-        android:id="@+id/TowerClimbPlacement"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/TowerClimbPlacement"
-        android:textColor="@color/bootstrap_brand_secondary_border"
-        android:textSize="@dimen/instruction_text_size"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/SuccessfulClimbed"
-        app:layout_constraintTop_toBottomOf="@+id/SuccessfulClimbed" />
+            <RadioButton
+                android:id="@+id/DidNotAttempt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/SuccessfulClimbedLevel"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-    <RadioGroup
-        android:id="@+id/SuccessfullyClimbedLocation"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@+id/TowerClimbPlacement"
-        app:layout_constraintTop_toBottomOf="@+id/TowerClimbPlacement">
+            <RadioButton
+                android:id="@+id/AchievedLevel1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <RadioButton
-            android:id="@+id/Left"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/Left"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+            <!-- Teleop/Endgame only
+            <RadioButton
+                android:id="@+id/AchievedLevel1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
 
-        <RadioButton
-            android:id="@+id/Center"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/Center"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
+            <RadioButton
+                android:id="@+id/AchievedLevel1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+            -->
+        </RadioGroup>
 
-        <RadioButton
-            android:id="@+id/Right"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/toggle_left_states"
-            android:button="@null"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:text="@string/Right"
-            android:textColor="@drawable/text_states"
-            android:textSize="@dimen/button_text_size" />
-    </RadioGroup>
+        <!-- Tower Climb Location: LEFT | CENTER | RIGHT -->
+        <TextView
+            android:id="@+id/TowerClimbPlacement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/TowerClimbPlacement"
+            android:textColor="@color/bootstrap_brand_secondary_border"
+            android:textSize="@dimen/instruction_text_size"
+            android:textStyle="italic"
+            android:letterSpacing="-0.02"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/SuccessfulClimbed"
+            app:layout_constraintTop_toBottomOf="@+id/SuccessfulClimbed" />
+
+        <RadioGroup
+            android:id="@+id/SuccessfullyClimbedLocation"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/TowerClimbPlacement"
+            app:layout_constraintTop_toBottomOf="@+id/TowerClimbPlacement">
+
+            <RadioButton
+                android:id="@+id/Left"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/Left"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/Center"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+
+            <RadioButton
+                android:id="@+id/Right"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/toggle_left_states"
+                android:button="@null"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:text="@string/Right"
+                android:textColor="@drawable/text_states"
+                android:textSize="@dimen/button_text_size" />
+        </RadioGroup>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <!-- ═════════════════════════════════════════
-         EDGE BARS
-         ═════════════════════════════════════════ -->
+     EDGE BARS
+     ═════════════════════════════════════════ -->
 
     <ImageView
         android:id="@+id/leftEdgeBar"
@@ -886,96 +1068,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/rightEdgeBar"
         app:layout_constraintStart_toStartOf="@+id/leftEdgeBar" />
-
-    <!-- ═════════════════════════════════════════
-         TIMER
-         ═════════════════════════════════════════ -->
-
-    <!-- ═════════════════════════════════════════
-         BUTTONS
-         ═════════════════════════════════════════ -->
-
-    <TextView
-        android:id="@+id/IDAutonSeconds1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:drawableStart="@drawable/timer"
-        android:drawablePadding="@dimen/drawable_padding"
-        android:fontFamily="@font/futura_medium_condensed_bt"
-        android:text="@string/AutonSeconds"
-        android:textColor="@color/sky"
-        android:textSize="@dimen/instruction_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/NextButtonAuton"
-        app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
-        app:layout_constraintHorizontal_bias="0.478"
-        app:layout_constraintStart_toEndOf="@+id/leftEdgeBar" />
-
-    <TextView
-        android:id="@+id/AutonSeconds"
-        android:layout_width="35dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:gravity="center"
-        android:text="@string/DefaultValue"
-        android:textColor="@drawable/text_states"
-        android:textSize="@dimen/instruction_text_size"
-        app:layout_constraintBottom_toBottomOf="@+id/IDAutonSeconds1"
-        app:layout_constraintStart_toEndOf="@+id/IDAutonSeconds1"
-        app:layout_constraintTop_toTopOf="@+id/IDAutonSeconds1"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/TeleopWarning"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="724dp"
-        android:background="@drawable/teleop_warning"
-        android:fontFamily="@font/open_sans"
-        android:gravity="center"
-        android:text="@string/TeleopWarning"
-        android:textColor="@color/bg_general"
-        android:textSize="@dimen/input_label_text_size"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/rightEdgeBar"
-        app:layout_constraintStart_toEndOf="@+id/leftEdgeBar"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/SaveButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="892dp"
-        android:layout_marginTop="128dp"
-        android:background="@drawable/button_large_active"
-        android:text="@string/Save"
-        android:textColor="@drawable/text_states"
-        android:textSize="@dimen/button_text_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SuccessfullyClimbedLocation" />
-
-    <Button
-        android:id="@+id/NextButtonAuton"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="0dp"
-        android:background="@drawable/button_next_states"
-        android:drawableEnd="@drawable/right_states"
-        android:paddingStart="80dp"
-        android:paddingEnd="80dp"
-        android:text="@string/Teleop"
-        android:textColor="@drawable/text_states"
-        android:textSize="@dimen/button_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

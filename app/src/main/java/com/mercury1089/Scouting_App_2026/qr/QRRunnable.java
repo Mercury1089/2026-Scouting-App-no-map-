@@ -25,25 +25,27 @@ public class QRRunnable implements Runnable {
     LinkedHashMap<String, String> setupHashMap = HashMapManager.getSetupHashMap();
     private String scouter, teamNum, matchNum, qrString;
     private boolean needsToBeStored;
+
     public QRRunnable(Activity ctx, Dialog loading_alert) {
         this.context = ctx;
         this.loading_alert = loading_alert;
-        // Make the actual qr string and stores match info
         QRStringBuilder.buildQRString();
         this.qrString = QRStringBuilder.getQRString();
-        this.scouter = QRStringBuilder.getScouterName();
-        this.teamNum = QRStringBuilder.getTeamNumber();
+        this.scouter  = QRStringBuilder.getScouterName();
+        this.teamNum  = QRStringBuilder.getTeamNumber();
         this.matchNum = QRStringBuilder.getMatchNumber();
         needsToBeStored = true;
     }
+
     public QRRunnable(String qrString, Activity ctx, Dialog loading_alert) {
         this.context = ctx;
         this.loading_alert = loading_alert;
-        // Uses the given qrString to find match info
         this.qrString = qrString;
-        String[] data = qrString.split(QRStringBuilder.DELIMITER);
-        this.scouter = data[QRStringBuilder.SCOUTER_NAME_INDEX];
-        this.teamNum = data[QRStringBuilder.TEAM_NUM_INDEX];
+        // Multi-row QR string — parse scouter/team/match from the first row only
+        String firstRow = qrString.split(QRStringBuilder.ROW_DELIMITER)[0];
+        String[] data   = firstRow.split(QRStringBuilder.DELIMITER);
+        this.scouter  = data[QRStringBuilder.SCOUTER_NAME_INDEX];
+        this.teamNum  = data[QRStringBuilder.TEAM_NUM_INDEX];
         this.matchNum = data[QRStringBuilder.MATCH_NUM_INDEX];
         needsToBeStored = false;
     }
@@ -61,26 +63,16 @@ public class QRRunnable implements Runnable {
                 if (needsToBeStored) {
                     HashMapManager.putSetupHashMap(setupHashMap);
 
-                    // Show the QR and store it in the cache
                     Dialog dialog = new Dialog(context);
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     dialog.setContentView(R.layout.popup_qr);
-                    // If this runnable is called from Pregame or post match activity, the string should be stored in the cahce
-                    // If this is called from the list adapter, the string doesn't need to eb stored again
                     if (needsToBeStored) QRStringBuilder.storeQRString(context);
 
-                    ImageView imageView = dialog.findViewById(R.id.imageView);
-                    TextView scouterName = dialog.findViewById(R.id.ScouterNameQR);
-                    TextView teamNumber = dialog.findViewById(R.id.TeamNumberQR);
-                    TextView matchNumber = dialog.findViewById(R.id.MatchNumberQR);
-                    Button goBackToMain = dialog.findViewById(R.id.GoBackButton);
+                    ImageView imageView  = dialog.findViewById(R.id.imageView);
+                    Button goBackToMain  = dialog.findViewById(R.id.GoBackButton);
                     imageView.setImageBitmap(bitmap);
 
                     dialog.setCancelable(false);
-
-                    scouterName.setText(this.scouter);
-                    teamNumber.setText(this.teamNum);
-                    matchNumber.setText(this.matchNum);
 
                     if (loading_alert != null && loading_alert.isShowing()) {
                         loading_alert.dismiss();
@@ -93,7 +85,7 @@ public class QRRunnable implements Runnable {
                         confirmDialog.setContentView(R.layout.setup_next_match_confirm_popup);
 
                         Button setupNextMatchButton = confirmDialog.findViewById(R.id.SetupNextMatchButton);
-                        Button cancelConfirm = confirmDialog.findViewById(R.id.CancelConfirm);
+                        Button cancelConfirm        = confirmDialog.findViewById(R.id.CancelConfirm);
 
                         confirmDialog.show();
 
@@ -122,18 +114,11 @@ public class QRRunnable implements Runnable {
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     dialog.setContentView(R.layout.popup_qr_cached);
 
-                    ImageView imageView = dialog.findViewById(R.id.imageView);
-                    TextView scouterName = dialog.findViewById(R.id.ScouterNameQR);
-                    TextView teamNumber = dialog.findViewById(R.id.TeamNumberQR);
-                    TextView matchNumber = dialog.findViewById(R.id.MatchNumberQR);
-                    Button closeButton = dialog.findViewById(R.id.CloseButton);
+                    ImageView imageView  = dialog.findViewById(R.id.imageView);
+                    Button closeButton   = dialog.findViewById(R.id.CloseButton);
                     imageView.setImageBitmap(bitmap);
 
                     dialog.setCancelable(false);
-
-                    scouterName.setText(scouter);
-                    teamNumber.setText(GenUtils.padLeftZeros(teamNum, 2));
-                    matchNumber.setText(GenUtils.padLeftZeros(matchNum, 2));
 
                     loading_alert.dismiss();
 
@@ -147,7 +132,7 @@ public class QRRunnable implements Runnable {
                     });
                 }
             });
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.d("QRGen", "Something went wrong while generating a QR Code.");
         }
     }
