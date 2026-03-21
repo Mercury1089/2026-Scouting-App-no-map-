@@ -16,26 +16,17 @@
     <dimen name="warning_text">18sp</dimen>
 
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="speech_bubble_length">320dp</dimen>
-    <dimen name="tail_width">24dp</dimen>
-    <dimen name="tail_height">12dp</dimen>
-    <dimen name="scoring_popup_width">411dp</dimen>
-    <dimen name="scoring_popup_height">735dp</dimen>
-    <dimen name="field_popup_width">1340dp</dimen>
-    <dimen name="field_popup_height">800dp</dimen>
-    <dimen name="field_tower_popup_width">1340dp</dimen>
-    <dimen name="field_tower_popup_height">800dp</dimen>
-    <dimen name="carat_width">48dp</dimen>
-    <dimen name="carat_height">28dp</dimen>
     <dimen name="square_toggle_text">20sp</dimen>
     <dimen name="square_toggle_length">44dp</dimen>
-    <dimen name="auton_fragment_padding">10dp</dimen>
+
     <dimen name="padding">20dp</dimen>
     <dimen name="drawable_padding">10dp</dimen>
     <dimen name="generate_qr_button_padding">185dp</dimen>
     <dimen name="left_pos_padding">5dp</dimen>
     <dimen name="right_pos_padding">60dp</dimen>
+
     <dimen name="button_height">50dp</dimen>
+    <dimen name="large_button_height">54dp</dimen>
     <dimen name="alliance_color_width">90dp</dimen>
 
     <dimen name="alert_paddings">15dp</dimen>

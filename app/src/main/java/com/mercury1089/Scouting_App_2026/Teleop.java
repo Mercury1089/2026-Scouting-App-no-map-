@@ -52,7 +52,7 @@ public class Teleop extends Fragment implements UpdateListener {
     private MaterialSwitch noShowSwitch;
     private Button saveButton;
     private Button resetButton;
-    private Button nextButtonTeleop;
+    private Button nextButtonEndGame;
 
     // Timer & animation
     private TextView timerID;
@@ -81,7 +81,7 @@ public class Teleop extends Fragment implements UpdateListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = (MatchActivity) getActivity();
         try {
-            return inflater.inflate(R.layout.teleop_screen, container, false);
+            return inflater.inflate(R.layout.screen_teleop, container, false);
         } catch (InflateException e) {
             Log.d(TAG, "Inflate error: " + e.getMessage());
             throw e;
@@ -108,7 +108,7 @@ public class Teleop extends Fragment implements UpdateListener {
         noShowSwitch                      = getView().findViewById(R.id.NoShowSwitch);
         saveButton                        = getView().findViewById(R.id.SaveButton);
         resetButton                       = getView().findViewById(R.id.ResetButton);
-        nextButtonTeleop                  = getView().findViewById(R.id.NextTeleopButton);   // FIX 10
+        nextButtonEndGame                  = getView().findViewById(R.id.NextButtonEndGame);   // FIX 10
         timerID                           = getView().findViewById(R.id.IDTeleopSeconds1);
         secondsRemaining                  = getView().findViewById(R.id.TeleopSeconds);
         endgameWarning                    = getView().findViewById(R.id.endgameWarning);
@@ -347,8 +347,8 @@ public class Teleop extends Fragment implements UpdateListener {
             });
         }
 
-        if (nextButtonTeleop != null) {
-            nextButtonTeleop.setOnClickListener(v -> {
+        if (nextButtonEndGame != null) {
+            nextButtonEndGame.setOnClickListener(v -> {
                 saveTeleopData();
                 appendTeleopSnapshot();
                 resetTeleopUI();

@@ -20,9 +20,9 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="LoadingDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:textColor">@color/cloud</item>
+        <item name="android:textColorPrimary">@color/cloud</item>
+        <item name="android:textColorSecondary">@color/cloud</item>
         <item name="android:background">@color/darkgray</item>
     </style>
 

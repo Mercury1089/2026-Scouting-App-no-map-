@@ -9,7 +9,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +27,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.screen_settings);
 
         //assigning variables to their equivalent screen elements
         Button localStorageResetButton = findViewById(R.id.LocalStorageResetButton);
@@ -84,7 +83,7 @@ public class SettingsActivity extends AppCompatActivity {
                 Context context = SettingsActivity.this;
                 Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.enter_password_popup);
+                dialog.setContentView(R.layout.popup_enter_password);
 
                 TextView passwordField = dialog.findViewById(R.id.PasswordField);
                 MaterialSwitch requirePasswordSwitch = dialog.findViewById(R.id.SettingsPasswordSwitch);
@@ -145,7 +144,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Dialog dialog = new Dialog(SettingsActivity.this);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.clear_qr_cache_confirm);
+                dialog.setContentView(R.layout.popup_clear_qr_cache_confirm);
 
                 Button clearConfirm = dialog.findViewById(R.id.ClearConfirm);
                 Button cancelConfirm = dialog.findViewById(R.id.CancelConfirm);

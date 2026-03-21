@@ -1,11 +1,7 @@
 package com.mercury1089.Scouting_App_2026;
 
-import android.animation.ObjectAnimator;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Vibrator;
 import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -13,10 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -57,15 +51,6 @@ public class Endgame extends Fragment implements UpdateListener {
     private Button resetButton;
     private Button generateQRButton;
 
-    // Timer & animation
-    private TextView timerID;
-    private TextView secondsRemaining;
-    private TextView postMatchWarning;
-    private ImageView topEdgeBar, bottomEdgeBar, leftEdgeBar, rightEdgeBar;
-
-    private static CountDownTimer timer;
-    private boolean firstTime = true;
-    private boolean running = true;
     private MatchActivity context;
 
     // Running counts
@@ -84,7 +69,7 @@ public class Endgame extends Fragment implements UpdateListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = (MatchActivity) getActivity();
         try {
-            return inflater.inflate(R.layout.endgame_screen, container, false);
+            return inflater.inflate(R.layout.screen_endgame, container, false);
         } catch (InflateException e) {
             Log.d(TAG, "Inflate error: " + e.getMessage());
             throw e;
@@ -101,6 +86,7 @@ public class Endgame extends Fragment implements UpdateListener {
         endGameHashMap = HashMapManager.getEndgameHashMap();
 
         // Link views
+        assert getView() != null;
         collectingCounterToggle           = getView().findViewById(R.id.CollectingCounterToggle);
         ferryingCounterToggle             = getView().findViewById(R.id.FerryingCounterToggle);
         scoringCounterToggle              = getView().findViewById(R.id.ScoredCounterToggle);   // FIX 2
@@ -112,20 +98,12 @@ public class Endgame extends Fragment implements UpdateListener {
         saveButton                        = getView().findViewById(R.id.SaveButton);
         resetButton                       = getView().findViewById(R.id.ResetButton);
         generateQRButton                  = getView().findViewById(R.id.NextQRButton);   // FIX 12
-        timerID                           = getView().findViewById(R.id.IDEndGameSeconds1);
-        secondsRemaining                  = getView().findViewById(R.id.EndGameSeconds);
-        postMatchWarning                  = getView().findViewById(R.id.postMatchWarning);
-        topEdgeBar                        = getView().findViewById(R.id.topEdgeBar);
-        bottomEdgeBar                     = getView().findViewById(R.id.bottomEdgeBar);
-        leftEdgeBar                       = getView().findViewById(R.id.leftEdgeBar);
-        rightEdgeBar                      = getView().findViewById(R.id.rightEdgeBar);
 
         initializeSnapshots();
         loadEndGameData();
         setupCounterListeners();
         setupCascadingListeners();
         setupButtonListeners();
-        setupTimer();
     }
 
     // ─────────────────────────────────────────
@@ -174,24 +152,6 @@ public class Endgame extends Fragment implements UpdateListener {
         endGameHashMap.put("snapshots", snapshotBuilder.toString());
         endGameHashMap.put("EndGameSaveIndex", String.valueOf(endGameSnapshotCount));
         HashMapManager.putEndgameHashMap(endGameHashMap);
-    }
-
-    private int countSnapshots() {
-        if (snapshotBuilder == null) return 0;
-        String content = snapshotBuilder.toString();
-        int count = 0;
-        for (int i = 0; i < content.length(); i++) {
-            if (content.charAt(i) == '\n') count++;
-        }
-        return count - 1; // subtract header line
-    }
-
-    public String getSnapshotsAsString() {
-        return snapshotBuilder != null ? snapshotBuilder.toString() : "";
-    }
-
-    public String exportSnapshotsCSV() {
-        return getSnapshotsAsString();
     }
 
     // ─────────────────────────────────────────
@@ -360,17 +320,13 @@ public class Endgame extends Fragment implements UpdateListener {
                 appendEndGameSnapshot();
                 Dialog loading_alert = new Dialog(context);
                 loading_alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                loading_alert.setContentView(R.layout.loading_screen);
+                loading_alert.setContentView(R.layout.screen_qr_loading);
                 loading_alert.setCancelable(false);
                 loading_alert.show();
                 new Thread(new QRRunnable(context, loading_alert)).start();
             });
         }
     }
-
-    // ─────────────────────────────────────────
-    // TIMER
-    // ─────────────────────────────────────────
 
     // ─────────────────────────────────────────
     // GET / SET HELPERS
@@ -470,11 +426,6 @@ public class Endgame extends Fragment implements UpdateListener {
     @Override
     public void onStop() {
         super.onStop();
-        running = false;
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
     }
 
     @Override

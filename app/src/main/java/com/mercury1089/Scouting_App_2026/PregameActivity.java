@@ -6,7 +6,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -68,7 +67,6 @@ public class PregameActivity extends AppCompatActivity {
     private LinkedHashMap<String, String> settingsHashMap;
     private LinkedHashMap<String, String> setupHashMap;
     private Dialog loading_alert;
-    private ProgressDialog progressDialog;
     boolean isQRButton = false;
 
     //Max and Min of of Preloading
@@ -102,7 +100,7 @@ public class PregameActivity extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pregame);
+        setContentView(R.layout.screen_pregame);
 
         // Initialize views here
         scouterNameInput = findViewById(R.id.ScouterNameInput);
@@ -130,12 +128,14 @@ public class PregameActivity extends AppCompatActivity {
 
         rooster = MediaPlayer.create(PregameActivity.this, R.raw.sound);
 
+        // Make sure hash maps are not empty/null, then get HashMaps and set password for settings screen
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.SETTINGS);
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.SETUP);
         settingsHashMap = HashMapManager.getSettingsHashMap();
         setupHashMap = HashMapManager.getSetupHashMap();
         password = settingsHashMap.get("DefaultPassword");
 
+        //setting group buttons to default state
         updateXMLObjects(true);
 
         scouterNameInput.addTextChangedListener(getTextWatcher("ScouterName"));
@@ -151,14 +151,106 @@ public class PregameActivity extends AppCompatActivity {
             }
         });
 
+        //click methods
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Settings password check logic...
-                HashMapManager.putSetupHashMap(setupHashMap);
-                Intent intent = new Intent(PregameActivity.this, SettingsActivity.class);
-                startActivity(intent);
-                finish();
+                String[] passwordData = HashMapManager.pullSettingsPassword(PregameActivity.this);
+                final String password, requiredPassword;
+                String tempPassword, tempRequired;
+                try {
+                    if (passwordData != null) {
+                        tempPassword = passwordData[0];
+                        tempRequired = passwordData[1];
+                    } else {
+                        tempPassword = PregameActivity.this.password;
+                        tempRequired = "N";
+                    }
+                } catch (Exception e) {
+                    tempPassword = PregameActivity.this.password;
+                    tempRequired = "N";
+                }
+
+                password = tempPassword;
+                requiredPassword = tempRequired;
+
+                if (requiredPassword.equals("N")) {
+                    HashMapManager.putSetupHashMap(setupHashMap);
+                    Intent intent = new Intent(PregameActivity.this, SettingsActivity.class);
+                    startActivity(intent);
+                    finish();
+                    return;
+                }
+
+                Dialog dialog = new Dialog(PregameActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.popup_settings_password);
+
+                TextView passwordField = dialog.findViewById(R.id.PasswordField);
+                Button confirm = dialog.findViewById(R.id.ConfirmButton);
+                Button cancel = dialog.findViewById(R.id.CancelButton);
+                ImageView topEdgeBar = dialog.findViewById(R.id.topEdgeBar);
+                ImageView bottomEdgeBar = dialog.findViewById(R.id.bottomEdgeBar);
+                ImageView leftEdgeBar = dialog.findViewById(R.id.leftEdgeBar);
+                ImageView rightEdgeBar = dialog.findViewById(R.id.rightEdgeBar);
+
+                dialog.show();
+
+                passwordField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                            //do what you want on the press of 'done'
+                            confirm.performClick();
+                        }
+                        return false;
+                    }
+                });
+
+                confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String savedPassword = !password.equals("") ? password : PregameActivity.this.password;
+                        if (passwordField.getText().toString().equals(savedPassword)) {
+                            HashMapManager.putSetupHashMap(setupHashMap);
+                            Intent intent = new Intent(PregameActivity.this, SettingsActivity.class);
+                            startActivity(intent);
+                            dialog.dismiss();
+                            finish();
+                        } else {
+                            Toast.makeText(PregameActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+
+                            ObjectAnimator topEdgeLighter = ObjectAnimator.ofFloat(topEdgeBar, View.ALPHA, 0.0f, 1.0f);
+                            ObjectAnimator bottomEdgeLighter = ObjectAnimator.ofFloat(bottomEdgeBar, View.ALPHA, 0.0f, 1.0f);
+                            ObjectAnimator rightEdgeLighter = ObjectAnimator.ofFloat(rightEdgeBar, View.ALPHA, 0.0f, 1.0f);
+                            ObjectAnimator leftEdgeLighter = ObjectAnimator.ofFloat(leftEdgeBar, View.ALPHA, 0.0f, 1.0f);
+
+                            topEdgeLighter.setDuration(500);
+                            bottomEdgeLighter.setDuration(500);
+                            leftEdgeLighter.setDuration(500);
+                            rightEdgeLighter.setDuration(500);
+
+                            topEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);
+                            topEdgeLighter.setRepeatCount(1);
+                            bottomEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);
+                            bottomEdgeLighter.setRepeatCount(1);
+                            leftEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);
+                            leftEdgeLighter.setRepeatCount(1);
+                            rightEdgeLighter.setRepeatMode(ObjectAnimator.REVERSE);
+                            rightEdgeLighter.setRepeatCount(1);
+
+                            AnimatorSet animatorSet = new AnimatorSet();
+                            animatorSet.playTogether(topEdgeLighter, bottomEdgeLighter, leftEdgeLighter, rightEdgeLighter);
+                            animatorSet.start();
+                        }
+                    }
+                });
+
+                cancel.setOnClickListener((new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                }));
             }
         });
 
@@ -178,9 +270,66 @@ public class PregameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isQRButton) {
-                    // QR Generation logic...
+                    Dialog dialog = new Dialog(PregameActivity.this);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setContentView(R.layout.popup_generate_qrcode_confirm);
+
+                    Button confirmBtn = dialog.findViewById(R.id.GenerateQRButton);
+                    Button cancelBtn = dialog.findViewById(R.id.CancelConfirm);
+
+                    dialog.show();
+
+                    confirmBtn.setOnClickListener(view -> {
+                        HashMapManager.putSetupHashMap(setupHashMap);
+                        dialog.dismiss();
+                        
+                        loading_alert = new Dialog(PregameActivity.this);
+                        loading_alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        loading_alert.setContentView(R.layout.screen_qr_loading);
+                        loading_alert.setCancelable(false);
+                        loading_alert.show();
+
+                        QRRunnable runnable = new QRRunnable(PregameActivity.this, loading_alert);
+                        new Thread(runnable).start();
+                    });
+
+                    cancelBtn.setOnClickListener(view -> dialog.dismiss());
                 } else {
                     HashMapManager.putSetupHashMap(setupHashMap);
+                    if (scouterNameInput.getText().toString().equals("Mercury") &&
+                        matchNumberInput.getText().toString().equals("1") &&
+                        teamNumberInput.getText().toString().equals("0") &&
+                        firstAlliancePartnerInput.getText().toString().equals("8") &&
+                        secondAlliancePartnerInput.getText().toString().equals("9")) {
+                            settingsHashMap.put("NothingToSeeHere", "1");
+                            HashMapManager.setDefaultValues(HashMapManager.HASH.SETUP);
+                            setupHashMap = HashMapManager.getSetupHashMap();
+
+                            updateXMLObjects(true);
+                            return;
+                    } else if (scouterNameInput.getText().toString().equals("admin") &&
+                            matchNumberInput.getText().toString().equals("1") &&
+                            teamNumberInput.getText().toString().equals("0") &&
+                            firstAlliancePartnerInput.getText().toString().equals("8") &&
+                            secondAlliancePartnerInput.getText().toString().equals("9")) {
+                                HashMapManager.saveSettingsPassword(new String[]{"", "N"}, PregameActivity.this);
+                                HashMapManager.setDefaultValues(HashMapManager.HASH.SETUP);
+                                setupHashMap = HashMapManager.getSetupHashMap();
+
+                                updateXMLObjects(true);
+                                return;
+                    } else if (Objects.equals(settingsHashMap.get("NothingToSeeHere"), "1")) {
+                        rooster.start();
+                    } else if (teamNumberInput.getText().toString().equals(firstAlliancePartnerInput.getText().toString()) || teamNumberInput.getText().toString().equals(secondAlliancePartnerInput.getText().toString())) {
+                        Toast.makeText(PregameActivity.this, "A team cannot be its own partner.", Toast.LENGTH_SHORT).show();
+                        setupHashMap.put("TeamNumber", "");
+                        setupHashMap.put("AlliancePartner1", "");
+                        setupHashMap.put("AlliancePartner2", "");
+                        teamNumberInput.requestFocus();
+                        updateXMLObjects(true);
+                        return;
+
+                    }
                     Intent intent = new Intent(PregameActivity.this, MatchActivity.class);
                     startActivity(intent);
                     finish();
@@ -189,9 +338,31 @@ public class PregameActivity extends AppCompatActivity {
         });
 
         clearButton.setOnClickListener(v -> {
-            HashMapManager.setDefaultValues(HashMapManager.HASH.SETUP);
-            setupHashMap = HashMapManager.getSetupHashMap();
-            updateXMLObjects(true);
+            Dialog dialog = new Dialog(PregameActivity.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.popup_clear_confirm);
+
+            Button clearConfirm = dialog.findViewById(R.id.ClearConfirm);
+            Button cancelConfirm = dialog.findViewById(R.id.CancelConfirm);
+
+            dialog.show();
+
+            cancelConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+
+            clearConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    HashMapManager.setDefaultValues(HashMapManager.HASH.SETUP);
+                    setupHashMap = HashMapManager.getSetupHashMap();
+                    updateXMLObjects(true);
+                }
+            });
         });
     }
 
@@ -231,26 +402,42 @@ public class PregameActivity extends AppCompatActivity {
     }
 
     private boolean readyToStart() {
+        String allianceColor = setupHashMap.get("AllianceColor");
         return scouterNameInput.getText().length() > 0 &&
                 matchNumberInput.getText().length() > 0 &&
                 teamNumberInput.getText().length() > 0 &&
                 firstAlliancePartnerInput.getText().length() > 0 &&
                 secondAlliancePartnerInput.getText().length() > 0 &&
-                setupHashMap.get("AllianceColor") != null && !setupHashMap.get("AllianceColor").isEmpty();
+                allianceColor != null && !allianceColor.isEmpty() &&
+                (Objects.equals(setupHashMap.get("NoShow"), "Y") || Objects.equals(setupHashMap.get("NoShow"), "N"));
     }
 
+    /*
+    - Check to see if there's any values that need to be cleared
+    - (if nothing is filled out, clear button should be disabled)
+     */
     private boolean canClearInputs() {
+        String allianceColor = setupHashMap.get("AllianceColor");
         return scouterNameInput.getText().length() > 0 ||
                 matchNumberInput.getText().length() > 0 ||
                 teamNumberInput.getText().length() > 0 ||
                 noShowSwitch.isChecked() ||
                 firstAlliancePartnerInput.getText().length() > 0 ||
                 secondAlliancePartnerInput.getText().length() > 0 ||
-                !Objects.requireNonNull(setupHashMap.get("AllianceColor")).isEmpty() || 
+                (allianceColor != null && !allianceColor.isEmpty()) || 
                 getPreloadCargoCount() > 0;
     }
 
+    /*
+    - Big complicated looking function, so let's break it down
+        - This is called on most events (so in all the View EventListeners)
+        - It updates hashmaps and the visual appearance of Views
+     */
     private void updateXMLObjects(boolean updateText) {
+        /*
+        - updateText should only be true if you want to reset the basic info fields to the stored hashmap values
+            - e.g. if you're returning from SettingsActivity or if you used the "Clear" button
+         */
         if (updateText) {
             scouterNameInput.setText(setupHashMap.get("ScouterName"));
             matchNumberInput.setText(setupHashMap.get("MatchNumber"));
@@ -261,8 +448,9 @@ public class PregameActivity extends AppCompatActivity {
             refreshPreloadDisplay();
         }
 
-        blueButton.setSelected(Objects.equals(setupHashMap.get("AllianceColor"), "Blue"));
-        redButton.setSelected(Objects.equals(setupHashMap.get("AllianceColor"), "Red"));
+        String allianceColor = setupHashMap.get("AllianceColor");
+        blueButton.setSelected(Objects.equals(allianceColor, "Blue"));
+        redButton.setSelected(Objects.equals(allianceColor, "Red"));
 
         if (Objects.equals(setupHashMap.get("NoShow"), "Y")) {
             noShowSwitch.setChecked(true);
@@ -270,6 +458,7 @@ public class PregameActivity extends AppCompatActivity {
             startButton.setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
             startButton.setIconSize(20);
             startButton.setText(R.string.GenerateQRCode);
+            startButton.setSelected(true);
             isQRButton = true;
         } else {
             noShowSwitch.setChecked(false);
@@ -277,6 +466,7 @@ public class PregameActivity extends AppCompatActivity {
             startButton.setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_END);
             startButton.setIconSize(26);
             startButton.setText(R.string.Start);
+            startButton.setSelected(true);
             isQRButton = false;
         }
 
@@ -286,7 +476,10 @@ public class PregameActivity extends AppCompatActivity {
         clearButton.setEnabled(canClearInputs());
     }
 
-    @Override protected void onResume() { super.onResume(); updateXMLObjects(true); }
+    @Override protected void onResume() {
+        super.onResume();
+        updateXMLObjects(true); }
+
     @Override public boolean dispatchTouchEvent(MotionEvent ev) {
         if (getCurrentFocus() != null) {
             InputMethodManager imm = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_general"
+    tools:context=".SettingsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rowOne"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/BackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:background="@drawable/button_states"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/GoBack"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/button_text_size"
+            app:backgroundTint="@null"
+            app:icon="@drawable/left"
+            app:iconGravity="textStart"
+            app:iconTint="@null"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rowOne" />
+
+        <ImageButton
+            android:id="@+id/MuteButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:background="@drawable/button_states"
+            android:fontFamily="@font/open_sans"
+            android:src="@drawable/mute"
+            android:scaleType="fitCenter"
+            android:contentDescription="Mute"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/BackButton"
+            app:layout_constraintBottom_toBottomOf="@+id/BackButton" />
+
+            <TextView
+                android:id="@+id/SettingsHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/futura_medium_condensed_bt"
+                android:gravity="center_horizontal"
+                android:paddingVertical="30dp"
+                android:text="@string/SettingsWarning"
+                android:textColor="@color/banana"
+                android:textSize="24sp"
+                android:drawableLeft="@drawable/warning"
+                android:drawablePadding="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/BackButton" />
+
+        <TextView
+            android:id="@+id/SettingsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/futura_medium_condensed_bt"
+            android:gravity="top"
+            android:text="@string/SettingsTitle"
+            android:textColor="@drawable/text_header_states"
+            android:textSize="@dimen/header_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SettingsHeader" />
+
+        <TextView
+            android:id="@+id/QRCacheHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/futura_medium_condensed_bt"
+            android:text="@string/QRCache"
+            android:textColor="@drawable/text_subead_states"
+            android:textSize="@dimen/subheader_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SettingsTitle" />
+
+        <Button
+            android:id="@+id/ClearQRCodesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_states"
+            app:icon="@drawable/trash_states"
+            app:iconTint="@null"
+            android:fontFamily="@font/open_sans"
+            android:text="Clear all QR Codes"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/button_text_size"
+            app:backgroundTint="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/QRCacheHeader"
+            app:layout_constraintBottom_toBottomOf="@id/QRCacheHeader"/>
+
+        <ListView
+            android:id="@+id/QRCodeListView"
+            android:layout_width="0dp"
+            android:layout_height="380dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/afterdark"
+            android:paddingVertical="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/ClearQRCodesButton"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/QRDivider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@drawable/divider"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/QRCodeListView"/>
+
+        <TextView
+            android:id="@+id/ResetHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/futura_medium_condensed_bt"
+            android:text="@string/ResetID"
+            android:textColor="@drawable/text_subead_states"
+            android:textSize="@dimen/subheader_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/QRDivider" />
+
+        <TextView
+            android:id="@+id/IDSettingsDirections"
+            android:layout_width="541dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/open_sans_italic"
+            android:text="@string/ResetDirections"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/instruction_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ResetHeader" />
+
+        <Button
+            android:id="@+id/LocalStorageResetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/button_states"
+            app:icon="@drawable/clear_states"
+            app:iconTint="@null"
+            app:backgroundTint="@color/fire"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/ResetButton"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/button_text_size"
+            app:layout_constraintStart_toStartOf="@+id/IDSettingsDirections"
+            app:layout_constraintTop_toBottomOf="@+id/IDSettingsDirections" />
+
+        <View
+            android:id="@+id/ResetDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/divider"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/LocalStorageResetButton"/>
+
+        <TextView
+            android:id="@+id/PasswordHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/futura_medium_condensed_bt"
+            android:text="@string/IDPassword"
+            android:textColor="@drawable/text_subead_states"
+            android:textSize="@dimen/subheader_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ResetDivider" />
+
+        <Button
+            android:id="@+id/PasswordSettingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/button_states"
+            android:fontFamily="@font/open_sans"
+            android:text="PASSWORD SETTINGS"
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/button_text_size"
+            app:backgroundTint="@null"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PasswordHeader" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

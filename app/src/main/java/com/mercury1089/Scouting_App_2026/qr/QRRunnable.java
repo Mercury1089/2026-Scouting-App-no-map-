@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -69,10 +70,25 @@ public class QRRunnable implements Runnable {
                     if (needsToBeStored) QRStringBuilder.storeQRString(context);
 
                     ImageView imageView  = dialog.findViewById(R.id.imageView);
+                    TextView scouterName = dialog.findViewById(R.id.ScouterNameQR);
+                    TextView teamNumber = dialog.findViewById(R.id.TeamNumberQR);
+                    TextView matchNumber = dialog.findViewById(R.id.MatchNumberQR);
                     Button goBackToMain  = dialog.findViewById(R.id.GoBackButton);
+                    ImageButton closeButton = dialog.findViewById(R.id.CloseButton);
                     imageView.setImageBitmap(bitmap);
 
                     dialog.setCancelable(false);
+
+                    scouterName.setText(this.scouter);
+                    teamNumber.setText(this.teamNum);
+                    matchNumber.setText(this.matchNum);
+
+                    closeButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
 
                     if (loading_alert != null && loading_alert.isShowing()) {
                         loading_alert.dismiss();
@@ -82,8 +98,7 @@ public class QRRunnable implements Runnable {
                     goBackToMain.setOnClickListener(v -> {
                         Dialog confirmDialog = new Dialog(context);
                         confirmDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        confirmDialog.setContentView(R.layout.setup_next_match_confirm_popup);
-
+                        confirmDialog.setContentView(R.layout.popup_setup_next_match_confirm);
                         Button setupNextMatchButton = confirmDialog.findViewById(R.id.SetupNextMatchButton);
                         Button cancelConfirm        = confirmDialog.findViewById(R.id.CancelConfirm);
 
@@ -114,22 +129,21 @@ public class QRRunnable implements Runnable {
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     dialog.setContentView(R.layout.popup_qr_cached);
 
-                    ImageView imageView  = dialog.findViewById(R.id.imageView);
-                    Button closeButton   = dialog.findViewById(R.id.CloseButton);
+                    ImageView imageView = dialog.findViewById(R.id.imageView);
+                    TextView scouterName = dialog.findViewById(R.id.ScouterNameQR);
+                    TextView teamNumber = dialog.findViewById(R.id.TeamNumberQR);
+                    TextView matchNumber = dialog.findViewById(R.id.MatchNumberQR);
                     imageView.setImageBitmap(bitmap);
 
                     dialog.setCancelable(false);
 
+                    scouterName.setText(scouter);
+                    teamNumber.setText(GenUtils.padLeftZeros(teamNum, 2));
+                    matchNumber.setText(GenUtils.padLeftZeros(matchNum, 2));
+
                     loading_alert.dismiss();
 
                     dialog.show();
-
-                    closeButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
                 }
             });
         } catch (Exception e) {

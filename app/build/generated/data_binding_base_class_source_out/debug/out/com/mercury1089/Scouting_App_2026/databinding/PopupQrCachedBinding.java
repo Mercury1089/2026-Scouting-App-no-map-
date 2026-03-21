@@ -4,7 +4,7 @@ package com.mercury1089.Scouting_App_2026.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,20 +21,16 @@ public final class PopupQrCachedBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final Button CloseButton;
+  public final ImageButton CloseButton;
 
   @NonNull
   public final ImageView imageView;
 
-  @NonNull
-  public final View view2;
-
-  private PopupQrCachedBinding(@NonNull ConstraintLayout rootView, @NonNull Button CloseButton,
-      @NonNull ImageView imageView, @NonNull View view2) {
+  private PopupQrCachedBinding(@NonNull ConstraintLayout rootView, @NonNull ImageButton CloseButton,
+      @NonNull ImageView imageView) {
     this.rootView = rootView;
     this.CloseButton = CloseButton;
     this.imageView = imageView;
-    this.view2 = view2;
   }
 
   @Override
@@ -65,7 +61,7 @@ public final class PopupQrCachedBinding implements ViewBinding {
     int id;
     missingId: {
       id = R.id.CloseButton;
-      Button CloseButton = ViewBindings.findChildViewById(rootView, id);
+      ImageButton CloseButton = ViewBindings.findChildViewById(rootView, id);
       if (CloseButton == null) {
         break missingId;
       }
@@ -76,13 +72,7 @@ public final class PopupQrCachedBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.view2;
-      View view2 = ViewBindings.findChildViewById(rootView, id);
-      if (view2 == null) {
-        break missingId;
-      }
-
-      return new PopupQrCachedBinding((ConstraintLayout) rootView, CloseButton, imageView, view2);
+      return new PopupQrCachedBinding((ConstraintLayout) rootView, CloseButton, imageView);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

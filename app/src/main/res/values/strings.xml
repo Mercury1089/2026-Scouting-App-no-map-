@@ -9,19 +9,23 @@
     <string name="app_name">Scouting App 2026</string>
     <string name="SettingsTitle">SETTINGS</string>
     <string name="SetupTitle">PRE-MATCH SETUP</string>
-    <string name="StartingPositionTitle">STARTING POSITION</string>
-    <string name="ClearTitle">CLEAR THIS SCREEN?</string>
-    <string name="ExitTitle">EXIT</string>
-    <string name="ScoringTitle">SCORING</string>
+    <string name="AutonTitle">AUTON</string>
     <string name="TeleopTitle">TELEOP</string>
     <string name="EndGameTitle">ENDGAME</string>
-    <string name="QRCodeTitle">DID YOU SCAN YOUR QR CODE?</string>
 
     <!-- Tabs -->
     <string name="Setup">SETUP</string>
     <string name="Auton">AUTON</string>
     <string name="Teleop">TELEOP</string>
     <string name="EndGame">ENDGAME</string>
+
+    <!-- Universal -->
+    <string name="Exit">EXIT</string>
+    <string name="Quit">QUIT</string>
+    <string name="Done">DONE</string>
+    <string name="Cancel">CANCEL</string>
+    <string name="Reset">RESET</string>
+    <string name="Save">SAVE</string>
 
 
     <!-- PregameActivity -->
@@ -31,11 +35,11 @@
     <string name="TeamNumberID">TEAM #:</string>
     <string name="AlliancePartnersID">ALLIANCE PARTNERS:</string>
     <string name="AllianceColorID">ALLIANCE COLOR:</string>
+    <string name="Preload">PRELOADED FUEL</string>
 
     <!-- Directions -->
     <string name="SetupDirections">Complete the fields below <b>before</b> the start of each match.</string>
     <string name="StartButtonDirections">Press START when you hear the charge sound!</string>
-    <string name="StartingPositionDirections">Tap on the field diagram below to mark the robot’s starting position.</string>
 
     <!-- Button Texts -->
     <string name="Blue">BLUE</string>
@@ -45,31 +49,40 @@
     <string name="Start">START</string>
     <string name="GenerateQRCode">GENERATE QR CODE</string>
 
-    <!--Organize After-->
+    <!--Auton. Teleop, Endgame Actions-->
+    <!-- Instructions -->
+    <string name="PossessionDirections">Tap the +/- buttons to increase or decrease the counter for each option.</string>
+    <string name="ScoringDirections">Tap the + or - buttons to record scored/missed fuel.</string>
+    <string name="ToggleInstructions">Tap on the toggle to record if the options are true (on) or false (off).</string>
+
+    <!-- Counter -->
+    <string name="Plus">+</string>
+    <string name="Minus">-</string>
+    <string name="DefaultValue">000</string>
+
+    <!-- Fuel Tasks -->
+    <string name="ScoringTitle">FUEL SCORING (PICK TWO)</string>
+
+    <string name="Header">COLLECTED</string>
+    <string name="FuelCollected">How much FUEL was collected?</string>
     <string name="CollectingDesc">How much <b>fuel</b> was collected?</string>
-    <string name="FerryingDesc">How much <b>fuel</b> was passed to their alliance zone or partner(s)?</string>
-    <string name="StartTitle">START</string>
-    <string name="StartDesc">How full was <b>the robot</b> when it started scoring?</string>
-    <string name="StopTitle">STOP</string>
-    <string name="StopDesc">How full was <b>the robot</b> when it stopped scoring?</string>
+
+    <string name="Scored">SCORED</string>
+    <string name="ScoringDesc">Record any <b><font color="#FFD966">TWO</font></b> scoring categories below, whichever are easiest to see for your robot. Examples: Picked Up and Missed; Scored and Missed."</string>
     <string name="MissedTitle">MISSED</string>
     <string name="MissedDesc">How much fuel was missed?</string>
-    <string name="ScoringDesc">How much fuel was scored?</string>
-    <string name="empty_label">EMPTY</string>
-    <string name="full_label">FULL</string>
-    <string name="percent_25">25<small>%</small></string>
-    <string name="percent_50">50<small>%</small></string>
-    <string name="percent_75">75<small>%</small></string>
-    <string name="RobotFellOver">Robot fell over/Died</string>
-    <string name="RobotFellOverDesc">D id the robot fall over during autonomous?</string>
-    <string name="Header">COLLECTING</string>
-    <string name="FuelCollected">How much FUEL was collected?</string>
+
     <string name="Ferrying">FERRYING</string>
+    <string name="FerryingDesc">How much <b>fuel</b> was passed to their alliance zone or partner(s)?</string>
     <string name="FuelPassed">How much FUEL was passed to their alliance zone or partner(s)?</string>
 
+    <!-- Climbing -->
     <string name="ClimbingTitle">CLIMBING</string>
     <string name="AttemptedCLimbLevelDesc">What level did they <b>attempt</b> to climb to?</string>
     <string name="DNA">NO ATTEMPT</string>
+    <string name="One">1</string>
+    <string name="Two">2</string>
+    <string name="Three">3</string>
     <string name="SuccessfullyClimbed">What level did they <b>successfully</b> climb to?</string>
     <string name="SuccessfulClimbedLevel">NONE</string>
     <string name="TowerClimbPlacement">What <b>side</b> of the tower did they climb on?</string>
@@ -77,90 +90,55 @@
     <string name="Center">CENTER</string>
     <string name="Right">RIGHT</string>
 
-    <string name="Plus">+</string>
-    <string name="Minus">-</string>
-    <string name="ScoringDirections">Tap the + or - buttons to record scored/missed fuel.</string>
-    <!--Check Scored and Missed to see if they are used anywhere-->
-    <string name="Scored">SCORED</string>
-    <string name="Missed">MISSED</string>
-    <string name="Leave">Leave (Robot left the starting zone)</string>
-    <string name="FellOver">Fell Over</string>
+
+    <string name="RobotFellOver">Robot fell over/Died</string>
+
+    <!-- Timer -->
+    <string name="AutonSeconds">AUTON SECONDS REMAINING</string>
+    <string name="TeleopSeconds">TELEOP SECONDS REMAINING</string>
+    <string name="EndGameSeconds">END GAME SECONDS REMAINING</string>
+
     <string name="TeleopWarning">Teleop is starting soon&#8230;</string>
     <string name="TeleopError">Switch to teleop as soon as possible!</string>
     <string name="EndGameWarning">End Game is starting soon&#8230;</string>
     <string name="EndGameError">Switch to End Game as soon as possible!</string>
-    <string name="TeleopNext">NEXT: TELEOP</string>
+
+    <!-- NEXT BUTTONS -->
+    <string name="TeleopNext">TELEOP</string>
+    <string name="ClimbNext">CLIMBING</string>
+
 
     <!-- SettingsActivity -->
-    <!-- Warning -->
     <string name="SettingsWarning">FOR STRATEGY COMMITTEE MEMBERS ONLY</string>
-    <!-- ID Fields -->
     <string name="ResetID">RESET APP</string>
-    <string name="GoBack">BACK</string>
     <string name="QRCache">CACHED QR CODES</string>
 
-    <!-- Directions -->
+    <string name="GoBack">BACK</string>
     <string name="ResetDirections">If a QR code fails to generate or the app is displaying persistent and incorrect active states, tap the button below.</string>
-
-    <!-- Button Texts -->
     <string name="ResetButton">RESET</string>
+
     <string name="QRCacheItem">Team Number: %1$s &#160;&#160;&#160;&#160;&#160;&#160; Match Number: %2$s</string>
 
-
-    <!-- MatchActivity -->
-    <!-- Universal -->
-    <string name="DefaultValue">000</string>
-    <string name="Exit">Exit</string>
-    <string name="Done">DONE</string>
-    <string name="Cancel">CANCEL</string>
-    <string name="Reset">RESET</string>
-    <string name="Save">SAVE</string>
+    <!-- Display Popups -->
 
     <!-- Exit Popup -->
-    <string name="ExitWarning">Are you sure that you want to leave? All data will be lost!</string>
+    <string name="ExitTitle">ARE YOU SURE YOU WANT TO QUIT?</string>
+    <string name="ExitWarning">All data will be lost!</string>
 
-    <!-- Auton -->
-    <string name="AutonSeconds">AUTON SECONDS REMAINING</string>
-    <string name="TeleopSeconds">TELEOP SECONDS REMAINING</string>
-    <string name="EndGameSeconds">END GAME SECONDS REMAINING</string>
-    <string name="PossessionDirections">Tap the +/- buttons to increase or decrease the counter for each option.</string>
-
-
-    <!-- Teleop -->
-    <string name="PlayedDefense">Played Defense</string>
-    <string name="FellOverOrDied">Fell over/Died</string>
-    <string name="ClimbNext">NEXT: POST-MATCH</string>
-
-
-
-    <!-- Display Popups -->
-    <!-- Loading -->
+    <!-- Loading QR Popup-->
     <string name="PleaseWait">Please Wait&#8230;\nGenerating QR Code&#8230;</string>
 
-    <!-- QR Popup -->
+    <!-- Generate Confirm -->
     <string name="GenerateQRID">GENERATE QR CODE?</string>
     <string name="GenerateQRDescription">Are you sure you want to generate a QR code? Once you generate a code you cannot return to the match to make changes.</string>
 
-    <!-- QR Popup -->
-    <string name="QRCodeID">Here is your QR Code:</string>
-    <string name="QRCode">QR Code</string>
-    <string name="QRWarningDirections">Are you sure you want to generate a QR code? Once you generate a code you cannot return to the match to make changes.</string>
-    <string name="QRExitDirections">Returning to the Setup screen will erase this QR code and all of your data from this match.</string>
-
-    <!-- QR Popup -->
+    <!-- QR Confirmation -->
     <string name="SetupNextMatchID">DID YOU SCAN YOUR QR CODE?</string>
     <string name="SetupNextMatchDirections">Returning to the Setup screen will erase this QR code and all of your data from this match.</string>
-    <string name="SetupNextMatch">SET UP NEXT MATCH</string>
-
-    <!-- Scored -->
-    <string name="OuterPortID">OUTER</string>
-    <string name="InnerPortID">INNER</string>
-
-    <!-- Missed -->
-    <string name="UpperPortID">HIGH\n(OUTER/INNER)</string>
-    <string name="LowerPortID">LOWER</string>
+    <string name="SetupNext">BUILD THE NEXT MATCH</string>
 
     <!-- Clear -->
+    <string name="ClearTitle">CLEAR THIS SCREEN?</string>
     <string name="ClearDirections">Are you sure you want to clear all data on the setup screen?</string>
 
     <!-- Password -->
@@ -169,12 +147,4 @@
     <string name="IDPasswordSettings">PASSWORD SETTINGS</string>
     <string name="IDPasswordRequiredConfirm">Password protect app settings?</string>
 
-    <!-- Button Text -->
-    <string name="SetupNext">BUILD THE NEXT MATCH</string>
-    <string name="Scanned">Scanned?</string>
-    <string name="NextMatch">SET UP NEXT MATCH</string>
-    <string name="ToggleInstructions">Tap on the toggle to record if the options are true (on) or false (off).</string>
-    <string name="Preload">PRELOADED FUEL</string>
-    <string name="Fuel">FUEL</string>
-    <string name="Amp">AMP</string>
 </resources>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -22,16 +23,28 @@ public final class PopupQrBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
+  public final ImageButton CloseButton;
+
+  @NonNull
   public final Button GoBackButton;
 
   @NonNull
-  public final TextView IDMatchNumberQR;
+  public final TextView MatchNumberQR;
 
   @NonNull
-  public final TextView IDScouterNameQR;
+  public final TextView MatchNumberTitle;
 
   @NonNull
-  public final TextView IDTeamNumberQR;
+  public final TextView ScouterNameQR;
+
+  @NonNull
+  public final TextView ScouterNameTitle;
+
+  @NonNull
+  public final TextView TeamNumberQR;
+
+  @NonNull
+  public final TextView TeamNumberTitle;
 
   @NonNull
   public final ImageView imageView;
@@ -39,14 +52,20 @@ public final class PopupQrBinding implements ViewBinding {
   @NonNull
   public final View view2;
 
-  private PopupQrBinding(@NonNull ConstraintLayout rootView, @NonNull Button GoBackButton,
-      @NonNull TextView IDMatchNumberQR, @NonNull TextView IDScouterNameQR,
-      @NonNull TextView IDTeamNumberQR, @NonNull ImageView imageView, @NonNull View view2) {
+  private PopupQrBinding(@NonNull ConstraintLayout rootView, @NonNull ImageButton CloseButton,
+      @NonNull Button GoBackButton, @NonNull TextView MatchNumberQR,
+      @NonNull TextView MatchNumberTitle, @NonNull TextView ScouterNameQR,
+      @NonNull TextView ScouterNameTitle, @NonNull TextView TeamNumberQR,
+      @NonNull TextView TeamNumberTitle, @NonNull ImageView imageView, @NonNull View view2) {
     this.rootView = rootView;
+    this.CloseButton = CloseButton;
     this.GoBackButton = GoBackButton;
-    this.IDMatchNumberQR = IDMatchNumberQR;
-    this.IDScouterNameQR = IDScouterNameQR;
-    this.IDTeamNumberQR = IDTeamNumberQR;
+    this.MatchNumberQR = MatchNumberQR;
+    this.MatchNumberTitle = MatchNumberTitle;
+    this.ScouterNameQR = ScouterNameQR;
+    this.ScouterNameTitle = ScouterNameTitle;
+    this.TeamNumberQR = TeamNumberQR;
+    this.TeamNumberTitle = TeamNumberTitle;
     this.imageView = imageView;
     this.view2 = view2;
   }
@@ -78,27 +97,51 @@ public final class PopupQrBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.CloseButton;
+      ImageButton CloseButton = ViewBindings.findChildViewById(rootView, id);
+      if (CloseButton == null) {
+        break missingId;
+      }
+
       id = R.id.GoBackButton;
       Button GoBackButton = ViewBindings.findChildViewById(rootView, id);
       if (GoBackButton == null) {
         break missingId;
       }
 
-      id = R.id.IDMatchNumberQR;
-      TextView IDMatchNumberQR = ViewBindings.findChildViewById(rootView, id);
-      if (IDMatchNumberQR == null) {
+      id = R.id.MatchNumberQR;
+      TextView MatchNumberQR = ViewBindings.findChildViewById(rootView, id);
+      if (MatchNumberQR == null) {
         break missingId;
       }
 
-      id = R.id.IDScouterNameQR;
-      TextView IDScouterNameQR = ViewBindings.findChildViewById(rootView, id);
-      if (IDScouterNameQR == null) {
+      id = R.id.MatchNumberTitle;
+      TextView MatchNumberTitle = ViewBindings.findChildViewById(rootView, id);
+      if (MatchNumberTitle == null) {
         break missingId;
       }
 
-      id = R.id.IDTeamNumberQR;
-      TextView IDTeamNumberQR = ViewBindings.findChildViewById(rootView, id);
-      if (IDTeamNumberQR == null) {
+      id = R.id.ScouterNameQR;
+      TextView ScouterNameQR = ViewBindings.findChildViewById(rootView, id);
+      if (ScouterNameQR == null) {
+        break missingId;
+      }
+
+      id = R.id.ScouterNameTitle;
+      TextView ScouterNameTitle = ViewBindings.findChildViewById(rootView, id);
+      if (ScouterNameTitle == null) {
+        break missingId;
+      }
+
+      id = R.id.TeamNumberQR;
+      TextView TeamNumberQR = ViewBindings.findChildViewById(rootView, id);
+      if (TeamNumberQR == null) {
+        break missingId;
+      }
+
+      id = R.id.TeamNumberTitle;
+      TextView TeamNumberTitle = ViewBindings.findChildViewById(rootView, id);
+      if (TeamNumberTitle == null) {
         break missingId;
       }
 
@@ -114,8 +157,9 @@ public final class PopupQrBinding implements ViewBinding {
         break missingId;
       }
 
-      return new PopupQrBinding((ConstraintLayout) rootView, GoBackButton, IDMatchNumberQR,
-          IDScouterNameQR, IDTeamNumberQR, imageView, view2);
+      return new PopupQrBinding((ConstraintLayout) rootView, CloseButton, GoBackButton,
+          MatchNumberQR, MatchNumberTitle, ScouterNameQR, ScouterNameTitle, TeamNumberQR,
+          TeamNumberTitle, imageView, view2);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

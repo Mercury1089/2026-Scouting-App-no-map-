@@ -52,7 +52,7 @@ public class ListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
-        View vi = inflater.inflate(R.layout.qr_list_item, null);
+        View vi = inflater.inflate(R.layout.screen_settings_qr_list_item, null);
 
         Button item = vi.findViewById(R.id.itemButton);
 
@@ -66,7 +66,7 @@ public class ListAdapter extends BaseAdapter {
             public void onClick(View v) {
                 loading_alert = new Dialog(context);
                 loading_alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                loading_alert.setContentView(R.layout.loading_screen);
+                loading_alert.setContentView(R.layout.screen_qr_loading);
                 loading_alert.setCancelable(false);
                 loading_alert.show();
 

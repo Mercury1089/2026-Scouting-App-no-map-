@@ -30,7 +30,7 @@ public class MatchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_match);
+        setContentView(R.layout.screen_match_tabs);
 
         //initializers
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
@@ -71,9 +71,9 @@ public class MatchActivity extends AppCompatActivity {
     private void showExitConfirmationDialog() {
         Dialog dialog = new Dialog(MatchActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.exit_confirm_popup);
+        dialog.setContentView(R.layout.popup_setup_next_match_confirm);
 
-        Button exitConfirm = dialog.findViewById(R.id.ExitConfirm);
+        Button exitConfirm = dialog.findViewById(R.id.CancelConfirm);
         Button cancelConfirm = dialog.findViewById(R.id.CancelConfirm);
 
         dialog.show();

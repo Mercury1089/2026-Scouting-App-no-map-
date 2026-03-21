@@ -4,6 +4,10 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\mipmap-xxxhdpi\\team_logo_icon_round.png"
     },
     {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_popup_clear_qr_cache_confirm.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/popup_clear_qr_cache_confirm.xml"
+    },
+    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_button_disabled.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\button_disabled.xml"
     },
@@ -20,28 +24,32 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\toggle_right_disabled.xml"
     },
     {
-        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_right.png.flat",
-        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\right.png"
-    },
-    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_popup_qr_cached.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\popup_qr_cached.xml"
+    },
+    {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_right.png.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\right.png"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_right_states.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\right_states.xml"
     },
     {
-        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_teleop_screen.xml.flat",
-        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/teleop_screen.xml"
-    },
-    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_counter_left_button_states.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\counter_left_button_states.xml"
     },
     {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_popup_settings_password.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\popup_settings_password.xml"
+    },
+    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_setup_next_match_confirm_popup.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\setup_next_match_confirm_popup.xml"
+    },
+    {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_screen_settings.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/screen_settings.xml"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_trash_disabled.png.flat",
@@ -76,20 +84,24 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\toggle_left_active.xml"
     },
     {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_popup_clear_confirm.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/popup_clear_confirm.xml"
+    },
+    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_thumb_disabled.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\thumb_disabled.xml"
     },
     {
-        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_left.png.flat",
-        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\left.png"
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_clear.png.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\clear.png"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_thumb_active.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\thumb_active.xml"
     },
     {
-        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_clear.png.flat",
-        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\clear.png"
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_left.png.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\left.png"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_exit_confirm_popup.xml.flat",
@@ -102,6 +114,10 @@
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_mute.png.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\mute.png"
+    },
+    {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_screen_match_tabs.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\screen_match_tabs.xml"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_clear_confirm_popup.xml.flat",
@@ -122,6 +138,10 @@
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\color_text_states.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\color\\text_states.xml"
+    },
+    {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_popup_qr_cached.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/popup_qr_cached.xml"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_clear_states.xml.flat",
@@ -152,6 +172,14 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\mipmap-mdpi\\team_logo_icon_foreground.png"
     },
     {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_screen_auton.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\screen_auton.xml"
+    },
+    {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_popup_enter_password.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\popup_enter_password.xml"
+    },
+    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_start_directions.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\start_directions.xml"
     },
@@ -180,12 +208,28 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\counter_left_button_states_no_corners.xml"
     },
     {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_popup_qr.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/popup_qr.xml"
+    },
+    {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_screen_pregame.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\screen_pregame.xml"
+    },
+    {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_popup_clear_confirm.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\popup_clear_confirm.xml"
+    },
+    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\mipmap-xxxhdpi_team_logo_icon.png.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\mipmap-xxxhdpi\\team_logo_icon.png"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\mipmap-mdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_popup_clear_qr_cache_confirm.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\popup_clear_qr_cache_confirm.xml"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\color_thumb_states.xml.flat",
@@ -210,6 +254,10 @@
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_timer_red.png.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\timer_red.png"
+    },
+    {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_screen_splash.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\screen_splash.xml"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\raw_sound.wav.flat",
@@ -268,6 +316,10 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\warning.png"
     },
     {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_screen_endgame.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\screen_endgame.xml"
+    },
+    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_track_disabled.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\track_disabled.xml"
     },
@@ -280,6 +332,14 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\button_large_active.xml"
     },
     {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_popup_generate_qrcode_confirm.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/popup_generate_qrcode_confirm.xml"
+    },
+    {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_screen_settings.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\screen_settings.xml"
+    },
+    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\mipmap-xxhdpi_team_logo_icon_round.png.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\mipmap-xxhdpi\\team_logo_icon_round.png"
     },
@@ -288,8 +348,16 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\mipmap-hdpi\\team_logo_icon_foreground.png"
     },
     {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_screen_qr_loading.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\screen_qr_loading.xml"
+    },
+    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_track_default.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\track_default.xml"
+    },
+    {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_popup_setup_next_match_confirm.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/popup_setup_next_match_confirm.xml"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_target.png.flat",
@@ -328,12 +396,20 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\qr.png"
     },
     {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_popup_enter_password.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/popup_enter_password.xml"
+    },
+    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_counter_right_button_states_no_corners.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\counter_right_button_states_no_corners.xml"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_button_states.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\button_states.xml"
+    },
+    {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_baseline_close_24.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\baseline_close_24.xml"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_toggle_left_default.xml.flat",
@@ -384,6 +460,14 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\text_states.xml"
     },
     {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_screen_endgame.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/screen_endgame.xml"
+    },
+    {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_popup_setup_next_match_confirm.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\popup_setup_next_match_confirm.xml"
+    },
+    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_teleop_screen.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\teleop_screen.xml"
     },
@@ -400,12 +484,20 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\font\\open_sans_bold.xml"
     },
     {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_screen_teleop.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\screen_teleop.xml"
+    },
+    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\font_futura_medium_condensed_bt.ttf.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\font\\futura_medium_condensed_bt.ttf"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_start.png.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\start.png"
+    },
+    {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_popup_generate_qrcode_confirm.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\popup_generate_qrcode_confirm.xml"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\raw_thunder2.wav.flat",
@@ -464,10 +556,6 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\clear_disabled.png"
     },
     {
-        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_endgame_screen.xml.flat",
-        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/endgame_screen.xml"
-    },
-    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\font_open_sans.ttf.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\font\\open_sans.ttf"
     },
@@ -504,10 +592,6 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\toggle_left_states.xml"
     },
     {
-        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_auton_screen.xml.flat",
-        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/auton_screen.xml"
-    },
-    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_right_disabled.png.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\right_disabled.png"
     },
@@ -522,6 +606,10 @@
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\font_barlow_condensed_medium.ttf.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\font\\barlow_condensed_medium.ttf"
+    },
+    {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_popup_settings_password.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/popup_settings_password.xml"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
@@ -544,16 +632,16 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\divider.xml"
     },
     {
+        "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_screen_settings_qr_list_item.xml.flat",
+        "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\screen_settings_qr_list_item.xml"
+    },
+    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_start_directions_bg_color_states.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\start_directions_bg_color_states.xml"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\mipmap-xhdpi_team_logo_icon_foreground.png.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\mipmap-xhdpi\\team_logo_icon_foreground.png"
-    },
-    {
-        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_enter_password_popup.xml.flat",
-        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/enter_password_popup.xml"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",

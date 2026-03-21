@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/QRCodeConfirm"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_general"
+    android:padding="@dimen/padding">
+
+    <TextView
+        android:id="@+id/IDGenerateQR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/futura_medium_condensed_bt"
+        android:gravity="center_horizontal"
+        android:text="@string/GenerateQRID"
+        android:textColor="@drawable/text_subead_states"
+        android:textSize="@dimen/header_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/IDGenerateQRDirections"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/open_sans"
+        android:text="@string/GenerateQRDescription"
+        android:textColor="@color/cloud"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IDGenerateQR" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IDGenerateQRDirections" />
+
+    <Button
+        android:id="@+id/GenerateQRButton"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/large_button_height"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_large_states"
+        android:gravity="center"
+        app:icon="@drawable/qr_states"
+        app:iconGravity="textStart"
+        app:iconTint="@null"
+        android:text="@string/GenerateQRCode"
+        android:textColor="@drawable/text_states"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view" />
+
+    <Button
+        android:id="@+id/CancelConfirm"
+        android:layout_width="440dp"
+        android:layout_height="@dimen/large_button_height"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/open_sans"
+        android:text="@string/Cancel"
+        android:textColor="@color/cloud"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GenerateQRButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
