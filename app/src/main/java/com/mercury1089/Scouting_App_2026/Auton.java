@@ -370,7 +370,7 @@ public class Auton extends Fragment implements UpdateListener {
 
                 if (!running) return;
 
-                if (secs <= 30 && secs > 0) {
+                if (secs <= 10 && secs > 0) {
                     if (teleopWarning != null) {
                         teleopWarning.setVisibility(View.VISIBLE);
                     }
