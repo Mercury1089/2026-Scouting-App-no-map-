@@ -95,7 +95,7 @@
         android:layout_height="400dp"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="34dp"
-        android:contentDescription="@string/QRCode"
+        android:contentDescription="QR Code"
         app:layout_constraintEnd_toStartOf="@id/CloseButton"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@color/charcoal" />

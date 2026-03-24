@@ -317,14 +317,10 @@ public class HashMapManager{
                 setupHashMap.put("MatchNumber", "");
                 setupHashMap.put("TeamNumber", "");
                 setupHashMap.put("NoShow", "N");
-                setupHashMap.put("PreloadNote", "N");
-                setupHashMap.put("PlayedDefense", "N");
+                setupHashMap.put("PreloadNote", "0");
                 setupHashMap.put("AlliancePartner1", "");
                 setupHashMap.put("AlliancePartner2", "");
                 setupHashMap.put("AllianceColor", "");
-                setupHashMap.put("PreloadedCargo", "0");
-                //Note: FellOver is put in setup hashmap because its value may be updated in Auton, Teleop, or Endgame
-                setupHashMap.put("FellOver", "N");
                 break;
             case AUTON:
                 // 2026 Fuel Game - Autonomous Phase Defaults
@@ -335,13 +331,13 @@ public class HashMapManager{
                 autonHashMap.put("Ferrying", "0");
                 autonHashMap.put("Missed", "0");
                 autonHashMap.put("Scored", "0");
-                autonHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
-                autonHashMap.put("SuccessfulClimbed", "None");
-                autonHashMap.put("ClimbLocation", "Null");
-                autonHashMap.put("RobotFellOver", "0");
+                autonHashMap.put("AttemptedClimb", "0");
+                autonHashMap.put("SuccessfulClimbed", "0");
+                autonHashMap.put("ClimbLocation", "");
+                autonHashMap.put("RobotFellOver", "N");
 
                 // CSV Snapshot buffer - initialize with header
-                autonHashMap.put("snapshots", "collecting,ferrying,missed,startLevel,stopLevel,attemptedClimb,successfulClimbed,climbLocation,robotFellOver\n");
+                autonHashMap.put("snapshots", "collecting,ferrying,missed,scored,attemptedClimb,successfulClimbed,climbLocation,robotFellOver\n");
 
                 break;
             case TELEOP:
@@ -353,13 +349,13 @@ public class HashMapManager{
                 teleopHashMap.put("Ferrying", "0");
                 teleopHashMap.put("Missed", "0");
                 teleopHashMap.put("Scored", "0");
-                teleopHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
-                teleopHashMap.put("SuccessfulClimbed", "None");
-                teleopHashMap.put("ClimbLocation", "Null");
-                teleopHashMap.put("RobotFellOver", "0");
+                teleopHashMap.put("AttemptedClimb", "0");
+                teleopHashMap.put("SuccessfulClimbed", "0");
+                teleopHashMap.put("ClimbLocation", "");
+                teleopHashMap.put("RobotFellOver", "N");
 
                 // CSV Snapshot buffer - initialize with header
-                teleopHashMap.put("snapshots", "collecting,ferrying,missed,startLevel,stopLevel,attemptedClimb,successfulClimbed,climbLocation,robotFellOver\n");
+                teleopHashMap.put("snapshots", "collecting,ferrying,missed,scored,attemptedClimb,successfulClimbed,climbLocation,robotFellOver\n");
 
                 break;
             case ENDGAME:
@@ -367,14 +363,14 @@ public class HashMapManager{
                 endgameHashMap.put("HashMapName", "Endgame");
 
                 // Game data fields
-                endgameHashMap.put("Collecting", "0");
-                endgameHashMap.put("Ferrying", "0");
-                endgameHashMap.put("Missed", "0");
-                endgameHashMap.put("Scored", "0");
-                endgameHashMap.put("AttemptedClimb", "DID NOT ATTEMPT");
-                endgameHashMap.put("SuccessfulClimbed", "None");
-                endgameHashMap.put("ClimbLocation", "Null");
-                endgameHashMap.put("RobotFellOver", "0");
+                endgameHashMap.put("Collecting", "");
+                endgameHashMap.put("Ferrying", "");
+                endgameHashMap.put("Missed", "");
+                endgameHashMap.put("Scored", "");
+                endgameHashMap.put("AttemptedClimb", "0");
+                endgameHashMap.put("SuccessfulClimbed", "0");
+                endgameHashMap.put("ClimbLocation", "");
+                endgameHashMap.put("RobotFellOver", "N");
 
                 // CSV Snapshot buffer - initialize with header
                 endgameHashMap.put("snapshots", "collecting,ferrying,missed,startLevel,stopLevel,attemptedClimb,successfulClimbed,climbLocation,robotFellOver\n");

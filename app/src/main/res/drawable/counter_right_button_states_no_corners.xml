@@ -10,16 +10,6 @@
             <corners android:radius="0dp" />
         </shape>
     </item>
-    <!-- default -->
-    <item
-        android:state_enabled="true"
-        android:state_selected="false"
-        android:state_pressed="false">
-        <shape android:shape="rectangle">
-            <solid android:color="@color/ocean"/>
-            <corners android:radius="0dp" />
-        </shape>
-    </item>
     <!-- focused -->
     <item
         android:state_enabled="true"
@@ -38,7 +28,16 @@
             <corners android:radius="0dp" />
         </shape>
     </item>
-    <!-- checked/active -->
+    <!-- checked -->
+    <item
+        android:state_enabled="true"
+        android:state_checked="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/melon"/>
+            <corners android:radius="0dp" />
+        </shape>
+    </item>
+    <!-- active -->
     <item
         android:state_enabled="true"
         android:state_selected="true">
@@ -47,12 +46,22 @@
             <corners android:radius="0dp" />
         </shape>
     </item>
-    <!-- checked/active and disabled -->
+    <!-- active and disabled -->
     <item
         android:state_enabled="false"
         android:state_selected="true">
         <shape android:shape="rectangle">
             <solid android:color="@color/rust"/>
+            <corners android:radius="0dp" />
+        </shape>
+    </item>
+    <!-- default -->
+    <item
+        android:state_enabled="true"
+        android:state_selected="false"
+        android:state_pressed="false">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/ocean"/>
             <corners android:radius="0dp" />
         </shape>
     </item>

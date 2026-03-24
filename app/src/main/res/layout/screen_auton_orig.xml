@@ -786,6 +786,7 @@
 
             <RadioButton
                 android:id="@+id/AttemptedNo"
+                android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="1dp"
@@ -800,6 +801,7 @@
 
             <RadioButton
                 android:id="@+id/AttemptedOne"
+                android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingHorizontal="10dp"
@@ -882,6 +884,7 @@
 
             <RadioButton
                 android:id="@+id/DidNotAttempt"
+                android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="1dp"
@@ -896,6 +899,7 @@
 
             <RadioButton
                 android:id="@+id/AchievedLevel1"
+                android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingHorizontal="10dp"
@@ -966,6 +970,7 @@
 
             <RadioButton
                 android:id="@+id/Left"
+                android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingHorizontal="12dp"
@@ -979,6 +984,7 @@
 
             <RadioButton
                 android:id="@+id/Center"
+                android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="1dp"
@@ -993,6 +999,7 @@
 
             <RadioButton
                 android:id="@+id/Right"
+                android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingHorizontal="12dp"

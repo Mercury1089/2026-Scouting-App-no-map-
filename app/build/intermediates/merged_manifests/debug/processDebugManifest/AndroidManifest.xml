@@ -21,7 +21,6 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:extractNativeLibs="true"
-        android:hardwareAccelerated="false"
         android:icon="@mipmap/team_logo_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/team_logo_icon_round"

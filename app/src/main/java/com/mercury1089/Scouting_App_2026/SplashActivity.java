@@ -35,7 +35,11 @@ public class SplashActivity extends AppCompatActivity {
                 TextView developersText = findViewById(R.id.CreditWhereCreditsDue);
 
                 mediaPlayer = MediaPlayer.create(SplashActivity.this, R.raw.thunder2);
-                mediaPlayer.setVolume(volume, volume);
+                if (mediaPlayer != null) {
+                    mediaPlayer.setVolume(volume, volume);
+                    mediaPlayer.start();
+                    startFadeOut();
+                }
 
                 int lightningBoltSpeed = 200;
 
@@ -60,8 +64,6 @@ public class SplashActivity extends AppCompatActivity {
                 animatorSet.playSequentially(lightningAnimation, animatorScreenAlphaOff, animatorTextAlpha, animatorScreenAlphaOn, anim);
 
                 animatorSet.start();
-                mediaPlayer.start();
-                startFadeOut();
             }
         }, 750);
 
