@@ -408,8 +408,8 @@ public class PregameActivity extends AppCompatActivity {
     private boolean readyToStart() {
         String allianceColor = setupHashMap.get("AllianceColor");
         return scouterNameInput.getText().length() > 0 &&
-                matchNumberInput.getText().length() > 0 &&
                 teamNumberInput.getText().length() > 0 &&
+                matchNumberInput.getText().length() > 0 &&
                 firstAlliancePartnerInput.getText().length() > 0 &&
                 secondAlliancePartnerInput.getText().length() > 0 &&
                 allianceColor != null && !allianceColor.isEmpty() &&

@@ -366,13 +366,13 @@ public class HashMapManager {
             case SETUP:
                 setupHashMap.put("HashMapName", "Setup");
                 setupHashMap.put("ScouterName", "");
-                setupHashMap.put("MatchNumber", "");
                 setupHashMap.put("TeamNumber", "");
-                setupHashMap.put("NoShow", "N");
+                setupHashMap.put("MatchNumber", "");
                 setupHashMap.put("PreloadedCargo", "0");
                 setupHashMap.put("AlliancePartner1", "");
                 setupHashMap.put("AlliancePartner2", "");
                 setupHashMap.put("AllianceColor", "");
+                setupHashMap.put("NoShow", "N");
                 break;
             case AUTON:
                 // 2026 Fuel Game - Autonomous Phase Defaults
