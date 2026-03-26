@@ -31,7 +31,7 @@ import com.mercury1089.Scouting_App_2026.utils.GenUtils;
 import java.util.LinkedHashMap;
 import java.util.Objects;
 
-public abstract class Auton extends Fragment implements UpdateListener {
+public class Auton extends Fragment implements UpdateListener {
 
     private static final String TAG = "Auton Fragment";
 
@@ -502,7 +502,7 @@ public abstract class Auton extends Fragment implements UpdateListener {
     }
 
     @Override
-    public void updateUpdated(String key, String value) {
+    public void onUpdate() {
         // Implementation of UpdateListener
     }
 }
