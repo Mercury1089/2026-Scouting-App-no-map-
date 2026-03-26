@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.materialswitch.MaterialSwitch;
+import com.mercury1089.Scouting_App_2026.utils.GenUtils;
 import com.mercury1089.Scouting_App_2026.utils.ListAdapter;
 
 import java.util.LinkedHashMap;
@@ -28,6 +29,9 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_settings);
+
+        // Enable full screen mode
+        GenUtils.setFullscreen(this);
 
         //assigning variables to their equivalent screen elements
         Button localStorageResetButton = findViewById(R.id.LocalStorageResetButton);
@@ -176,6 +180,12 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void addQRCodes(){
         qrCodeSelector.setAdapter(listAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GenUtils.setFullscreen(this);
     }
 
     @Override

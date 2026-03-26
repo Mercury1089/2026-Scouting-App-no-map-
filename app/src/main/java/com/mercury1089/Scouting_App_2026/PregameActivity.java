@@ -1,6 +1,7 @@
 package com.mercury1089.Scouting_App_2026;
 
 import com.mercury1089.Scouting_App_2026.qr.QRRunnable;
+import com.mercury1089.Scouting_App_2026.utils.GenUtils;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -101,6 +102,9 @@ public class PregameActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_pregame);
+
+        // Enable full screen mode
+        GenUtils.setFullscreen(this);
 
         // Initialize views here
         scouterNameInput = findViewById(R.id.ScouterNameInput);
@@ -478,6 +482,7 @@ public class PregameActivity extends AppCompatActivity {
 
     @Override protected void onResume() {
         super.onResume();
+        GenUtils.setFullscreen(this);
         updateXMLObjects(true); }
 
     @Override public boolean dispatchTouchEvent(MotionEvent ev) {

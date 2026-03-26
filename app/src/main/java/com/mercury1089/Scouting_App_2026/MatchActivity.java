@@ -32,6 +32,9 @@ public class MatchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_match_tabs);
 
+        // Enable full screen mode
+        GenUtils.setFullscreen(this);
+
         //initializers
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
@@ -66,6 +69,12 @@ public class MatchActivity extends AppCompatActivity {
                 showExitConfirmationDialog();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GenUtils.setFullscreen(this);
     }
 
     private void showExitConfirmationDialog() {

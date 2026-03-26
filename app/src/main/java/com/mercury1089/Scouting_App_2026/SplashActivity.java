@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.mercury1089.Scouting_App_2026.utils.GenUtils;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,6 +27,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_splash);
+
+        // Enable full screen mode
+        GenUtils.setFullscreen(this);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -79,6 +84,12 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }
         }, 2250);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GenUtils.setFullscreen(this);
     }
 
     private void startFadeOut(){
