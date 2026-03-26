@@ -263,20 +263,18 @@ public class Auton extends Fragment implements UpdateListener {
             }
         });
     }
-
     private void setupCascadingListeners() {
-        attemptedClimbToggle.setOnCheckedChangeListener((g, id) -> updateClimbStates());
+        attemptedClimbToggle.setOnCheckedChangeListener((g, id)    -> updateClimbStates());
         successfulClimbedToggle.setOnCheckedChangeListener((g, id) -> updateClimbStates());
+        updateClimbStates();
     }
 
     private void updateClimbStates() {
-        boolean attempted = attemptedClimbToggle.getCheckedRadioButtonId() == R.id.AttemptedClimbToggle;
-        setGroupEnabled(successfulClimbedToggle, attempted);
-        if (!attempted) successfulClimbedToggle.clearCheck();
-
-        boolean successful = successfulClimbedToggle.getCheckedRadioButtonId() == R.id.SuccessfulClimbed;
-        setGroupEnabled(successfullyClimbedLocationToggle, successful);
-        if (!successful) successfullyClimbedLocationToggle.clearCheck();
+        int attemptedId  = attemptedClimbToggle.getCheckedRadioButtonId();
+        int successfulId = successfulClimbedToggle.getCheckedRadioButtonId();
+        boolean attempted  = attemptedId  != -1 && attemptedId  != R.id.AttemptedNo;
+        boolean successful = successfulId != -1 && successfulId != R.id.DidNotAttempt;
+        setGroupEnabled(successfullyClimbedLocationToggle, attempted && successful);
     }
 
     private int deltaFor(int id,
