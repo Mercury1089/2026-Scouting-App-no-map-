@@ -29,10 +29,12 @@ public class QRStringBuilder {
         LinkedHashMap<String, String> endgame = HashMapManager.getEndgameHashMap();
 
         // Line 1: Setup
-        // Scouter,Team,Match,Alliance,NoShow,Preload
+        // Scouter,Team,Match,Partner1,Partner2,Alliance,Preload,NoShow
         String scouter  = nvl(setup.get("ScouterName"));
         String team     = nvl(setup.get("TeamNumber"));
         String match    = nvl(setup.get("MatchNumber"));
+        String partner1 = nvl(setup.get("AlliancePartner1"));
+        String partner2 = nvl(setup.get("AlliancePartner2"));
         String alliance = nvl(setup.get("AllianceColor"));
         String noShow   = nvl(setup.get("NoShow"));
         String preload  = nvl(setup.get("PreloadedCargo"));
@@ -42,9 +44,11 @@ public class QRStringBuilder {
         QRString.append(scouter).append(",")
                 .append(team).append(",")
                 .append(match).append(",")
+                .append(partner1).append(",")
+                .append(partner2).append(",")
                 .append(alliance).append(",")
-                .append(noShow).append(",")
-                .append(preload);
+                .append(preload).append(",")
+                .append(noShow);
 
         // If "No Show" is checked, we only return the setup line.
         if (noShow.equalsIgnoreCase("Y")) {
