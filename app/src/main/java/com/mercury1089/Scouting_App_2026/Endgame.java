@@ -26,12 +26,12 @@ public class Endgame extends Fragment implements UpdateListener {
     private int endGameSnapshotCount = 0;
     private LinkedHashMap<String, String> setupHashMap;
     private LinkedHashMap<String, String> endGameHashMap;
-    private LinkedHashMap<String, String> teleopHasMap;
+    private LinkedHashMap<String, String> teleopHashMap;
 
     // Snapshot System (CSV format)
     private StringBuilder snapshotBuilder;
     private static final String SNAPSHOT_HEADER =
-            "scouterName,teamNumber,matchNumber,collecting,ferrying,scored,missed,attemptedClimb,successfulClimbed,climbLocation,noShow";
+            "scouterName,teamNumber,matchNumber,A_coll,A_scor,A_miss,A_ferr,A_died,A_att,A_succ,A_loc,T_coll,T_scor,T_miss,T_ferr,T_died,E_att,E_succ,E_loc";
 
     // Climbing section
     private RadioGroup attemptedClimbToggle;
@@ -48,7 +48,7 @@ public class Endgame extends Fragment implements UpdateListener {
     // Running counts
     private int collectingCount = 0;
     private int ferryingCount   = 0;
-    private int scoredCount     = 0;   // FIX 2
+    private int scoredCount     = 0;
     private int missedCount     = 0;
 
     public static Endgame newInstance() {
@@ -76,7 +76,7 @@ public class Endgame extends Fragment implements UpdateListener {
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.TELEOP);
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.ENDGAME);
         setupHashMap  = HashMapManager.getSetupHashMap();
-        teleopHasMap = HashMapManager.getTeleopHashMap();
+        teleopHashMap = HashMapManager.getTeleopHashMap();
         endGameHashMap = HashMapManager.getEndgameHashMap();
 
         // Link views
@@ -86,7 +86,7 @@ public class Endgame extends Fragment implements UpdateListener {
         successfullyClimbedLocationToggle = getView().findViewById(R.id.SuccessfullyClimbedLocation);
         saveButton                        = getView().findViewById(R.id.SaveButton);
         resetButton                       = getView().findViewById(R.id.ResetButton);
-        generateQRButton                  = getView().findViewById(R.id.NextQRButton);   // FIX 12
+        generateQRButton                  = getView().findViewById(R.id.NextQRButton);
 
         initializeSnapshots();
         loadEndGameData();
@@ -116,28 +116,24 @@ public class Endgame extends Fragment implements UpdateListener {
             initializeSnapshots();
         }
 
-        // FIX 4: pull teamNumber and scouterName from setupHashMap; removed startLevel/stopLevel
         String teamNumber  = setupHashMap.get("TeamNumber");
         if (teamNumber == null) teamNumber = "";
         String scouterName = setupHashMap.get("ScouterName");
         if (scouterName == null) scouterName = "";
         String matchNumber = setupHashMap.get("MatchNumber");
         if (matchNumber == null) matchNumber = "";
-        String noShow = teleopHasMap.get("RobotFellOver");
-        if (noShow == null) noShow = "N";
 
-        String snapshotLine = String.format("%s,%s,%s,%d,%d,%d,%d,%s,%s,%s,%s\n",
+        // Format: Scouter, Team, Match, [8 Auton null], [5 Teleop null], [3 Endgame cols]
+        String snapshotLine = String.format("%s,%s,%s,,,,,,,,,,,,,,%s,%s,%s\n",
                 scouterName,
                 teamNumber,
                 matchNumber,
-                collectingCount,
-                ferryingCount,
-                scoredCount,
-                missedCount,
-                getSelectedText(attemptedClimbToggle,              "0"),
-                getSelectedText(successfulClimbedToggle,           "0"),
-                getSelectedText(successfullyClimbedLocationToggle, "N"),
-                noShow);
+                // auton values
+                // teleop values
+                getSelectedText(attemptedClimbToggle,              ""),
+                getSelectedText(successfulClimbedToggle,           ""),
+                getSelectedText(successfullyClimbedLocationToggle, "")
+        );
 
         snapshotBuilder.append(snapshotLine);
         endGameSnapshotCount++;
@@ -154,8 +150,8 @@ public class Endgame extends Fragment implements UpdateListener {
     private void resetEndGameUI() {
         collectingCount = 0;
         ferryingCount   = 0;
-        scoredCount     = 0;   // FIX 5
-        missedCount     = 0;;
+        scoredCount     = 0;
+        missedCount     = 0;
 
         if (attemptedClimbToggle != null) attemptedClimbToggle.clearCheck();
         if (successfulClimbedToggle != null) successfulClimbedToggle.clearCheck();
@@ -169,17 +165,11 @@ public class Endgame extends Fragment implements UpdateListener {
     // ─────────────────────────────────────────
 
     private void setupCascadingListeners() {
-        // FIX 8+9: removed startLevelToggle/stopLevelToggle listeners and updateFuelStates entirely
         attemptedClimbToggle.setOnCheckedChangeListener((g, id)    -> updateClimbStates());
         successfulClimbedToggle.setOnCheckedChangeListener((g, id) -> updateClimbStates());
         updateClimbStates();
     }
 
-    /**
-     * FIX 10: check button IDs directly instead of fragile string comparisons.
-     * Endgame XML has DNA | 1 | 2 | 3 for attempted and None | 1 | 2 | 3 for successful.
-     * Location enabled only when neither first button is selected.
-     */
     private void updateClimbStates() {
         int attemptedId  = attemptedClimbToggle.getCheckedRadioButtonId();
         int successfulId = successfulClimbedToggle.getCheckedRadioButtonId();
@@ -209,7 +199,6 @@ public class Endgame extends Fragment implements UpdateListener {
             });
         }
 
-        // FIX 11+12: NextQRButton serves as both "next" and QR generation in endgame
         if (generateQRButton != null) {
             generateQRButton.setOnClickListener(v -> {
                 saveEndGameData();
@@ -262,27 +251,25 @@ public class Endgame extends Fragment implements UpdateListener {
     // ─────────────────────────────────────────
 
     private void loadEndGameData() {
-        collectingCount = parseCount(hm("Collecting", "0"));
-        ferryingCount   = parseCount(hm("Ferrying",   "0"));
-        scoredCount     = parseCount(hm("Scored",     "0"));   // FIX 2
-        missedCount     = parseCount(hm("Missed",     "0"));
+        collectingCount = parseCount(hm("Collecting", ""));
+        ferryingCount   = parseCount(hm("Ferrying",   ""));
+        scoredCount     = parseCount(hm("Scored",     ""));
+        missedCount     = parseCount(hm("Missed",     ""));
 
-        // FIX: removed startLevelToggle/stopLevelToggle selectByText calls
-        selectByText(attemptedClimbToggle,              hm("AttemptedClimb",    "0"));
-        selectByText(successfulClimbedToggle,           hm("SuccessfulClimbed", "0"));
+        selectByText(attemptedClimbToggle,              hm("AttemptedClimb",    ""));
+        selectByText(successfulClimbedToggle,           hm("SuccessfulClimbed", ""));
         selectByText(successfullyClimbedLocationToggle, hm("ClimbLocation",     ""));
 
         updateClimbStates();
     }
 
     private void saveEndGameData() {
-        // FIX: removed StartLevel/StopLevel; added Scored
         endGameHashMap.put("Collecting",        String.valueOf(collectingCount));
         endGameHashMap.put("Ferrying",          String.valueOf(ferryingCount));
         endGameHashMap.put("Scored",            String.valueOf(scoredCount));
         endGameHashMap.put("Missed",            String.valueOf(missedCount));
-        endGameHashMap.put("AttemptedClimb",    getSelectedText(attemptedClimbToggle,              "0"));
-        endGameHashMap.put("SuccessfulClimbed", getSelectedText(successfulClimbedToggle,           "0"));
+        endGameHashMap.put("AttemptedClimb",    getSelectedText(attemptedClimbToggle,              ""));
+        endGameHashMap.put("SuccessfulClimbed", getSelectedText(successfulClimbedToggle,           ""));
         endGameHashMap.put("ClimbLocation",     getSelectedText(successfullyClimbedLocationToggle, ""));
         HashMapManager.putEndgameHashMap(endGameHashMap);
     }
@@ -307,6 +294,7 @@ public class Endgame extends Fragment implements UpdateListener {
         if (this.isVisible()) {
             if (isVisibleToUser) {
                 setupHashMap   = HashMapManager.getSetupHashMap();
+                teleopHashMap  = HashMapManager.getTeleopHashMap();
                 endGameHashMap = HashMapManager.getEndgameHashMap();
                 initializeSnapshots();
                 loadEndGameData();

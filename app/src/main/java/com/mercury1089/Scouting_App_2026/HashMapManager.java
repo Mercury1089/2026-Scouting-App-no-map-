@@ -13,30 +13,21 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 
-public class HashMapManager{
-    private static LinkedHashMap<String, String> settingsHashMap = new LinkedHashMap<>();
-    private static LinkedHashMap<String, String> setupHashMap = new LinkedHashMap<>();
-    private static LinkedHashMap<String, String> autonHashMap = new LinkedHashMap<>();
-    private static LinkedHashMap<String, String> teleopHashMap = new LinkedHashMap<>();
-    private static LinkedHashMap<String, String> endgameHashMap = new LinkedHashMap<>();
+public class HashMapManager {
 
-    /**
-     *
-     * Enum for reference to each HashMap
-     *
-     */
-    public enum HASH{
-        SETTINGS, SETUP, AUTON, TELEOP, ENDGAME, QRCODES
+    public enum HASH {
+        SETTINGS,
+        SETUP,
+        AUTON,
+        TELEOP,
+        ENDGAME
     }
 
-    /**
-     *
-     * Used to access the setup HashMap from an activity
-     *
-     */
-    private HashMapManager(){
-        // Nothing to see here
-    }
+    private static LinkedHashMap<String, String> settingsHashMap;
+    private static LinkedHashMap<String, String> setupHashMap;
+    private static LinkedHashMap<String, String> autonHashMap;
+    private static LinkedHashMap<String, String> teleopHashMap;
+    private static LinkedHashMap<String, String> endgameHashMap;
 
     /**
      *
@@ -138,7 +129,7 @@ public class HashMapManager{
      *
      * Used to set the app wide teleopHashMap
      * Call before leaving an activity to update the app wide teleopHashMap
-     * @param teleopData    the data to be put in the teleopHashMap
+     * @param teleopData the data to be put in the teleopHashMap
      *
      */
     public static void putTeleopHashMap(LinkedHashMap<String, String> teleopData){
@@ -151,7 +142,7 @@ public class HashMapManager{
      *
      * Used to set the app wide endgameHashMap
      * Call before leaving an activity to update the app wide endgameHashMap
-     * @param endgameData    the data to be put in the endgameHashMap
+     * @param endgameData the data to be put in the endgameHashMap
      *
      */
     public static void putEndgameHashMap(LinkedHashMap<String, String> endgameData){
@@ -171,6 +162,32 @@ public class HashMapManager{
      */
     public static void appendQRList(String qrString, Context context){
         String[] qrList = setupQRList(context);
+
+        // Check for duplicates based on Scouter, Team, and Match (first line of the string)
+        String firstLine = qrString.split("\n")[0];
+        String[] parts = firstLine.split(",");
+        if (parts.length >= 3) {
+            String scouter = parts[0];
+            String team = parts[1];
+            String match = parts[2];
+
+            for (int i = 0; i < qrList.length; i++) {
+                String existingFirstLine = qrList[i].split("\n")[0];
+                String[] existingParts = existingFirstLine.split(",");
+                if (existingParts.length >= 3) {
+                    if (existingParts[0].equals(scouter) && 
+                        existingParts[1].equals(team) && 
+                        existingParts[2].equals(match)) {
+                        // Duplicate found, replace it
+                        qrList[i] = qrString;
+                        outputQRList(qrList, context);
+                        return;
+                    }
+                }
+            }
+        }
+
+        // No duplicate found, append normally
         String[] newList = new String[qrList.length + 1];
         Log.d("QRStuff", "" + qrList.length + " " + newList.length);
         for(int i = 0; i < qrList.length; i++)
@@ -194,18 +211,48 @@ public class HashMapManager{
             FileInputStream fs = context.openFileInput(filename);
             InputStreamReader inputStreamReader = new InputStreamReader(fs, StandardCharsets.UTF_8);
             BufferedReader reader = new BufferedReader(inputStreamReader);
-            String line = reader.readLine();
-            int count = 0;
-            while(line != null){
-                Log.d("QRStuff3", "" + count);
-                String[] tempList = qrList;
-                qrList = new String[tempList.length + 1];
-                for(int i = 0; i < tempList.length; i++)
-                    qrList[i] = tempList[i];
-                qrList[qrList.length-1] = line;
-                line = reader.readLine();
-                count ++;
+            
+            StringBuilder fullContent = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                fullContent.append(line).append("\n");
             }
+            reader.close();
+
+            String content = fullContent.toString();
+            if (content.trim().isEmpty()) return qrList;
+
+            // Split by the custom delimiter (double newline) or look for the start of a new record
+            // Records start with the Scouter Name. However, since snapshots also contain newlines,
+            // we should be careful. 
+            // The QRRunnable stores the WHOLE qrString which contains \n.
+            // When reading back, readLine() splits it.
+            
+            // Let's re-parse based on the structure: A record starts with scouterName and has specific columns.
+            // A simpler way: when writing, we could use a different delimiter for records.
+            // But since we are already using \n for snapshots, let's try to detect the header/first line pattern.
+            
+            String[] rawLines = content.split("\n");
+            java.util.ArrayList<String> records = new java.util.ArrayList<>();
+            StringBuilder currentRecord = new StringBuilder();
+            
+            for (String l : rawLines) {
+                if (l.trim().isEmpty()) continue;
+                // If the line looks like a "Setup" line (6 columns), it's a new record
+                if (l.split(",").length == 6 && !l.contains("A_coll")) {
+                    if (currentRecord.length() > 0) {
+                        records.add(currentRecord.toString().trim());
+                    }
+                    currentRecord = new StringBuilder();
+                }
+                currentRecord.append(l).append("\n");
+            }
+            if (currentRecord.length() > 0) {
+                records.add(currentRecord.toString().trim());
+            }
+            
+            return records.toArray(new String[0]);
+
         } catch(Exception e){
             File file = new File(context.getFilesDir(), filename);
             try {
@@ -236,6 +283,8 @@ public class HashMapManager{
                 Log.d("QRStuff2", "" + qrList.length);
                 bw.write(qrString);
                 bw.newLine();
+                // Add an extra newline to help separate records since each record has internal newlines
+                bw.newLine(); 
             }
             bw.close();
         } catch(Exception e) {
@@ -305,6 +354,9 @@ public class HashMapManager{
      *
      */
     public static void setDefaultValues(HASH map){
+        String snapshotHeader = "scouterName,teamNumber,matchNumber,A_coll,A_scor,A_miss,A_ferr,A_died,A_att,A_succ,A_loc,T_coll,T_scor,T_miss,T_ferr,T_died,E_att,E_succ,E_loc,timestamp\n";
+        String endgameHeader = "scouterName,teamNumber,matchNumber,A_coll,A_scor,A_miss,A_ferr,A_died,A_att,A_succ,A_loc,T_coll,T_scor,T_miss,T_ferr,T_died,E_att,E_succ,E_loc\n";
+
         switch(map) {
             case SETTINGS:
                 settingsHashMap.put("HashMapName", "Settings");
@@ -317,7 +369,7 @@ public class HashMapManager{
                 setupHashMap.put("MatchNumber", "");
                 setupHashMap.put("TeamNumber", "");
                 setupHashMap.put("NoShow", "N");
-                setupHashMap.put("PreloadNote", "0");
+                setupHashMap.put("PreloadedCargo", "0");
                 setupHashMap.put("AlliancePartner1", "");
                 setupHashMap.put("AlliancePartner2", "");
                 setupHashMap.put("AllianceColor", "");
@@ -327,17 +379,17 @@ public class HashMapManager{
                 autonHashMap.put("HashMapName", "Auton");
 
                 // Game data fields
-                autonHashMap.put("Collecting", "0");
-                autonHashMap.put("Ferrying", "0");
-                autonHashMap.put("Missed", "0");
-                autonHashMap.put("Scored", "0");
-                autonHashMap.put("AttemptedClimb", "0");
-                autonHashMap.put("SuccessfulClimbed", "0");
-                autonHashMap.put("ClimbLocation", "");
+                autonHashMap.put("Collecting", "");
+                autonHashMap.put("Ferrying", "");
+                autonHashMap.put("Missed", "");
+                autonHashMap.put("Scored", "");
                 autonHashMap.put("RobotFellOver", "N");
+                autonHashMap.put("AttemptedClimb", "");
+                autonHashMap.put("SuccessfulClimbed", "");
+                autonHashMap.put("ClimbLocation", "");
 
                 // CSV Snapshot buffer - initialize with header
-                autonHashMap.put("snapshots", "collecting,ferrying,missed,scored,attemptedClimb,successfulClimbed,climbLocation,robotFellOver\n");
+                autonHashMap.put("snapshots", snapshotHeader);
 
                 break;
             case TELEOP:
@@ -345,21 +397,18 @@ public class HashMapManager{
                 teleopHashMap.put("HashMapName", "Teleop");
 
                 // Game data fields
-                teleopHashMap.put("Collecting", "0");
-                teleopHashMap.put("Ferrying", "0");
-                teleopHashMap.put("Missed", "0");
-                teleopHashMap.put("Scored", "0");
-                teleopHashMap.put("AttemptedClimb", "0");
-                teleopHashMap.put("SuccessfulClimbed", "0");
-                teleopHashMap.put("ClimbLocation", "");
+                teleopHashMap.put("Collecting", "");
+                teleopHashMap.put("Ferrying", "");
+                teleopHashMap.put("Missed", "");
+                teleopHashMap.put("Scored", "");
                 teleopHashMap.put("RobotFellOver", "N");
 
                 // CSV Snapshot buffer - initialize with header
-                teleopHashMap.put("snapshots", "collecting,ferrying,missed,scored,attemptedClimb,successfulClimbed,climbLocation,robotFellOver\n");
+                teleopHashMap.put("snapshots", snapshotHeader);
 
                 break;
             case ENDGAME:
-                // 2026 Fuel Game - Endgame Phase Defaults (same structure as Teleop)
+                // 2026 Fuel Game - End Game Phase Defaults
                 endgameHashMap.put("HashMapName", "Endgame");
 
                 // Game data fields
@@ -367,94 +416,90 @@ public class HashMapManager{
                 endgameHashMap.put("Ferrying", "");
                 endgameHashMap.put("Missed", "");
                 endgameHashMap.put("Scored", "");
-                endgameHashMap.put("AttemptedClimb", "0");
-                endgameHashMap.put("SuccessfulClimbed", "0");
+                endgameHashMap.put("AttemptedClimb", "");
+                endgameHashMap.put("SuccessfulClimbed", "");
                 endgameHashMap.put("ClimbLocation", "");
-                endgameHashMap.put("RobotFellOver", "N");
 
                 // CSV Snapshot buffer - initialize with header
-                endgameHashMap.put("snapshots", "collecting,ferrying,missed,startLevel,stopLevel,attemptedClimb,successfulClimbed,climbLocation,robotFellOver\n");
+                endgameHashMap.put("snapshots", endgameHeader);
 
                 break;
         }
     }
 
     /**
-     *
-     * Checks if the setupHashMap is empty or null
-     * if it is null, it instantiates it and calls setDefaultValues()
-     * if it is empty, it calls setDefaultValues()
-     * @param map   The map to be checked
-     *
+     * Initializes all HashMaps. <br>
+     * Call when Pregame activity starts.
      */
+    public static void initHashMaps(){
+        settingsHashMap = new LinkedHashMap<>();
+        setupHashMap = new LinkedHashMap<>();
+        autonHashMap = new LinkedHashMap<>();
+        teleopHashMap = new LinkedHashMap<>();
+        endgameHashMap = new LinkedHashMap<>();
 
-    public static boolean checkNullOrEmpty(HASH map){
-        switch(map){
-            case SETTINGS:
-                if(settingsHashMap == null)
-                    settingsHashMap = new LinkedHashMap<>();
-                if(settingsHashMap.isEmpty()) {
-                    setDefaultValues(HASH.SETTINGS);
-                    return true;
-                }
-                break;
-            case SETUP:
-                if(setupHashMap == null)
-                    setupHashMap = new LinkedHashMap<>();
-                if(setupHashMap.isEmpty()) {
-                    setDefaultValues(HASH.SETUP);
-                    return true;
-                }
-                break;
-            case AUTON:
-                if(autonHashMap == null)
-                    autonHashMap = new LinkedHashMap<>();
-                if(autonHashMap.isEmpty()) {
-                    setDefaultValues(HASH.AUTON);
-                    return true;
-                }
-                break;
-            case TELEOP:
-                if(teleopHashMap == null)
-                    teleopHashMap = new LinkedHashMap<>();
-                if(teleopHashMap.isEmpty()) {
-                    setDefaultValues(HASH.TELEOP);
-                    return true;
-                }
-                break;
-            case ENDGAME:
-                if(endgameHashMap == null)
-                    endgameHashMap = new LinkedHashMap<>();
-                if(endgameHashMap.isEmpty()) {
-                    setDefaultValues(HASH.ENDGAME);
-                    return true;
-                }
-                break;
-        }
-        return false;
-    }
-
-    /**
-     *
-     * resets all of the values of all of the HashMaps except for scouterName
-     * It also increments the match number
-     *
-     */
-
-    public static void setupNextMatch(){
-        String scouterName = setupHashMap.get("ScouterName");
-        String matchNumber = setupHashMap.get("MatchNumber");
-        String allianceColor = setupHashMap.get("AllianceColor");
+        setDefaultValues(HASH.SETTINGS);
         setDefaultValues(HASH.SETUP);
         setDefaultValues(HASH.AUTON);
         setDefaultValues(HASH.TELEOP);
         setDefaultValues(HASH.ENDGAME);
-        setupHashMap.put("ScouterName", scouterName);
-        try {
-            setupHashMap.put("MatchNumber", Integer.toString((Integer.parseInt(matchNumber) + 1)));
-        } catch(NumberFormatException e){
-            setupHashMap.put("MatchNumber", "0");
+    }
+
+    /**
+     * Verifies that the requested HashMap is NOT null or empty. <br>
+     * If it is, re-initializes it with default values.
+     * @param map The requested HashMap
+     */
+    public static void checkNullOrEmpty(HASH map){
+        switch (map){
+            case SETTINGS:
+                if(settingsHashMap == null || settingsHashMap.isEmpty()) {
+                    settingsHashMap = new LinkedHashMap<>();
+                    setDefaultValues(HASH.SETTINGS);
+                }
+                break;
+            case SETUP:
+                if(setupHashMap == null || setupHashMap.isEmpty()) {
+                    setupHashMap = new LinkedHashMap<>();
+                    setDefaultValues(HASH.SETUP);
+                }
+                break;
+            case AUTON:
+                if(autonHashMap == null || autonHashMap.isEmpty()) {
+                    autonHashMap = new LinkedHashMap<>();
+                    setDefaultValues(HASH.AUTON);
+                }
+                break;
+            case TELEOP:
+                if(teleopHashMap == null || teleopHashMap.isEmpty()) {
+                    teleopHashMap = new LinkedHashMap<>();
+                    setDefaultValues(HASH.TELEOP);
+                }
+                break;
+            case ENDGAME:
+                if(endgameHashMap == null || endgameHashMap.isEmpty()) {
+                    endgameHashMap = new LinkedHashMap<>();
+                    setDefaultValues(HASH.ENDGAME);
+                }
+                break;
         }
-        setupHashMap.put("AllianceColor", allianceColor);
+    }
+
+    /**
+     * Resets the application for the next match. <br>
+     * Keeps ScouterName and increments MatchNumber.
+     */
+    public static void setupNextMatch(){
+        String scouter = setupHashMap.get("ScouterName");
+        String match = setupHashMap.get("MatchNumber");
+        int matchNum = 0;
+        try {
+            matchNum = Integer.parseInt(match);
+        } catch (Exception e) {}
+        matchNum++;
+
+        initHashMaps();
+        setupHashMap.put("ScouterName", scouter);
+        setupHashMap.put("MatchNumber", String.valueOf(matchNum));
     }
 }

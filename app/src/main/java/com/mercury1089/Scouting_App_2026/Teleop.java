@@ -34,7 +34,7 @@ public class Teleop extends Fragment implements UpdateListener {
     // Snapshot System (CSV format)
     private StringBuilder snapshotBuilder;
     private static final String SNAPSHOT_HEADER =
-            "teamNumber,scouterName,collecting,ferrying,scored,missed,attemptedClimb,successfulClimbed,climbLocation,noShow";
+            "scouterName,teamNumber,matchNumber,A_coll,A_scor,A_miss,A_ferr,A_died,A_att,A_succ,A_loc,T_coll,T_scor,T_miss,T_ferr,T_died,E_att,E_succ,E_loc,timestamp";
 
     // Counter toggles
     private RadioGroup collectingCounterToggle;
@@ -47,11 +47,6 @@ public class Teleop extends Fragment implements UpdateListener {
     private EditText ferryingEditText;
     private EditText scoredEditText;
     private EditText missedEditText;
-
-    // Climbing section
-    private RadioGroup attemptedClimbToggle;
-    private RadioGroup successfulClimbedToggle;
-    private RadioGroup successfullyClimbedLocationToggle;
 
     // Other controls
     private MaterialSwitch noShowSwitch;
@@ -73,6 +68,7 @@ public class Teleop extends Fragment implements UpdateListener {
     private int ferryingCount   = 0;
     private int scoredCount     = 0;
     private int missedCount     = 0;
+    private long secondsLeft    = 140;
 
     public static Teleop newInstance() {
         Teleop fragment = new Teleop();
@@ -109,11 +105,8 @@ public class Teleop extends Fragment implements UpdateListener {
         scoredEditText                    = getView().findViewById(R.id.ScoredCounter);
         missedCounterToggle               = getView().findViewById(R.id.MissedCounterToggle);
         missedEditText                    = getView().findViewById(R.id.MissedCounter);
-
-        attemptedClimbToggle              = getView().findViewById(R.id.AttemptedClimbToggle);
-        successfulClimbedToggle           = getView().findViewById(R.id.SuccessfulClimbed);
-        successfullyClimbedLocationToggle = getView().findViewById(R.id.SuccessfullyClimbedLocation);
         noShowSwitch                      = getView().findViewById(R.id.NoShowSwitch);
+
         timerID                           = getView().findViewById(R.id.IDTeleopSeconds);
         secondsRemaining                  = getView().findViewById(R.id.TeleopSeconds);
         saveButton                        = getView().findViewById(R.id.SaveButton);
@@ -154,18 +147,23 @@ public class Teleop extends Fragment implements UpdateListener {
         if (teamNumber == null) teamNumber = "";
         String scouterName = setupHashMap.get("ScouterName");
         if (scouterName == null) scouterName = "";
+        String matchNumber = setupHashMap.get("MatchNumber");
+        if (matchNumber == null) matchNumber = "";
 
-        String snapshotLine = String.format("%s,%s,%d,%d,%d,%d,%s,%s,%s,%s\n",
-                teamNumber,
+        String timestamp = String.valueOf(secondsLeft);
+
+        // Architecture: Scouter, Team, Match, [8 Auton cols (null)], [5 Teleop cols], [3 Endgame cols (null)], Timestamp
+        String snapshotLine = String.format("%s,%s,%s,,,,,,,,,%d,%d,%d,%d,%s,,,,%s\n",
                 scouterName,
+                teamNumber,
+                matchNumber,
+                //nuull auton values
                 collectingCount,
-                ferryingCount,
                 scoredCount,
                 missedCount,
-                getSelectedText(attemptedClimbToggle,              "0"),
-                getSelectedText(successfulClimbedToggle,           "0"),
-                getSelectedText(successfullyClimbedLocationToggle, ""),
-                (noShowSwitch != null && noShowSwitch.isChecked()) ? "1" : "0");
+                ferryingCount,
+                (noShowSwitch != null && noShowSwitch.isChecked()) ? "Y" : "N",
+                timestamp);
 
         snapshotBuilder.append(snapshotLine);
         teleopSnapshotCount++;
@@ -207,10 +205,6 @@ public class Teleop extends Fragment implements UpdateListener {
         refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
         refreshDisplay(scoringCounterToggle,    R.id.ScoredCounter,     scoredCount);
         refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
-
-        if (attemptedClimbToggle != null) attemptedClimbToggle.clearCheck();
-        if (successfulClimbedToggle != null) successfulClimbedToggle.clearCheck();
-        if (successfullyClimbedLocationToggle != null) successfullyClimbedLocationToggle.clearCheck();
 
         if (noShowSwitch != null) {
             noShowSwitch.setChecked(false);
@@ -368,13 +362,16 @@ public class Teleop extends Fragment implements UpdateListener {
     // ─────────────────────────────────────────
 
     private void setupTimer() {
-        timer = new CountDownTimer(130000, 1000) {
+        timer = new CountDownTimer(140000, 1000) {
             @Override
             public void onTick(long ms) {
                 if (secondsRemaining == null) return;
                 long secs = ms / 1000;
-                long mins = secs / 60;
-                long rem  = secs % 60;
+                secondsLeft = Math.max(0, Math.min(secs, 140) - 1);
+                
+                long displaySecs = Math.min(secs, 140);
+                long mins = displaySecs / 60;
+                long rem  = displaySecs % 60;
 
                 secondsRemaining.setText(mins + ":" + String.format("%02d", rem));
 
@@ -382,6 +379,7 @@ public class Teleop extends Fragment implements UpdateListener {
             }
             @Override
             public void onFinish() {
+                secondsLeft = 0;
                 if (!running) return;
                 try {
                     if (secondsRemaining != null) secondsRemaining.setText("00");
@@ -439,19 +437,15 @@ public class Teleop extends Fragment implements UpdateListener {
     // ─────────────────────────────────────────
 
     private void loadTeleopData() {
-        collectingCount = parseCount(hm("Collecting", "0"));
-        ferryingCount   = parseCount(hm("Ferrying",   "0"));
-        scoredCount     = parseCount(hm("Scored",     "0"));
-        missedCount     = parseCount(hm("Missed",     "0"));
+        collectingCount = parseCount(hm("Collecting", ""));
+        ferryingCount   = parseCount(hm("Ferrying",   ""));
+        scoredCount     = parseCount(hm("Scored",     ""));
+        missedCount     = parseCount(hm("Missed",     ""));
 
         refreshDisplay(collectingCounterToggle, R.id.CollectingCounter, collectingCount);
         refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
         refreshDisplay(scoringCounterToggle,    R.id.ScoredCounter,     scoredCount);
         refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
-
-        selectByText(attemptedClimbToggle,              hm("AttemptedClimb",    ""));
-        selectByText(successfulClimbedToggle,           hm("SuccessfulClimbed", ""));
-        selectByText(successfullyClimbedLocationToggle, hm("ClimbLocation",     ""));
 
         noShowSwitch.setChecked("Y".equals(hm("RobotFellOver", "N")));
     }
@@ -461,10 +455,8 @@ public class Teleop extends Fragment implements UpdateListener {
         teleopHashMap.put("Ferrying",          String.valueOf(ferryingCount));
         teleopHashMap.put("Scored",            String.valueOf(scoredCount));
         teleopHashMap.put("Missed",            String.valueOf(missedCount));
-        teleopHashMap.put("AttemptedClimb",    getSelectedText(attemptedClimbToggle,              ""));
-        teleopHashMap.put("SuccessfulClimbed", getSelectedText(successfulClimbedToggle,           ""));
-        teleopHashMap.put("ClimbLocation",     getSelectedText(successfullyClimbedLocationToggle, ""));
         teleopHashMap.put("RobotFellOver",     noShowSwitch.isChecked() ? "Y" : "N");
+        teleopHashMap.put("Timestamp",         String.valueOf(secondsLeft));
         HashMapManager.putTeleopHashMap(teleopHashMap);
     }
 

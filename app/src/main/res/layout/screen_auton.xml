@@ -107,6 +107,7 @@
                 android:layout_height="54dp"
                 android:background="@drawable/button_large_active"
                 android:backgroundTint="@null"
+                app:backgroundTint="@null"
                 android:text="@string/Save"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size"/>

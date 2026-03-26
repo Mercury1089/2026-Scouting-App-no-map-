@@ -1,10 +1,7 @@
 package com.mercury1089.Scouting_App_2026.utils;
 
 import com.mercury1089.Scouting_App_2026.HashMapManager;
-
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 public class QRStringBuilder {
 
@@ -16,87 +13,9 @@ public class QRStringBuilder {
     public static final String ROW_DELIMITER   = "\n";
 
     // ─────────────────────────────────────────
-    // LEVEL CONVERSION
-    // ─────────────────────────────────────────
-    private static String levelToDecimal(String level) {
-        if (level == null) return "0";
-        switch (level.toUpperCase().trim()) {
-            case "EMPTY": return "0";
-            case "25%":   return "0.25";
-            case "50%":   return "0.5";
-            case "75%":   return "0.75";
-            case "FULL":  return "1";
-            default:      return "0";
-        }
-    }
-
-    // ─────────────────────────────────────────
-    // CLIMB CONVERSION
-    // "DID NOT ATTEMPT" | "None" → 0, anything else → 1
-    // ─────────────────────────────────────────
-    private static String climbToNumeric(String climb) {
-        if (climb == null || climb.isEmpty()) return "0";
-        String t = climb.trim();
-        if (t.equalsIgnoreCase("DID NOT ATTEMPT") || t.equalsIgnoreCase("None") || t.equals("0"))
-            return "0";
-        return "1";
-    }
-
-    // ─────────────────────────────────────────
-    // PRELOAD CONVERSION
-    // ─────────────────────────────────────────
-    private static String preloadToInt(String preload) {
-        if (preload == null || preload.isEmpty()) return "1";
-        try {
-            int val = Integer.parseInt(preload.trim());
-            return (val >= 1 && val <= 8) ? String.valueOf(val) : "1";
-        } catch (NumberFormatException e) {
-            return "1";
-        }
-    }
-
-    // ─────────────────────────────────────────
-    // PARSE SNAPSHOT CSV
-    // Returns list of data rows (skips header line)
-    // Each row is a String[] of columns
-    // ─────────────────────────────────────────
-    private static List<String[]> parseSnapshots(String snapshotCsv) {
-        List<String[]> rows = new ArrayList<>();
-        if (snapshotCsv == null || snapshotCsv.isEmpty()) return rows;
-
-        String[] lines = snapshotCsv.split("\n");
-        // lines[0] is the header — skip it
-        for (int i = 1; i < lines.length; i++) {
-            String line = lines[i].trim();
-            if (!line.isEmpty()) {
-                rows.add(line.split(",", -1));
-            }
-        }
-        return rows;
-    }
-
-    // Column indices matching SNAPSHOT_HEADER:
-    // collecting,ferrying,missed,startLevel,stopLevel,attemptedClimb,successfulClimbed,climbLocation,robotFellOver
-    private static final int COL_COLLECTING       = 0;
-    private static final int COL_FERRYING         = 1;
-    private static final int COL_MISSED           = 2;
-    private static final int COL_START_LEVEL      = 3;
-    private static final int COL_STOP_LEVEL       = 4;
-    private static final int COL_ATTEMPTED_CLIMB  = 5;
-    private static final int COL_SUCCESSFUL_CLIMB = 6;
-    private static final int COL_CLIMB_LOCATION   = 7;
-    private static final int COL_FELL_OVER        = 8;
-
-    private static String col(String[] row, int index) {
-        if (row == null || index >= row.length) return "";
-        return row[index] != null ? row[index].trim() : "";
-    }
-
-    // ─────────────────────────────────────────
     // BUILD
     // ─────────────────────────────────────────
     public static void buildQRString() {
-        // Always reset before building
         QRString = new StringBuilder();
 
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.SETUP);
@@ -109,120 +28,141 @@ public class QRStringBuilder {
         LinkedHashMap<String, String> teleop  = HashMapManager.getTeleopHashMap();
         LinkedHashMap<String, String> endgame = HashMapManager.getEndgameHashMap();
 
-        // Parse snapshot CSVs
-        List<String[]> autonRows   = parseSnapshots(auton.get("snapshots"));
-        List<String[]> teleopRows  = parseSnapshots(teleop.get("snapshots"));
-        List<String[]> endgameRows = parseSnapshots(endgame.get("snapshots"));
-
-        int maxRows = Math.max(1, Math.max(autonRows.size(),
-                Math.max(teleopRows.size(), endgameRows.size())));
-
-        // Fixed setup fields
+        // Line 1: Setup
+        // Scouter,Team,Match,Alliance,NoShow,Preload
         String scouter  = nvl(setup.get("ScouterName"));
         String team     = nvl(setup.get("TeamNumber"));
         String match    = nvl(setup.get("MatchNumber"));
         String alliance = nvl(setup.get("AllianceColor"));
         String noShow   = nvl(setup.get("NoShow"));
-        String preload  = preloadToInt(setup.get("PreloadNote"));
-        String fellOver = nvl(setup.get("FellOver"));
+        String preload  = nvl(setup.get("PreloadedCargo"));
+        if (preload.isEmpty()) preload = nvl(setup.get("PreloadFuel")); // Fallback
+        if (preload.isEmpty()) preload = "0";
 
-        for (int i = 0; i < maxRows; i++) {
-            // Row 0: include setup fields; subsequent rows: leave blank
-            if (i == 0) {
-                QRString.append(scouter).append(",");
-                QRString.append(team).append(",");
-                QRString.append(match).append(",");
-                QRString.append(alliance).append(",");
-                QRString.append(noShow).append(",");
-                QRString.append(preload).append(",");
-                QRString.append(fellOver).append(",");
-            } else {
-                QRString.append(",,,,,,,");
-            }
+        QRString.append(scouter).append(",")
+                .append(team).append(",")
+                .append(match).append(",")
+                .append(alliance).append(",")
+                .append(noShow).append(",")
+                .append(preload);
 
-            // ── Auton snapshot i ──
-            if (i < autonRows.size()) {
-                String[] row = autonRows.get(i);
-                QRString.append(col(row, COL_COLLECTING)).append(",");
-                QRString.append(col(row, COL_FERRYING)).append(",");
-                QRString.append(col(row, COL_MISSED)).append(",");
-                QRString.append(levelToDecimal(col(row, COL_START_LEVEL))).append(",");
-                QRString.append(levelToDecimal(col(row, COL_STOP_LEVEL))).append(",");
-                QRString.append(climbToNumeric(col(row, COL_ATTEMPTED_CLIMB))).append(",");
-                QRString.append(climbToNumeric(col(row, COL_SUCCESSFUL_CLIMB))).append(",");
-                QRString.append(col(row, COL_CLIMB_LOCATION)).append(",");
-            } else if (i == 0) {
-                // No snapshots — fall back to base hashmap values
-                QRString.append(nvl(auton.get("Collecting"))).append(",");
-                QRString.append(nvl(auton.get("Ferrying"))).append(",");
-                QRString.append(nvl(auton.get("Missed"))).append(",");
-                QRString.append(levelToDecimal(auton.get("StartLevel"))).append(",");
-                QRString.append(levelToDecimal(auton.get("StopLevel"))).append(",");
-                QRString.append(climbToNumeric(auton.get("AttemptedClimb"))).append(",");
-                QRString.append(climbToNumeric(auton.get("SuccessfulClimbed"))).append(",");
-                QRString.append(nvl(auton.get("ClimbLocation"))).append(",");
-            } else {
-                QRString.append(",,,,,,,,");
-            }
+        // If "No Show" is checked, we only return the setup line.
+        if (noShow.equalsIgnoreCase("Y")) {
+            return;
+        }
 
-            // ── Teleop snapshot i ──
-            if (i < teleopRows.size()) {
-                String[] row = teleopRows.get(i);
-                QRString.append(col(row, COL_COLLECTING)).append(",");
-                QRString.append(col(row, COL_FERRYING)).append(",");
-                QRString.append(col(row, COL_MISSED)).append(",");
-                QRString.append(levelToDecimal(col(row, COL_START_LEVEL))).append(",");
-                QRString.append(levelToDecimal(col(row, COL_STOP_LEVEL))).append(",");
-                QRString.append(climbToNumeric(col(row, COL_ATTEMPTED_CLIMB))).append(",");
-                QRString.append(climbToNumeric(col(row, COL_SUCCESSFUL_CLIMB))).append(",");
-                QRString.append(col(row, COL_CLIMB_LOCATION)).append(",");
-            } else if (i == 0) {
-                QRString.append(nvl(teleop.get("Collecting"))).append(",");
-                QRString.append(nvl(teleop.get("Ferrying"))).append(",");
-                QRString.append(nvl(teleop.get("Missed"))).append(",");
-                QRString.append(levelToDecimal(teleop.get("StartLevel"))).append(",");
-                QRString.append(levelToDecimal(teleop.get("StopLevel"))).append(",");
-                QRString.append(climbToNumeric(teleop.get("AttemptedClimb"))).append(",");
-                QRString.append(climbToNumeric(teleop.get("SuccessfulClimbed"))).append(",");
-                QRString.append(nvl(teleop.get("ClimbLocation"))).append(",");
-            } else {
-                QRString.append(",,,,,,,,");
-            }
+        QRString.append(ROW_DELIMITER);
 
-            // ── Endgame snapshot i ──
-            if (i < endgameRows.size()) {
-                String[] row = endgameRows.get(i);
-                QRString.append(col(row, COL_COLLECTING)).append(",");
-                QRString.append(col(row, COL_FERRYING)).append(",");
-                QRString.append(col(row, COL_MISSED)).append(",");
-                QRString.append(levelToDecimal(col(row, COL_START_LEVEL))).append(",");
-                QRString.append(levelToDecimal(col(row, COL_STOP_LEVEL))).append(",");
-                QRString.append(climbToNumeric(col(row, COL_ATTEMPTED_CLIMB))).append(",");
-                QRString.append(climbToNumeric(col(row, COL_SUCCESSFUL_CLIMB))).append(",");
-                QRString.append(col(row, COL_CLIMB_LOCATION));
-            } else if (i == 0) {
-                QRString.append(nvl(endgame.get("Collecting"))).append(",");
-                QRString.append(nvl(endgame.get("Ferrying"))).append(",");
-                QRString.append(nvl(endgame.get("Missed"))).append(",");
-                QRString.append(levelToDecimal(endgame.get("StartLevel"))).append(",");
-                QRString.append(levelToDecimal(endgame.get("StopLevel"))).append(",");
-                QRString.append(climbToNumeric(endgame.get("AttemptedClimb"))).append(",");
-                QRString.append(climbToNumeric(endgame.get("SuccessfulClimbed"))).append(",");
-                QRString.append(nvl(endgame.get("ClimbLocation")));
-            } else {
-                QRString.append(",,,,,,,");
-            }
+        // Lines 2+: Auton Snapshots
+        String autonSnaps = getSnapshotsOnly(auton.get("snapshots"));
+        if (autonSnaps.isEmpty()) {
+            QRString.append(formatDefaultLine(scouter, team, match, auton, "AUTON")).append(ROW_DELIMITER);
+        } else {
+            QRString.append(autonSnaps);
+        }
 
-            if (i < maxRows - 1) QRString.append(ROW_DELIMITER);
+        // Lines 3+: Teleop Snapshots
+        String teleopSnaps = getSnapshotsOnly(teleop.get("snapshots"));
+        if (teleopSnaps.isEmpty()) {
+            QRString.append(formatDefaultLine(scouter, team, match, teleop, "TELEOP")).append(ROW_DELIMITER);
+        } else {
+            QRString.append(teleopSnaps);
+        }
+
+        // Lines 4+: Endgame Snapshots
+        String endgameSnaps = getSnapshotsOnly(endgame.get("snapshots"));
+        if (endgameSnaps.isEmpty()) {
+            QRString.append(formatDefaultLine(scouter, team, match, endgame, "ENDGAME")).append(ROW_DELIMITER);
+        } else {
+            QRString.append(endgameSnaps);
+        }
+
+        // Trim trailing row delimiter
+        if (QRString.length() > 0 && QRString.lastIndexOf(ROW_DELIMITER) == QRString.length() - ROW_DELIMITER.length()) {
+            QRString.setLength(QRString.length() - ROW_DELIMITER.length());
         }
     }
 
-    // ─────────────────────────────────────────
-    // HELPERS
-    // ─────────────────────────────────────────
+    private static String getSnapshotsOnly(String snapshots) {
+        if (snapshots == null || snapshots.isEmpty()) return "";
+        String[] lines = snapshots.split("\n");
+        StringBuilder sb = new StringBuilder();
+        // Skip header (index 0)
+        for (int i = 1; i < lines.length; i++) {
+            String line = lines[i].trim();
+            if (!line.isEmpty()) {
+                sb.append(line).append(ROW_DELIMITER);
+            }
+        }
+        return sb.toString();
+    }
+
+    private static String formatDefaultLine(String scouter, String team, String match, LinkedHashMap<String, String> map, String type) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(scouter).append(",")
+          .append(team).append(",")
+          .append(match).append(",");
+
+        // 8 Auton cols
+        if (type.equals("AUTON")) {
+            sb.append(nvl(map.get("Collecting"), "")).append(",")
+              .append(nvl(map.get("Scored"), "")).append(",")
+              .append(nvl(map.get("Missed"), "")).append(",")
+              .append(nvl(map.get("Ferrying"), "")).append(",")
+              .append(nvl(map.get("RobotFellOver"), "N")).append(",")
+              .append(climbToNumeric(map.get("AttemptedClimb"))).append(",")
+              .append(climbToNumeric(map.get("SuccessfulClimbed"))).append(",")
+              .append(nvl(map.get("ClimbLocation"), "")).append(",");
+        } else {
+            sb.append("0,0,0,0,N,0,0,N,");
+        }
+
+        // 5 Teleop cols
+        if (type.equals("TELEOP")) {
+            sb.append(nvl(map.get("Collecting"), "")).append(",")
+              .append(nvl(map.get("Scored"), "")).append(",")
+              .append(nvl(map.get("Missed"), "")).append(",")
+              .append(nvl(map.get("Ferrying"), "")).append(",")
+              .append(nvl(map.get("RobotFellOver"), "N")).append(",");
+        } else {
+            sb.append("0,0,0,0,N,");
+        }
+
+        // 3 Endgame cols
+        if (type.equals("ENDGAME")) {
+            sb.append(climbToNumeric(map.get("AttemptedClimb"))).append(",")
+              .append(climbToNumeric(map.get("SuccessfulClimbed"))).append(",")
+              .append(nvl(map.get("ClimbLocation"), "N"));
+        } else {
+            sb.append("0,0,N");
+        }
+
+        if (!type.equals("ENDGAME")) {
+            sb.append(",").append(nvl(map.get("Timestamp"), "0:00"));
+        }
+
+        return sb.toString();
+    }
+
+    private static String climbToNumeric(String climb) {
+        if (climb == null || climb.isEmpty()) return "0";
+        String t = climb.trim();
+        if (t.equalsIgnoreCase("NO ATTEMPT") || t.equalsIgnoreCase("NONE") || t.equalsIgnoreCase("DID NOT ATTEMPT") || t.equals("0"))
+            return "0";
+        try {
+            Integer.parseInt(t);
+            return t;
+        } catch (NumberFormatException e) {
+            return "1"; // Fallback for any other non-zero level string
+        }
+    }
 
     private static String nvl(String s) {
-        return s != null ? s : "";
+        return (s == null || s.trim().isEmpty()) ? "" : s.trim();
+    }
+
+    private static String nvl(String s, String def) {
+        return (s == null || s.trim().isEmpty()) ? def : s.trim();
     }
 
     // ─────────────────────────────────────────

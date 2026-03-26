@@ -23,7 +23,6 @@ import java.util.LinkedHashMap;
 public class QRRunnable implements Runnable {
     private final Activity context;
     private final Dialog loading_alert;
-    LinkedHashMap<String, String> setupHashMap = HashMapManager.getSetupHashMap();
     private String scouter, teamNum, matchNum, qrString;
     private boolean needsToBeStored;
 
@@ -42,71 +41,71 @@ public class QRRunnable implements Runnable {
         this.context = ctx;
         this.loading_alert = loading_alert;
         this.qrString = qrString;
-        // Multi-row QR string — parse scouter/team/match from the first row only
-        String firstRow = qrString.split(QRStringBuilder.ROW_DELIMITER)[0];
-        String[] data   = firstRow.split(QRStringBuilder.DELIMITER);
-        this.scouter  = data[QRStringBuilder.SCOUTER_NAME_INDEX];
-        this.teamNum  = data[QRStringBuilder.TEAM_NUM_INDEX];
-        this.matchNum = data[QRStringBuilder.MATCH_NUM_INDEX];
+        try {
+            // Multi-row QR string — parse scouter/team/match from the first row only
+            String firstRow = qrString.split(QRStringBuilder.ROW_DELIMITER)[0];
+            String[] data = firstRow.split(QRStringBuilder.DELIMITER);
+            this.scouter = data[QRStringBuilder.SCOUTER_NAME_INDEX];
+            this.teamNum = data[QRStringBuilder.TEAM_NUM_INDEX];
+            this.matchNum = data[QRStringBuilder.MATCH_NUM_INDEX];
+        } catch (Exception e) {
+            this.scouter = "Unknown";
+            this.teamNum = "0000";
+            this.matchNum = "00";
+        }
         needsToBeStored = false;
     }
 
     @Override
     public void run() {
-        // Once QR is generated, hashmap values go back to defaults
-        HashMapManager.setDefaultValues(HashMapManager.HASH.AUTON);
-        HashMapManager.setDefaultValues(HashMapManager.HASH.TELEOP);
-        HashMapManager.setDefaultValues(HashMapManager.HASH.ENDGAME);
+        if (needsToBeStored) {
+            // Once QR is generated, hashmap values go back to defaults
+            HashMapManager.setDefaultValues(HashMapManager.HASH.AUTON);
+            HashMapManager.setDefaultValues(HashMapManager.HASH.TELEOP);
+            HashMapManager.setDefaultValues(HashMapManager.HASH.ENDGAME);
+        }
 
         try {
             Bitmap bitmap = QRUtils.textToImageEncode(qrString);
             context.runOnUiThread(() -> {
-                if (needsToBeStored) {
-                    HashMapManager.putSetupHashMap(setupHashMap);
+                try {
+                    if (needsToBeStored) {
+                        Dialog dialog = new Dialog(context);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setContentView(R.layout.popup_qr);
+                        QRStringBuilder.storeQRString(context);
 
-                    Dialog dialog = new Dialog(context);
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.setContentView(R.layout.popup_qr);
-                    if (needsToBeStored) QRStringBuilder.storeQRString(context);
+                        ImageView imageView = dialog.findViewById(R.id.imageView);
+                        TextView scouterName = dialog.findViewById(R.id.ScouterNameQR);
+                        TextView teamNumber = dialog.findViewById(R.id.TeamNumberQR);
+                        TextView matchNumber = dialog.findViewById(R.id.MatchNumberQR);
+                        Button goBackToMain = dialog.findViewById(R.id.GoBackButton);
+                        ImageButton closeButton = dialog.findViewById(R.id.CloseButton);
+                        imageView.setImageBitmap(bitmap);
 
-                    ImageView imageView  = dialog.findViewById(R.id.imageView);
-                    TextView scouterName = dialog.findViewById(R.id.ScouterNameQR);
-                    TextView teamNumber = dialog.findViewById(R.id.TeamNumberQR);
-                    TextView matchNumber = dialog.findViewById(R.id.MatchNumberQR);
-                    Button goBackToMain  = dialog.findViewById(R.id.GoBackButton);
-                    ImageButton closeButton = dialog.findViewById(R.id.CloseButton);
-                    imageView.setImageBitmap(bitmap);
+                        dialog.setCancelable(false);
 
-                    dialog.setCancelable(false);
+                        scouterName.setText(this.scouter);
+                        teamNumber.setText(this.teamNum);
+                        matchNumber.setText(this.matchNum);
 
-                    scouterName.setText(this.scouter);
-                    teamNumber.setText(this.teamNum);
-                    matchNumber.setText(this.matchNum);
+                        closeButton.setOnClickListener(v -> dialog.dismiss());
 
-                    closeButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
+                        if (loading_alert != null && loading_alert.isShowing()) {
+                            loading_alert.dismiss();
                         }
-                    });
+                        dialog.show();
 
-                    if (loading_alert != null && loading_alert.isShowing()) {
-                        loading_alert.dismiss();
-                    }
-                    dialog.show();
+                        goBackToMain.setOnClickListener(v -> {
+                            Dialog confirmDialog = new Dialog(context);
+                            confirmDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            confirmDialog.setContentView(R.layout.popup_setup_next_match_confirm);
+                            Button setupNextMatchButton = confirmDialog.findViewById(R.id.SetupNextMatchButton);
+                            Button cancelConfirm = confirmDialog.findViewById(R.id.CancelConfirm);
 
-                    goBackToMain.setOnClickListener(v -> {
-                        Dialog confirmDialog = new Dialog(context);
-                        confirmDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        confirmDialog.setContentView(R.layout.popup_setup_next_match_confirm);
-                        Button setupNextMatchButton = confirmDialog.findViewById(R.id.SetupNextMatchButton);
-                        Button cancelConfirm        = confirmDialog.findViewById(R.id.CancelConfirm);
+                            confirmDialog.show();
 
-                        confirmDialog.show();
-
-                        setupNextMatchButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
+                            setupNextMatchButton.setOnClickListener(view -> {
                                 QRStringBuilder.clearQRString();
                                 HashMapManager.setupNextMatch();
                                 Intent intent = new Intent(context, PregameActivity.class);
@@ -114,40 +113,52 @@ public class QRRunnable implements Runnable {
                                 context.startActivity(intent);
                                 context.finish();
                                 confirmDialog.dismiss();
-                            }
+                            });
+
+                            cancelConfirm.setOnClickListener(view -> confirmDialog.dismiss());
                         });
+                    } else {
+                        Dialog dialog = new Dialog(context);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setContentView(R.layout.popup_qr_cached);
 
-                        cancelConfirm.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                confirmDialog.dismiss();
-                            }
-                        });
-                    });
-                } else {
-                    Dialog dialog = new Dialog(context);
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.setContentView(R.layout.popup_qr_cached);
+                        ImageView imageView = dialog.findViewById(R.id.imageView);
+                        ImageButton closeButton = dialog.findViewById(R.id.CloseButton);
+                        
+                        // Use findViewById to check if these exist in the layout before setting them
+                        TextView scouterName = dialog.findViewById(R.id.ScouterNameQR);
+                        TextView teamNumber = dialog.findViewById(R.id.TeamNumberQR);
+                        TextView matchNumber = dialog.findViewById(R.id.MatchNumberQR);
 
-                    ImageView imageView = dialog.findViewById(R.id.imageView);
-                    TextView scouterName = dialog.findViewById(R.id.ScouterNameQR);
-                    TextView teamNumber = dialog.findViewById(R.id.TeamNumberQR);
-                    TextView matchNumber = dialog.findViewById(R.id.MatchNumberQR);
-                    imageView.setImageBitmap(bitmap);
+                        imageView.setImageBitmap(bitmap);
+                        if (scouterName != null) scouterName.setText(this.scouter);
+                        if (teamNumber != null) teamNumber.setText(GenUtils.padLeftZeros(this.teamNum, 4));
+                        if (matchNumber != null) matchNumber.setText(GenUtils.padLeftZeros(this.matchNum, 2));
 
-                    dialog.setCancelable(false);
+                        dialog.setCancelable(false);
 
-                    scouterName.setText(scouter);
-                    teamNumber.setText(GenUtils.padLeftZeros(teamNum, 2));
-                    matchNumber.setText(GenUtils.padLeftZeros(matchNum, 2));
+                        closeButton.setOnClickListener(v -> dialog.dismiss());
 
-                    loading_alert.dismiss();
+                        if (loading_alert != null && loading_alert.isShowing()) {
+                            loading_alert.dismiss();
+                        }
 
-                    dialog.show();
+                        dialog.show();
+                    }
+                } catch (Exception e) {
+                    Log.e("QRGen", "Error showing QR dialog: " + e.getMessage());
+                    if (loading_alert != null && loading_alert.isShowing()) {
+                        loading_alert.dismiss();
+                    }
                 }
             });
         } catch (Exception e) {
-            Log.d("QRGen", "Something went wrong while generating a QR Code.");
+            Log.e("QRGen", "Something went wrong while generating a QR Code: " + e.getMessage());
+            context.runOnUiThread(() -> {
+                if (loading_alert != null && loading_alert.isShowing()) {
+                    loading_alert.dismiss();
+                }
+            });
         }
     }
 }

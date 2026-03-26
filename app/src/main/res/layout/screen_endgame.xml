@@ -51,30 +51,16 @@
                 app:backgroundTint="@color/midnight" />
 
             <Button
-                android:id="@+id/SaveButton"
-                android:layout_width="550dp"
+                android:id="@+id/NextQRButton"
+                android:layout_width="750dp"
                 android:layout_height="54dp"
                 android:background="@drawable/button_large_active"
-                android:text="@string/Save"
+                android:text="@string/GenerateQRCode"
                 android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size"/>
-
-            <Button
-                android:id="@+id/NextQRButton"
-                android:layout_width="200dp"
-                android:layout_height="54dp"
-                android:layout_marginStart="20dp"
-                android:paddingHorizontal="12dp"
-                android:text="GENERATE QR"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/button_text_size"
-                android:background="@drawable/button_large_states"
-                app:backgroundTint="@null"
                 app:icon="@drawable/qr_states"
                 app:iconGravity="textStart"
                 app:iconTint="@null"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/autonTimerBar" />
+                android:textSize="@dimen/button_text_size"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
