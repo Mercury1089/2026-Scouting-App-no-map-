@@ -4,14 +4,14 @@ import java.util.HashMap;
 
 public class LocationGroupList {
     public static HashMap<String, LocationGroup> list = new HashMap<String, LocationGroup>();
-    public static HashMap getLocations(String panelOrCargo) {
+    public static HashMap getLocations(String panelOrFuel) {
         HashMap<String, LocationGroup> locations = new HashMap<>();
-        if (panelOrCargo.equals("Panel")) {
+        if (panelOrFuel.equals("Panel")) {
             for (String key : list.keySet()) {
                 if (key.charAt(2) == 'P')
                     locations.put(key, list.get(key));
             }
-        } else if (panelOrCargo.equals("Cargo")) {
+        } else if (panelOrFuel.equals("Fuel")) {
             for (String key : list.keySet()) {
                 if (key.charAt(2) == 'P')
                     locations.put(key, list.get(key));

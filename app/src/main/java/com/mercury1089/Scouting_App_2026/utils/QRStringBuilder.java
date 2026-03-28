@@ -37,7 +37,7 @@ public class QRStringBuilder {
         String partner2 = nvl(setup.get("AlliancePartner2"));
         String alliance = nvl(setup.get("AllianceColor"));
         String noShow   = nvl(setup.get("NoShow"));
-        String preload  = nvl(setup.get("PreloadedCargo"));
+        String preload  = nvl(setup.get("PreloadedFuel"));
         if (preload.isEmpty()) preload = nvl(setup.get("PreloadFuel")); // Fallback
         if (preload.isEmpty()) preload = "0";
 
@@ -129,35 +129,35 @@ public class QRStringBuilder {
               .append(nvl(map.get("Ferrying"), "")).append(",")
               .append(nvl(map.get("RobotFellOver"), "N")).append(",");
         } else {
-            sb.append("0,0,0,0,N,");
+            sb.append(",,,,,");
         }
 
         // 3 Endgame cols
         if (type.equals("ENDGAME")) {
             sb.append(climbToNumeric(map.get("AttemptedClimb"))).append(",")
               .append(climbToNumeric(map.get("SuccessfulClimbed"))).append(",")
-              .append(nvl(map.get("ClimbLocation"), "N"));
+              .append(nvl(map.get("ClimbLocation"), ""));
         } else {
-            sb.append("0,0,N");
+            sb.append(",,");
         }
 
         if (!type.equals("ENDGAME")) {
-            sb.append(",").append(nvl(map.get("Timestamp"), "0:00"));
+            sb.append(",").append(nvl(map.get("Timestamp"), "0"));
         }
 
         return sb.toString();
     }
 
     private static String climbToNumeric(String climb) {
-        if (climb == null || climb.isEmpty()) return "0";
+        if (climb == null || climb.isEmpty()) return null;
         String t = climb.trim();
         if (t.equalsIgnoreCase("NO ATTEMPT") || t.equalsIgnoreCase("NONE") || t.equalsIgnoreCase("DID NOT ATTEMPT") || t.equals("0"))
-            return "0";
+            return null;
         try {
             Integer.parseInt(t);
             return t;
         } catch (NumberFormatException e) {
-            return "1"; // Fallback for any other non-zero level string
+            return "9"; // Fallback for any other non-zero level string
         }
     }
 

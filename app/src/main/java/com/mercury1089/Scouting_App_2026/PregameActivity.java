@@ -60,8 +60,8 @@ public class PregameActivity extends AppCompatActivity {
 
     //Switches & Counters
     private MaterialSwitch noShowSwitch;
-    private RadioGroup preloadedCargoToggle;
-    private RadioButton preloadCargoDisplay;
+    private RadioGroup preloadedFuelToggle;
+    private RadioButton preloadFuelDisplay;
 
 
     //HashMaps
@@ -71,29 +71,29 @@ public class PregameActivity extends AppCompatActivity {
     boolean isQRButton = false;
 
     //Max and Min of of Preloading
-    private static final int PRELOAD_CARGO_MAX = 8;
-    private static final int PRELOAD_CARGO_MIN = 0;
+    private static final int PRELOAD_FUEL_MAX = 8;
+    private static final int PRELOAD_FUEL_MIN = 0;
     //others
     private MediaPlayer rooster;
 
-    // Unified listener for the preloaded cargo counter
+    // Unified listener for the preloaded fuel counter
     private final RadioGroup.OnCheckedChangeListener preLoadListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
-            if (checkedId == R.id.PreloadedCargoDisplay) {
+            if (checkedId == R.id.PreloadedFuelDisplay) {
                 return;
             }
-            int currentCargo = getPreloadCargoCount();
-            if (checkedId == R.id.PreloadedCargoMinus) {
-                if (currentCargo > PRELOAD_CARGO_MIN) {
-                    currentCargo--;
+            int currentFuel = getPreloadFuelCount();
+            if (checkedId == R.id.PreloadedFuelMinus) {
+                if (currentFuel > PRELOAD_FUEL_MIN) {
+                    currentFuel--;
                 }
-            } else if (checkedId == R.id.PreloadedCargoPlus) {
-                if (currentCargo < PRELOAD_CARGO_MAX) {
-                    currentCargo++;
+            } else if (checkedId == R.id.PreloadedFuelPlus) {
+                if (currentFuel < PRELOAD_FUEL_MAX) {
+                    currentFuel++;
                 }
             }
-            updatePreloadCargoCount(currentCargo);
+            updatePreloadFuelCount(currentFuel);
             refreshPreloadDisplay();
             updateXMLObjects(false);
         }
@@ -122,9 +122,9 @@ public class PregameActivity extends AppCompatActivity {
         startButton = findViewById(R.id.StartButton);
         settingsButton = findViewById(R.id.SettingsButton);
 
-        //Preload Cargo Toggle (RadioGroup)
-        preloadedCargoToggle = findViewById(R.id.CollectingCounterToggle);
-        preloadCargoDisplay = findViewById(R.id.PreloadedCargoDisplay);
+        //Preload Fuel Toggle (RadioGroup)
+        preloadedFuelToggle = findViewById(R.id.CollectingCounterToggle);
+        preloadFuelDisplay = findViewById(R.id.PreloadedFuelDisplay);
 
         //misc
         startDirectionsToast = findViewById(R.id.IDStartDirections);
@@ -268,7 +268,7 @@ public class PregameActivity extends AppCompatActivity {
             updateXMLObjects(false);
         });
 
-        preloadedCargoToggle.setOnCheckedChangeListener(preLoadListener);
+        preloadedFuelToggle.setOnCheckedChangeListener(preLoadListener);
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -381,28 +381,28 @@ public class PregameActivity extends AppCompatActivity {
         };
     }
 
-    private int getPreloadCargoCount() {
+    private int getPreloadFuelCount() {
         try {
-            String cargoStr = setupHashMap.get("PreloadedCargo");
-            return Integer.parseInt(cargoStr != null ? cargoStr : "0");
+            String fuelStr = setupHashMap.get("PreloadedFuel");
+            return Integer.parseInt(fuelStr != null ? fuelStr : "0");
         } catch (NumberFormatException e) {
             return 0;
         }
     }
 
-    private void updatePreloadCargoCount(int count) {
-        setupHashMap.put("PreloadedCargo", String.valueOf(count));
-        updatePreloadCargoDisplay(count);
+    private void updatePreloadFuelCount(int count) {
+        setupHashMap.put("PreloadedFuel", String.valueOf(count));
+        updatePreloadFuelDisplay(count);
     }
 
-    private void updatePreloadCargoDisplay(int count) {
-        preloadCargoDisplay.setText(String.format("%03d", count));
+    private void updatePreloadFuelDisplay(int count) {
+        preloadFuelDisplay.setText(String.format("%03d", count));
     }
 
     private void refreshPreloadDisplay() {
-        preloadedCargoToggle.setOnCheckedChangeListener(null);
-        preloadedCargoToggle.check(R.id.PreloadedCargoDisplay);
-        preloadedCargoToggle.setOnCheckedChangeListener(preLoadListener);
+        preloadedFuelToggle.setOnCheckedChangeListener(null);
+        preloadedFuelToggle.check(R.id.PreloadedFuelDisplay);
+        preloadedFuelToggle.setOnCheckedChangeListener(preLoadListener);
     }
 
     private boolean readyToStart() {
@@ -429,7 +429,7 @@ public class PregameActivity extends AppCompatActivity {
                 firstAlliancePartnerInput.getText().length() > 0 ||
                 secondAlliancePartnerInput.getText().length() > 0 ||
                 (allianceColor != null && !allianceColor.isEmpty()) || 
-                getPreloadCargoCount() > 0;
+                getPreloadFuelCount() > 0;
     }
 
     /*
@@ -448,7 +448,7 @@ public class PregameActivity extends AppCompatActivity {
             teamNumberInput.setText(setupHashMap.get("TeamNumber"));
             firstAlliancePartnerInput.setText(setupHashMap.get("AlliancePartner1"));
             secondAlliancePartnerInput.setText(setupHashMap.get("AlliancePartner2"));
-            updatePreloadCargoDisplay(getPreloadCargoCount());
+            updatePreloadFuelDisplay(getPreloadFuelCount());
             refreshPreloadDisplay();
         }
 

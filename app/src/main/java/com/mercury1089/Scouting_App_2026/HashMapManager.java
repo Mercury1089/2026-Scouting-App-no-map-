@@ -368,7 +368,7 @@ public class HashMapManager {
                 setupHashMap.put("ScouterName", "");
                 setupHashMap.put("TeamNumber", "");
                 setupHashMap.put("MatchNumber", "");
-                setupHashMap.put("PreloadedCargo", "0");
+                setupHashMap.put("PreloadedFuel", "0");
                 setupHashMap.put("AlliancePartner1", "");
                 setupHashMap.put("AlliancePartner2", "");
                 setupHashMap.put("AllianceColor", "");

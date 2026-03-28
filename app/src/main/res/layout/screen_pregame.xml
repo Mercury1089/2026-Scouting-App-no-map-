@@ -315,7 +315,7 @@
                     app:layout_constraintTop_toTopOf="@+id/PreloadWrapper" >
 
                     <RadioButton
-                        android:id="@+id/PreloadedCargoMinus"
+                        android:id="@+id/PreloadedFuelMinus"
                         android:layout_width="@dimen/button_height"
                         android:layout_height="match_parent"
                         android:background="@drawable/counter_left_button_states"
@@ -327,7 +327,7 @@
                         android:textSize="@dimen/button_text_size" />
 
                     <RadioButton
-                        android:id="@+id/PreloadedCargoDisplay"
+                        android:id="@+id/PreloadedFuelDisplay"
                         android:layout_width="@dimen/button_height"
                         android:layout_height="match_parent"
                         android:button="@null"
@@ -340,7 +340,7 @@
                         android:textSize="@dimen/button_text_size"/>
 
                     <RadioButton
-                        android:id="@+id/PreloadedCargoPlus"
+                        android:id="@+id/PreloadedFuelPlus"
                         android:layout_width="@dimen/button_height"
                         android:layout_height="match_parent"
                         android:background="@drawable/counter_right_button_states"
