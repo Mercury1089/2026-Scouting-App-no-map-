@@ -175,6 +175,47 @@
                 android:textColorHint="@color/sky"
                 app:layout_constraintStart_toStartOf="@+id/IDTeamNumber"
                 app:layout_constraintTop_toBottomOf="@+id/IDTeamNumber" />
+
+            <View
+                android:id="@+id/div2"
+                android:layout_width="300dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="25dp"
+                android:background="@color/night"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/SuccessfullyClimbedLocation" />
+
+
+            <!--No Show Switch-->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/SwitchWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/PreloadWrapper">
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/NoShowSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    app:thumbTint="@color/thumb_states"
+                    app:trackDecoration="@null"
+                    app:trackTint="@color/track_states" />
+
+                <TextView
+                    android:id="@+id/NoShowText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/open_sans"
+                    android:text="@string/NoShow"
+                    android:textColor="@drawable/text_states"
+                    android:textSize="@dimen/button_text_size" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <!-- ═════════════════════════════════════════
@@ -298,19 +339,29 @@
             <!--Preload-->
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/PreloadWrapper"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:gravity="center|start"
                 app:layout_constraintStart_toEndOf="@id/AllianceToggle"
                 app:layout_constraintTop_toTopOf="@id/AllianceToggle">
+
+                <TextView
+                    android:id="@+id/IDPreload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/open_sans"
+                    android:text="@string/Preload"
+                    android:textColor="@drawable/text_states"
+                    android:textSize="@dimen/input_label_text_size" />
 
                 <RadioGroup
                     android:id="@+id/CollectingCounterToggle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="@+id/PreloadWrapper"
                     app:layout_constraintTop_toTopOf="@+id/PreloadWrapper" >
 
@@ -352,48 +403,8 @@
                         android:textColor="@drawable/text_states"
                         android:textSize="@dimen/button_text_size" />
                 </RadioGroup>
-
-                <TextView
-                    android:id="@+id/IDPreload"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:fontFamily="@font/open_sans"
-                    android:text="@string/Preload"
-                    android:textColor="@drawable/text_states"
-                    android:textSize="@dimen/input_label_text_size" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-            <!--No Show Switch-->
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/SwitchWrapper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/PreloadWrapper">
-
-                <com.google.android.material.materialswitch.MaterialSwitch
-                    android:id="@+id/NoShowSwitch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="false"
-                    app:thumbTint="@color/thumb_states"
-                    app:trackDecoration="@null"
-                    app:trackTint="@color/track_states" />
-
-                <TextView
-                    android:id="@+id/NoShowText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="@font/open_sans"
-                    android:text="@string/NoShow"
-                    android:textColor="@drawable/text_states"
-                    android:textSize="@dimen/button_text_size" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -164,6 +164,10 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\counter_left_button_states_no_corners.xml"
     },
     {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_popup_qr.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/popup_qr.xml"
+    },
+    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_screen_pregame.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\screen_pregame.xml"
     },
@@ -388,6 +392,10 @@
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\text_states.xml"
     },
     {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_screen_endgame.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/screen_endgame.xml"
+    },
+    {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\layout_popup_setup_next_match_confirm.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\layout\\popup_setup_next_match_confirm.xml"
     },
@@ -434,6 +442,10 @@
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\drawable_starting_pos_states.xml.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\drawable\\starting_pos_states.xml"
+    },
+    {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_screen_teleop.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/screen_teleop.xml"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
@@ -546,6 +558,14 @@
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\mipmap-xhdpi_team_logo_icon_foreground.png.flat",
         "source": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-main-36:\\mipmap-xhdpi\\team_logo_icon_foreground.png"
+    },
+    {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_screen_pregame.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/screen_pregame.xml"
+    },
+    {
+        "merged": "com.mercury1089.Scouting_App_2026.app-debug-34:/layout_screen_match_tabs.xml.flat",
+        "source": "com.mercury1089.Scouting_App_2026.app-main-36:/layout/screen_match_tabs.xml"
     },
     {
         "merged": "C:\\Users\\Mercury1089\\.gradle\\daemon\\9.4.0\\com.mercury1089.Scouting_App_2026.app-debug-34:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",

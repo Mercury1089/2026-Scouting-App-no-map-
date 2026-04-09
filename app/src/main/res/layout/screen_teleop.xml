@@ -4,23 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/teleopFieldContainer"
     android:layout_width="match_parent"
-    android:layout_height="540dp"
+    android:layout_height="match_parent"
     android:background="@color/bg_general">
 
     <!-- ═════════════════════════════════════════
      TIMER & BUTTON BOX (bottom)
      ═════════════════════════════════════════ -->
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/FixedBottom"
+        android:id="@+id/timerWrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
         android:layout_marginHorizontal="20dp"
-        android:orientation="vertical"
+        android:layout_marginTop="10dp"
         android:gravity="center_horizontal|bottom"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- ═════════════════════════════════════════
         TIMER
@@ -29,8 +29,9 @@
             android:id="@+id/TimerBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/IDTeleopSeconds"
                 android:layout_width="wrap_content"
@@ -42,6 +43,7 @@
                 android:textColor="@color/sky"
                 android:textSize="@dimen/instruction_text_size"
                 app:layout_constraintBottom_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/TeleopSeconds"
                 android:layout_width="wrap_content"
@@ -50,8 +52,51 @@
                 android:text="@string/DefaultValue"
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/instruction_text_size"
-                app:layout_constraintStart_toEndOf="@+id/IDTeleopSeconds" />
+                app:layout_constraintStart_toEndOf="@+id/IDAutonSeconds" />
         </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <!-- Timer Warning -->
+        <TextView
+            android:id="@+id/EndgameWarning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/teleop_warning"
+            android:fontFamily="@font/open_sans"
+            android:text="@string/EndGameWarning"
+            android:textColor="@color/charcoal"
+            android:textSize="@dimen/input_label_text_size"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/FixedBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal|bottom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/IDStartDirections"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="12dp"
+            android:enabled="true"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="Press SAVE after each task the robot attempts."
+            android:textColor="@drawable/text_states"
+            android:textSize="@dimen/input_label_text_size"
+            app:drawableStartCompat="@drawable/start_directions_symbol_states"
+            app:layout_constraintBottom_toTopOf="@+id/StartButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <!-- Divider -->
         <View
@@ -73,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:orientation="horizontal"
-            android:gravity="end|bottom"
+            android:gravity="center|bottom"
             app:layout_constraintStart_toEndOf="parent" >
 
             <Button
@@ -102,7 +147,7 @@
                 android:layout_height="54dp"
                 android:layout_marginStart="20dp"
                 android:paddingHorizontal="12dp"
-                android:text="CLIMBING"
+                android:text="@string/EndGame"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/button_text_size"
                 android:background="@drawable/button_large_states"
@@ -119,9 +164,6 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-
-
-
     <!-- ═════════════════════════════════════════
          COLUMN ONE
          ═════════════════════════════════════════ -->
@@ -130,8 +172,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -159,115 +201,6 @@
             android:textSize="@dimen/instruction_text_size"
             android:textStyle="italic"
             app:layout_constraintTop_toBottomOf="@+id/CollectingTitle" />
-
-        <!-- ═════════════════════════════════════════
-             COLLECTING
-             ═════════════════════════════════════════ -->
-        <TextView
-            android:id="@+id/CollectingTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/futura_medium_condensed_bt"
-            android:gravity="top"
-            android:text="PICKED UP"
-            android:textColor="@drawable/text_subead_states"
-            android:textSize="@dimen/subheader_text_size"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Collecting counter toggle: -10 | -5 | - | 000 | + | +5 | +10 -->
-        <RadioGroup
-            android:id="@+id/CollectingCounterToggle"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@id/CollectingDesc"
-            app:layout_constraintTop_toBottomOf="@+id/CollectingDesc">
-
-            <RadioButton
-                android:id="@+id/CollectingMinus10"
-                android:layout_width="@dimen/button_height"
-                android:layout_height="@dimen/button_height"
-                android:layout_marginEnd="1dp"
-                android:background="@drawable/counter_left_button_states"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:text="-10"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
-
-            <RadioButton
-                android:id="@+id/CollectingMinus5"
-                android:layout_width="@dimen/button_height"
-                android:layout_height="@dimen/button_height"
-                android:layout_marginEnd="1dp"
-                android:background="@drawable/counter_left_button_states_no_corners"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:text="-5"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
-
-            <EditText
-                android:id="@+id/CollectingCounter"
-                android:layout_width="75dp"
-                android:layout_height="@dimen/button_height"
-                android:background="@drawable/edittext_rounded_corners"
-                android:fontFamily="@font/open_sans"
-                android:hint="@string/DefaultValue"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:tag=""
-                android:textColor="@color/charcoal"
-                android:textColorHint="@color/night"
-                android:gravity="center"
-                android:padding="12dp"
-                android:layout_marginHorizontal="5dp"
-                app:layout_constraintStart_toEndOf="@+id/CollectingMinus5"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!--<RadioButton
-                android:id="@+id/CollectingCounter"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:button="@null"
-                android:checked="false"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:padding="12dp"
-                android:text="@string/DefaultValue"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />-->
-
-            <RadioButton
-                android:id="@+id/CollectingPlus5"
-                android:layout_width="@dimen/button_height"
-                android:layout_height="@dimen/button_height"
-                android:layout_marginEnd="1dp"
-                android:background="@drawable/counter_right_button_states_no_corners"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:text="+5"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
-
-            <RadioButton
-                android:id="@+id/CollectingPlus10"
-                android:layout_width="@dimen/button_height"
-                android:layout_height="match_parent"
-                android:background="@drawable/counter_right_button_states"
-                android:button="@null"
-                android:fontFamily="@font/open_sans"
-                android:gravity="center"
-                android:text="+10"
-                android:textColor="@drawable/text_states"
-                android:textSize="@dimen/button_text_size" />
-        </RadioGroup>
 
         <!-- ═════════════════════════════════════════
          SCORED AND MISSED ROW
@@ -315,7 +248,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/ScoringDesc">
 
                     <RadioButton
-                        android:id="@+id/ScoredMinus5"
+                        android:id="@+id/ScoredMinus10"
                         android:layout_width="@dimen/button_height"
                         android:layout_height="@dimen/button_height"
                         android:layout_marginEnd="1dp"
@@ -323,7 +256,7 @@
                         android:button="@null"
                         android:fontFamily="@font/open_sans"
                         android:gravity="center"
-                        android:text="-5"
+                        android:text="-10"
                         android:textColor="@drawable/text_states"
                         android:textSize="@dimen/button_text_size" />
 
@@ -385,7 +318,7 @@
                         android:textSize="@dimen/button_text_size" />
 
                     <RadioButton
-                        android:id="@+id/ScoredPlus5"
+                        android:id="@+id/ScoredPlus10"
                         android:layout_width="@dimen/button_height"
                         android:layout_height="@dimen/button_height"
                         android:layout_marginEnd="1dp"
@@ -393,7 +326,7 @@
                         android:button="@null"
                         android:fontFamily="@font/open_sans"
                         android:gravity="center"
-                        android:text="+5"
+                        android:text="+10"
                         android:textColor="@drawable/text_states"
                         android:textSize="@dimen/button_text_size" />
                 </RadioGroup>
@@ -433,7 +366,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/MissedDesc">
 
                     <RadioButton
-                        android:id="@+id/MissedMinus5"
+                        android:id="@+id/MissedMinus10"
                         android:layout_width="@dimen/button_height"
                         android:layout_height="@dimen/button_height"
                         android:layout_marginEnd="1dp"
@@ -441,7 +374,7 @@
                         android:button="@null"
                         android:fontFamily="@font/open_sans"
                         android:gravity="center"
-                        android:text="-5"
+                        android:text="-10"
                         android:textColor="@drawable/text_states"
                         android:textSize="@dimen/button_text_size" />
 
@@ -503,7 +436,7 @@
                         android:textSize="@dimen/button_text_size" />
 
                     <RadioButton
-                        android:id="@+id/MissedPlus5"
+                        android:id="@+id/MissedPlus10"
                         android:layout_width="@dimen/button_height"
                         android:layout_height="@dimen/button_height"
                         android:layout_marginEnd="1dp"
@@ -511,7 +444,7 @@
                         android:button="@null"
                         android:fontFamily="@font/open_sans"
                         android:gravity="center"
-                        android:text="+5"
+                        android:text="+10"
                         android:textColor="@drawable/text_states"
                         android:textSize="@dimen/button_text_size" />
                 </RadioGroup>
@@ -522,7 +455,7 @@
             android:id="@+id/div"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:background="@color/night"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -535,7 +468,7 @@
             android:id="@+id/FerryingTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/futura_medium_condensed_bt"
             android:text="@string/Ferrying"
             android:textColor="@drawable/text_header_states"
@@ -545,9 +478,9 @@
 
         <TextView
             android:id="@+id/FerryingDesc"
-            android:layout_width="match_parent"
+            android:layout_width="580dp"
             android:layout_height="wrap_content"
-            android:text="@string/FerryingDesc"
+            android:text="@string/FerryingInstructions"
             android:textColor="@color/cloud"
             android:textSize="@dimen/instruction_text_size"
             android:textStyle="italic"
@@ -561,7 +494,7 @@
             android:id="@+id/FerryingCounterToggle"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_height"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="@id/FerryingDesc"
             app:layout_constraintTop_toBottomOf="@+id/FerryingDesc">
@@ -648,21 +581,16 @@
                 android:textColor="@drawable/text_states"
                 android:textSize="@dimen/button_text_size" />
         </RadioGroup>
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <!-- ═════════════════════════════════════════
-    COLUMN TWO  (right column)
-    ═════════════════════════════════════════ -->
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ColumnThree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="30dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/FixedBottom">
+        <View
+            android:id="@+id/div2"
+            android:layout_width="300dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/night"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SuccessfullyClimbedLocation" />
 
         <!--Fell Over Switch-->
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -695,5 +623,49 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!-- ═════════════════════════════════════════
+     EDGE BARS
+     ═════════════════════════════════════════ -->
+
+    <ImageView
+        android:id="@+id/leftEdgeBar"
+        android:layout_width="5dp"
+        android:layout_height="0dp"
+        android:alpha="0"
+        android:background="@drawable/teleop_warning"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/rightEdgeBar"
+        android:layout_width="5dp"
+        android:layout_height="0dp"
+        android:alpha="0"
+        android:background="@drawable/teleop_warning"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/topEdgeBar"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:alpha="0"
+        android:background="@drawable/teleop_warning"
+        app:layout_constraintEnd_toStartOf="@id/rightEdgeBar"
+        app:layout_constraintStart_toEndOf="@id/leftEdgeBar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/bottomEdgeBar"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:alpha="0"
+        android:background="@drawable/teleop_warning"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rightEdgeBar"
+        app:layout_constraintStart_toStartOf="@+id/leftEdgeBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

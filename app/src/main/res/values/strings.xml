@@ -47,7 +47,7 @@
     <string name="NoShow">No robot on field</string>
     <string name="Clear">CLEAR</string>
     <string name="Start">START</string>
-    <string name="GenerateQRCode">GENERATE QR CODE</string>
+    <string name="GenerateQRCode">GENERATE QR</string>
 
     <!--Auton. Teleop, Endgame Actions-->
     <!-- Instructions -->
@@ -61,31 +61,32 @@
     <string name="DefaultValue">000</string>
 
     <!-- Fuel Tasks -->
-    <string name="ScoringTitle">FUEL SCORING (PICK TWO)</string>
+    <string name="ScoringTitle">FUEL SCORING</string>
 
     <string name="Header">COLLECTED</string>
     <string name="FuelCollected">How much FUEL was collected?</string>
     <string name="CollectingDesc">How much <b>fuel</b> was collected?</string>
 
     <string name="Scored">SCORED</string>
-    <string name="ScoringDesc">Record any <b><font color="#FFD966">TWO</font></b> scoring categories below, whichever are easiest to see for your robot. Examples: Picked Up and Missed; Scored and Missed."</string>
+    <string name="ScoringDesc">Tap the +/- buttons or write in the number box to record scored and missed fuel.</string>
     <string name="MissedTitle">MISSED</string>
     <string name="MissedDesc">How much fuel was missed?</string>
 
     <string name="Ferrying">FERRYING</string>
+    <string name="FerryingInstructions">Tap the +/- buttons or write in the number box to record how much <b>fuel was passed to their alliance zone or partner(s)</b>. </string>
     <string name="FerryingDesc">How much <b>fuel</b> was passed to their alliance zone or partner(s)?</string>
-    <string name="FuelPassed">How much FUEL was passed to their alliance zone or partner(s)?</string>
 
     <!-- Climbing -->
     <string name="ClimbingTitle">CLIMBING</string>
-    <string name="AttemptedCLimbLevelDesc">What level did they <b>attempt</b> to climb to?</string>
+    <string name="ClimbInstructions">If a robot attempts more than once, save each attempt separately.</string>
+    <string name="AttemptedCLimbLevelDesc">ATTEMPTED LEVEL</string>
     <string name="DNA">NO ATTEMPT</string>
     <string name="One">1</string>
     <string name="Two">2</string>
     <string name="Three">3</string>
-    <string name="SuccessfullyClimbed">What level did they <b>successfully</b> climb to?</string>
+    <string name="SuccessfullyClimbed">SUCCESSFUL LEVEL</string>
     <string name="SuccessfulClimbedLevel">NONE</string>
-    <string name="TowerClimbPlacement">What <b>side</b> of the tower did they climb on?</string>
+    <string name="TowerClimbPlacement">TOWER SIDE</string>
     <string name="Left">LEFT</string>
     <string name="Center">CENTER</string>
     <string name="Right">RIGHT</string>
@@ -96,12 +97,11 @@
     <!-- Timer -->
     <string name="AutonSeconds">AUTON SECONDS REMAINING</string>
     <string name="TeleopSeconds">TELEOP SECONDS REMAINING</string>
-    <string name="EndGameSeconds">END GAME SECONDS REMAINING</string>
 
     <string name="TeleopWarning">Teleop is starting soon&#8230;</string>
     <string name="TeleopError">Switch to teleop as soon as possible!</string>
-    <string name="EndGameWarning">End Game is starting soon&#8230;</string>
-    <string name="EndGameError">Switch to End Game as soon as possible!</string>
+    <string name="EndGameWarning">Endgame is starting soon&#8230;</string>
+    <string name="EndGameError">Switch to endgame as soon as possible!</string>
 
     <!-- NEXT BUTTONS -->
     <string name="TeleopNext">TELEOP</string>

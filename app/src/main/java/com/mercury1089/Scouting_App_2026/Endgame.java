@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -26,17 +27,18 @@ public class Endgame extends Fragment implements UpdateListener {
     private int endGameSnapshotCount = 0;
     private LinkedHashMap<String, String> setupHashMap;
     private LinkedHashMap<String, String> endGameHashMap;
-    private LinkedHashMap<String, String> teleopHashMap;
 
     // Snapshot System (CSV format)
     private StringBuilder snapshotBuilder;
     private static final String SNAPSHOT_HEADER =
-            "scouterName,teamNumber,matchNumber,A_coll,A_scor,A_miss,A_ferr,A_died,A_att,A_succ,A_loc,T_coll,T_scor,T_miss,T_ferr,T_died,E_att,E_succ,E_loc";
+            "scouterName,teamNumber,matchNumber,A_scor,A_miss,A_ferr,A_died,A_att,A_succ,A_loc,T_scor,T_miss,T_ferr,T_died,E_scor,E_miss,E_ferr,E_att,E_succ,E_loc,timestamp";
 
     // Climbing section
     private RadioGroup attemptedClimbToggle;
     private RadioGroup successfulClimbedToggle;
     private RadioGroup successfullyClimbedLocationToggle;
+    private TextView locationText;
+    private TextView successfulText;
 
     // Other controls
     private Button saveButton;
@@ -75,8 +77,7 @@ public class Endgame extends Fragment implements UpdateListener {
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.SETUP);
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.TELEOP);
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.ENDGAME);
-        setupHashMap  = HashMapManager.getSetupHashMap();
-        teleopHashMap = HashMapManager.getTeleopHashMap();
+        setupHashMap  = HashMapManager.getSetupHashMap();;
         endGameHashMap = HashMapManager.getEndgameHashMap();
 
         // Link views
@@ -124,7 +125,8 @@ public class Endgame extends Fragment implements UpdateListener {
         if (matchNumber == null) matchNumber = "";
 
         // Format: Scouter, Team, Match, [8 Auton null], [5 Teleop null], [3 Endgame cols]
-        String snapshotLine = String.format("%s,%s,%s,,,,,,,,,,,,,,%s,%s,%s\n",
+        String snapshotLine = String.format("%s,%s,%s " +
+                        "%s,%s,%s\n",
                 scouterName,
                 teamNumber,
                 matchNumber,
@@ -148,7 +150,6 @@ public class Endgame extends Fragment implements UpdateListener {
     // ─────────────────────────────────────────
 
     private void resetEndGameUI() {
-        collectingCount = 0;
         ferryingCount   = 0;
         scoredCount     = 0;
         missedCount     = 0;
@@ -172,12 +173,20 @@ public class Endgame extends Fragment implements UpdateListener {
 
     private void updateClimbStates() {
         int attemptedId  = attemptedClimbToggle.getCheckedRadioButtonId();
-        int successfulId = successfulClimbedToggle.getCheckedRadioButtonId();
         boolean attempted  = attemptedId  != -1 && attemptedId  != R.id.AttemptedNo;
-        boolean successful = successfulId != -1 && successfulId != R.id.DidNotAttempt;
-        setGroupEnabled(successfullyClimbedLocationToggle, attempted && successful);
-    }
+        successfulText.setEnabled(attempted);
+        setGroupEnabled(successfulClimbedToggle, attempted);
 
+        if (!attempted) {successfulClimbedToggle.clearCheck();}
+
+        int successfulId = successfulClimbedToggle.getCheckedRadioButtonId();
+        boolean successful = successfulId != -1 && successfulId != R.id.DidNotAttempt;
+        locationText.setEnabled(attempted && successful);
+        setGroupEnabled(successfullyClimbedLocationToggle, attempted && successful);
+
+        if (!attempted || !successful) { successfullyClimbedLocationToggle.clearCheck();}
+
+    }
     // ─────────────────────────────────────────
     // BUTTON LISTENERS
     // ─────────────────────────────────────────
@@ -188,7 +197,7 @@ public class Endgame extends Fragment implements UpdateListener {
                 saveEndGameData();
                 appendEndGameSnapshot();
                 resetEndGameUI();
-                Toast.makeText(context, "EndGame snapshot saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Endgame snapshot saved", Toast.LENGTH_SHORT).show();
             });
         }
 
@@ -251,7 +260,6 @@ public class Endgame extends Fragment implements UpdateListener {
     // ─────────────────────────────────────────
 
     private void loadEndGameData() {
-        collectingCount = parseCount(hm("Collecting", ""));
         ferryingCount   = parseCount(hm("Ferrying",   ""));
         scoredCount     = parseCount(hm("Scored",     ""));
         missedCount     = parseCount(hm("Missed",     ""));
@@ -264,7 +272,6 @@ public class Endgame extends Fragment implements UpdateListener {
     }
 
     private void saveEndGameData() {
-        endGameHashMap.put("Collecting",        String.valueOf(collectingCount));
         endGameHashMap.put("Ferrying",          String.valueOf(ferryingCount));
         endGameHashMap.put("Scored",            String.valueOf(scoredCount));
         endGameHashMap.put("Missed",            String.valueOf(missedCount));
@@ -294,7 +301,6 @@ public class Endgame extends Fragment implements UpdateListener {
         if (this.isVisible()) {
             if (isVisibleToUser) {
                 setupHashMap   = HashMapManager.getSetupHashMap();
-                teleopHashMap  = HashMapManager.getTeleopHashMap();
                 endGameHashMap = HashMapManager.getEndgameHashMap();
                 initializeSnapshots();
                 loadEndGameData();

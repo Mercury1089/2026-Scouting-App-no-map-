@@ -85,9 +85,9 @@ public class QRRunnable implements Runnable {
 
                         dialog.setCancelable(false);
 
-                        scouterName.setText(this.scouter);
-                        teamNumber.setText(this.teamNum);
-                        matchNumber.setText(this.matchNum);
+                        if (scouterName != null) scouterName.setText(this.scouter);
+                        if (teamNumber != null) teamNumber.setText(this.teamNum);
+                        if (matchNumber != null) matchNumber.setText(this.matchNum);
 
                         closeButton.setOnClickListener(v -> dialog.dismiss());
 
@@ -125,15 +125,7 @@ public class QRRunnable implements Runnable {
                         ImageView imageView = dialog.findViewById(R.id.imageView);
                         ImageButton closeButton = dialog.findViewById(R.id.CloseButton);
                         
-                        // Use findViewById to check if these exist in the layout before setting them
-                        TextView scouterName = dialog.findViewById(R.id.ScouterNameQR);
-                        TextView teamNumber = dialog.findViewById(R.id.TeamNumberQR);
-                        TextView matchNumber = dialog.findViewById(R.id.MatchNumberQR);
-
                         imageView.setImageBitmap(bitmap);
-                        if (scouterName != null) scouterName.setText(this.scouter);
-                        if (teamNumber != null) teamNumber.setText(GenUtils.padLeftZeros(this.teamNum, 4));
-                        if (matchNumber != null) matchNumber.setText(GenUtils.padLeftZeros(this.matchNum, 2));
 
                         dialog.setCancelable(false);
 

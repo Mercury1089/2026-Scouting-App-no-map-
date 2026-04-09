@@ -118,7 +118,7 @@ public class QRStringBuilder {
               .append(climbToNumeric(map.get("SuccessfulClimbed"))).append(",")
               .append(nvl(map.get("ClimbLocation"), "")).append(",");
         } else {
-            sb.append("0,0,0,0,N,0,0,N,");
+            sb.append(",,,,,,,,");
         }
 
         // 5 Teleop cols

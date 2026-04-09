@@ -24,7 +24,6 @@ public class ListAdapter extends BaseAdapter {
     public final static int QRCodeSize = 500;
 
     public ListAdapter(Context context, String[] data) {
-        // TODO Auto-generated constructor stub
         this.context = (SettingsActivity) context;
         this.data = data;
         inflater = (LayoutInflater) context
@@ -33,102 +32,64 @@ public class ListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return data.length;
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return data[position];
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
-        View vi = inflater.inflate(R.layout.screen_settings_qr_list_item, null);
+        View vi = convertView;
+        if (vi == null) {
+            vi = inflater.inflate(R.layout.screen_settings_qr_list_item, parent, false);
+        }
 
         Button item = vi.findViewById(R.id.itemButton);
+        final String qrString = data[position];
 
-        String[] qrData = data[position].split(",");
-        Log.d("Stuff", data[position]);
-        String scouterName = qrData[0], teamNumber = qrData[1], matchNumber = qrData[2], qrString = data[position];
+        try {
+            // Parse based on the first line of the record (which is the Setup line)
+            String firstLine = qrString.split("\n")[0];
+            String[] qrData = firstLine.split(",");
+            
+            // Expected length is 8 after our previous fix: Scouter,Team,Match,P1,P2,Color,Preload,NoShow
+            if (qrData.length >= 3) {
+                String teamNumber = qrData[1];
+                String matchNumber = qrData[2];
 
-        item.setText(context.getString(R.string.QRCacheItem, padLeftZeros(teamNumber, 4), padLeftZeros(matchNumber, 2)));
-        item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loading_alert = new Dialog(context);
-                loading_alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                loading_alert.setContentView(R.layout.screen_qr_loading);
-                loading_alert.setCancelable(false);
-                loading_alert.show();
+                item.setText(context.getString(R.string.QRCacheItem, padLeftZeros(teamNumber, 4), padLeftZeros(matchNumber, 2)));
+                
+                item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        loading_alert = new Dialog(context);
+                        loading_alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        loading_alert.setContentView(R.layout.screen_qr_loading);
+                        loading_alert.setCancelable(false);
+                        loading_alert.show();
 
-                QRRunnable runnable = new QRRunnable(data[position], context, loading_alert);
-                new Thread(runnable).start();
+                        QRRunnable runnable = new QRRunnable(qrString, context, loading_alert);
+                        new Thread(runnable).start();
+                    }
+                });
+            } else {
+                item.setText("Invalid QR Data");
+                item.setEnabled(false);
             }
-        });
-        item.setTag(scouterName + "~" + teamNumber + "~" + matchNumber + "~" + qrString);
-        item.setId(Integer.parseInt(teamNumber+matchNumber));
+        } catch (Exception e) {
+            Log.e("ListAdapter", "Error parsing QR data at position " + position, e);
+            item.setText("Parse Error");
+            item.setEnabled(false);
+        }
+        
         return vi;
     }
-
-//    class QRRunnable implements Runnable {
-//
-//        private String scouter, teamNum, matchNum, qrString;
-//        private SettingsActivity context;
-//
-//        public QRRunnable(String[] qrData, Context c, View v){
-//            scouter = qrData[0];
-//            teamNum = qrData[1];
-//            matchNum = qrData[2];
-//            qrString = qrData[3];
-//            context = (SettingsActivity) c;
-//        }
-//
-//        @Override
-//        public void run() {
-//            try {
-//                Bitmap bitmap = TextToImageEncode(qrString);
-//                context.runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Dialog dialog = new Dialog(context);
-//                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//                        dialog.setContentView(R.layout.popup_qr_cached);
-//
-//                        ImageView imageView = dialog.findViewById(R.id.imageView);
-//                        TextView scouterName = dialog.findViewById(R.id.ScouterNameQR);
-//                        TextView teamNumber = dialog.findViewById(R.id.TeamNumberQR);
-//                        TextView matchNumber = dialog.findViewById(R.id.MatchNumberQR);
-//                        Button closeButton = dialog.findViewById(R.id.CloseButton);
-//                        imageView.setImageBitmap(bitmap);
-//
-//                        dialog.setCancelable(false);
-//
-//                        scouterName.setText(scouter);
-//                        teamNumber.setText(GenUtils.padLeftZeros(teamNum, 2));
-//                        matchNumber.setText(GenUtils.padLeftZeros(matchNum, 2));
-//
-//                        loading_alert.dismiss();
-//
-//                        dialog.show();
-//
-//                        closeButton.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                dialog.dismiss();
-//                            }
-//                        });
-//                    }
-//                });
-//            } catch (WriterException e){}
-//        }
-//    }
 }
