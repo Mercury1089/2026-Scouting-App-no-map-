@@ -238,8 +238,8 @@ public class HashMapManager {
             
             for (String l : rawLines) {
                 if (l.trim().isEmpty()) continue;
-                // If the line looks like a "Setup" line (6 columns), it's a new record
-                if (l.split(",").length == 6 && !l.contains("A_coll")) {
+                // If the line looks like a "Setup" line (8 columns), it's a new record
+                if (l.split(",").length == 8 && !l.contains("A_scor")) {
                     if (currentRecord.length() > 0) {
                         records.add(currentRecord.toString().trim());
                     }
@@ -354,16 +354,17 @@ public class HashMapManager {
      *
      */
     public static void setDefaultValues(HASH map){
-        String snapshotHeader = "scouterName,teamNumber,matchNumber,A_coll,A_scor,A_miss,A_ferr,A_died,A_att,A_succ,A_loc,T_coll,T_scor,T_miss,T_ferr,T_died,E_att,E_succ,E_loc,timestamp\n";
-        String endgameHeader = "scouterName,teamNumber,matchNumber,A_coll,A_scor,A_miss,A_ferr,A_died,A_att,A_succ,A_loc,T_coll,T_scor,T_miss,T_ferr,T_died,E_att,E_succ,E_loc\n";
+        String snapshotHeader = "scouterName,teamNumber,matchNumber,A_scor,A_miss,A_ferr,A_died,A_att,A_succ,A_loc,T_scor,T_miss,T_ferr,T_died,E_scor,E_miss,E_ferr,E_att,E_succ,E_loc,timestamp\n";
 
         switch(map) {
             case SETTINGS:
+                if (settingsHashMap == null) settingsHashMap = new LinkedHashMap<>();
                 settingsHashMap.put("HashMapName", "Settings");
                 settingsHashMap.put("NothingToSeeHere", "0");
                 settingsHashMap.put("DefaultPassword", "abc");
                 break;
             case SETUP:
+                if (setupHashMap == null) setupHashMap = new LinkedHashMap<>();
                 setupHashMap.put("HashMapName", "Setup");
                 setupHashMap.put("ScouterName", "");
                 setupHashMap.put("TeamNumber", "");
@@ -375,14 +376,14 @@ public class HashMapManager {
                 setupHashMap.put("NoShow", "N");
                 break;
             case AUTON:
+                if (autonHashMap == null) autonHashMap = new LinkedHashMap<>();
                 // 2026 Fuel Game - Autonomous Phase Defaults
                 autonHashMap.put("HashMapName", "Auton");
 
                 // Game data fields
-                autonHashMap.put("Collecting", "");
-                autonHashMap.put("Ferrying", "");
-                autonHashMap.put("Missed", "");
-                autonHashMap.put("Scored", "");
+                autonHashMap.put("Ferrying", "0");
+                autonHashMap.put("Missed", "0");
+                autonHashMap.put("Scored", "0");
                 autonHashMap.put("RobotFellOver", "N");
                 autonHashMap.put("AttemptedClimb", "");
                 autonHashMap.put("SuccessfulClimbed", "");
@@ -393,14 +394,14 @@ public class HashMapManager {
 
                 break;
             case TELEOP:
+                if (teleopHashMap == null) teleopHashMap = new LinkedHashMap<>();
                 // 2026 Fuel Game - Teleoperated Phase Defaults
                 teleopHashMap.put("HashMapName", "Teleop");
 
                 // Game data fields
-                teleopHashMap.put("Collecting", "");
-                teleopHashMap.put("Ferrying", "");
-                teleopHashMap.put("Missed", "");
-                teleopHashMap.put("Scored", "");
+                teleopHashMap.put("Ferrying", "0");
+                teleopHashMap.put("Missed", "0");
+                teleopHashMap.put("Scored", "0");
                 teleopHashMap.put("RobotFellOver", "N");
 
                 // CSV Snapshot buffer - initialize with header
@@ -408,20 +409,21 @@ public class HashMapManager {
 
                 break;
             case ENDGAME:
+                if (endgameHashMap == null) endgameHashMap = new LinkedHashMap<>();
                 // 2026 Fuel Game - End Game Phase Defaults
                 endgameHashMap.put("HashMapName", "Endgame");
 
                 // Game data fields
-                endgameHashMap.put("Collecting", "");
-                endgameHashMap.put("Ferrying", "");
-                endgameHashMap.put("Missed", "");
-                endgameHashMap.put("Scored", "");
+                endgameHashMap.put("Ferrying", "0");
+                endgameHashMap.put("Missed", "0");
+                endgameHashMap.put("Scored", "0");
                 endgameHashMap.put("AttemptedClimb", "");
                 endgameHashMap.put("SuccessfulClimbed", "");
                 endgameHashMap.put("ClimbLocation", "");
+                endgameHashMap.put("RobotFellOver", "N");
 
                 // CSV Snapshot buffer - initialize with header
-                endgameHashMap.put("snapshots", endgameHeader);
+                endgameHashMap.put("snapshots", snapshotHeader);
 
                 break;
         }

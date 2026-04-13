@@ -107,43 +107,49 @@ public class QRStringBuilder {
           .append(team).append(",")
           .append(match).append(",");
 
-        // 8 Auton cols
+        // Unified CSV Structure (21 columns):
+        // 0:scouterName, 1:teamNumber, 2:matchNumber,
+        // 3:A_scor, 4:A_miss, 5:A_ferr, 6:A_died, 7:A_att, 8:A_succ, 9:A_loc,
+        // 10:T_scor, 11:T_miss, 12:T_ferr, 13:T_died,
+        // 14:E_scor, 15:E_miss, 16:E_ferr, 17:E_att, 18:E_succ, 19:E_loc,
+        // 20:timestamp
+
+        // 7 Auton cols (A_scor, A_miss, A_ferr, A_died, A_att, A_succ, A_loc)
         if (type.equals("AUTON")) {
-            sb.append(nvl(map.get("Collecting"), "")).append(",")
-              .append(nvl(map.get("Scored"), "")).append(",")
-              .append(nvl(map.get("Missed"), "")).append(",")
-              .append(nvl(map.get("Ferrying"), "")).append(",")
+            sb.append(nvl(map.get("Scored"), "0")).append(",")
+              .append(nvl(map.get("Missed"), "0")).append(",")
+              .append(nvl(map.get("Ferrying"), "0")).append(",")
               .append(nvl(map.get("RobotFellOver"), "N")).append(",")
               .append(climbToNumeric(map.get("AttemptedClimb"))).append(",")
               .append(climbToNumeric(map.get("SuccessfulClimbed"))).append(",")
               .append(nvl(map.get("ClimbLocation"), "")).append(",");
         } else {
-            sb.append(",,,,,,,,");
+            sb.append(",,,,,,,");
         }
 
-        // 5 Teleop cols
+        // 4 Teleop cols (T_scor, T_miss, T_ferr, T_died)
         if (type.equals("TELEOP")) {
-            sb.append(nvl(map.get("Collecting"), "")).append(",")
-              .append(nvl(map.get("Scored"), "")).append(",")
-              .append(nvl(map.get("Missed"), "")).append(",")
-              .append(nvl(map.get("Ferrying"), "")).append(",")
+            sb.append(nvl(map.get("Scored"), "0")).append(",")
+              .append(nvl(map.get("Missed"), "0")).append(",")
+              .append(nvl(map.get("Ferrying"), "0")).append(",")
               .append(nvl(map.get("RobotFellOver"), "N")).append(",");
         } else {
-            sb.append(",,,,,");
+            sb.append(",,,,");
         }
 
-        // 3 Endgame cols
+        // 6 Endgame cols (E_scor, E_miss, E_ferr, E_att, E_succ, E_loc)
         if (type.equals("ENDGAME")) {
-            sb.append(climbToNumeric(map.get("AttemptedClimb"))).append(",")
+            sb.append(nvl(map.get("Scored"), "0")).append(",")
+              .append(nvl(map.get("Missed"), "0")).append(",")
+              .append(nvl(map.get("Ferrying"), "0")).append(",")
+              .append(climbToNumeric(map.get("AttemptedClimb"))).append(",")
               .append(climbToNumeric(map.get("SuccessfulClimbed"))).append(",")
               .append(nvl(map.get("ClimbLocation"), ""));
         } else {
-            sb.append(",,");
+            sb.append(",,,,,,");
         }
 
-        if (!type.equals("ENDGAME")) {
-            sb.append(",").append(nvl(map.get("Timestamp"), "0"));
-        }
+        sb.append(",").append(nvl(map.get("Timestamp"), "0"));
 
         return sb.toString();
     }

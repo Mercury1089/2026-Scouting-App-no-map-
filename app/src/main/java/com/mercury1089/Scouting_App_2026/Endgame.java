@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.mercury1089.Scouting_App_2026.listeners.UpdateListener;
 import com.mercury1089.Scouting_App_2026.qr.QRRunnable;
 
@@ -57,6 +58,7 @@ public class Endgame extends Fragment implements UpdateListener {
 
 
     // Other controls
+    private MaterialSwitch noShowSwitch;
     private Button saveButton;
     private Button resetButton;
     private Button generateQRButton;
@@ -66,6 +68,7 @@ public class Endgame extends Fragment implements UpdateListener {
     private int ferryingCount   = 0;
     private int scoredCount     = 0;
     private int missedCount     = 0;
+    private boolean isUpdating = false;
 
     public static Endgame newInstance() {
         Endgame fragment = new Endgame();
@@ -103,8 +106,9 @@ public class Endgame extends Fragment implements UpdateListener {
         attemptedClimbToggle              = getView().findViewById(R.id.AttemptedClimbToggle);
         successfulText                    = getView().findViewById(R.id.SuccessTitle);
         successfulClimbedToggle           = getView().findViewById(R.id.SuccessfulClimbed);
-        locationText                     = getView().findViewById(R.id.locationTitle);
+        locationText                     = getView().findViewById(R.id.TowerClimbPlacement);
         successfullyClimbedLocationToggle = getView().findViewById(R.id.SuccessfullyClimbedLocation);
+        noShowSwitch                      = getView().findViewById(R.id.NoShowSwitch);
         saveButton                        = getView().findViewById(R.id.SaveButton);
         resetButton                       = getView().findViewById(R.id.ResetButton);
         generateQRButton                  = getView().findViewById(R.id.NextQRButton);
@@ -135,17 +139,29 @@ public class Endgame extends Fragment implements UpdateListener {
     }
 
     private void loadEndgameData() {
-        ferryingCount   = parseCount(hm("Ferrying",   ""));
-        scoredCount     = parseCount(hm("Scored",     ""));
-        missedCount     = parseCount(hm("Missed",     ""));
+        ferryingCount = parseCount(hm("Ferrying", ""));
+        scoredCount = parseCount(hm("Scored", ""));
+        missedCount = parseCount(hm("Missed", ""));
 
-        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
-        refreshDisplay(scoringCounterToggle,    R.id.ScoredCounter,     scoredCount);
-        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
+        refreshDisplay(ferryingCounterToggle, R.id.FerryingCounter, ferryingCount);
+        refreshDisplay(scoringCounterToggle, R.id.ScoredCounter, scoredCount);
+        refreshDisplay(missedCounterToggle, R.id.MissedCounter, missedCount);
 
-        selectByText(attemptedClimbToggle,              hm("AttemptedClimb",    ""));
-        selectByText(successfulClimbedToggle,           hm("SuccessfulClimbed", ""));
-        selectByText(successfullyClimbedLocationToggle, hm("ClimbLocation",     ""));
+        selectByText(attemptedClimbToggle, hm("AttemptedClimb", ""));
+        selectByText(successfulClimbedToggle, hm("SuccessfulClimbed", ""));
+        selectByText(successfullyClimbedLocationToggle, hm("ClimbLocation", ""));
+
+        // Persistence: Check Endgame map first, then Teleop map, then Auton map
+        String fellOver = hm("RobotFellOver", "");
+        if (fellOver.isEmpty()) {
+            fellOver = HashMapManager.getTeleopHashMap().get("RobotFellOver");
+            if (fellOver == null || fellOver.isEmpty()) {
+                fellOver = HashMapManager.getAutonHashMap().get("RobotFellOver");
+            }
+        }
+        if (noShowSwitch != null) {
+            noShowSwitch.setChecked("Y".equals(fellOver != null ? fellOver : "N"));
+        }
 
         updateClimbStates();
     }
@@ -157,6 +173,7 @@ public class Endgame extends Fragment implements UpdateListener {
         endGameHashMap.put("AttemptedClimb",    getSelectedText(attemptedClimbToggle,              ""));
         endGameHashMap.put("SuccessfulClimbed", getSelectedText(successfulClimbedToggle,           ""));
         endGameHashMap.put("ClimbLocation",     getSelectedText(successfullyClimbedLocationToggle, ""));
+        endGameHashMap.put("RobotFellOver",     (noShowSwitch != null && noShowSwitch.isChecked()) ? "Y" : "N");
         HashMapManager.putEndgameHashMap(endGameHashMap);
     }
 
@@ -177,21 +194,16 @@ public class Endgame extends Fragment implements UpdateListener {
         /* auton: A_scor,A_miss,A_ferr,A_died,A_att,A_succ,A_loc, */ ",,,,,,," +
         /* teleop  T_scor,T_miss,T_ferr,T_died, */ ",,,," +
         /* endgame E_scor,E_miss,E_ferr,E_att,E_succ,E_loc, */ "%d,%d,%d,%s,%s,%s," +
-        /* timestamp */ "\n",
+        /* timestamp */ "0\n",
             scouterName,
             teamNumber,
             matchNumber,
-            // auton null values
-            // teleop null values
             scoredCount,
             missedCount,
             ferryingCount,
-            attemptedClimbToggle,
-            successfulClimbedToggle,
-            successfullyClimbedLocationToggle
-            //null teleop values
-            //null endgame values
-            // no timestamp but line break
+            getSelectedText(attemptedClimbToggle, ""),
+            getSelectedText(successfulClimbedToggle, ""),
+            getSelectedText(successfullyClimbedLocationToggle, "")
         );
 
 
@@ -207,12 +219,13 @@ public class Endgame extends Fragment implements UpdateListener {
         ferryingCount = 0;
         scoredCount = 0;
         missedCount = 0;
-        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
-        refreshDisplay(scoringCounterToggle,    R.id.ScoredCounter,     scoredCount);
-        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
-        attemptedClimbToggle.clearCheck();
-        successfulClimbedToggle.clearCheck();
-        successfullyClimbedLocationToggle.clearCheck();
+        refreshDisplay(ferryingCounterToggle, R.id.FerryingCounter, ferryingCount);
+        refreshDisplay(scoringCounterToggle, R.id.ScoredCounter, scoredCount);
+        refreshDisplay(missedCounterToggle, R.id.MissedCounter, missedCount);
+        if (attemptedClimbToggle != null) attemptedClimbToggle.clearCheck();
+        if (successfulClimbedToggle != null) successfulClimbedToggle.clearCheck();
+        if (successfullyClimbedLocationToggle != null) successfullyClimbedLocationToggle.clearCheck();
+        if (noShowSwitch != null) noShowSwitch.setChecked(false);
         updateClimbStates();
     }
 
@@ -262,20 +275,31 @@ public class Endgame extends Fragment implements UpdateListener {
     }
 
     private void updateClimbStates() {
-        int attemptedId  = attemptedClimbToggle.getCheckedRadioButtonId();
-        boolean attempted  = attemptedId  != -1 && attemptedId  != R.id.AttemptedNo;
-        successfulText.setEnabled(attempted);
-        setGroupEnabled(successfulClimbedToggle, attempted);
+        if (isUpdating) return;
+        isUpdating = true;
+        try {
+            int attemptedId = attemptedClimbToggle != null ? attemptedClimbToggle.getCheckedRadioButtonId() : -1;
+            boolean attempted = attemptedId != -1 && attemptedId != R.id.AttemptedNo;
 
-        if (!attempted) {successfulClimbedToggle.clearCheck();}
+            if (successfulText != null) successfulText.setEnabled(attempted);
+            setGroupEnabled(successfulClimbedToggle, attempted);
 
-        int successfulId = successfulClimbedToggle.getCheckedRadioButtonId();
-        boolean successful = successfulId != -1 && successfulId != R.id.DidNotAttempt;
-        locationText.setEnabled(attempted && successful);
-        setGroupEnabled(successfullyClimbedLocationToggle, attempted && successful);
+            if (!attempted && successfulClimbedToggle != null && successfulClimbedToggle.getCheckedRadioButtonId() != -1) {
+                successfulClimbedToggle.clearCheck();
+            }
 
-        if (!attempted || !successful) { successfullyClimbedLocationToggle.clearCheck();}
+            int successfulId = successfulClimbedToggle != null ? successfulClimbedToggle.getCheckedRadioButtonId() : -1;
+            boolean successful = successfulId != -1 && successfulId != R.id.DidNotAttempt;
 
+            if (locationText != null) locationText.setEnabled(attempted && successful);
+            setGroupEnabled(successfullyClimbedLocationToggle, attempted && successful);
+
+            if ((!attempted || !successful) && successfullyClimbedLocationToggle != null && successfullyClimbedLocationToggle.getCheckedRadioButtonId() != -1) {
+                successfullyClimbedLocationToggle.clearCheck();
+            }
+        } finally {
+            isUpdating = false;
+        }
     }
 
     private int deltaFor(int id,
@@ -300,7 +324,7 @@ public class Endgame extends Fragment implements UpdateListener {
             display.setText(String.valueOf(count));
         }
         group.setOnCheckedChangeListener(null);
-        group.check(displayId);
+        group.clearCheck();
         if (group == ferryingCounterToggle)   setupFerryingListener();
         else if (group == scoringCounterToggle)    setupScoredListener();
         else if (group == missedCounterToggle)     setupMissedListener();
@@ -368,6 +392,36 @@ public class Endgame extends Fragment implements UpdateListener {
                 new Thread(new QRRunnable(context, loading_alert)).start();
             });
         }
+
+        setupToggleableRadioGroup(attemptedClimbToggle);
+        setupToggleableRadioGroup(successfulClimbedToggle);
+        setupToggleableRadioGroup(successfullyClimbedLocationToggle);
+    }
+
+    private void setupToggleableRadioGroup(RadioGroup group) {
+        for (int i = 0; i < group.getChildCount(); i++) {
+            View v = group.getChildAt(i);
+            if (v instanceof RadioButton) {
+                v.setOnClickListener(view -> {
+                    if (((RadioButton) view).isChecked() && view.getTag() != null && (boolean) view.getTag()) {
+                        group.clearCheck();
+                        updateTags(group, -1);
+                    } else {
+                        updateTags(group, view.getId());
+                    }
+                    updateClimbStates();
+                });
+            }
+        }
+    }
+
+    private void updateTags(RadioGroup group, int checkedId) {
+        for (int i = 0; i < group.getChildCount(); i++) {
+            View v = group.getChildAt(i);
+            if (v instanceof RadioButton) {
+                v.setTag(v.getId() == checkedId);
+            }
+        }
     }
 
     // ─────────────────────────────────────────
@@ -406,7 +460,7 @@ public class Endgame extends Fragment implements UpdateListener {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (this.isVisible()) {
+        if (this.isVisible() && getView() != null) {
             if (isVisibleToUser) {
                 setupHashMap   = HashMapManager.getSetupHashMap();
                 endGameHashMap = HashMapManager.getEndgameHashMap();

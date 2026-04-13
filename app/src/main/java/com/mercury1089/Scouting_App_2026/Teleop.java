@@ -259,7 +259,7 @@ public class Teleop extends Fragment implements UpdateListener {
             display.setText(String.valueOf(count));
         }
         group.setOnCheckedChangeListener(null);
-        group.check(displayId);
+        group.clearCheck();
         if (group == ferryingCounterToggle)   setupFerryingListener();
         else if (group == scoringCounterToggle)    setupScoredListener();
         else if (group == missedCounterToggle)     setupMissedListener();
@@ -269,9 +269,10 @@ public class Teleop extends Fragment implements UpdateListener {
         ferryingCounterToggle.setOnCheckedChangeListener((g, id) -> {
             if (id == R.id.FerryingCounter) return;
             ferryingCount = parseCount(ferryingEditText.getText().toString());
+            // Ferrying in Teleop only has +/- 5 and 10 buttons
             ferryingCount = clamp(ferryingCount + deltaFor(id,
-                    R.id.FerryingMinus10, R.id.FerryingMinus5, R.id.FerryingMinus,
-                    R.id.FerryingPlus,    R.id.FerryingPlus5,  R.id.FerryingPlus10));
+                    R.id.FerryingMinus10, R.id.FerryingMinus5, View.NO_ID,
+                    View.NO_ID,    R.id.FerryingPlus5,  R.id.FerryingPlus10));
             refreshDisplay(ferryingCounterToggle, R.id.FerryingCounter, ferryingCount);
         });
     }
@@ -431,14 +432,20 @@ public class Teleop extends Fragment implements UpdateListener {
         refreshDisplay(scoringCounterToggle,    R.id.ScoredCounter,     scoredCount);
         refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
 
-        noShowSwitch.setChecked("Y".equals(hm("RobotFellOver", "N")));
+        // Persistence: Check Teleop map first, then Auton map
+        String fellOver = hm("RobotFellOver", "");
+        if (fellOver.isEmpty()) {
+            String autonFell = HashMapManager.getAutonHashMap().get("RobotFellOver");
+            fellOver = (autonFell != null) ? autonFell : "N";
+        }
+        noShowSwitch.setChecked("Y".equals(fellOver));
     }
 
     private void saveTeleopData() {
         teleopHashMap.put("Ferrying",          String.valueOf(ferryingCount));
         teleopHashMap.put("Scored",            String.valueOf(scoredCount));
         teleopHashMap.put("Missed",            String.valueOf(missedCount));
-        teleopHashMap.put("RobotFellOver",     noShowSwitch.isChecked() ? "Y" : "N");
+        teleopHashMap.put("RobotFellOver",     (noShowSwitch != null && noShowSwitch.isChecked()) ? "Y" : "N");
         teleopHashMap.put("Timestamp",         String.valueOf(secondsLeft));
         HashMapManager.putTeleopHashMap(teleopHashMap);
     }
@@ -460,7 +467,7 @@ public class Teleop extends Fragment implements UpdateListener {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (this.isVisible()) {
+        if (this.isVisible() && getView() != null) {
             if (isVisibleToUser) {
                 setupHashMap = HashMapManager.getSetupHashMap();
                 teleopHashMap = HashMapManager.getTeleopHashMap();

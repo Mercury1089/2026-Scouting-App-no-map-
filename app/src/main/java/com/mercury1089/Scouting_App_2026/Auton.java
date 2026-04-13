@@ -84,6 +84,7 @@ public class Auton extends Fragment implements UpdateListener {
     private int scoredCount     = 0;
     private int missedCount     = 0;
     private long secondsLeft    = 20;
+    private boolean isUpdating = false;
 
     public static Auton newInstance() {
         Auton fragment = new Auton();
@@ -157,25 +158,34 @@ public class Auton extends Fragment implements UpdateListener {
     // ─────────────────────────────────────────
 
     private void initializeSnapshots() {
-        snapshotBuilder = new StringBuilder();
-        snapshotBuilder.append(SNAPSHOT_HEADER).append("\n");
-        autonSnapshotCount = 0;
+        String snapshotsString = autonHashMap.get("snapshots");
+        if (snapshotsString == null || snapshotsString.isEmpty()) {
+            snapshotBuilder = new StringBuilder();
+            snapshotBuilder.append(SNAPSHOT_HEADER).append("\n");
+        } else {
+            snapshotBuilder = new StringBuilder(snapshotsString);
+            if (!snapshotsString.endsWith("\n")) {
+                snapshotBuilder.append("\n");
+            }
+        }
     }
 
     private void loadAutonData() {
-        ferryingCount   = parseCount(hm("Ferrying",   ""));
-        scoredCount     = parseCount(hm("Scored",     ""));
-        missedCount     = parseCount(hm("Missed",     ""));
+        ferryingCount = parseCount(hm("Ferrying", ""));
+        scoredCount = parseCount(hm("Scored", ""));
+        missedCount = parseCount(hm("Missed", ""));
 
-        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
-        refreshDisplay(scoringCounterToggle,    R.id.ScoredCounter,     scoredCount);
-        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
+        refreshDisplay(ferryingCounterToggle, R.id.FerryingCounter, ferryingCount);
+        refreshDisplay(scoringCounterToggle, R.id.ScoredCounter, scoredCount);
+        refreshDisplay(missedCounterToggle, R.id.MissedCounter, missedCount);
 
-        selectByText(attemptedClimbToggle,              hm("AttemptedClimb",    ""));
-        selectByText(successfulClimbedToggle,           hm("SuccessfulClimbed", ""));
-        selectByText(successfullyClimbedLocationToggle, hm("ClimbLocation",     ""));
+        selectByText(attemptedClimbToggle, hm("AttemptedClimb", ""));
+        selectByText(successfulClimbedToggle, hm("SuccessfulClimbed", ""));
+        selectByText(successfullyClimbedLocationToggle, hm("ClimbLocation", ""));
 
-        noShowSwitch.setChecked("Y".equals(hm("RobotFellOver", "N")));
+        if (noShowSwitch != null) {
+            noShowSwitch.setChecked("Y".equals(hm("RobotFellOver", "N")));
+        }
         updateClimbStates();
     }
 
@@ -186,7 +196,7 @@ public class Auton extends Fragment implements UpdateListener {
         autonHashMap.put("AttemptedClimb",    getSelectedText(attemptedClimbToggle,              ""));
         autonHashMap.put("SuccessfulClimbed", getSelectedText(successfulClimbedToggle,           ""));
         autonHashMap.put("ClimbLocation",     getSelectedText(successfullyClimbedLocationToggle, ""));
-        autonHashMap.put("RobotFellOver",     noShowSwitch.isChecked() ? "Y" : "N");
+        autonHashMap.put("RobotFellOver",     (noShowSwitch != null && noShowSwitch.isChecked()) ? "Y" : "N");
         autonHashMap.put("Timestamp",         String.valueOf(secondsLeft + 140));
         HashMapManager.putAutonHashMap(autonHashMap);
     }
@@ -218,11 +228,9 @@ public class Auton extends Fragment implements UpdateListener {
             missedCount,
             ferryingCount,
             (noShowSwitch != null && noShowSwitch.isChecked()) ? "Y" : "N",
-            attemptedClimbToggle,
-            successfulClimbedToggle,
-            successfullyClimbedLocationToggle,
-            //null teleop values
-            //null endgame values
+            getSelectedText(attemptedClimbToggle, ""),
+            getSelectedText(successfulClimbedToggle, ""),
+            getSelectedText(successfullyClimbedLocationToggle, ""),
             timestamp);
 
         snapshotBuilder.append(snapshotLine);
@@ -237,13 +245,13 @@ public class Auton extends Fragment implements UpdateListener {
         ferryingCount = 0;
         scoredCount = 0;
         missedCount = 0;
-        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
-        refreshDisplay(scoringCounterToggle,    R.id.ScoredCounter,     scoredCount);
-        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
-        attemptedClimbToggle.clearCheck();
-        successfulClimbedToggle.clearCheck();
-        successfullyClimbedLocationToggle.clearCheck();
-        noShowSwitch.setChecked(false);
+        refreshDisplay(ferryingCounterToggle, R.id.FerryingCounter, ferryingCount);
+        refreshDisplay(scoringCounterToggle, R.id.ScoredCounter, scoredCount);
+        refreshDisplay(missedCounterToggle, R.id.MissedCounter, missedCount);
+        if (attemptedClimbToggle != null) attemptedClimbToggle.clearCheck();
+        if (successfulClimbedToggle != null) successfulClimbedToggle.clearCheck();
+        if (successfullyClimbedLocationToggle != null) successfullyClimbedLocationToggle.clearCheck();
+        if (noShowSwitch != null) noShowSwitch.setChecked(false);
         updateClimbStates();
     }
 
@@ -293,20 +301,31 @@ public class Auton extends Fragment implements UpdateListener {
     }
 
     private void updateClimbStates() {
-        int attemptedId  = attemptedClimbToggle.getCheckedRadioButtonId();
-        boolean attempted  = attemptedId  != -1 && attemptedId  != R.id.AttemptedNo;
-        successfulText.setEnabled(attempted);
-        setGroupEnabled(successfulClimbedToggle, attempted);
+        if (isUpdating) return;
+        isUpdating = true;
+        try {
+            int attemptedId = attemptedClimbToggle != null ? attemptedClimbToggle.getCheckedRadioButtonId() : -1;
+            boolean attempted = attemptedId != -1 && attemptedId != R.id.AttemptedNo;
 
-        if (!attempted) {successfulClimbedToggle.clearCheck();}
+            if (successfulText != null) successfulText.setEnabled(attempted);
+            setGroupEnabled(successfulClimbedToggle, attempted);
 
-        int successfulId = successfulClimbedToggle.getCheckedRadioButtonId();
-        boolean successful = successfulId != -1 && successfulId != R.id.DidNotAttempt;
-        locationText.setEnabled(attempted && successful);
-        setGroupEnabled(successfullyClimbedLocationToggle, attempted && successful);
+            if (!attempted && successfulClimbedToggle != null && successfulClimbedToggle.getCheckedRadioButtonId() != -1) {
+                successfulClimbedToggle.clearCheck();
+            }
 
-        if (!attempted || !successful) { successfullyClimbedLocationToggle.clearCheck();}
+            int successfulId = successfulClimbedToggle != null ? successfulClimbedToggle.getCheckedRadioButtonId() : -1;
+            boolean successful = successfulId != -1 && successfulId != R.id.DidNotAttempt;
 
+            if (locationText != null) locationText.setEnabled(attempted && successful);
+            setGroupEnabled(successfullyClimbedLocationToggle, attempted && successful);
+
+            if ((!attempted || !successful) && successfullyClimbedLocationToggle != null && successfullyClimbedLocationToggle.getCheckedRadioButtonId() != -1) {
+                successfullyClimbedLocationToggle.clearCheck();
+            }
+        } finally {
+            isUpdating = false;
+        }
     }
 
     private int deltaFor(int id,
@@ -331,7 +350,7 @@ public class Auton extends Fragment implements UpdateListener {
             display.setText(String.valueOf(count));
         }
         group.setOnCheckedChangeListener(null);
-        group.check(displayId);
+        group.clearCheck();
         if (group == ferryingCounterToggle)   setupFerryingListener();
         else if (group == scoringCounterToggle)    setupScoredListener();
         else if (group == missedCounterToggle)     setupMissedListener();
@@ -394,6 +413,36 @@ public class Auton extends Fragment implements UpdateListener {
                 resetAutonUI();
                 context.tabs.getTabAt(1).select();
             });
+        }
+
+        setupToggleableRadioGroup(attemptedClimbToggle);
+        setupToggleableRadioGroup(successfulClimbedToggle);
+        setupToggleableRadioGroup(successfullyClimbedLocationToggle);
+    }
+
+    private void setupToggleableRadioGroup(RadioGroup group) {
+        for (int i = 0; i < group.getChildCount(); i++) {
+            View v = group.getChildAt(i);
+            if (v instanceof RadioButton) {
+                v.setOnClickListener(view -> {
+                    if (((RadioButton) view).isChecked() && view.getTag() != null && (boolean) view.getTag()) {
+                        group.clearCheck();
+                        updateTags(group, -1);
+                    } else {
+                        updateTags(group, view.getId());
+                    }
+                    updateClimbStates();
+                });
+            }
+        }
+    }
+
+    private void updateTags(RadioGroup group, int checkedId) {
+        for (int i = 0; i < group.getChildCount(); i++) {
+            View v = group.getChildAt(i);
+            if (v instanceof RadioButton) {
+                v.setTag(v.getId() == checkedId);
+            }
         }
     }
 
@@ -515,10 +564,10 @@ public class Auton extends Fragment implements UpdateListener {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (this.isVisible()) {
+        if (this.isVisible() && getView() != null) {
             if (isVisibleToUser) {
                 setupHashMap   = HashMapManager.getSetupHashMap();
-                autonHashMap = HashMapManager.getEndgameHashMap();
+                autonHashMap = HashMapManager.getAutonHashMap();
                 initializeSnapshots();
                 loadAutonData();
             } else {
