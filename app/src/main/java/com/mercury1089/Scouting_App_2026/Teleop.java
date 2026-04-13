@@ -185,24 +185,6 @@ public class Teleop extends Fragment implements UpdateListener {
         HashMapManager.putTeleopHashMap(teleopHashMap);
     }
 
-    private int countSnapshots() {
-        if (snapshotBuilder == null) return 0;
-        String content = snapshotBuilder.toString();
-        int count = 0;
-        for (int i = 0; i < content.length(); i++) {
-            if (content.charAt(i) == '\n') count++;
-        }
-        return count - 1; // subtract header line
-    }
-
-    public String getSnapshotsAsString() {
-        return snapshotBuilder != null ? snapshotBuilder.toString() : "";
-    }
-
-    public String exportSnapshotsCSV() {
-        return getSnapshotsAsString();
-    }
-
     // ─────────────────────────────────────────
     // UI RESET
     // ─────────────────────────────────────────
@@ -434,39 +416,6 @@ public class Teleop extends Fragment implements UpdateListener {
                 pulse.start();
             }
         }
-    }
-
-    // ─────────────────────────────────────────
-    // GET / SET HELPERS
-    // ─────────────────────────────────────────
-
-    private String getSelectedText(RadioGroup group, String defaultVal) {
-        int id = group.getCheckedRadioButtonId();
-        if (id == -1) return defaultVal;
-        RadioButton btn = group.findViewById(id);
-        return btn != null ? btn.getText().toString().trim() : defaultVal;
-    }
-
-    private void selectByText(RadioGroup group, String value) {
-        if (group == null) return;
-        group.clearCheck();
-        if (value == null || value.isEmpty()) return;
-        for (int i = 0; i < group.getChildCount(); i++) {
-            View v = group.getChildAt(i);
-            if (v instanceof RadioButton) {
-                RadioButton btn = (RadioButton) v;
-                if (btn.getText().toString().trim().equalsIgnoreCase(value)) {
-                    group.check(btn.getId());
-                    return;
-                }
-            }
-        }
-    }
-
-    private void setGroupEnabled(RadioGroup group, boolean enabled) {
-        if (group == null) return;
-        for (int i = 0; i < group.getChildCount(); i++)
-            group.getChildAt(i).setEnabled(enabled);
     }
 
     // ─────────────────────────────────────────

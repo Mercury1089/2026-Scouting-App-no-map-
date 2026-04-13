@@ -1,7 +1,10 @@
 package com.mercury1089.Scouting_App_2026;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
@@ -9,12 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
 import com.mercury1089.Scouting_App_2026.listeners.UpdateListener;
 import com.mercury1089.Scouting_App_2026.qr.QRRunnable;
 
@@ -33,22 +38,31 @@ public class Endgame extends Fragment implements UpdateListener {
     private static final String SNAPSHOT_HEADER =
             "scouterName,teamNumber,matchNumber,A_scor,A_miss,A_ferr,A_died,A_att,A_succ,A_loc,T_scor,T_miss,T_ferr,T_died,E_scor,E_miss,E_ferr,E_att,E_succ,E_loc,timestamp";
 
-    // Climbing section
+    // Counter toggles
+    private RadioGroup ferryingCounterToggle;
+    private RadioGroup scoringCounterToggle;
+    private RadioGroup missedCounterToggle;
+
+    // EditText display fields
+    private EditText ferryingEditText;
+    private EditText scoredEditText;
+    private EditText missedEditText;
+
+    // Climbing toggles
     private RadioGroup attemptedClimbToggle;
     private RadioGroup successfulClimbedToggle;
     private RadioGroup successfullyClimbedLocationToggle;
     private TextView locationText;
     private TextView successfulText;
 
+
     // Other controls
     private Button saveButton;
     private Button resetButton;
     private Button generateQRButton;
-
     private MatchActivity context;
 
     // Running counts
-    private int collectingCount = 0;
     private int ferryingCount   = 0;
     private int scoredCount     = 0;
     private int missedCount     = 0;
@@ -75,22 +89,30 @@ public class Endgame extends Fragment implements UpdateListener {
         super.onStart();
 
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.SETUP);
-        HashMapManager.checkNullOrEmpty(HashMapManager.HASH.TELEOP);
         HashMapManager.checkNullOrEmpty(HashMapManager.HASH.ENDGAME);
-        setupHashMap  = HashMapManager.getSetupHashMap();;
+        setupHashMap  = HashMapManager.getSetupHashMap();
         endGameHashMap = HashMapManager.getEndgameHashMap();
 
         // Link views
-        assert getView() != null;
+        ferryingCounterToggle             = getView().findViewById(R.id.FerryingCounterToggle);
+        ferryingEditText                  = getView().findViewById(R.id.FerryingCounter);
+        scoringCounterToggle              = getView().findViewById(R.id.ScoredCounterToggle);
+        scoredEditText                    = getView().findViewById(R.id.ScoredCounter);
+        missedCounterToggle               = getView().findViewById(R.id.MissedCounterToggle);
+        missedEditText                    = getView().findViewById(R.id.MissedCounter);
         attemptedClimbToggle              = getView().findViewById(R.id.AttemptedClimbToggle);
+        successfulText                    = getView().findViewById(R.id.SuccessTitle);
         successfulClimbedToggle           = getView().findViewById(R.id.SuccessfulClimbed);
+        locationText                     = getView().findViewById(R.id.locationTitle);
         successfullyClimbedLocationToggle = getView().findViewById(R.id.SuccessfullyClimbedLocation);
         saveButton                        = getView().findViewById(R.id.SaveButton);
         resetButton                       = getView().findViewById(R.id.ResetButton);
         generateQRButton                  = getView().findViewById(R.id.NextQRButton);
 
         initializeSnapshots();
-        loadEndGameData();
+        loadEndgameData();
+        setupCounterListeners();
+        setupTextWatchers();
         setupCascadingListeners();
         setupButtonListeners();
     }
@@ -112,6 +134,32 @@ public class Endgame extends Fragment implements UpdateListener {
         }
     }
 
+    private void loadEndgameData() {
+        ferryingCount   = parseCount(hm("Ferrying",   ""));
+        scoredCount     = parseCount(hm("Scored",     ""));
+        missedCount     = parseCount(hm("Missed",     ""));
+
+        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
+        refreshDisplay(scoringCounterToggle,    R.id.ScoredCounter,     scoredCount);
+        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
+
+        selectByText(attemptedClimbToggle,              hm("AttemptedClimb",    ""));
+        selectByText(successfulClimbedToggle,           hm("SuccessfulClimbed", ""));
+        selectByText(successfullyClimbedLocationToggle, hm("ClimbLocation",     ""));
+
+        updateClimbStates();
+    }
+
+    private void saveEndgameData() {
+        endGameHashMap.put("Ferrying",          String.valueOf(ferryingCount));
+        endGameHashMap.put("Scored",            String.valueOf(scoredCount));
+        endGameHashMap.put("Missed",            String.valueOf(missedCount));
+        endGameHashMap.put("AttemptedClimb",    getSelectedText(attemptedClimbToggle,              ""));
+        endGameHashMap.put("SuccessfulClimbed", getSelectedText(successfulClimbedToggle,           ""));
+        endGameHashMap.put("ClimbLocation",     getSelectedText(successfullyClimbedLocationToggle, ""));
+        HashMapManager.putEndgameHashMap(endGameHashMap);
+    }
+
     private void appendEndGameSnapshot() {
         if (snapshotBuilder == null) {
             initializeSnapshots();
@@ -124,18 +172,28 @@ public class Endgame extends Fragment implements UpdateListener {
         String matchNumber = setupHashMap.get("MatchNumber");
         if (matchNumber == null) matchNumber = "";
 
-        // Format: Scouter, Team, Match, [8 Auton null], [5 Teleop null], [3 Endgame cols]
-        String snapshotLine = String.format("%s,%s,%s " +
-                        "%s,%s,%s\n",
-                scouterName,
-                teamNumber,
-                matchNumber,
-                // auton values
-                // teleop values
-                getSelectedText(attemptedClimbToggle,              ""),
-                getSelectedText(successfulClimbedToggle,           ""),
-                getSelectedText(successfullyClimbedLocationToggle, "")
+        String snapshotLine = String.format(
+        /* setup: scouter, team, match */ "%s,%s,%s," +
+        /* auton: A_scor,A_miss,A_ferr,A_died,A_att,A_succ,A_loc, */ ",,,,,,," +
+        /* teleop  T_scor,T_miss,T_ferr,T_died, */ ",,,," +
+        /* endgame E_scor,E_miss,E_ferr,E_att,E_succ,E_loc, */ "%d,%d,%d,%s,%s,%s," +
+        /* timestamp */ "\n",
+            scouterName,
+            teamNumber,
+            matchNumber,
+            // auton null values
+            // teleop null values
+            scoredCount,
+            missedCount,
+            ferryingCount,
+            attemptedClimbToggle,
+            successfulClimbedToggle,
+            successfullyClimbedLocationToggle
+            //null teleop values
+            //null endgame values
+            // no timestamp but line break
         );
+
 
         snapshotBuilder.append(snapshotLine);
         endGameSnapshotCount++;
@@ -145,26 +203,58 @@ public class Endgame extends Fragment implements UpdateListener {
         HashMapManager.putEndgameHashMap(endGameHashMap);
     }
 
-    // ─────────────────────────────────────────
-    // UI RESET
-    // ─────────────────────────────────────────
-
-    private void resetEndGameUI() {
-        ferryingCount   = 0;
-        scoredCount     = 0;
-        missedCount     = 0;
-
-        if (attemptedClimbToggle != null) attemptedClimbToggle.clearCheck();
-        if (successfulClimbedToggle != null) successfulClimbedToggle.clearCheck();
-        if (successfullyClimbedLocationToggle != null) successfullyClimbedLocationToggle.clearCheck();
-
+    private void resetEndgameUI() {
+        ferryingCount = 0;
+        scoredCount = 0;
+        missedCount = 0;
+        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
+        refreshDisplay(scoringCounterToggle,    R.id.ScoredCounter,     scoredCount);
+        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
+        attemptedClimbToggle.clearCheck();
+        successfulClimbedToggle.clearCheck();
+        successfullyClimbedLocationToggle.clearCheck();
         updateClimbStates();
     }
 
-    // ─────────────────────────────────────────
-    // CASCADING LOGIC
-    // ─────────────────────────────────────────
+    private String hm(String key, String def) {
+        String v = endGameHashMap.get(key);
+        return v != null ? v : def;
+    }
 
+    private int parseCount(String s) {
+        try { return Integer.parseInt(s); }
+        catch (Exception e) { return 0; }
+    }
+
+    private void setupCounterListeners() {
+        setupFerryingListener();
+        setupScoredListener();
+        setupMissedListener();
+    }
+
+    private void setupTextWatchers() {
+        ferryingEditText.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override public void afterTextChanged(Editable s) {
+                ferryingCount = parseCount(s.toString());
+            }
+        });
+        scoredEditText.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override public void afterTextChanged(Editable s) {
+                scoredCount = parseCount(s.toString());
+            }
+        });
+        missedEditText.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override public void afterTextChanged(Editable s) {
+                missedCount = parseCount(s.toString());
+            }
+        });
+    }
     private void setupCascadingListeners() {
         attemptedClimbToggle.setOnCheckedChangeListener((g, id)    -> updateClimbStates());
         successfulClimbedToggle.setOnCheckedChangeListener((g, id) -> updateClimbStates());
@@ -187,30 +277,88 @@ public class Endgame extends Fragment implements UpdateListener {
         if (!attempted || !successful) { successfullyClimbedLocationToggle.clearCheck();}
 
     }
-    // ─────────────────────────────────────────
-    // BUTTON LISTENERS
-    // ─────────────────────────────────────────
+
+    private int deltaFor(int id,
+                         int m10, int m5, int m1,
+                         int p1,  int p5, int p10) {
+        if (id == m10) return -10;
+        if (id == m5)  return -5;
+        if (id == m1)  return -1;
+        if (id == p1)  return +1;
+        if (id == p5)  return +5;
+        if (id == p10) return +10;
+        return 0;
+    }
+
+    private int clamp(int value) {
+        return Math.max(0, value);
+    }
+
+    private void refreshDisplay(RadioGroup group, int displayId, int count) {
+        EditText display = group.findViewById(displayId);
+        if (display != null) {
+            display.setText(String.valueOf(count));
+        }
+        group.setOnCheckedChangeListener(null);
+        group.check(displayId);
+        if (group == ferryingCounterToggle)   setupFerryingListener();
+        else if (group == scoringCounterToggle)    setupScoredListener();
+        else if (group == missedCounterToggle)     setupMissedListener();
+    }
+
+    private void setupFerryingListener() {
+        ferryingCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.FerryingCounter) return;
+            ferryingCount = parseCount(ferryingEditText.getText().toString());
+            ferryingCount = clamp(ferryingCount + deltaFor(id,
+                    R.id.FerryingMinus10, R.id.FerryingMinus5, R.id.FerryingMinus,
+                    R.id.FerryingPlus,    R.id.FerryingPlus5,  R.id.FerryingPlus10));
+            refreshDisplay(ferryingCounterToggle, R.id.FerryingCounter, ferryingCount);
+        });
+    }
+
+    private void setupScoredListener() {
+        scoringCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.ScoredCounter) return;
+            scoredCount = parseCount(scoredEditText.getText().toString());
+            scoredCount = clamp(scoredCount + deltaFor(id,
+                    R.id.ScoredMinus10, R.id.ScoredMinus5, R.id.ScoredMinus,
+                    R.id.ScoredPlus,    R.id.ScoredPlus5,  R.id.ScoredPlus10));
+            refreshDisplay(scoringCounterToggle, R.id.ScoredCounter, scoredCount);
+        });
+    }
+
+    private void setupMissedListener() {
+        missedCounterToggle.setOnCheckedChangeListener((g, id) -> {
+            if (id == R.id.MissedCounter) return;
+            missedCount = parseCount(missedEditText.getText().toString());
+            missedCount = clamp(missedCount + deltaFor(id,
+                    R.id.MissedMinus10, R.id.MissedMinus5, R.id.MissedMinus,
+                    R.id.MissedPlus,    R.id.MissedPlus5,  R.id.MissedPlus10));
+            refreshDisplay(missedCounterToggle, R.id.MissedCounter, missedCount);
+        });
+    }
 
     private void setupButtonListeners() {
         if (saveButton != null) {
             saveButton.setOnClickListener(v -> {
-                saveEndGameData();
+                saveEndgameData();
                 appendEndGameSnapshot();
-                resetEndGameUI();
+                resetEndgameUI();
                 Toast.makeText(context, "Endgame snapshot saved", Toast.LENGTH_SHORT).show();
             });
         }
 
         if (resetButton != null) {
             resetButton.setOnClickListener(v -> {
-                resetEndGameUI();
+                resetEndgameUI();
                 Toast.makeText(context, "Changes cancelled", Toast.LENGTH_SHORT).show();
             });
         }
 
         if (generateQRButton != null) {
             generateQRButton.setOnClickListener(v -> {
-                saveEndGameData();
+                saveEndgameData();
                 appendEndGameSnapshot();
                 Dialog loading_alert = new Dialog(context);
                 loading_alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -255,46 +403,6 @@ public class Endgame extends Fragment implements UpdateListener {
             group.getChildAt(i).setEnabled(enabled);
     }
 
-    // ─────────────────────────────────────────
-    // DATA PERSISTENCE
-    // ─────────────────────────────────────────
-
-    private void loadEndGameData() {
-        ferryingCount   = parseCount(hm("Ferrying",   ""));
-        scoredCount     = parseCount(hm("Scored",     ""));
-        missedCount     = parseCount(hm("Missed",     ""));
-
-        selectByText(attemptedClimbToggle,              hm("AttemptedClimb",    ""));
-        selectByText(successfulClimbedToggle,           hm("SuccessfulClimbed", ""));
-        selectByText(successfullyClimbedLocationToggle, hm("ClimbLocation",     ""));
-
-        updateClimbStates();
-    }
-
-    private void saveEndGameData() {
-        endGameHashMap.put("Ferrying",          String.valueOf(ferryingCount));
-        endGameHashMap.put("Scored",            String.valueOf(scoredCount));
-        endGameHashMap.put("Missed",            String.valueOf(missedCount));
-        endGameHashMap.put("AttemptedClimb",    getSelectedText(attemptedClimbToggle,              ""));
-        endGameHashMap.put("SuccessfulClimbed", getSelectedText(successfulClimbedToggle,           ""));
-        endGameHashMap.put("ClimbLocation",     getSelectedText(successfullyClimbedLocationToggle, ""));
-        HashMapManager.putEndgameHashMap(endGameHashMap);
-    }
-
-    private String hm(String key, String def) {
-        String v = endGameHashMap.get(key);
-        return v != null ? v : def;
-    }
-
-    private int parseCount(String s) {
-        try { return Integer.parseInt(s); }
-        catch (NumberFormatException e) { return 0; }
-    }
-
-    // ─────────────────────────────────────────
-    // LIFECYCLE
-    // ─────────────────────────────────────────
-
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -303,9 +411,9 @@ public class Endgame extends Fragment implements UpdateListener {
                 setupHashMap   = HashMapManager.getSetupHashMap();
                 endGameHashMap = HashMapManager.getEndgameHashMap();
                 initializeSnapshots();
-                loadEndGameData();
+                loadEndgameData();
             } else {
-                saveEndGameData();
+                saveEndgameData();
             }
         }
     }
@@ -316,5 +424,5 @@ public class Endgame extends Fragment implements UpdateListener {
     }
 
     @Override
-    public void onUpdate() { loadEndGameData(); }
+    public void onUpdate() { loadEndgameData(); }
 }

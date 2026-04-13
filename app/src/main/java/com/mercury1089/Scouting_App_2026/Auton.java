@@ -513,7 +513,26 @@ public class Auton extends Fragment implements UpdateListener {
     }
 
     @Override
-    public void onUpdate() {
-        // Implementation of UpdateListener
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (this.isVisible()) {
+            if (isVisibleToUser) {
+                setupHashMap   = HashMapManager.getSetupHashMap();
+                autonHashMap = HashMapManager.getEndgameHashMap();
+                initializeSnapshots();
+                loadAutonData();
+            } else {
+                saveAutonData();
+            }
+        }
     }
-}
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onUpdate() { loadAutonData(); }
+    }
+
