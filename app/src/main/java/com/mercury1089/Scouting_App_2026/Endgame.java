@@ -154,13 +154,24 @@ public class Endgame extends Fragment implements UpdateListener {
         // Persistence: Check Endgame map first, then Teleop map, then Auton map
         String fellOver = hm("RobotFellOver", "");
         if (fellOver.isEmpty()) {
-            fellOver = HashMapManager.getTeleopHashMap().get("RobotFellOver");
-            if (fellOver == null || fellOver.isEmpty()) {
-                fellOver = HashMapManager.getAutonHashMap().get("RobotFellOver");
+            String teleopFell = HashMapManager.getTeleopHashMap().get("RobotFellOver");
+            if (teleopFell != null && !teleopFell.isEmpty()) {
+                fellOver = teleopFell;
+            } else {
+                String autonFell = HashMapManager.getAutonHashMap().get("RobotFellOver");
+                if (autonFell != null && !autonFell.isEmpty()) {
+                    fellOver = autonFell;
+                }
+            }
+            if (fellOver != null && !fellOver.isEmpty()) {
+                endGameHashMap.put("RobotFellOver", fellOver);
+                HashMapManager.putEndgameHashMap(endGameHashMap);
+            } else {
+                fellOver = "N";
             }
         }
         if (noShowSwitch != null) {
-            noShowSwitch.setChecked("Y".equals(fellOver != null ? fellOver : "N"));
+            noShowSwitch.setChecked("Y".equals(fellOver));
         }
 
         updateClimbStates();
@@ -225,7 +236,7 @@ public class Endgame extends Fragment implements UpdateListener {
         if (attemptedClimbToggle != null) attemptedClimbToggle.clearCheck();
         if (successfulClimbedToggle != null) successfulClimbedToggle.clearCheck();
         if (successfullyClimbedLocationToggle != null) successfullyClimbedLocationToggle.clearCheck();
-        if (noShowSwitch != null) noShowSwitch.setChecked(false);
+        // RobotFellOver (noShowSwitch) removed from reset to maintain persistence after save
         updateClimbStates();
     }
 
@@ -271,6 +282,14 @@ public class Endgame extends Fragment implements UpdateListener {
     private void setupCascadingListeners() {
         attemptedClimbToggle.setOnCheckedChangeListener((g, id)    -> updateClimbStates());
         successfulClimbedToggle.setOnCheckedChangeListener((g, id) -> updateClimbStates());
+        if (noShowSwitch != null) {
+            noShowSwitch.setOnCheckedChangeListener((v, isChecked) -> {
+                String state = isChecked ? "Y" : "N";
+                endGameHashMap.put("RobotFellOver", state);
+                HashMapManager.putEndgameHashMap(endGameHashMap);
+                updateClimbStates();
+            });
+        }
         updateClimbStates();
     }
 
@@ -278,8 +297,21 @@ public class Endgame extends Fragment implements UpdateListener {
         if (isUpdating) return;
         isUpdating = true;
         try {
+            boolean robotDied = noShowSwitch != null && noShowSwitch.isChecked();
+            boolean enabled = !robotDied;
+
+            // Counters and Text Fields
+            setGroupEnabled(ferryingCounterToggle, enabled);
+            setGroupEnabled(scoringCounterToggle, enabled);
+            setGroupEnabled(missedCounterToggle, enabled);
+            if (ferryingEditText != null) ferryingEditText.setEnabled(enabled);
+            if (scoredEditText != null) scoredEditText.setEnabled(enabled);
+            if (missedEditText != null) missedEditText.setEnabled(enabled);
+
+            // Climb logic
+            setGroupEnabled(attemptedClimbToggle, enabled);
             int attemptedId = attemptedClimbToggle != null ? attemptedClimbToggle.getCheckedRadioButtonId() : -1;
-            boolean attempted = attemptedId != -1 && attemptedId != R.id.AttemptedNo;
+            boolean attempted = enabled && (attemptedId != -1 && attemptedId != R.id.AttemptedNo);
 
             if (successfulText != null) successfulText.setEnabled(attempted);
             setGroupEnabled(successfulClimbedToggle, attempted);
@@ -289,12 +321,12 @@ public class Endgame extends Fragment implements UpdateListener {
             }
 
             int successfulId = successfulClimbedToggle != null ? successfulClimbedToggle.getCheckedRadioButtonId() : -1;
-            boolean successful = successfulId != -1 && successfulId != R.id.DidNotAttempt;
+            boolean successful = attempted && (successfulId != -1 && successfulId != R.id.DidNotAttempt);
 
-            if (locationText != null) locationText.setEnabled(attempted && successful);
-            setGroupEnabled(successfullyClimbedLocationToggle, attempted && successful);
+            if (locationText != null) locationText.setEnabled(successful);
+            setGroupEnabled(successfullyClimbedLocationToggle, successful);
 
-            if ((!attempted || !successful) && successfullyClimbedLocationToggle != null && successfullyClimbedLocationToggle.getCheckedRadioButtonId() != -1) {
+            if (!successful && successfullyClimbedLocationToggle != null && successfullyClimbedLocationToggle.getCheckedRadioButtonId() != -1) {
                 successfullyClimbedLocationToggle.clearCheck();
             }
         } finally {

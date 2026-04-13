@@ -198,9 +198,7 @@ public class Teleop extends Fragment implements UpdateListener {
         refreshDisplay(scoringCounterToggle,    R.id.ScoredCounter,     scoredCount);
         refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
 
-        if (noShowSwitch != null) {
-            noShowSwitch.setChecked(false);
-        }
+        // RobotFellOver (noShowSwitch) removed from reset to maintain persistence after save
     }
 
     // ─────────────────────────────────────────
@@ -211,6 +209,34 @@ public class Teleop extends Fragment implements UpdateListener {
         setupFerryingListener();
         setupScoredListener();
         setupMissedListener();
+        if (noShowSwitch != null) {
+            noShowSwitch.setOnCheckedChangeListener((v, isChecked) -> {
+                String state = isChecked ? "Y" : "N";
+                teleopHashMap.put("RobotFellOver", state);
+                HashMapManager.putTeleopHashMap(teleopHashMap);
+                updateEnabledStates();
+            });
+        }
+    }
+
+    private void updateEnabledStates() {
+        boolean robotDied = noShowSwitch != null && noShowSwitch.isChecked();
+        boolean enabled = !robotDied;
+
+        setGroupEnabled(ferryingCounterToggle, enabled);
+        setGroupEnabled(scoringCounterToggle, enabled);
+        setGroupEnabled(missedCounterToggle, enabled);
+
+        if (ferryingEditText != null) ferryingEditText.setEnabled(enabled);
+        if (scoredEditText != null) scoredEditText.setEnabled(enabled);
+        if (missedEditText != null) missedEditText.setEnabled(enabled);
+    }
+
+    private void setGroupEnabled(RadioGroup group, boolean enabled) {
+        if (group == null) return;
+        for (int i = 0; i < group.getChildCount(); i++) {
+            group.getChildAt(i).setEnabled(enabled);
+        }
     }
 
     private void setupTextWatchers() {
@@ -434,11 +460,19 @@ public class Teleop extends Fragment implements UpdateListener {
 
         // Persistence: Check Teleop map first, then Auton map
         String fellOver = hm("RobotFellOver", "");
-        if (fellOver.isEmpty()) {
+        if (fellOver.isEmpty()) { 
             String autonFell = HashMapManager.getAutonHashMap().get("RobotFellOver");
-            fellOver = (autonFell != null) ? autonFell : "N";
+            if (autonFell != null && !autonFell.isEmpty()) {
+                fellOver = autonFell;
+                // Propagate to current map
+                teleopHashMap.put("RobotFellOver", fellOver);
+                HashMapManager.putTeleopHashMap(teleopHashMap);
+            } else {
+                fellOver = "N";
+            }
         }
         noShowSwitch.setChecked("Y".equals(fellOver));
+        updateEnabledStates();
     }
 
     private void saveTeleopData() {
