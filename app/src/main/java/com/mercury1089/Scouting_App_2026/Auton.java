@@ -184,20 +184,7 @@ public class Auton extends Fragment implements UpdateListener {
         selectByText(successfullyClimbedLocationToggle, hm("ClimbLocation", ""));
 
         if (noShowSwitch != null) {
-            String fellOver = hm("RobotFellOver", "");
-            if (fellOver.isEmpty()) {
-                // If this is the start of the match, check if Teleop/Endgame already have it (unlikely but for consistency)
-                String teleopFell = HashMapManager.getTeleopHashMap().get("RobotFellOver");
-                if (teleopFell != null && !teleopFell.isEmpty()) {
-                    fellOver = teleopFell;
-                } else {
-                    String endgameFell = HashMapManager.getEndgameHashMap().get("RobotFellOver");
-                    fellOver = (endgameFell != null && !endgameFell.isEmpty()) ? endgameFell : "N";
-                }
-                autonHashMap.put("RobotFellOver", fellOver);
-                HashMapManager.putAutonHashMap(autonHashMap);
-            }
-            noShowSwitch.setChecked("Y".equals(fellOver));
+            noShowSwitch.setChecked("Y".equals(hm("RobotFellOver", "N")));
         }
         updateClimbStates();
     }
@@ -314,7 +301,8 @@ public class Auton extends Fragment implements UpdateListener {
             noShowSwitch.setOnCheckedChangeListener((v, isChecked) -> {
                 String state = isChecked ? "Y" : "N";
                 autonHashMap.put("RobotFellOver", state);
-                HashMapManager.putAutonHashMap(autonHashMap);
+                HashMapManager.getTeleopHashMap().put("RobotFellOver", state);
+                HashMapManager.getEndgameHashMap().put("RobotFellOver", state);
                 updateClimbStates();
             });
         }
@@ -570,7 +558,12 @@ public class Auton extends Fragment implements UpdateListener {
         int id = group.getCheckedRadioButtonId();
         if (id == -1) return defaultVal;
         RadioButton btn = group.findViewById(id);
-        return btn != null ? btn.getText().toString().trim() : defaultVal;
+        if (btn == null) return defaultVal;
+        String text = btn.getText().toString().trim();
+        if (text.equalsIgnoreCase("No Attempt") || text.equalsIgnoreCase("None") || text.equalsIgnoreCase("Did Not Attempt")) {
+            return "";
+        }
+        return text;
     }
 
     private void selectByText(RadioGroup group, String value) {

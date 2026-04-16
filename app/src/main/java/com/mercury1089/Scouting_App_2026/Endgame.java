@@ -1,7 +1,6 @@
 package com.mercury1089.Scouting_App_2026;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -464,7 +463,12 @@ public class Endgame extends Fragment implements UpdateListener {
         int id = group.getCheckedRadioButtonId();
         if (id == -1) return defaultVal;
         RadioButton btn = group.findViewById(id);
-        return btn != null ? btn.getText().toString().trim() : defaultVal;
+        if (btn == null) return defaultVal;
+        String text = btn.getText().toString().trim();
+        if (text.equalsIgnoreCase("No Attempt") || text.equalsIgnoreCase("None") || text.equalsIgnoreCase("Did Not Attempt")) {
+            return "";
+        }
+        return text;
     }
 
     private void selectByText(RadioGroup group, String value) {
