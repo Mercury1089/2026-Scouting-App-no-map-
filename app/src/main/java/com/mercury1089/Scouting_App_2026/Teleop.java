@@ -73,6 +73,8 @@ public class Teleop extends Fragment implements UpdateListener {
     private int scoredCount     = 0;
     private int missedCount     = 0;
     private long secondsLeft    = 140;
+    private boolean isUpdating = false;
+    private boolean isDirty = false;
 
     public static Teleop newInstance() {
         Teleop fragment = new Teleop();
@@ -147,6 +149,11 @@ public class Teleop extends Fragment implements UpdateListener {
     }
 
     private void appendTeleopSnapshot() {
+        if (!isDirty) {
+            return;
+        }
+        isDirty = false;
+
         if (snapshotBuilder == null) {
             initializeSnapshots();
         }
@@ -183,6 +190,7 @@ public class Teleop extends Fragment implements UpdateListener {
         teleopHashMap.put("snapshots", snapshotBuilder.toString());
         teleopHashMap.put("TeleopSaveIndex", String.valueOf(teleopSnapshotCount));
         HashMapManager.putTeleopHashMap(teleopHashMap);
+        isDirty = false;
     }
 
     // ─────────────────────────────────────────
@@ -190,15 +198,21 @@ public class Teleop extends Fragment implements UpdateListener {
     // ─────────────────────────────────────────
 
     private void resetTeleopUI() {
-        ferryingCount   = 0;
-        scoredCount     = 0;
-        missedCount     = 0;
+        isUpdating = true;
+        try {
+            ferryingCount   = 0;
+            scoredCount     = 0;
+            missedCount     = 0;
 
-        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
-        refreshDisplay(scoringCounterToggle,    R.id.ScoredCounter,     scoredCount);
-        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
+            refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
+            refreshDisplay(scoringCounterToggle,    R.id.ScoredCounter,     scoredCount);
+            refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
 
-        // RobotFellOver (noShowSwitch) removed from reset to maintain persistence after save
+            // RobotFellOver (noShowSwitch) removed from reset to maintain persistence after save
+            isDirty = false;
+        } finally {
+            isUpdating = false;
+        }
     }
 
     // ─────────────────────────────────────────
@@ -211,25 +225,34 @@ public class Teleop extends Fragment implements UpdateListener {
         setupMissedListener();
         if (noShowSwitch != null) {
             noShowSwitch.setOnCheckedChangeListener((v, isChecked) -> {
+                if (isUpdating) return;
                 String state = isChecked ? "Y" : "N";
                 teleopHashMap.put("RobotFellOver", state);
-                HashMapManager.putTeleopHashMap(teleopHashMap);
+                HashMapManager.getAutonHashMap().put("RobotFellOver", state);
+                HashMapManager.getEndgameHashMap().put("RobotFellOver", state);
                 updateEnabledStates();
+                isDirty = true;
             });
         }
     }
 
     private void updateEnabledStates() {
-        boolean robotDied = noShowSwitch != null && noShowSwitch.isChecked();
-        boolean enabled = !robotDied;
+        boolean wasUpdating = isUpdating;
+        isUpdating = true;
+        try {
+            boolean robotDied = noShowSwitch != null && noShowSwitch.isChecked();
+            boolean enabled = !robotDied;
 
-        setGroupEnabled(ferryingCounterToggle, enabled);
-        setGroupEnabled(scoringCounterToggle, enabled);
-        setGroupEnabled(missedCounterToggle, enabled);
+            setGroupEnabled(ferryingCounterToggle, enabled);
+            setGroupEnabled(scoringCounterToggle, enabled);
+            setGroupEnabled(missedCounterToggle, enabled);
 
-        if (ferryingEditText != null) ferryingEditText.setEnabled(enabled);
-        if (scoredEditText != null) scoredEditText.setEnabled(enabled);
-        if (missedEditText != null) missedEditText.setEnabled(enabled);
+            if (ferryingEditText != null) ferryingEditText.setEnabled(enabled);
+            if (scoredEditText != null) scoredEditText.setEnabled(enabled);
+            if (missedEditText != null) missedEditText.setEnabled(enabled);
+        } finally {
+            isUpdating = wasUpdating;
+        }
     }
 
     private void setGroupEnabled(RadioGroup group, boolean enabled) {
@@ -244,21 +267,27 @@ public class Teleop extends Fragment implements UpdateListener {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override public void afterTextChanged(Editable s) {
+                if (isUpdating) return;
                 ferryingCount = parseCount(s.toString());
+                isDirty = true;
             }
         });
         scoredEditText.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override public void afterTextChanged(Editable s) {
+                if (isUpdating) return;
                 scoredCount = parseCount(s.toString());
+                isDirty = true;
             }
         });
         missedEditText.addTextChangedListener(new TextWatcher() {
             @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override public void afterTextChanged(Editable s) {
+                if (isUpdating) return;
                 missedCount = parseCount(s.toString());
+                isDirty = true;
             }
         });
     }
@@ -293,35 +322,38 @@ public class Teleop extends Fragment implements UpdateListener {
 
     private void setupFerryingListener() {
         ferryingCounterToggle.setOnCheckedChangeListener((g, id) -> {
-            if (id == R.id.FerryingCounter) return;
+            if (isUpdating || id == R.id.FerryingCounter) return;
             ferryingCount = parseCount(ferryingEditText.getText().toString());
             // Ferrying in Teleop only has +/- 5 and 10 buttons
             ferryingCount = clamp(ferryingCount + deltaFor(id,
                     R.id.FerryingMinus10, R.id.FerryingMinus5, View.NO_ID,
                     View.NO_ID,    R.id.FerryingPlus5,  R.id.FerryingPlus10));
             refreshDisplay(ferryingCounterToggle, R.id.FerryingCounter, ferryingCount);
+            isDirty = true;
         });
     }
 
     private void setupScoredListener() {
         scoringCounterToggle.setOnCheckedChangeListener((g, id) -> {
-            if (id == R.id.ScoredCounter) return;
+            if (isUpdating || id == R.id.ScoredCounter) return;
             scoredCount = parseCount(scoredEditText.getText().toString());
             scoredCount = clamp(scoredCount + deltaFor(id,
                     R.id.ScoredMinus10, R.id.ScoredMinus5, R.id.ScoredMinus,
                     R.id.ScoredPlus,    R.id.ScoredPlus5,  R.id.ScoredPlus10));
             refreshDisplay(scoringCounterToggle, R.id.ScoredCounter, scoredCount);
+            isDirty = true;
         });
     }
 
     private void setupMissedListener() {
         missedCounterToggle.setOnCheckedChangeListener((g, id) -> {
-            if (id == R.id.MissedCounter) return;
+            if (isUpdating || id == R.id.MissedCounter) return;
             missedCount = parseCount(missedEditText.getText().toString());
             missedCount = clamp(missedCount + deltaFor(id,
                     R.id.MissedMinus10, R.id.MissedMinus5, R.id.MissedMinus,
                     R.id.MissedPlus,    R.id.MissedPlus5,  R.id.MissedPlus10));
             refreshDisplay(missedCounterToggle, R.id.MissedCounter, missedCount);
+            isDirty = true;
         });
     }
 
@@ -362,12 +394,12 @@ public class Teleop extends Fragment implements UpdateListener {
 
     private void setupTimer() {
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        timer = new CountDownTimer(110000, 1000) {
+        timer = new CountDownTimer(secondsLeft * 1000, 1000) {
             @Override
             public void onTick(long ms) {
                 if (secondsRemaining == null) return;
                 long secs = ms / 1000;
-                secondsLeft = Math.max(0, Math.min(secs, 110) - 1);
+                secondsLeft = secs;
                 
                 long displaySecs = Math.min(secs, 110);
                 long mins = displaySecs / 60;
@@ -399,16 +431,21 @@ public class Teleop extends Fragment implements UpdateListener {
             @Override
             public void onFinish() {
                 secondsLeft = 0;
-                nextButtonEndGame.setBackgroundColor(context.getResources().getColor(R.color.fire));
-                topEdgeBar.setBackgroundColor(context.getResources().getColor(R.color.fire));
-                bottomEdgeBar.setBackgroundColor(context.getResources().getColor(R.color.fire));
-                leftEdgeBar.setBackgroundColor(context.getResources().getColor(R.color.fire));
-                rightEdgeBar.setBackgroundColor(context.getResources().getColor(R.color.fire));
+                if (nextButtonEndGame != null)
+                    nextButtonEndGame.setBackgroundColor(context.getResources().getColor(R.color.fire));
+                if (topEdgeBar != null)
+                    topEdgeBar.setBackgroundColor(context.getResources().getColor(R.color.fire));
+                if (bottomEdgeBar != null)
+                    bottomEdgeBar.setBackgroundColor(context.getResources().getColor(R.color.fire));
+                if (leftEdgeBar != null)
+                    rightEdgeBar.setBackgroundColor(context.getResources().getColor(R.color.fire));
+                if (rightEdgeBar != null)
+                    rightEdgeBar.setBackgroundColor(context.getResources().getColor(R.color.fire));
 
                 if (!running) return;
                 try {
                     if (secondsRemaining != null) {
-                        secondsRemaining.setText("00");
+                        secondsRemaining.setText("0:00");
                     }
 
                     if (timerID != null) {
@@ -429,8 +466,7 @@ public class Teleop extends Fragment implements UpdateListener {
             }
         };
 
-        if (firstTime) {
-            firstTime = false;
+        if (running && secondsLeft > 0) {
             timer.start();
         }
     }
@@ -450,29 +486,40 @@ public class Teleop extends Fragment implements UpdateListener {
     // ─────────────────────────────────────────
 
     private void loadTeleopData() {
-        ferryingCount   = parseCount(hm("Ferrying",   ""));
-        scoredCount     = parseCount(hm("Scored",     ""));
-        missedCount     = parseCount(hm("Missed",     ""));
+        isUpdating = true;
+        try {
+            ferryingCount   = parseCount(hm("Ferrying",   ""));
+            scoredCount     = parseCount(hm("Scored",     ""));
+            missedCount     = parseCount(hm("Missed",     ""));
 
-        refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
-        refreshDisplay(scoringCounterToggle,    R.id.ScoredCounter,     scoredCount);
-        refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
-
-        // Persistence: Check Teleop map first, then Auton map
-        String fellOver = hm("RobotFellOver", "");
-        if (fellOver.isEmpty()) { 
-            String autonFell = HashMapManager.getAutonHashMap().get("RobotFellOver");
-            if (autonFell != null && !autonFell.isEmpty()) {
-                fellOver = autonFell;
-                // Propagate to current map
-                teleopHashMap.put("RobotFellOver", fellOver);
-                HashMapManager.putTeleopHashMap(teleopHashMap);
-            } else {
-                fellOver = "N";
+            String savedTimestamp = hm("Timestamp", "");
+            if (!savedTimestamp.isEmpty()) {
+                secondsLeft = parseCount(savedTimestamp);
             }
+
+            refreshDisplay(ferryingCounterToggle,   R.id.FerryingCounter,   ferryingCount);
+            refreshDisplay(scoringCounterToggle,    R.id.ScoredCounter,     scoredCount);
+            refreshDisplay(missedCounterToggle,     R.id.MissedCounter,     missedCount);
+
+            // Persistence: Check Teleop map first, then Auton map
+            String fellOver = hm("RobotFellOver", "");
+            if (fellOver.isEmpty()) {
+                String autonFell = HashMapManager.getAutonHashMap().get("RobotFellOver");
+                if (autonFell != null && !autonFell.isEmpty()) {
+                    fellOver = autonFell;
+                    // Propagate to current map
+                    teleopHashMap.put("RobotFellOver", fellOver);
+                    HashMapManager.putTeleopHashMap(teleopHashMap);
+                } else {
+                    fellOver = "N";
+                }
+            }
+            noShowSwitch.setChecked("Y".equals(fellOver));
+            updateEnabledStates();
+            isDirty = false;
+        } finally {
+            isUpdating = false;
         }
-        noShowSwitch.setChecked("Y".equals(fellOver));
-        updateEnabledStates();
     }
 
     private void saveTeleopData() {
